@@ -37,6 +37,7 @@ interface VolumeChartProps {
   jsonData: any;
 }
 const VolumeChart: React.FC<VolumeChartProps> = ({ jsonData }) => {
+  // const reversed30D = jsonData.labels.reverse();
   console.log({ jsonData });
   const [timespan, setTimespan] = useState(-30);
 
@@ -51,165 +52,98 @@ const VolumeChart: React.FC<VolumeChartProps> = ({ jsonData }) => {
         label: jsonData.datasets[0].label,
         data: jsonData.datasets[0].data,
         borderColor: "white",
-        backgroundColor: jsonData.datasets[0].backgroundColor,
+        backgroundColor: "#5C5F66",
       },
       {
         label: jsonData.datasets[1].label,
         data: jsonData.datasets[1].data,
         borderColor: "black",
-        backgroundColor: jsonData.datasets[1].backgroundColor,
+        backgroundColor: "#FFD740",
       },
       {
         label: jsonData.datasets[2].label,
         data: jsonData.datasets[2].data,
         borderColor: "red",
-        backgroundColor: jsonData.datasets[2].backgroundColor,
+        backgroundColor: "#FD7E14",
       },
     ],
   };
 
   const volumeData30D = {
-    labels: jsonData.labels.slice(-30).map((data: any) => data),
+    labels: jsonData.labels
+      .slice(jsonData.labels.length - 30)
+      .map((data: any) => data),
     datasets: [
       {
         label: jsonData.datasets[0].label,
-        data: jsonData.datasets[0].data,
+        data: jsonData.datasets[0].data.slice(jsonData.labels.length - 30),
         borderColor: "white",
-        backgroundColor: jsonData.datasets[0].backgroundColor,
+        backgroundColor: "#5C5F66",
       },
       {
         label: jsonData.datasets[1].label,
-        data: jsonData.datasets[1].data,
+        data: jsonData.datasets[1].data.slice(jsonData.labels.length - 30),
         borderColor: "black",
-        backgroundColor: jsonData.datasets[1].backgroundColor,
+        backgroundColor: "#FFD740",
       },
       {
         label: jsonData.datasets[2].label,
-        data: jsonData.datasets[2].data,
+        data: jsonData.datasets[2].data.slice(jsonData.labels.length - 30),
         borderColor: "red",
-        backgroundColor: jsonData.datasets[2].backgroundColor,
+        backgroundColor: "#FD7E14",
       },
     ],
   };
   const volumeData7D = {
-    labels: jsonData.labels.slice(-7).map((data: any) => data),
+    labels: jsonData.labels
+      .slice(jsonData.labels.length - 7)
+      .map((data: any) => data),
     datasets: [
       {
         label: jsonData.datasets[0].label,
-        data: jsonData.datasets[0].data,
+        data: jsonData.datasets[0].data.slice(jsonData.labels.length - 7),
         borderColor: "white",
-        backgroundColor: jsonData.datasets[0].backgroundColor,
+        backgroundColor: "#5C5F66",
       },
       {
         label: jsonData.datasets[1].label,
-        data: jsonData.datasets[1].data,
+        data: jsonData.datasets[1].data.slice(jsonData.labels.length - 7),
         borderColor: "black",
-        backgroundColor: jsonData.datasets[1].backgroundColor,
+        backgroundColor: "#FFD740",
       },
       {
         label: jsonData.datasets[2].label,
-        data: jsonData.datasets[2].data,
+        data: jsonData.datasets[2].data.slice(jsonData.labels.length - 7),
         borderColor: "red",
-        backgroundColor: jsonData.datasets[2].backgroundColor,
+        backgroundColor: "#FD7E14",
       },
     ],
   };
 
   const volumeData24H = {
-    labels: jsonData.labels.slice(-2).map((data: any) => data),
+    labels: jsonData.labels
+      .slice(jsonData.labels.length - 2)
+      .map((data: any) => data),
     datasets: [
       {
         label: jsonData.datasets[0].label,
-        data: jsonData.datasets[0].data,
+        data: jsonData.datasets[0].data.slice(jsonData.labels.length - 2),
         borderColor: "white",
-        backgroundColor: jsonData.datasets[0].backgroundColor,
+        backgroundColor: "#5C5F66",
       },
       {
         label: jsonData.datasets[1].label,
-        data: jsonData.datasets[1].data,
+        data: jsonData.datasets[1].data.slice(jsonData.labels.length - 2),
         borderColor: "black",
-        backgroundColor: jsonData.datasets[1].backgroundColor,
+        backgroundColor: "#FFD740",
       },
       {
         label: jsonData.datasets[2].label,
-        data: jsonData.datasets[2].data,
+        data: jsonData.datasets[2].data.slice(jsonData.labels.length - 2),
         borderColor: "red",
-        backgroundColor: jsonData.datasets[2].backgroundColor,
+        backgroundColor: "#FD7E14",
       },
     ],
-  };
-  const options = {
-    interaction: {
-      mode: "x",
-    },
-    maintainAspectRatio: false,
-    plugins: {
-      autoColors: false,
-      annotation: {
-        annotations: {
-          box1: {
-            type: "label",
-            xMin: 2,
-            xMax: 10,
-            yMin: 500,
-            yMax: 10000,
-            backgroundColor: jsonData.datasets[0].backgroundColor,
-            borderColor: "#000",
-            borderRadius: 6,
-            borderWidth: 1,
-            content: ["annotated"],
-          },
-          box2: {
-            type: "label",
-            xMin: 11,
-            xMax: 20,
-            yMin: 20000,
-            yMax: 40000,
-            backgroundColor: jsonData.datasets[1].backgroundColor,
-            borderColor: "#000",
-            borderRadius: 6,
-            borderWidth: 1,
-            content: ["annotated"],
-          },
-          box3: {
-            type: "label",
-            xMin: 51,
-            xMax: 100,
-            yMin: 30000,
-            yMax: 80000,
-            backgroundColor: jsonData.datasets[2].backgroundColor,
-            borderColor: "#000",
-            borderRadius: 6,
-            borderWidth: 1,
-            content: ["annotated"],
-          },
-        },
-      },
-      title: {
-        display: false,
-        text: "Chart.js Bar Chart - Stacked",
-      },
-      legend: {
-        position: "top",
-        align: "start",
-        display: true,
-        fullSize: true,
-        labels: {
-          color: "#fff",
-          usePointStyle: true,
-          pointStyle: "rectRounded",
-        },
-      },
-      responsive: true,
-    },
-    scales: {
-      x: {
-        stacked: true,
-      },
-      y: {
-        stacked: true,
-      },
-    },
   };
 
   return (
