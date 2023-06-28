@@ -152,7 +152,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     return "Total Volume" + totalVolume;
   };
 
-  console.log({loanVolume})
   return (
     <section className="chart__wrapper">
       <section className="chart__grid">
@@ -205,6 +204,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       data: loanVolume.slice(loanVolume.length - 30),
                       borderColor: "black",
                       backgroundColor: "#FFD740",
+                    },
+                    {
+                      label: "Total Volume",
+                      data: totalVolume.slice(totalVolume.length - 30),
+                      borderColor: "black",
+                      backgroundColor: "#1c1d22",
+                      // hidden: true,
                     },
                   ],
                 }}
@@ -260,6 +266,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       borderColor: "black",
                       backgroundColor: "#FFD740",
                     },
+                    {
+                      label: "Total Volume",
+                      data: totalVolume.slice(totalVolume.length - 7),
+                      borderColor: "black",
+                      backgroundColor: "#1c1d22",
+                      // hidden: true,
+                    },
                   ],
                 }}
                 options={{
@@ -313,6 +326,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       data: loanVolume.slice(loanVolume.length - 1),
                       borderColor: "black",
                       backgroundColor: "#FFD740",
+                    },
+                    {
+                      label: "Total Volume",
+                      data: totalVolume.slice(totalVolume.length - 1),
+                      borderColor: "black",
+                      backgroundColor: "#1c1d22",
+                      // hidden: true,
                     },
                   ],
                 }}
@@ -368,11 +388,11 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         backgroundColor: "#FFD740",
                       },
                       {
-                        label: "none",
+                        label: "Total Volume",
                         data: totalVolume,
                         borderColor: "black",
-                        backgroundColor: "#fff",
-                        hidden: true,
+                        backgroundColor: "#1c1d22",
+                        // hidden: true,
                       },
                     ],
                   }}
@@ -384,7 +404,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     plugins: {
                       tooltip: {
                         callbacks: {
-                          footer: customTooltip,
+                          // footer: customTooltip,
                         },
                       },
                       annotation: {
@@ -400,7 +420,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         display: true,
                         fullSize: true,
                         labels: {
-                          filter: (item) => item.text !== "none",
+                          filter: (item) => item.text !== "Total Volume",
                           color: "#fff",
                           usePointStyle: true,
                           pointStyle: "rectRounded",
@@ -535,7 +555,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       datasets: [
                         {
                           label: "Loans",
-                          data: loanVolume,
+                          data: loanVolume.slice(loanVolume.length - 90),
                           borderColor: "rgba(250, 176, 5, 1)",
                           pointRadius: 0,
                           tension: 1.1,
@@ -543,7 +563,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         },
                         {
                           label: "Fake Volume (Blur)",
-                          data: fakeBlurVolume,
+                          data: fakeBlurVolume.slice(fakeBlurVolume.length - 90),
                           borderColor: "rgba(253, 126, 20, 1)",
                           pointRadius: 0,
                           tension: 1.1,
@@ -551,7 +571,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         },
                         {
                           label: "Fake Volume (Other)",
-                          data: fakeOtherVolume,
+                          data: fakeOtherVolume.slice(fakeOtherVolume.length - 90),
                           borderColor: "rgba(250, 82, 82, 1)",
                           pointRadius: 0,
                           tension: 1.1,

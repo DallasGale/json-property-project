@@ -26,16 +26,16 @@ export default async function Home() {
   const labels = await data?.labels;
 
   // Datasets
-  const totalVolume: Datasets = await data?.datasets.filter(
+  const totalVolume = await data?.datasets.filter(
     ({ label }: DatasetType) => label === "total_volume"
   );
   const volumeFarming: Datasets = await data?.datasets.filter(
     ({ label }: DatasetType) => label === "volume_farming"
   );
-  const volumeWashTrading: Datasets = data?.datasets.filter(
+  const volumeWashTrading = data?.datasets.filter(
     ({ label }: DatasetType) => label === "volume_wash_trading"
   );
-  const inorganicVolume: Datasets = data?.datasets.filter(
+  const inorganicVolume = data?.datasets.filter(
     ({ label }: DatasetType) => label === "inorganic_volume"
   );
   const loanVolume = data?.datasets.filter(
@@ -75,8 +75,8 @@ export default async function Home() {
           trueVolume={realVolume[0].data}
           loanVolume={loanVolume[0].data}
           totalVolume={totalVolume[0].data}
-          fakeBlurVolume={volumeWashTrading[0].data.slice(volumeWashTrading[0].data.length - 90)}
-          fakeOtherVolume={inorganicVolume[0].data.slice(inorganicVolume[0].data.length - 90)}
+          fakeBlurVolume={volumeWashTrading[0].data}
+          fakeOtherVolume={inorganicVolume[0].data}
         />
       </div>
     </main>
