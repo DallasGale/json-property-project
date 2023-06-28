@@ -63,81 +63,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   totalVolume,
 }) => {
   console.log({trueVolume})
-  const [timespan, setTimespan] = useState(null);
+  const [timespan, setTimespan] = useState(-30);
 
   function handleClick(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimespan(value);
   }
 
-  // const dailyTrueVolume30 = {
-  //   labels: labels.slice(labels.length - 30).map((data: any) => data),
-  //   datasets: [
-  //     {
-  //       label: "True Volume",
-  //       data: trueVolume,
-  //       borderColor: "white",
-  //       backgroundColor: "#5C5F66",
-  //     },
-  //     {
-  //       label: "Loans",
-  //       data: loanVolume,
-  //       borderColor: "black",
-  //       backgroundColor: "#FFD740",
-  //     },
-  //     // {
-  //     //   label: "Fake (Blur)",
-  //     //   data: labels.datasets[2].data,
-  //     //   borderColor: "red",
-  //     //   backgroundColor: "#FD7E14",
-  //     // },
-  //     // {
-  //     //   label: "Fake (Other)",
-  //     //   data: labels.datasets[2].data,
-  //     //   borderColor: "red",
-  //     //   backgroundColor: "#FD7E14",
-  //     // },
-  //   ],
-  // };
-
-  // const volumeData30D = {
-  //   labels: labels
-  //     .slice(labels.length - 30)
-  //     .map((data: any) => data),
-  //   datasets: [
-  //     {
-  //       label: "True Volume"
-  //       data: labels.datasets[0].data.slice(labels.labels.length - 30),
-  //       borderColor: "white",
-  //       backgroundColor: "#5C5F66",
-  //     },
-  //     {
-  //       label: labels.datasets[1].label,
-  //       data: labels.datasets[1].data.slice(labels.labels.length - 30),
-  //       borderColor: "black",
-  //       backgroundColor: "#FFD740",
-  //     },
-  //     {
-  //       label: labels.datasets[2].label,
-  //       data: labels.datasets[2].data.slice(labels.labels.length - 30),
-  //       borderColor: "red",
-  //       backgroundColor: "#FD7E14",
-  //     },
-  //   ],
-  // };
-
-  // const trueVolumeData = {
-  //   labels: labels.slice(labels.length - 90).map((data: any) => data),
-  //   datasets: [
-  //     {
-  //       label: "True Volume",
-  //       data: trueVolume,
-  //       borderColor: "white",
-  //       backgroundColor: "#5C5F66",
-  //       barThickness: 2,
-  //     },
-  //   ],
-  // };
 
   const customTooltip = (tooltipItems?: any) => {
     let sum = 0;
@@ -420,7 +352,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         display: true,
                         fullSize: true,
                         labels: {
-                          filter: (item) => item.text !== "Total Volume",
+                          // filter: (item) => item.text !== "Total Volume",
                           color: "#fff",
                           usePointStyle: true,
                           pointStyle: "rectRounded",
