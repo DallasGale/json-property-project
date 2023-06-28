@@ -6,7 +6,9 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
+  LineElement,
   Title,
+  PointElement,
   Tooltip,
   Legend,
 } from "chart.js";
@@ -14,7 +16,7 @@ import {
 
 import annotationPlugin from "chartjs-plugin-annotation";
 import Data from "../../public/data/volume.json";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 
 // window.ChartJS = {
 //   plugins: { register: (...x) => ChartJS.plugins.register(...x) },
@@ -25,7 +27,9 @@ import { Bar } from "react-chartjs-2";
 ChartJS.register(
   CategoryScale,
   LinearScale,
+  LineElement,
   BarElement,
+  PointElement,
   Title,
   Tooltip,
   Legend,
@@ -33,466 +37,577 @@ ChartJS.register(
   // chartTrendline
 );
 
-interface VolumeChartProps {
-  jsonData: any;
+export interface Datasets {
+  datasets: DatasetType[];
 }
-const VolumeChart: React.FC<VolumeChartProps> = ({ jsonData }) => {
-  // const reversed30D = jsonData.labels.reverse();
-  console.log({ jsonData });
-  const [timespan, setTimespan] = useState(-30);
 
-  function handleClick(e: any) {
-    setTimespan(e);
-    console.log({ timespan });
+export type DatasetType = {
+  label: string;
+  data: number[];
+};
+
+interface VolumeChartProps {
+  labels: string[];
+  trueVolume: DatasetType[];
+  loanVolume: DatasetType[];
+  totalVolume: DatasetType[];
+  fakeBlurVolume: DatasetType[]
+  fakeOtherVolume: DatasetType[]
+}
+const VolumeChart: React.FC<VolumeChartProps> = ({
+  labels,
+  trueVolume,
+  loanVolume,
+  fakeBlurVolume,
+  fakeOtherVolume,
+  totalVolume,
+}) => {
+  console.log({trueVolume})
+  const [timespan, setTimespan] = useState(null);
+
+  function handleClick(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setTimespan(value);
   }
-  const volumeDataAll = {
-    labels: jsonData.labels.map((data: any) => data),
-    datasets: [
-      {
-        label: jsonData.datasets[0].label,
-        data: jsonData.datasets[0].data,
-        borderColor: "white",
-        backgroundColor: "#5C5F66",
-      },
-      {
-        label: jsonData.datasets[1].label,
-        data: jsonData.datasets[1].data,
-        borderColor: "black",
-        backgroundColor: "#FFD740",
-      },
-      {
-        label: jsonData.datasets[2].label,
-        data: jsonData.datasets[2].data,
-        borderColor: "red",
-        backgroundColor: "#FD7E14",
-      },
-    ],
+
+  // const dailyTrueVolume30 = {
+  //   labels: labels.slice(labels.length - 30).map((data: any) => data),
+  //   datasets: [
+  //     {
+  //       label: "True Volume",
+  //       data: trueVolume,
+  //       borderColor: "white",
+  //       backgroundColor: "#5C5F66",
+  //     },
+  //     {
+  //       label: "Loans",
+  //       data: loanVolume,
+  //       borderColor: "black",
+  //       backgroundColor: "#FFD740",
+  //     },
+  //     // {
+  //     //   label: "Fake (Blur)",
+  //     //   data: labels.datasets[2].data,
+  //     //   borderColor: "red",
+  //     //   backgroundColor: "#FD7E14",
+  //     // },
+  //     // {
+  //     //   label: "Fake (Other)",
+  //     //   data: labels.datasets[2].data,
+  //     //   borderColor: "red",
+  //     //   backgroundColor: "#FD7E14",
+  //     // },
+  //   ],
+  // };
+
+  // const volumeData30D = {
+  //   labels: labels
+  //     .slice(labels.length - 30)
+  //     .map((data: any) => data),
+  //   datasets: [
+  //     {
+  //       label: "True Volume"
+  //       data: labels.datasets[0].data.slice(labels.labels.length - 30),
+  //       borderColor: "white",
+  //       backgroundColor: "#5C5F66",
+  //     },
+  //     {
+  //       label: labels.datasets[1].label,
+  //       data: labels.datasets[1].data.slice(labels.labels.length - 30),
+  //       borderColor: "black",
+  //       backgroundColor: "#FFD740",
+  //     },
+  //     {
+  //       label: labels.datasets[2].label,
+  //       data: labels.datasets[2].data.slice(labels.labels.length - 30),
+  //       borderColor: "red",
+  //       backgroundColor: "#FD7E14",
+  //     },
+  //   ],
+  // };
+
+  // const trueVolumeData = {
+  //   labels: labels.slice(labels.length - 90).map((data: any) => data),
+  //   datasets: [
+  //     {
+  //       label: "True Volume",
+  //       data: trueVolume,
+  //       borderColor: "white",
+  //       backgroundColor: "#5C5F66",
+  //       barThickness: 2,
+  //     },
+  //   ],
+  // };
+
+  const customTooltip = (tooltipItems?: any) => {
+    let sum = 0;
+    
+
+    // tooltipItems.forEach(function (tooltipItem: any) {
+    //   sum += tooltipItem.parsed.y;
+    // });
+     tooltipItems.forEach(function (tooltipItem: any) {
+      sum += tooltipItem.parsed.y;
+    });
+    return "Total Volume" + totalVolume;
   };
 
-  const volumeData30D = {
-    labels: jsonData.labels
-      .slice(jsonData.labels.length - 30)
-      .map((data: any) => data),
-    datasets: [
-      {
-        label: jsonData.datasets[0].label,
-        data: jsonData.datasets[0].data.slice(jsonData.labels.length - 30),
-        borderColor: "white",
-        backgroundColor: "#5C5F66",
-      },
-      {
-        label: jsonData.datasets[1].label,
-        data: jsonData.datasets[1].data.slice(jsonData.labels.length - 30),
-        borderColor: "black",
-        backgroundColor: "#FFD740",
-      },
-      {
-        label: jsonData.datasets[2].label,
-        data: jsonData.datasets[2].data.slice(jsonData.labels.length - 30),
-        borderColor: "red",
-        backgroundColor: "#FD7E14",
-      },
-    ],
-  };
-  const volumeData7D = {
-    labels: jsonData.labels
-      .slice(jsonData.labels.length - 7)
-      .map((data: any) => data),
-    datasets: [
-      {
-        label: jsonData.datasets[0].label,
-        data: jsonData.datasets[0].data.slice(jsonData.labels.length - 7),
-        borderColor: "white",
-        backgroundColor: "#5C5F66",
-      },
-      {
-        label: jsonData.datasets[1].label,
-        data: jsonData.datasets[1].data.slice(jsonData.labels.length - 7),
-        borderColor: "black",
-        backgroundColor: "#FFD740",
-      },
-      {
-        label: jsonData.datasets[2].label,
-        data: jsonData.datasets[2].data.slice(jsonData.labels.length - 7),
-        borderColor: "red",
-        backgroundColor: "#FD7E14",
-      },
-    ],
-  };
-
-  const volumeData24H = {
-    labels: jsonData.labels
-      .slice(jsonData.labels.length - 2)
-      .map((data: any) => data),
-    datasets: [
-      {
-        label: jsonData.datasets[0].label,
-        data: jsonData.datasets[0].data.slice(jsonData.labels.length - 2),
-        borderColor: "white",
-        backgroundColor: "#5C5F66",
-      },
-      {
-        label: jsonData.datasets[1].label,
-        data: jsonData.datasets[1].data.slice(jsonData.labels.length - 2),
-        borderColor: "black",
-        backgroundColor: "#FFD740",
-      },
-      {
-        label: jsonData.datasets[2].label,
-        data: jsonData.datasets[2].data.slice(jsonData.labels.length - 2),
-        borderColor: "red",
-        backgroundColor: "#FD7E14",
-      },
-    ],
-  };
-
+  console.log({loanVolume})
   return (
     <section className="chart__wrapper">
-      <h1 className="typography__display--1">True Volume</h1>
-
       <section className="chart__grid">
-        <div className="chart__grid-cell chart__grid-cell--main u-bgGrey u-radius8 u-padding12">
-          <div className="button-group">
-            <button
-              className="button typography__label--1"
-              onClick={() => handleClick(-1)}
-            >
-              24HR
-            </button>
-            <button
-              className="button typography__label--1"
-              onClick={(e) => handleClick(-7)}
-            >
-              7D
-            </button>
-            <button
-              className="button typography__label--1"
-              onClick={(e) => handleClick(-30)}
-            >
-              30D
-            </button>
-            <button
-              className="button typography__label--1"
-              onClick={(e) => handleClick(null)}
-            >
-              ALL
-            </button>
-          </div>
+        <div className="chart__grid-cell chart__grid-cell--main">
+          <h2 className="typography__display--1">Daily True Volume</h2>
 
-          {timespan == -30 && (
-            <Bar
-              data={volumeData30D}
-              options={{
-                interaction: {
-                  mode: "x",
-                },
-                maintainAspectRatio: false,
-                plugins: {
-                  annotation: {
-                    annotations: {
-                      box1: {
-                        type: "label",
-                        xMin: 2,
-                        xMax: 10,
-                        yMin: 500,
-                        yMax: 10000,
-                        backgroundColor: jsonData.datasets[0].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
-                      },
-                      box2: {
-                        type: "label",
-                        xMin: 11,
-                        xMax: 20,
-                        yMin: 20000,
-                        yMax: 40000,
-                        backgroundColor: jsonData.datasets[1].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
-                      },
-                      box3: {
-                        type: "label",
-                        xMin: 51,
-                        xMax: 100,
-                        yMin: 30000,
-                        yMax: 80000,
-                        backgroundColor: jsonData.datasets[2].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
+          <div className="u-bgGrey u-radius8 u-padding12 u-heightFull">
+            <div className="button-group">
+              <button
+                className="button typography__label--1"
+                onClick={(e) => handleClick(e, -1)}
+              >
+                24HR
+              </button>
+              <button
+                className="button typography__label--1"
+                onClick={(e) => handleClick(e, -7)}
+              >
+                7D
+              </button>
+              <button
+                className="button typography__label--1"
+                onClick={(e) => handleClick(e, -30)}
+              >
+                30D
+              </button>
+              <button
+                className="button typography__label--1"
+                onClick={(e) => handleClick(e, null)}
+              >
+                ALL
+              </button>
+            </div>
+
+            {timespan == -30 && (
+              <Bar
+                data={{
+                  labels: labels
+                    .slice(labels.length - 30)
+                    .map((data: any) => data),
+                  datasets: [
+                    {
+                      label: "True Volume",
+                      data: trueVolume.slice(trueVolume.length - 30),
+                      borderColor: "white",
+                      backgroundColor: "#5C5F66",
+                    },
+                    {
+                      label: "Loans",
+                      data: loanVolume.slice(loanVolume.length - 30),
+                      borderColor: "black",
+                      backgroundColor: "#FFD740",
+                    },
+                  ],
+                }}
+                options={{
+                  interaction: {
+                    mode: "x",
+                  },
+                  maintainAspectRatio: false,
+                  plugins: {
+                    title: {
+                      display: false,
+                      text: "Chart.js Bar Chart - Stacked",
+                    },
+                    legend: {
+                      position: "top",
+                      align: "start",
+                      display: true,
+                      fullSize: true,
+                      labels: {
+                        color: "#fff",
+                        usePointStyle: true,
+                        pointStyle: "rectRounded",
                       },
                     },
                   },
-                  title: {
-                    display: false,
-                    text: "Chart.js Bar Chart - Stacked",
-                  },
-                  legend: {
-                    position: "top",
-                    align: "start",
-                    display: true,
-                    fullSize: true,
-                    labels: {
-                      color: "#fff",
-                      usePointStyle: true,
-                      pointStyle: "rectRounded",
+                  scales: {
+                    x: {
+                      stacked: true,
+                    },
+                    y: {
+                      stacked: true,
                     },
                   },
-                },
-                scales: {
-                  x: {
-                    stacked: true,
+                }}
+              />
+            )}
+            {timespan == -7 && (
+              <Bar
+                data={{
+                  labels: labels
+                    .slice(labels.length - 7)
+                    .map((data: any) => data),
+                  datasets: [
+                    {
+                      label: "True Volume",
+                      data: trueVolume.slice(trueVolume.length - 7),
+                      borderColor: "white",
+                      backgroundColor: "#5C5F66",
+                    },
+                    {
+                      label: "Loans",
+                      data: loanVolume.slice(loanVolume.length - 7),
+                      borderColor: "black",
+                      backgroundColor: "#FFD740",
+                    },
+                  ],
+                }}
+                options={{
+                  interaction: {
+                    mode: "x",
                   },
-                  y: {
-                    stacked: true,
-                  },
-                },
-              }}
-            />
-          )}
-          {timespan == -7 && (
-            <Bar
-              data={volumeData7D}
-              options={{
-                interaction: {
-                  mode: "x",
-                },
-                maintainAspectRatio: false,
-                plugins: {
-                  annotation: {
-                    annotations: {
-                      box1: {
-                        type: "label",
-                        xMin: 2,
-                        xMax: 10,
-                        yMin: 500,
-                        yMax: 10000,
-                        backgroundColor: jsonData.datasets[0].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
-                      },
-                      box2: {
-                        type: "label",
-                        xMin: 11,
-                        xMax: 20,
-                        yMin: 20000,
-                        yMax: 40000,
-                        backgroundColor: jsonData.datasets[1].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
-                      },
-                      box3: {
-                        type: "label",
-                        xMin: 51,
-                        xMax: 100,
-                        yMin: 30000,
-                        yMax: 80000,
-                        backgroundColor: jsonData.datasets[2].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
+                  maintainAspectRatio: false,
+                  plugins: {
+                    title: {
+                      display: false,
+                      text: "Chart.js Bar Chart - Stacked",
+                    },
+                    legend: {
+                      position: "top",
+                      align: "start",
+                      display: true,
+                      fullSize: true,
+                      labels: {
+                        color: "#fff",
+                        usePointStyle: true,
+                        pointStyle: "rectRounded",
                       },
                     },
                   },
-                  title: {
-                    display: false,
-                    text: "Chart.js Bar Chart - Stacked",
-                  },
-                  legend: {
-                    position: "top",
-                    align: "start",
-                    display: true,
-                    fullSize: true,
-                    labels: {
-                      color: "#fff",
-                      usePointStyle: true,
-                      pointStyle: "rectRounded",
+                  scales: {
+                    x: {
+                      stacked: true,
+                    },
+                    y: {
+                      stacked: true,
                     },
                   },
-                },
-                scales: {
-                  x: {
-                    stacked: true,
+                }}
+              />
+            )}
+            {timespan == -1 && (
+              <Bar
+                data={{
+                  labels: labels
+                    .slice(labels.length - 1)
+                    .map((data: any) => data),
+                  datasets: [
+                    {
+                      label: "True Volume",
+                      data: trueVolume.slice(trueVolume.length - 1),
+                      borderColor: "white",
+                      backgroundColor: "#5C5F66",
+                    },
+                    {
+                      label: "Loans",
+                      data: loanVolume.slice(loanVolume.length - 1),
+                      borderColor: "black",
+                      backgroundColor: "#FFD740",
+                    },
+                  ],
+                }}
+                options={{
+                  interaction: {
+                    mode: "x",
                   },
-                  y: {
-                    stacked: true,
-                  },
-                },
-              }}
-            />
-          )}
-          {timespan == -1 && (
-            <Bar
-              data={volumeData24H}
-              options={{
-                interaction: {
-                  mode: "x",
-                },
-                maintainAspectRatio: false,
-                plugins: {
-                  annotation: {
-                    annotations: {
-                      box1: {
-                        type: "label",
-                        xMin: 2,
-                        xMax: 10,
-                        yMin: 500,
-                        yMax: 10000,
-                        backgroundColor: jsonData.datasets[0].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
-                      },
-                      box2: {
-                        type: "label",
-                        xMin: 11,
-                        xMax: 20,
-                        yMin: 20000,
-                        yMax: 40000,
-                        backgroundColor: jsonData.datasets[1].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
-                      },
-                      box3: {
-                        type: "label",
-                        xMin: 51,
-                        xMax: 100,
-                        yMin: 30000,
-                        yMax: 80000,
-                        backgroundColor: jsonData.datasets[2].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
+                  maintainAspectRatio: false,
+                  plugins: {
+                    title: {
+                      display: false,
+                      text: "Chart.js Bar Chart - Stacked",
+                    },
+                    legend: {
+                      position: "top",
+                      align: "start",
+                      display: true,
+                      fullSize: true,
+                      labels: {
+                        color: "#fff",
+                        usePointStyle: true,
+                        pointStyle: "rectRounded",
                       },
                     },
                   },
-                  title: {
-                    display: false,
-                    text: "Chart.js Bar Chart - Stacked",
-                  },
-                  legend: {
-                    position: "top",
-                    align: "start",
-                    display: true,
-                    fullSize: true,
-                    labels: {
-                      color: "#fff",
-                      usePointStyle: true,
-                      pointStyle: "rectRounded",
+                  scales: {
+                    x: {
+                      stacked: true,
+                    },
+                    y: {
+                      stacked: true,
                     },
                   },
-                },
-                scales: {
-                  x: {
-                    stacked: true,
-                  },
-                  y: {
-                    stacked: true,
-                  },
-                },
-              }}
-            />
-          )}
-          {timespan == null && (
-            <Bar
-              data={volumeDataAll}
-              options={{
-                interaction: {
-                  mode: "x",
-                },
-                maintainAspectRatio: false,
-                plugins: {
-                  annotation: {
-                    annotations: {
-                      box1: {
-                        type: "label",
-                        xMin: 2,
-                        xMax: 10,
-                        yMin: 500,
-                        yMax: 10000,
-                        backgroundColor: jsonData.datasets[0].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
+                }}
+              />
+            )}
+            {timespan == null && (
+              <>
+                <Bar
+                  data={{
+                    labels: labels.map((data: any) => data),
+                    datasets: [
+                      {
+                        label: "True Volume",
+                        data: trueVolume,
+                        borderColor: "white",
+                        backgroundColor: "#5C5F66",
                       },
-                      box2: {
-                        type: "label",
-                        xMin: 11,
-                        xMax: 20,
-                        yMin: 20000,
-                        yMax: 40000,
-                        backgroundColor: jsonData.datasets[1].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
+                      {
+                        label: "Loans",
+                        data: loanVolume,
+                        borderColor: "black",
+                        backgroundColor: "#FFD740",
                       },
-                      box3: {
-                        type: "label",
-                        xMin: 51,
-                        xMax: 100,
-                        yMin: 30000,
-                        yMax: 80000,
-                        backgroundColor: jsonData.datasets[2].backgroundColor,
-                        borderColor: "#000",
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        content: ["annotated"],
+                      {
+                        label: "none",
+                        data: totalVolume,
+                        borderColor: "black",
+                        backgroundColor: "#fff",
+                        hidden: true,
+                      },
+                    ],
+                  }}
+                  options={{
+                    interaction: {
+                      mode: "x",
+                    },
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: {
+                        callbacks: {
+                          footer: customTooltip,
+                        },
+                      },
+                      annotation: {
+                        annotations: {},
+                      },
+                      title: {
+                        display: false,
+                        text: "Chart.js Bar Chart - Stacked",
+                      },
+                      legend: {
+                        position: "top",
+                        align: "start",
+                        display: true,
+                        fullSize: true,
+                        labels: {
+                          filter: (item) => item.text !== "none",
+                          color: "#fff",
+                          usePointStyle: true,
+                          pointStyle: "rectRounded",
+                        },
                       },
                     },
-                  },
-                  title: {
-                    display: false,
-                    text: "Chart.js Bar Chart - Stacked",
-                  },
-                  legend: {
-                    position: "top",
-                    align: "start",
-                    display: true,
-                    fullSize: true,
-                    labels: {
-                      color: "#fff",
-                      usePointStyle: true,
-                      pointStyle: "rectRounded",
+                    scales: {
+                      x: {
+                        stacked: true,
+                      },
+                      y: {
+                        stacked: true,
+                      },
                     },
-                  },
-                },
-                scales: {
-                  x: {
-                    stacked: true,
-                  },
-                  y: {
-                    stacked: true,
-                  },
-                },
-              }}
-            />
-          )}
-        </div>
-        <div className="chart__grid-cell u-bgGrey u-radius8 u-padding12">
-          <div className="chart__chart">
-            <h2 className="typography__display--2">24H True Volume</h2>
+                  }}
+                />
+              </>
+            )}
           </div>
         </div>
+        <div className="chart__grid-cell">
+          <h2 className="typography__display--1">Last 24 hours</h2>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "20px",
+              height: "100%",
+            }}
+          >
+            <div className="u-bgGrey u-radius8 u-padding12 u-heightFull u-posRelative">
+              <div className="chart__container">
+                <div>
+                  <p className="typography__label--2">3.6k</p>
+                  <h3 className="typography__label--1">True Volume</h3>
+                  <p className="typography__paragraph--1">
+                    NFT trading volume across all transaction types
+                  </p>
+                </div>
+                <div style={{ position: "relative", bottom: "90px" }}>
+                  <Bar
+                    data={{
+                      labels: labels.slice(labels.length - 90).map((data: any) => data),
+                      datasets: [
+                        {
+                          label: "True Volume",
+                          data: trueVolume,
+                          borderColor: "white",
+                          backgroundColor: "#5C5F66",
+                          barThickness: 2,
+                        },
+                      ],
+                    }}
+                    options={{
+                      interaction: {
+                        mode: "x",
+                      },
+                      maintainAspectRatio: false,
+                      plugins: {
+                        tooltip: {
+                          callbacks: {
+                            footer: customTooltip,
+                          },
+                        },
+                        annotation: {
+                          annotations: {},
+                        },
+                        title: {
+                          display: false,
+                          text: "Chart.js Bar Chart - Stacked",
+                        },
+                        legend: {
+                          position: "top",
+                          align: "start",
+                          display: false,
+                          fullSize: true,
+                          labels: {
+                            color: "#fff",
+                            usePointStyle: true,
+                            pointStyle: "rectRounded",
+                          },
+                        },
+                      },
+                      scales: {
+                        x: {
+                          display: false,
+                          stacked: true,
+                        },
+                        y: {
+                          display: false,
+                          stacked: true,
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="chart__subtitle">
+                <p className="typography__label--3">90 Day Trend</p>
+              </div>
+            </div>
 
-        <div className="chart__grid-cell u-bgGrey u-radius8 u-padding12">
-          <div className="chart__chart">
-            <h2 className="typography__display--2">24H Breakdown</h2>
+            <div className="u-bgGrey u-radius8 u-padding12 u-posRelative u-heightFull">
+              <div className="chart__container">
+                <div>
+                  <h3 className="typography__label--1">Total Volume</h3>
+                  <p className="typography__paragraph--1">
+                    Excludes fake/artificial volume such as loans, points
+                    farming and wash trading.
+                  </p>
+
+                <div className="chart__legend">
+                  <div className="chart__legend-item chart__legend-item--primary">
+                    <p className="typography__label--3">Loans</p>
+                  </div>
+                  <div className="chart__legend-item chart__legend-item--secondary">
+                    <p className="typography__label--3">Fake Volume (Blur)</p>
+                  </div>
+                  <div className="chart__legend-item chart__legend-item--tertiary">
+                  <p className="typography__label--3">Fake Volume (Other Marketplaces)</p>
+                  </div>
+
+                </div>
+                </div>
+
+                <div style={{ position: "relative", bottom: "90px" }}>
+                  <Line
+                    data={{
+                      labels: labels
+                        .slice(labels.length - 90)
+                        .map((data: any) => data),
+                      datasets: [
+                        {
+                          label: "Loans",
+                          data: loanVolume,
+                          borderColor: "rgba(250, 176, 5, 1)",
+                          pointRadius: 0,
+                          tension: 1.1,
+                          borderWidth: 2,
+                        },
+                        {
+                          label: "Fake Volume (Blur)",
+                          data: fakeBlurVolume,
+                          borderColor: "rgba(253, 126, 20, 1)",
+                          pointRadius: 0,
+                          tension: 1.1,
+                          borderWidth: 2,
+                        },
+                        {
+                          label: "Fake Volume (Other)",
+                          data: fakeOtherVolume,
+                          borderColor: "rgba(250, 82, 82, 1)",
+                          pointRadius: 0,
+                          tension: 1.1,
+                          borderWidth: 2,
+                        },
+                      ],
+                    }}
+                    options={{
+                      interaction: {
+                        mode: "x",
+                      },
+                      maintainAspectRatio: false,
+                      plugins: {
+                        tooltip: {
+                          callbacks: {
+                            footer: customTooltip,
+                          },
+                        },
+
+                        annotation: {
+                          annotations: {},
+                        },
+                        title: {
+                          display: false,
+                          text: "Chart.js Bar Chart - Stacked",
+                        },
+                        legend: {
+                          position: "top",
+                          align: "start",
+                          display: false,
+                          fullSize: true,
+                          labels: {
+                            color: "#fff",
+                            usePointStyle: true,
+                            pointStyle: "rectRounded",
+                          },
+                        },
+                      },
+                      scales: {
+                        x: {
+                          display: false,
+                          stacked: true,
+                        },
+                        y: {
+                          display: false,
+                          stacked: true,
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="chart__subtitle">
+                <p className="typography__label--3">90 Day Trend</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

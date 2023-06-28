@@ -1,0 +1,82 @@
+.chart__wrapper {
+  flex-direction: column;
+  margin: auto;
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+}
+
+.chart__grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+}
+
+.chart__grid-cell {
+  position: relative;
+  height: 60vh;
+  flex: 1;
+}
+.chart__grid-cell--main {
+  flex: 2;
+}
+
+.chart__container {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.chart__subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  margin: auto;
+  text-align: center;
+  left: 0;
+  bottom: 80px;
+  right: 0;
+}
+
+// --------------------------------------
+// Legend
+// --------------------------------------
+.chart__legend {
+  border-top: 1px solid $dark-bg-3;
+}
+
+
+.chart__legend-item::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 4px;
+  border-radius: 2px;
+  left: 0;
+  top: 5px;
+  background-color: $dark-bg-1;
+}
+
+
+.chart__legend-item {
+  position: relative;
+  padding-left: 20px;
+  &--primary:before {
+    background-color: $accent-yellow;
+  }
+
+  &--secondary:before {
+    background-color: $accent-orange;
+
+  }
+  
+  &--tertiary:before {
+    background-color: $accent-red;
+
+  }
+  
+}
