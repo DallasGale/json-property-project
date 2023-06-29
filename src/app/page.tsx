@@ -32,13 +32,13 @@ export default async function Home() {
   // const volumeFarming: Datasets = await data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "volume_farming"
   // );
-  const volumeWashTrading = data?.datasets.filter(
+  const volumeWashTrading = await data?.datasets.filter(
     ({ label }: DatasetType) => label === "volume_wash_trading"
   );
-  const inorganicVolume = data?.datasets.filter(
+  const inorganicVolume = await data?.datasets.filter(
     ({ label }: DatasetType) => label === "inorganic_volume"
   );
-  const loanVolume = data?.datasets.filter(
+  const loanVolume = await data?.datasets.filter(
     ({ label }: DatasetType) => label === "loan_volume"
   );
   // const percentDifference: Datasets = data?.datasets.filter(
@@ -50,7 +50,7 @@ export default async function Home() {
   // const realRawRatio: Datasets = data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "real_raw_ratio"
   // );
-  const realVolume = data?.datasets.filter(
+  const realVolume = await data?.datasets.filter(
     ({ label }: DatasetType) => label === "real_volume"
   );
   // const realVolumeHack: Datasets = data?.datasets.filter(
