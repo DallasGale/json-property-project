@@ -96,8 +96,6 @@ export default async function Home() {
   //     dateFormatter(labels);
   //   }
   // }, [labels]);
-
-  console.log({ fakeVolume });
   return (
     <main className="main-container">
       <header className="header">
@@ -106,13 +104,13 @@ export default async function Home() {
 
       <div className="content">
         <VolumeChart
-          fakeVolume={fakeVolume[0].data}
           labels={labels}
+          fakeVolume={fakeVolume[0].data}
           trueVolume={realVolume[0].data}
           loanVolume={loanVolume[0].data}
           totalVolume={totalVolume[0].data}
-          fakeBlurVolume={volumeWashTrading[0].data}
-          fakeOtherVolume={inorganicVolume[0].data}
+          // fakeBlurVolume={volumeWashTrading[0].data}
+          // fakeOtherVolume={inorganicVolume[0].data}
         />
       </div>
     </main>

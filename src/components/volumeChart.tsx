@@ -52,16 +52,16 @@ interface VolumeChartProps {
   loanVolume: DatasetType[];
   totalVolume: DatasetType[];
   fakeVolume: DatasetType[];
-  fakeBlurVolume: DatasetType[];
-  fakeOtherVolume: DatasetType[];
+  // fakeBlurVolume: DatasetType[];
+  // fakeOtherVolume: DatasetType[];
 }
 const VolumeChart: React.FC<VolumeChartProps> = ({
   labels,
   trueVolume,
   loanVolume,
   fakeVolume,
-  fakeBlurVolume,
-  fakeOtherVolume,
+  // fakeBlurVolume,
+  // fakeOtherVolume,
   totalVolume,
 }) => {
   const [timespan, setTimespan] = useState(-30);
@@ -89,31 +89,45 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   const [dailyTrueVolumeDataArray, setDailyTrueVolumeDataArray] = useState(
     trueVolume.slice(trueVolume.length - 30)
   );
+  const [dailyLoanVolumeDataArray, setDailyLoanVolumeDataArray] = useState(
+    loanVolume.slice(loanVolume.length - 30)
+  );
+  const [dailyTotalVolumeDataArray, setDailyTotalVolumeDataArray] = useState(
+    totalVolume.slice(totalVolume.length - 30)
+  );
 
   useEffect(() => {
     if (timespan === -30) {
+      setDailyTotalVolumeDataArray(totalVolume.slice(totalVolume.length - 30));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
       setDailyTrueVolumeLabels(
         labels.slice(labels.length - 30).map((data: any) => data)
       );
     }
     if (timespan === -7) {
+      setDailyTotalVolumeDataArray(totalVolume.slice(totalVolume.length - 7));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
       setDailyTrueVolumeLabels(
         labels.slice(labels.length - 7).map((data: any) => data)
       );
     }
     if (timespan === -1) {
+      setDailyTotalVolumeDataArray(totalVolume.slice(totalVolume.length - 1));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
       setDailyTrueVolumeLabels(
         labels.slice(labels.length - 1).map((data: any) => data)
       );
     }
     if (timespan === null) {
+      setDailyTotalVolumeDataArray(totalVolume);
+      setDailyLoanVolumeDataArray(loanVolume);
       setDailyTrueVolumeDataArray(trueVolume);
       setDailyTrueVolumeLabels(labels);
     }
-  }, [timespan, labels, trueVolume]);
+  }, [timespan, labels, trueVolume, loanVolume, totalVolume]);
   return (
     <>
       <section className="chart__wrapper">
@@ -162,7 +176,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       },
                       {
                         label: "Loans",
-                        data: dailyTrueVolumeDataArray,
+                        data: dailyLoanVolumeDataArray,
                         borderColor: "black",
                         backgroundColor: "#FFD740",
                       },
@@ -337,7 +351,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       datasets: [
                         {
                           label: "Real Volume",
-                          data: trueVolume.slice(trueVolume.length - 90),
+                          data: trueVolume.slice(labels.length - 90),
                           borderColor: "rgba(255, 255, 255, 1)",
                           backgroundColor: "rgba(255, 255, 255, 1)",
                           pointRadius: 0,
@@ -345,17 +359,18 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                           borderWidth: 2,
                         },
                         {
-                          label: "Loans",
-                          data: loanVolume.slice(loanVolume.length - 90),
+                          label: "Loan Volume",
+                          data: loanVolume.slice(labels.length - 90),
                           borderColor: "rgba(250, 176, 5, 1)",
                           backgroundColor: "rgba(250, 176, 5, 1)",
                           pointRadius: 0,
                           tension: 0.6,
                           borderWidth: 2,
                         },
+
                         {
                           label: "Fake Volume (Inorganic)",
-                          data: fakeVolume.slice(fakeVolume.length - 90),
+                          data: fakeVolume.slice(labels.length - 90),
                           borderColor: "rgba(253, 126, 20, 1)",
                           backgroundColor: "rgba(253, 126, 20, 1)",
                           pointRadius: 0,
@@ -363,10 +378,10 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                           borderWidth: 2,
                         },
                         {
-                          label: "Total Volume ",
-                          data: totalVolume.slice(totalVolume.length - 90),
-                          borderColor: "rgba(250, 82, 82, 1",
-                          backgroundColor: "rgba(250, 82, 82, 1",
+                          label: "Total Volume",
+                          data: totalVolume.slice(labels.length - 90),
+                          borderColor: "rgba(250, 82, 82, 1)",
+                          backgroundColor: "rgba(250, 82, 82, 1)",
                           pointRadius: 0,
                           tension: 0.6,
                           borderWidth: 2,
