@@ -92,13 +92,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   const [dailyLoanVolumeDataArray, setDailyLoanVolumeDataArray] = useState(
     loanVolume.slice(loanVolume.length - 30)
   );
-  const [dailyTotalVolumeDataArray, setDailyTotalVolumeDataArray] = useState(
-    totalVolume.slice(totalVolume.length - 30)
+  const [dailyFakeVolumeDataArray, setDailyFakeVolumeDataArray] = useState(
+    fakeVolume.slice(fakeVolume.length - 30)
   );
 
   useEffect(() => {
     if (timespan === -30) {
-      setDailyTotalVolumeDataArray(totalVolume.slice(totalVolume.length - 30));
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
       setDailyTrueVolumeLabels(
@@ -106,7 +106,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       );
     }
     if (timespan === -7) {
-      setDailyTotalVolumeDataArray(totalVolume.slice(totalVolume.length - 7));
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
       setDailyTrueVolumeLabels(
@@ -114,7 +114,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       );
     }
     if (timespan === -1) {
-      setDailyTotalVolumeDataArray(totalVolume.slice(totalVolume.length - 1));
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
       setDailyTrueVolumeLabels(
@@ -122,12 +122,12 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       );
     }
     if (timespan === null) {
-      setDailyTotalVolumeDataArray(totalVolume);
+      setDailyFakeVolumeDataArray(fakeVolume);
       setDailyLoanVolumeDataArray(loanVolume);
       setDailyTrueVolumeDataArray(trueVolume);
       setDailyTrueVolumeLabels(labels);
     }
-  }, [timespan, labels, trueVolume, loanVolume, totalVolume]);
+  }, [timespan, labels, trueVolume, loanVolume, fakeVolume]);
   return (
     <>
       <section className="chart__wrapper">
@@ -181,10 +181,10 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         backgroundColor: "#FFD740",
                       },
                       {
-                        label: "Total Volume",
-                        data: dailyTotalVolumeDataArray,
-                        borderColor: "black",
-                        backgroundColor: "#1c1d22",
+                        label: "Fake Volume (Inorganic)",
+                        data: dailyFakeVolumeDataArray,
+                        borderColor: "white",
+                        backgroundColor: "rgba(250, 82, 82, 1)",
                         // hidden: true,
                       },
                     ],
