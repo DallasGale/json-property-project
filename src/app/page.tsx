@@ -29,9 +29,9 @@ export default async function Home() {
   const totalVolume = await data?.datasets.filter(
     ({ label }: DatasetType) => label === "total_volume"
   );
-  const volumeFarming: Datasets = await data?.datasets.filter(
-    ({ label }: DatasetType) => label === "volume_farming"
-  );
+  // const volumeFarming: Datasets = await data?.datasets.filter(
+  //   ({ label }: DatasetType) => label === "volume_farming"
+  // );
   const volumeWashTrading = data?.datasets.filter(
     ({ label }: DatasetType) => label === "volume_wash_trading"
   );
@@ -41,27 +41,27 @@ export default async function Home() {
   const loanVolume = data?.datasets.filter(
     ({ label }: DatasetType) => label === "loan_volume"
   );
-  const percentDifference: Datasets = data?.datasets.filter(
-    ({ label }: DatasetType) => label === "percent_difference"
-  );
-  const realPercentDifference: Datasets = data?.datasets.filter(
-    ({ label }: DatasetType) => label === "real_percent_difference"
-  );
-  const realRawRatio: Datasets = data?.datasets.filter(
-    ({ label }: DatasetType) => label === "real_raw_ratio"
-  );
+  // const percentDifference: Datasets = data?.datasets.filter(
+  //   ({ label }: DatasetType) => label === "percent_difference"
+  // );
+  // const realPercentDifference: Datasets = data?.datasets.filter(
+  //   ({ label }: DatasetType) => label === "real_percent_difference"
+  // );
+  // const realRawRatio: Datasets = data?.datasets.filter(
+  //   ({ label }: DatasetType) => label === "real_raw_ratio"
+  // );
   const realVolume = data?.datasets.filter(
     ({ label }: DatasetType) => label === "real_volume"
   );
-  const realVolumeHack: Datasets = data?.datasets.filter(
-    ({ label }: DatasetType) => label === "real_volume_hack"
-  );
-  const totalPlatform: Datasets = data?.datasets.filter(
-    ({ label }: DatasetType) => label === "total_platform"
-  );
-  const totalRoyalty: Datasets = data?.datasets.filter(
-    ({ label }: DatasetType) => label === "total_royalty"
-  );
+  // const realVolumeHack: Datasets = data?.datasets.filter(
+  //   ({ label }: DatasetType) => label === "real_volume_hack"
+  // );
+  // const totalPlatform: Datasets = data?.datasets.filter(
+  //   ({ label }: DatasetType) => label === "total_platform"
+  // );
+  // const totalRoyalty: Datasets = data?.datasets.filter(
+  //   ({ label }: DatasetType) => label === "total_royalty"
+  // );
 
   return (
     <main className="main-container">

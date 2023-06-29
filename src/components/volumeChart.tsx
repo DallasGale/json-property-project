@@ -62,7 +62,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   fakeOtherVolume,
   totalVolume,
 }) => {
-  console.log({ trueVolume });
   const [timespan, setTimespan] = useState(-30);
 
   function handleClick(e: React.MouseEvent, value: any) {
@@ -70,17 +69,17 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     setTimespan(value);
   }
 
-  const customTooltip = (tooltipItems?: any) => {
-    let sum = 0;
+  // const customTooltip = (tooltipItems?: any) => {
+  //   let sum = 0;
 
-    // tooltipItems.forEach(function (tooltipItem: any) {
-    //   sum += tooltipItem.parsed.y;
-    // });
-    tooltipItems.forEach(function (tooltipItem: any) {
-      sum += tooltipItem.parsed.y;
-    });
-    return "Total Volume" + totalVolume;
-  };
+  //   // tooltipItems.forEach(function (tooltipItem: any) {
+  //   //   sum += tooltipItem.parsed.y;
+  //   // });
+  //   tooltipItems.forEach(function (tooltipItem: any) {
+  //     sum += tooltipItem.parsed.y;
+  //   });
+  //   return "Total Volume" + totalVolume;
+  // };
 
   return (
     <section className="chart__wrapper">
