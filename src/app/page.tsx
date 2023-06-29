@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Logo from "../../public/DataBeast.svg";
 import VolumeChart from "@components/volumeChart";
-import type { Datasets, DatasetType } from "@components/volumeChart";
+import type { DatasetType } from "@components/volumeChart";
 
 async function getData() {
   const res = await fetch(
@@ -27,7 +27,7 @@ export default async function Home() {
 
   // Datasets
   const totalVolume = await data?.datasets.filter(
-    ({ label }: DatasetType) => label === "total_volume"
+    ({ label }: DatasetType) => label === "volume_total"
   );
   // const volumeFarming: Datasets = await data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "volume_farming"
@@ -36,10 +36,10 @@ export default async function Home() {
     ({ label }: DatasetType) => label === "volume_wash_trading"
   );
   const inorganicVolume = await data?.datasets.filter(
-    ({ label }: DatasetType) => label === "inorganic_volume"
+    ({ label }: DatasetType) => label === "volume_fake"
   );
   const loanVolume = await data?.datasets.filter(
-    ({ label }: DatasetType) => label === "loan_volume"
+    ({ label }: DatasetType) => label === "volume_loan"
   );
   // const percentDifference: Datasets = data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "percent_difference"
@@ -51,7 +51,7 @@ export default async function Home() {
   //   ({ label }: DatasetType) => label === "real_raw_ratio"
   // );
   const realVolume = await data?.datasets.filter(
-    ({ label }: DatasetType) => label === "real_volume"
+    ({ label }: DatasetType) => label === "volume_real"
   );
   // const realVolumeHack: Datasets = data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "real_volume_hack"
