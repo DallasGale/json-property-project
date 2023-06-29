@@ -395,7 +395,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     </p>
                   </div>
                 </div>
-                <div style={{ position: "relative", bottom: "90px" }}>
+                <div style={{ position: "relative", bottom: "30px" }}>
                   <Bar
                     data={{
                       labels: labels
@@ -484,7 +484,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                   </div>
                 </div>
 
-                <div style={{ position: "relative", bottom: "90px" }}>
+                <div style={{ position: "relative", bottom: "30px" }}>
                   <Line
                     data={{
                       labels: labels
