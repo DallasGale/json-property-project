@@ -8,9 +8,12 @@
 
 .chart__grid {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
   width: 100%;
+  @include respond-to(desktop-up) {
+    flex-direction: row;
+  }
 }
 
 .chart__grid-cell {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,7 +13,7 @@ import {
   Legend,
 } from "chart.js";
 // import chartTrendline from "chartjs-plugin-trendline";
-
+import { kFormatter } from "../utils/kFormatter";
 import annotationPlugin from "chartjs-plugin-annotation";
 import Data from "../../public/data/volume.json";
 import { Bar, Line } from "react-chartjs-2";
@@ -81,6 +81,38 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   //   return "Total Volume" + totalVolume;
   // };
 
+  console.log({ labels });
+  const [dailyTrueVolumeLabels, setDailyTrueVolumeLabels] = useState(
+    labels.slice(labels.length - 30).map((data: any) => data)
+  );
+  const [dailyTrueVolumeDataArray, setDailyTrueVolumeDataArray] = useState(
+    trueVolume.slice(trueVolume.length - 30)
+  );
+
+  useEffect(() => {
+    if (timespan === -30) {
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 30).map((data: any) => data)
+      );
+    }
+    if (timespan === -7) {
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 7).map((data: any) => data)
+      );
+    }
+    if (timespan === -1) {
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 1).map((data: any) => data)
+      );
+    }
+    if (timespan === null) {
+      setDailyTrueVolumeDataArray(trueVolume);
+      setDailyTrueVolumeLabels(labels);
+    }
+  }, [timespan, labels, trueVolume]);
   return (
     <section className="chart__wrapper">
       <section className="chart__grid">
@@ -115,259 +147,75 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               </button>
             </div>
 
-            {timespan == -30 && (
-              <Bar
-                data={{
-                  labels: labels
-                    .slice(labels.length - 30)
-                    .map((data: any) => data),
-                  datasets: [
-                    {
-                      label: "True Volume",
-                      data: trueVolume.slice(trueVolume.length - 30),
-                      borderColor: "white",
-                      backgroundColor: "#5C5F66",
-                    },
-                    {
-                      label: "Loans",
-                      data: loanVolume.slice(loanVolume.length - 30),
-                      borderColor: "black",
-                      backgroundColor: "#FFD740",
-                    },
-                    {
-                      label: "Total Volume",
-                      data: totalVolume.slice(totalVolume.length - 30),
-                      borderColor: "black",
-                      backgroundColor: "#1c1d22",
-                      // hidden: true,
-                    },
-                  ],
-                }}
-                options={{
-                  interaction: {
-                    mode: "x",
+            {/* {timespan == -30 && ( */}
+            <Bar
+              data={{
+                labels: dailyTrueVolumeLabels,
+                datasets: [
+                  {
+                    label: "True Volume",
+                    data: dailyTrueVolumeDataArray,
+                    borderColor: "white",
+                    backgroundColor: "#5C5F66",
                   },
-                  maintainAspectRatio: false,
-                  plugins: {
-                    title: {
-                      display: false,
-                      text: "Chart.js Bar Chart - Stacked",
-                    },
-                    legend: {
-                      position: "top",
-                      align: "start",
-                      display: true,
-                      fullSize: true,
-                      labels: {
-                        color: "#fff",
-                        usePointStyle: true,
-                        pointStyle: "rectRounded",
-                      },
+                  {
+                    label: "Loans",
+                    data: dailyTrueVolumeDataArray,
+                    borderColor: "black",
+                    backgroundColor: "#FFD740",
+                  },
+                  {
+                    label: "Total Volume",
+                    data: dailyTrueVolumeDataArray,
+                    borderColor: "black",
+                    backgroundColor: "#1c1d22",
+                    // hidden: true,
+                  },
+                ],
+              }}
+              options={{
+                interaction: {
+                  mode: "x",
+                },
+                maintainAspectRatio: false,
+                plugins: {
+                  title: {
+                    display: false,
+                    text: "Chart.js Bar Chart - Stacked",
+                  },
+                  legend: {
+                    position: "top",
+                    align: "start",
+                    display: true,
+                    fullSize: true,
+                    labels: {
+                      color: "#fff",
+                      usePointStyle: true,
+                      pointStyle: "rectRounded",
                     },
                   },
-                  scales: {
-                    x: {
-                      stacked: true,
-                    },
-                    y: {
-                      stacked: true,
-                    },
+                },
+                scales: {
+                  x: {
+                    stacked: true,
+                    // ticks: {
+                    //   callback: function (x) {
+                    //     console.log({ x });
+                    //     return ".";
+                    //   },
+                    // },
                   },
-                }}
-              />
-            )}
-            {timespan == -7 && (
-              <Bar
-                data={{
-                  labels: labels
-                    .slice(labels.length - 7)
-                    .map((data: any) => data),
-                  datasets: [
-                    {
-                      label: "True Volume",
-                      data: trueVolume.slice(trueVolume.length - 7),
-                      borderColor: "white",
-                      backgroundColor: "#5C5F66",
-                    },
-                    {
-                      label: "Loans",
-                      data: loanVolume.slice(loanVolume.length - 7),
-                      borderColor: "black",
-                      backgroundColor: "#FFD740",
-                    },
-                    {
-                      label: "Total Volume",
-                      data: totalVolume.slice(totalVolume.length - 7),
-                      borderColor: "black",
-                      backgroundColor: "#1c1d22",
-                      // hidden: true,
-                    },
-                  ],
-                }}
-                options={{
-                  interaction: {
-                    mode: "x",
-                  },
-                  maintainAspectRatio: false,
-                  plugins: {
-                    title: {
-                      display: false,
-                      text: "Chart.js Bar Chart - Stacked",
-                    },
-                    legend: {
-                      position: "top",
-                      align: "start",
-                      display: true,
-                      fullSize: true,
-                      labels: {
-                        color: "#fff",
-                        usePointStyle: true,
-                        pointStyle: "rectRounded",
+                  y: {
+                    stacked: true,
+                    ticks: {
+                      callback: function (value: any) {
+                        return kFormatter(value);
                       },
                     },
                   },
-                  scales: {
-                    x: {
-                      stacked: true,
-                    },
-                    y: {
-                      stacked: true,
-                    },
-                  },
-                }}
-              />
-            )}
-            {timespan == -1 && (
-              <Bar
-                data={{
-                  labels: labels
-                    .slice(labels.length - 1)
-                    .map((data: any) => data),
-                  datasets: [
-                    {
-                      label: "True Volume",
-                      data: trueVolume.slice(trueVolume.length - 1),
-                      borderColor: "white",
-                      backgroundColor: "#5C5F66",
-                    },
-                    {
-                      label: "Loans",
-                      data: loanVolume.slice(loanVolume.length - 1),
-                      borderColor: "black",
-                      backgroundColor: "#FFD740",
-                    },
-                    {
-                      label: "Total Volume",
-                      data: totalVolume.slice(totalVolume.length - 1),
-                      borderColor: "black",
-                      backgroundColor: "#1c1d22",
-                      // hidden: true,
-                    },
-                  ],
-                }}
-                options={{
-                  interaction: {
-                    mode: "x",
-                  },
-                  maintainAspectRatio: false,
-                  plugins: {
-                    title: {
-                      display: false,
-                      text: "Chart.js Bar Chart - Stacked",
-                    },
-                    legend: {
-                      position: "top",
-                      align: "start",
-                      display: true,
-                      fullSize: true,
-                      labels: {
-                        color: "#fff",
-                        usePointStyle: true,
-                        pointStyle: "rectRounded",
-                      },
-                    },
-                  },
-                  scales: {
-                    x: {
-                      stacked: true,
-                    },
-                    y: {
-                      stacked: true,
-                    },
-                  },
-                }}
-              />
-            )}
-            {timespan == null && (
-              <>
-                <Bar
-                  data={{
-                    labels: labels.map((data: any) => data),
-                    datasets: [
-                      {
-                        label: "True Volume",
-                        data: trueVolume,
-                        borderColor: "white",
-                        backgroundColor: "#5C5F66",
-                      },
-                      {
-                        label: "Loans",
-                        data: loanVolume,
-                        borderColor: "black",
-                        backgroundColor: "#FFD740",
-                      },
-                      {
-                        label: "Total Volume",
-                        data: totalVolume,
-                        borderColor: "black",
-                        backgroundColor: "#1c1d22",
-                        // hidden: true,
-                      },
-                    ],
-                  }}
-                  options={{
-                    interaction: {
-                      mode: "x",
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                      tooltip: {
-                        callbacks: {
-                          // footer: customTooltip,
-                        },
-                      },
-                      annotation: {
-                        annotations: {},
-                      },
-                      title: {
-                        display: false,
-                        text: "Chart.js Bar Chart - Stacked",
-                      },
-                      legend: {
-                        position: "top",
-                        align: "start",
-                        display: true,
-                        fullSize: true,
-                        labels: {
-                          // filter: (item) => item.text !== "Total Volume",
-                          color: "#fff",
-                          usePointStyle: true,
-                          pointStyle: "rectRounded",
-                        },
-                      },
-                    },
-                    scales: {
-                      x: {
-                        stacked: true,
-                      },
-                      y: {
-                        stacked: true,
-                      },
-                    },
-                  }}
-                />
-              </>
-            )}
+                },
+              }}
+            />
           </div>
         </div>
         <div className="chart__grid-cell">
@@ -468,6 +316,8 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     farming and wash trading.
                   </p>
 
+                  {/* fake_percent_difference */}
+                  {/* real_percent_difference */}
                   <div className="chart__legend">
                     <div className="chart__legend-item chart__legend-item--primary">
                       <p className="typography__label--3">Loans</p>

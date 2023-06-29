@@ -22,8 +22,33 @@ async function getData() {
 export default async function Home() {
   const data = await getData();
 
+  const dateFormatter = async () => {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    let newDates: any[] = [];
+    await data.labels.forEach((date: any) => {
+      const fullDate = new Date(date);
+      const month = fullDate.getMonth();
+      const day = fullDate.getDate();
+      const completeDate = `${monthNames[month]} ${day}`;
+      newDates.push(completeDate);
+    });
+    return newDates;
+  };
   // Labels
-  const labels = await data?.labels;
+  const labels = await dateFormatter();
 
   // Datasets
   const totalVolume = await data?.datasets.filter(
@@ -62,6 +87,12 @@ export default async function Home() {
   // const totalRoyalty: Datasets = data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "total_royalty"
   // );
+
+  // useEffect(() => {
+  //   if (labels) {
+  //     dateFormatter(labels);
+  //   }
+  // }, [labels]);
 
   return (
     <main className="main-container">
