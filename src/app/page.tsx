@@ -21,7 +21,6 @@ async function getData() {
 
 export default async function Home() {
   const data = await getData();
-
   const dateFormatter = async () => {
     const monthNames = [
       "January",
@@ -47,6 +46,7 @@ export default async function Home() {
     });
     return newDates;
   };
+
   // Labels
   const labels = await dateFormatter();
 
@@ -65,6 +65,9 @@ export default async function Home() {
   );
   const loanVolume = await data?.datasets.filter(
     ({ label }: DatasetType) => label === "volume_loan"
+  );
+  const fakeVolume = await data?.datasets.filter(
+    ({ label }: DatasetType) => label === "volume_fake"
   );
   // const percentDifference: Datasets = data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "percent_difference"
@@ -94,6 +97,7 @@ export default async function Home() {
   //   }
   // }, [labels]);
 
+  console.log({ fakeVolume });
   return (
     <main className="main-container">
       <header className="header">
@@ -102,6 +106,7 @@ export default async function Home() {
 
       <div className="content">
         <VolumeChart
+          fakeVolume={fakeVolume[0].data}
           labels={labels}
           trueVolume={realVolume[0].data}
           loanVolume={loanVolume[0].data}

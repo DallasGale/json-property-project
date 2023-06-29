@@ -51,6 +51,7 @@ interface VolumeChartProps {
   trueVolume: DatasetType[];
   loanVolume: DatasetType[];
   totalVolume: DatasetType[];
+  fakeVolume: DatasetType[];
   fakeBlurVolume: DatasetType[];
   fakeOtherVolume: DatasetType[];
 }
@@ -58,6 +59,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   labels,
   trueVolume,
   loanVolume,
+  fakeVolume,
   fakeBlurVolume,
   fakeOtherVolume,
   totalVolume,
@@ -310,16 +312,19 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 {/* fake_percent_difference */}
                 {/* real_percent_difference */}
                 <div className="chart__legend">
+                  <div className="chart__legend-item chart__legend-item--real-volume">
+                    <p className="typography__label--3">Real Volume</p>
+                  </div>
                   <div className="chart__legend-item chart__legend-item--primary">
-                    <p className="typography__label--3">Loans</p>
+                    <p className="typography__label--3">Loan Volume</p>
                   </div>
                   <div className="chart__legend-item chart__legend-item--secondary">
-                    <p className="typography__label--3">Fake Volume (Blur)</p>
+                    <p className="typography__label--3">
+                      Fake Volume (Inorganic)
+                    </p>
                   </div>
                   <div className="chart__legend-item chart__legend-item--tertiary">
-                    <p className="typography__label--3">
-                      Fake Volume (Other Marketplaces)
-                    </p>
+                    <p className="typography__label--3">Total Volume</p>
                   </div>
                 </div>
 
@@ -331,6 +336,15 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         .map((data: any) => data),
                       datasets: [
                         {
+                          label: "Real Volume",
+                          data: trueVolume.slice(trueVolume.length - 90),
+                          borderColor: "rgba(255, 255, 255, 1)",
+                          backgroundColor: "rgba(255, 255, 255, 1)",
+                          pointRadius: 0,
+                          tension: 1.1,
+                          borderWidth: 2,
+                        },
+                        {
                           label: "Loans",
                           data: loanVolume.slice(loanVolume.length - 90),
                           borderColor: "rgba(250, 176, 5, 1)",
@@ -340,10 +354,8 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                           borderWidth: 2,
                         },
                         {
-                          label: "Fake Volume (Blur)",
-                          data: fakeBlurVolume.slice(
-                            fakeBlurVolume.length - 90
-                          ),
+                          label: "Fake Volume (Inorganic)",
+                          data: fakeVolume.slice(fakeVolume.length - 90),
                           borderColor: "rgba(253, 126, 20, 1)",
                           backgroundColor: "rgba(253, 126, 20, 1)",
                           pointRadius: 0,
@@ -351,12 +363,10 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                           borderWidth: 2,
                         },
                         {
-                          label: "Fake Volume (Other)",
-                          data: fakeOtherVolume.slice(
-                            fakeOtherVolume.length - 90
-                          ),
-                          borderColor: "rgba(250, 82, 82, 1)",
-                          backgroundColor: "rgba(250, 82, 82, 1)",
+                          label: "Total Volume ",
+                          data: totalVolume.slice(totalVolume.length - 90),
+                          borderColor: "rgba(250, 82, 82, 1",
+                          backgroundColor: "rgba(250, 82, 82, 1",
                           pointRadius: 0,
                           tension: 1.1,
                           borderWidth: 2,
