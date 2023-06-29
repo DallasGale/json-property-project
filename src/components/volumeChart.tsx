@@ -182,7 +182,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       },
                       {
                         label: "Total Volume",
-                        data: dailyTrueVolumeDataArray,
+                        data: dailyTotalVolumeDataArray,
                         borderColor: "black",
                         backgroundColor: "#1c1d22",
                         // hidden: true,
