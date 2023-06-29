@@ -341,7 +341,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                           borderColor: "rgba(255, 255, 255, 1)",
                           backgroundColor: "rgba(255, 255, 255, 1)",
                           pointRadius: 0,
-                          tension: 1.1,
+                          tension: 0.6,
                           borderWidth: 2,
                         },
                         {
@@ -350,7 +350,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                           borderColor: "rgba(250, 176, 5, 1)",
                           backgroundColor: "rgba(250, 176, 5, 1)",
                           pointRadius: 0,
-                          tension: 1.1,
+                          tension: 0.6,
                           borderWidth: 2,
                         },
                         {
@@ -359,7 +359,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                           borderColor: "rgba(253, 126, 20, 1)",
                           backgroundColor: "rgba(253, 126, 20, 1)",
                           pointRadius: 0,
-                          tension: 1.1,
+                          tension: 0.6,
                           borderWidth: 2,
                         },
                         {
@@ -368,7 +368,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                           borderColor: "rgba(250, 82, 82, 1",
                           backgroundColor: "rgba(250, 82, 82, 1",
                           pointRadius: 0,
-                          tension: 1.1,
+                          tension: 0.6,
                           borderWidth: 2,
                         },
                       ],
@@ -388,10 +388,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         annotation: {
                           annotations: {},
                         },
-                        title: {
-                          display: false,
-                          text: "Chart.js Bar Chart - Stacked",
-                        },
+
                         legend: {
                           position: "top",
                           align: "start",
