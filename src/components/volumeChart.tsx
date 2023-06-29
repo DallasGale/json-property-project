@@ -51,8 +51,8 @@ interface VolumeChartProps {
   trueVolume: DatasetType[];
   loanVolume: DatasetType[];
   totalVolume: DatasetType[];
-  fakeBlurVolume: DatasetType[]
-  fakeOtherVolume: DatasetType[]
+  fakeBlurVolume: DatasetType[];
+  fakeOtherVolume: DatasetType[];
 }
 const VolumeChart: React.FC<VolumeChartProps> = ({
   labels,
@@ -62,7 +62,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   fakeOtherVolume,
   totalVolume,
 }) => {
-  console.log({trueVolume})
+  console.log({ trueVolume });
   const [timespan, setTimespan] = useState(-30);
 
   function handleClick(e: React.MouseEvent, value: any) {
@@ -70,15 +70,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     setTimespan(value);
   }
 
-
   const customTooltip = (tooltipItems?: any) => {
     let sum = 0;
-    
 
     // tooltipItems.forEach(function (tooltipItem: any) {
     //   sum += tooltipItem.parsed.y;
     // });
-     tooltipItems.forEach(function (tooltipItem: any) {
+    tooltipItems.forEach(function (tooltipItem: any) {
       sum += tooltipItem.parsed.y;
     });
     return "Total Volume" + totalVolume;
@@ -385,17 +383,24 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
           >
             <div className="u-bgGrey u-radius8 u-padding12 u-heightFull u-posRelative">
               <div className="chart__container">
-                <div>
-                  <p className="typography__label--2">3.6k</p>
-                  <h3 className="typography__label--1">True Volume</h3>
-                  <p className="typography__paragraph--1">
-                    NFT trading volume across all transaction types
-                  </p>
+                <div className="chart__info">
+                  <div className="chart__progress-ring">
+                    <p className="typography__label--2">28%</p>
+                  </div>
+                  <div>
+                    <p className="typography__label--2">3.6k</p>
+                    <h3 className="typography__label--1">True Volume</h3>
+                    <p className="typography__paragraph--1">
+                      NFT trading volume across all transaction types
+                    </p>
+                  </div>
                 </div>
                 <div style={{ position: "relative", bottom: "90px" }}>
                   <Bar
                     data={{
-                      labels: labels.slice(labels.length - 90).map((data: any) => data),
+                      labels: labels
+                        .slice(labels.length - 90)
+                        .map((data: any) => data),
                       datasets: [
                         {
                           label: "True Volume",
@@ -414,7 +419,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       plugins: {
                         tooltip: {
                           callbacks: {
-                            footer: customTooltip,
+                            // footer: customTooltip,
                           },
                         },
                         annotation: {
@@ -464,18 +469,19 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     farming and wash trading.
                   </p>
 
-                <div className="chart__legend">
-                  <div className="chart__legend-item chart__legend-item--primary">
-                    <p className="typography__label--3">Loans</p>
+                  <div className="chart__legend">
+                    <div className="chart__legend-item chart__legend-item--primary">
+                      <p className="typography__label--3">Loans</p>
+                    </div>
+                    <div className="chart__legend-item chart__legend-item--secondary">
+                      <p className="typography__label--3">Fake Volume (Blur)</p>
+                    </div>
+                    <div className="chart__legend-item chart__legend-item--tertiary">
+                      <p className="typography__label--3">
+                        Fake Volume (Other Marketplaces)
+                      </p>
+                    </div>
                   </div>
-                  <div className="chart__legend-item chart__legend-item--secondary">
-                    <p className="typography__label--3">Fake Volume (Blur)</p>
-                  </div>
-                  <div className="chart__legend-item chart__legend-item--tertiary">
-                  <p className="typography__label--3">Fake Volume (Other Marketplaces)</p>
-                  </div>
-
-                </div>
                 </div>
 
                 <div style={{ position: "relative", bottom: "90px" }}>
@@ -489,22 +495,29 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                           label: "Loans",
                           data: loanVolume.slice(loanVolume.length - 90),
                           borderColor: "rgba(250, 176, 5, 1)",
+                          backgroundColor: "rgba(250, 176, 5, 1)",
                           pointRadius: 0,
                           tension: 1.1,
                           borderWidth: 2,
                         },
                         {
                           label: "Fake Volume (Blur)",
-                          data: fakeBlurVolume.slice(fakeBlurVolume.length - 90),
+                          data: fakeBlurVolume.slice(
+                            fakeBlurVolume.length - 90
+                          ),
                           borderColor: "rgba(253, 126, 20, 1)",
+                          backgroundColor: "rgba(253, 126, 20, 1)",
                           pointRadius: 0,
                           tension: 1.1,
                           borderWidth: 2,
                         },
                         {
                           label: "Fake Volume (Other)",
-                          data: fakeOtherVolume.slice(fakeOtherVolume.length - 90),
+                          data: fakeOtherVolume.slice(
+                            fakeOtherVolume.length - 90
+                          ),
                           borderColor: "rgba(250, 82, 82, 1)",
+                          backgroundColor: "rgba(250, 82, 82, 1)",
                           pointRadius: 0,
                           tension: 1.1,
                           borderWidth: 2,
@@ -519,7 +532,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       plugins: {
                         tooltip: {
                           callbacks: {
-                            footer: customTooltip,
+                            // footer: customTooltip,
                           },
                         },
 

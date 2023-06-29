@@ -47,8 +47,9 @@
 // --------------------------------------
 .chart__legend {
   border-top: 1px solid $dark-bg-3;
+  padding-top: 10px;
+  margin-top: 10px;
 }
-
 
 .chart__legend-item::before {
   content: "";
@@ -61,7 +62,6 @@
   background-color: $dark-bg-1;
 }
 
-
 .chart__legend-item {
   position: relative;
   padding-left: 20px;
@@ -71,12 +71,30 @@
 
   &--secondary:before {
     background-color: $accent-orange;
-
   }
-  
+
   &--tertiary:before {
     background-color: $accent-red;
-
   }
-  
+}
+
+// Info
+.chart__info {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.chart__progress-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  height: 74px;
+  min-width: 74px;
+  max-width: 74px;
+  border-radius: 100%;
+  border: 6px solid $accent-red;
 }
