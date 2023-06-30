@@ -302,6 +302,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         borderColor: "white",
                         backgroundColor: "#5C5F66",
                         barThickness: 5,
+                        // @ts-ignore
+                        trendlineLinear: {
+                          colorMin: "rgba(255, 82, 82, 1)",
+                          colorMax: "rgba(250, 82, 82, 1)",
+                          lineStyle: "solid",
+                          width: 2,
+                          projection: false,
+                        },
                       },
                     ],
                   }}
