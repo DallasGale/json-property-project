@@ -17,16 +17,16 @@ $gap: 20px;
   height: 100%;
   flex-wrap: wrap;
   @include respond-to(desktop-up) {
-    // gap: $gap;
+    gap: $gap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 }
 
 .chart__grid-cell {
   position: relative;
   height: 342px;
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
   flex: 1;
   width: 100%;
   @include respond-to(desktop-up) {
@@ -77,6 +77,13 @@ $gap: 20px;
   }
 }
 
+.chart__title {
+  position: relative;
+  display: block;
+  padding-top: 20px;
+  width: 100%;
+  // top: -60px;
+}
 .chart__inner {
   padding: 20px;
   width: 100%;

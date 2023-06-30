@@ -67,10 +67,16 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   totalVolume,
 }) => {
   const [timespan, setTimespan] = useState(-30);
+  const [trendlineTimespan, setTrendlineTimespan] = useState(-30);
 
   function handleClick(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimespan(value);
+  }
+
+  function handleTrendChartTimeframe(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setTrendlineTimespan(value);
   }
 
   // const customTooltip = (tooltipItems?: any) => {
@@ -85,6 +91,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   //   return "Total Volume" + totalVolume;
   // };
 
+  // Daily True
   const [dailyTrueVolumeLabels, setDailyTrueVolumeLabels] = useState(
     labels.slice(labels.length - 30).map((data: any) => data)
   );
@@ -97,6 +104,21 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   const [dailyFakeVolumeDataArray, setDailyFakeVolumeDataArray] = useState(
     fakeVolume.slice(fakeVolume.length - 30)
   );
+
+  // Trendline
+  const [trendlineVolumeLabels, setTrendlineVolumeLabels] = useState(
+    labels.slice(labels.length - 30).map((data: any) => data)
+  );
+  const [trendlineTrueVolumeArray, setTrendlineTrueVolumeArray] = useState(
+    trueVolume.slice(trueVolume.length - 30)
+  );
+  const [trendlineTotalVolumeArray, setTrendlineTotalVolumeArray] = useState(
+    totalVolume.slice(totalVolume.length - 30)
+  );
+  const [trendlineLoanVolumeDataArray, setTrendlineLoanVolumeDataArray] =
+    useState(loanVolume.slice(loanVolume.length - 30));
+  const [trendlineFakeVolumeDataArray, setTrendlineFakeVolumeDataArray] =
+    useState(fakeVolume.slice(fakeVolume.length - 30));
 
   useEffect(() => {
     if (timespan === -30) {
@@ -115,14 +137,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
         labels.slice(labels.length - 7).map((data: any) => data)
       );
     }
-    if (timespan === -1) {
-      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
-      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
-      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
-      setDailyTrueVolumeLabels(
-        labels.slice(labels.length - 1).map((data: any) => data)
-      );
-    }
+    // if (timespan === -1) {
+    //   setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
+    //   setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
+    //   setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
+    //   setDailyTrueVolumeLabels(
+    //     labels.slice(labels.length - 1).map((data: any) => data)
+    //   );
+    // }
     if (timespan === null) {
       setDailyFakeVolumeDataArray(fakeVolume);
       setDailyLoanVolumeDataArray(loanVolume);
@@ -130,6 +152,43 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       setDailyTrueVolumeLabels(labels);
     }
   }, [timespan]);
+
+  useEffect(() => {
+    if (trendlineTimespan === -30) {
+      setTrendlineLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
+      setTrendlineTrueVolumeArray(trueVolume.slice(trueVolume.length - 30));
+      setTrendlineTotalVolumeArray(totalVolume.slice(totalVolume.length - 30));
+      setTrendlineFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
+      setTrendlineVolumeLabels(
+        labels.slice(labels.length - 30).map((data: any) => data)
+      );
+    }
+    if (trendlineTimespan === -7) {
+      setTrendlineLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
+      setTrendlineTrueVolumeArray(trueVolume.slice(trueVolume.length - 7));
+      setTrendlineTotalVolumeArray(totalVolume.slice(totalVolume.length - 7));
+      setTrendlineFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
+      setTrendlineVolumeLabels(
+        labels.slice(labels.length - 7).map((data: any) => data)
+      );
+    }
+    // if (trendlineTimespan === -1) {
+    //   setTrendlineLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
+    //   setTrendlineTrueVolumeArray(trueVolume.slice(trueVolume.length - 1));
+    //   setTrendlineTotalVolumeArray(totalVolume.slice(totalVolume.length - 1));
+    //   setTrendlineFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
+    //   setTrendlineVolumeLabels(
+    //     labels.slice(labels.length - 1).map((data: any) => data)
+    //   );
+    // }
+    if (trendlineTimespan === null) {
+      setTrendlineLoanVolumeDataArray(loanVolume);
+      setTrendlineFakeVolumeDataArray(fakeVolume);
+      setTrendlineTotalVolumeArray(totalVolume);
+      setTrendlineTrueVolumeArray(trueVolume);
+      setTrendlineVolumeLabels(labels);
+    }
+  }, [trendlineTimespan]);
 
   const renderTrueTotalPercentage = () => {
     const trueV: any = trueVolume[trueVolume.length - 1];
@@ -140,17 +199,18 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     <>
       <section className="chart__wrapper">
         <div className="chart__grid">
-          <div className="chart__grid-cell">
-            {/* <h2 className="typography__display--1">Daily True Volume</h2> */}
-
+          <div className="chart__title">
+            <h2 className="typography__display--1">Daily True Volume</h2>
+          </div>
+          <div className="chart__grid-cell chart__grid-cell--full">
             <div className="chart__container">
               <div className="button-group">
-                <button
+                {/* <button
                   className="button typography__label--1"
                   onClick={(e) => handleClick(e, -1)}
                 >
                   24HR
-                </button>
+                </button> */}
                 <button
                   className="button typography__label--1"
                   onClick={(e) => handleClick(e, -7)}
@@ -243,9 +303,44 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               </div>
             </div>
           </div>
-          <div className="chart__grid-cell">
-            {/* <h2 className="typography__display--1">Last 24 hours</h2> */}
+        </div>
 
+        <div className="chart__grid">
+          <div className="chart__title">
+            <h2 className="typography__display--1">
+              Last {trendlineTimespan} days
+            </h2>
+            <div className="button-group" style={{ top: "40px" }}>
+              {/* <button
+                className="button typography__label--1"
+                onClick={(e) => handleTrendChartTimeframe(e, -1)}
+              >
+                24HR
+              </button> */}
+              <button
+                className="button typography__label--1"
+                onClick={(e) => handleTrendChartTimeframe(e, -7)}
+              >
+                7D
+              </button>
+              <button
+                className="button typography__label--1"
+                onClick={(e) => handleTrendChartTimeframe(e, -30)}
+              >
+                30D
+              </button>
+              <button
+                className="button typography__label--1"
+                onClick={(e) => handleTrendChartTimeframe(e, null)}
+              >
+                ALL
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="chart__grid">
+          <div className="chart__grid-cell chart__grid-cell--half">
             <div className="chart__container chart__container">
               <div className="chart__info">
                 <div className="chart__progress-ring">
@@ -292,16 +387,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               <div className="chart__bar-wrapper">
                 <Bar
                   data={{
-                    labels: labels
-                      .slice(labels.length - 90)
-                      .map((data: any) => data),
+                    labels: trendlineVolumeLabels,
                     datasets: [
                       {
                         label: "True Volume",
-                        data: trueVolume.slice(trueVolume.length - 90),
+                        data: trendlineTrueVolumeArray,
                         borderColor: "white",
                         backgroundColor: "#5C5F66",
-                        barThickness: 5,
+                        barThickness: trendlineTimespan === null ? 1 : 5,
                         // @ts-ignore
                         trendlineLinear: {
                           colorMin: "rgba(255, 82, 82, 1)",
@@ -357,13 +450,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">90 Day Trend</p>
+                <p className="typography__label--3">
+                  {trendlineTimespan} Trend
+                </p>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="chart__grid">
           <div className="chart__grid-cell chart__grid-cell--half">
             <div className="chart__container">
               <h3 className="typography__label--1">Total Volume</h3>
@@ -380,16 +473,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               <div className="chart__bar-wrapper">
                 <Line
                   data={{
-                    labels: labels
-                      .slice(labels.length - 90)
-                      .map((data: any) => data),
+                    labels: trendlineVolumeLabels,
                     datasets: [
                       {
                         label: "Real Volume",
-                        data: trueVolume.slice(trueVolume.length - 90),
+                        data: trendlineTrueVolumeArray,
                         borderColor: "rgba(92, 95, 102, 1)",
                         backgroundColor: "rgba(92, 95, 102, 1)",
-                        pointRadius: 5,
+                        pointRadius: trendlineTimespan === null ? 2 : 5,
                         tension: 0.3,
                         borderWidth: 1,
                         // @ts-ignore
@@ -453,7 +544,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">90 Day Trend</p>
+                <p className="typography__label--3">
+                  {trendlineTimespan} Trend
+                </p>
               </div>
             </div>
           </div>
@@ -474,16 +567,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               <div className="chart__bar-wrapper">
                 <Line
                   data={{
-                    labels: labels
-                      .slice(labels.length - 90)
-                      .map((data: any) => data),
+                    labels: trendlineVolumeLabels,
                     datasets: [
                       {
                         label: "Loan Volume",
-                        data: loanVolume.slice(loanVolume.length - 90),
+                        data: trendlineLoanVolumeDataArray,
                         borderColor: "rgba(92, 95, 102, 1)",
                         backgroundColor: "rgba(92, 95, 102, 1)",
-                        pointRadius: 5,
+                        pointRadius: trendlineTimespan === null ? 2 : 5,
                         tension: 0.3,
                         borderWidth: 1,
                         // @ts-ignore
@@ -547,7 +638,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">90 Day Trend</p>
+                <p className="typography__label--3">
+                  {trendlineTimespan} Trend
+                </p>
               </div>
             </div>
           </div>
@@ -570,16 +663,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               <div className="chart__bar-wrapper">
                 <Line
                   data={{
-                    labels: labels
-                      .slice(labels.length - 90)
-                      .map((data: any) => data),
+                    labels: trendlineVolumeLabels,
                     datasets: [
                       {
                         label: "Fake Volume (Inorganic)",
-                        data: fakeVolume.slice(fakeVolume.length - 90),
+                        data: trendlineFakeVolumeDataArray,
                         borderColor: "rgba(92, 95, 102, 1)",
                         backgroundColor: "rgba(92, 95, 102, 1)",
-                        pointRadius: 5,
+                        pointRadius: trendlineTimespan === null ? 2 : 5,
                         tension: 0.3,
                         borderWidth: 1,
                         // @ts-ignore
@@ -643,7 +734,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">90 Day Trend</p>
+                <p className="typography__label--3">
+                  {trendlineTimespan} Trend
+                </p>
               </div>
             </div>
           </div>
@@ -664,16 +757,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               <div className="chart__bar-wrapper">
                 <Line
                   data={{
-                    labels: labels
-                      .slice(labels.length - 90)
-                      .map((data: any) => data),
+                    labels: trendlineVolumeLabels,
                     datasets: [
                       {
                         label: "Total Volume",
-                        data: totalVolume.slice(totalVolume.length - 90),
+                        data: trendlineTotalVolumeArray,
                         borderColor: "rgba(92, 95, 102, 1)",
                         backgroundColor: "rgba(92, 95, 102, 1)",
-                        pointRadius: 5,
+                        pointRadius: trendlineTimespan === null ? 2 : 5,
                         tension: 0.3,
                         borderWidth: 1,
                         // @ts-ignore
@@ -737,7 +828,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">90 Day Trend</p>
+                <p className="typography__label--3">
+                  {trendlineTimespan} Trend
+                </p>
               </div>
             </div>
           </div>
