@@ -130,7 +130,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       setDailyTrueVolumeDataArray(trueVolume);
       setDailyTrueVolumeLabels(labels);
     }
-  }, [timespan, labels, trueVolume, loanVolume, fakeVolume]);
+  }, [timespan]);
 
   const renderTrueTotalPercentage = () => {
     const trueV: any = trueVolume[trueVolume.length - 1];
@@ -302,7 +302,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         data: trueVolume.slice(trueVolume.length - 90),
                         borderColor: "white",
                         backgroundColor: "#5C5F66",
-                        barThickness: 2,
+                        barThickness: 5,
                       },
                     ],
                   }}
