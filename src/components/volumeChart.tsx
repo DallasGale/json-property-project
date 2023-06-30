@@ -54,10 +54,7 @@ interface VolumeChartProps {
   fakeVolume: DatasetType[];
   realPercentDifference: number[];
   leaderBoard: {
-    datasets: {
-      label: string;
-      data: DatasetType[];
-    };
+    datasets: any[];
   };
 }
 const VolumeChart: React.FC<VolumeChartProps> = ({
@@ -208,7 +205,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   console.log({ leaderBoard });
 
   const leaderBoardTrueVolume = leaderBoard.datasets.filter(
-    ({ label }) => label === "true_volume"
+    ({ label }: any) => label === "true_volume"
   );
   console.log({ leaderBoardTrueVolume });
   return (
