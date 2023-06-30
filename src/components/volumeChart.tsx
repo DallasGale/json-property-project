@@ -13,10 +13,8 @@ import {
   Legend,
 } from "chart.js";
 import chartTrendline from "chartjs-plugin-trendline";
-// import chartTrendline from "chartjs-plugin-trendline";
 import { kFormatter } from "../utils/kFormatter";
 import annotationPlugin from "chartjs-plugin-annotation";
-import Data from "../../public/data/volume.json";
 import { Bar, Line } from "react-chartjs-2";
 import { RingProgress, Text } from "@mantine/core";
 
@@ -386,12 +384,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         pointRadius: 5,
                         tension: 0.3,
                         borderWidth: 1,
+                        // @ts-ignore
                         trendlineLinear: {
                           colorMin: "white",
                           colorMax: "white",
                           lineStyle: "solid",
                           width: 2,
-                          projection: true,
+                          projection: false,
                         },
                       },
                     ],
@@ -479,12 +478,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         pointRadius: 5,
                         tension: 0.3,
                         borderWidth: 1,
+                        // @ts-ignore
                         trendlineLinear: {
                           colorMin: "rgba(250, 176, 5, 1)",
                           colorMax: "rgba(250, 176, 5, 1)",
                           lineStyle: "solid",
                           width: 2,
-                          projection: true,
+                          projection: false,
                         },
                       },
                     ],
@@ -574,6 +574,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         pointRadius: 5,
                         tension: 0.3,
                         borderWidth: 1,
+                        // @ts-ignore
                         trendlineLinear: {
                           colorMin: "rgba(253, 126, 20, 1)",
                           colorMax: "rgba(253, 126, 20, 1)",
@@ -667,6 +668,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         pointRadius: 5,
                         tension: 0.3,
                         borderWidth: 1,
+                        // @ts-ignore
                         trendlineLinear: {
                           colorMin: "rgba(255, 82, 82, 1)",
                           colorMax: "rgba(250, 82, 82, 1)",

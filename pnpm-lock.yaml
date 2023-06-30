@@ -6,6 +6,7 @@ specifiers:
   '@fontsource/roboto': ^5.0.3
   '@mantine/core': ^6.0.15
   '@mantine/hooks': ^6.0.15
+  '@types/chartjs': ^0.0.31
   '@types/chartjs-plugin-trendline': ^1.0.1
   '@types/node': 20.3.2
   '@types/react': 18.2.14
@@ -29,6 +30,7 @@ dependencies:
   '@fontsource/roboto': 5.0.3
   '@mantine/core': 6.0.15_nrsdfr5x3due2myo76pnvn23oq
   '@mantine/hooks': 6.0.15_react@18.2.0
+  '@types/chartjs': 0.0.31
   '@types/node': 20.3.2
   '@types/react': 18.2.14
   '@types/react-dom': 18.2.6
@@ -594,6 +596,11 @@ packages:
     dependencies:
       chart.js: 3.9.1
     dev: true
+
+  /@types/chartjs/0.0.31:
+    resolution: {integrity: sha512-eF1AgrIO0qP9KJYwM2dTKL2pczTjiLa0hfmZdQfKiqFq5WIvFTKPn1gkgADitF5sT4byEyq4EFdMVvuPIk6zeQ==}
+    deprecated: '''@types/chartjs'' is now ''@types/chart.js'''
+    dev: false
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
