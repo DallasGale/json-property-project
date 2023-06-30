@@ -358,8 +358,8 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
         </div>
 
         <div className="chart__grid">
-          <div className="chart__container">
-            <div className="chart__grid-cell chart__grid-cell--full">
+          <div className="chart__grid-cell chart__grid-cell--half">
+            <div className="chart__container">
               <h3 className="typography__label--1">Total Volume</h3>
               <p className="typography__paragraph--1">
                 NFT trading volume across all transaction types
@@ -368,17 +368,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               <div className="chart__legend">
                 <div className="chart__legend-item chart__legend-item--real-volume">
                   <p className="typography__label--3">Real Volume</p>
-                </div>
-                <div className="chart__legend-item chart__legend-item--primary">
-                  <p className="typography__label--3">Loan Volume</p>
-                </div>
-                <div className="chart__legend-item chart__legend-item--secondary">
-                  <p className="typography__label--3">
-                    Fake Volume (Inorganic)
-                  </p>
-                </div>
-                <div className="chart__legend-item chart__legend-item--tertiary">
-                  <p className="typography__label--3">Total Volume</p>
                 </div>
               </div>
 
@@ -392,46 +381,299 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       {
                         label: "Real Volume",
                         data: trueVolume.slice(trueVolume.length - 90),
-                        borderColor: "rgba(255, 255, 255, 1)",
-                        backgroundColor: "rgba(255, 255, 255, 1)",
+                        borderColor: "rgba(92, 95, 102, 1)",
+                        backgroundColor: "rgba(92, 95, 102, 1)",
                         pointRadius: 5,
                         tension: 0.3,
                         borderWidth: 1,
                         trendlineLinear: {
-                          colorMin: "gray",
-                          colorMax: "gray",
+                          colorMin: "white",
+                          colorMax: "white",
+                          lineStyle: "solid",
+                          width: 2,
+                          projection: true,
+                        },
+                      },
+                    ],
+                  }}
+                  options={{
+                    elements: {
+                      line: {
+                        capBezierPoints: true,
+                        borderJoinStyle: "round",
+                        borderWidth: 10,
+                      },
+                      point: {
+                        pointStyle: "circle",
+                      },
+                    },
+                    interaction: {
+                      mode: "x",
+                    },
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: {
+                        callbacks: {},
+                      },
+
+                      annotation: {
+                        annotations: {},
+                      },
+
+                      legend: {
+                        position: "top",
+                        align: "start",
+                        display: false,
+                        fullSize: true,
+                        labels: {
+                          color: "#fff",
+                          usePointStyle: true,
+                          pointStyle: "rectRounded",
+                        },
+                      },
+                    },
+                    scales: {
+                      x: {
+                        display: false,
+                        stacked: true,
+                      },
+                      y: {
+                        display: false,
+                        stacked: true,
+                      },
+                    },
+                  }}
+                />
+              </div>
+              <div className="chart__subtitle">
+                <p className="typography__label--3">90 Day Trend</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="chart__grid-cell chart__grid-cell--half">
+            <div className="chart__container">
+              <h3 className="typography__label--1">Total Volume</h3>
+              <p className="typography__paragraph--1">
+                NFT trading volume across all transaction types
+              </p>
+
+              <div className="chart__legend">
+                <div className="chart__legend-item chart__legend-item--primary">
+                  <p className="typography__label--3">Loan Volume</p>
+                </div>
+              </div>
+
+              <div className="chart__bar-wrapper">
+                <Line
+                  data={{
+                    labels: labels
+                      .slice(labels.length - 90)
+                      .map((data: any) => data),
+                    datasets: [
+                      {
+                        label: "Loan Volume",
+                        data: loanVolume.slice(loanVolume.length - 90),
+                        borderColor: "rgba(92, 95, 102, 1)",
+                        backgroundColor: "rgba(92, 95, 102, 1)",
+                        pointRadius: 5,
+                        tension: 0.3,
+                        borderWidth: 1,
+                        trendlineLinear: {
+                          colorMin: "rgba(250, 176, 5, 1)",
+                          colorMax: "rgba(250, 176, 5, 1)",
+                          lineStyle: "solid",
+                          width: 2,
+                          projection: true,
+                        },
+                      },
+                    ],
+                  }}
+                  options={{
+                    elements: {
+                      line: {
+                        capBezierPoints: true,
+                        borderJoinStyle: "round",
+                        borderWidth: 10,
+                      },
+                      point: {
+                        pointStyle: "circle",
+                      },
+                    },
+                    interaction: {
+                      mode: "x",
+                    },
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: {
+                        callbacks: {},
+                      },
+
+                      annotation: {
+                        annotations: {},
+                      },
+
+                      legend: {
+                        position: "top",
+                        align: "start",
+                        display: false,
+                        fullSize: true,
+                        labels: {
+                          color: "#fff",
+                          usePointStyle: true,
+                          pointStyle: "rectRounded",
+                        },
+                      },
+                    },
+                    scales: {
+                      x: {
+                        display: false,
+                        stacked: true,
+                      },
+                      y: {
+                        display: false,
+                        stacked: true,
+                      },
+                    },
+                  }}
+                />
+              </div>
+              <div className="chart__subtitle">
+                <p className="typography__label--3">90 Day Trend</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="chart__grid-cell chart__grid-cell--half">
+            <div className="chart__container">
+              <h3 className="typography__label--1">Total Volume</h3>
+              <p className="typography__paragraph--1">
+                NFT trading volume across all transaction types
+              </p>
+
+              <div className="chart__legend">
+                <div className="chart__legend-item chart__legend-item--secondary">
+                  <p className="typography__label--3">
+                    Fake Volume (Inorganic)
+                  </p>
+                </div>
+              </div>
+
+              <div className="chart__bar-wrapper">
+                <Line
+                  data={{
+                    labels: labels
+                      .slice(labels.length - 90)
+                      .map((data: any) => data),
+                    datasets: [
+                      {
+                        label: "Fake Volume (Inorganic)",
+                        data: fakeVolume.slice(fakeVolume.length - 90),
+                        borderColor: "rgba(92, 95, 102, 1)",
+                        backgroundColor: "rgba(92, 95, 102, 1)",
+                        pointRadius: 5,
+                        tension: 0.3,
+                        borderWidth: 1,
+                        trendlineLinear: {
+                          colorMin: "rgba(253, 126, 20, 1)",
+                          colorMax: "rgba(253, 126, 20, 1)",
+                          lineStyle: "solid",
+                          width: 2,
+                          projection: true,
+                        },
+                      },
+                    ],
+                  }}
+                  options={{
+                    elements: {
+                      line: {
+                        capBezierPoints: true,
+                        borderJoinStyle: "round",
+                        borderWidth: 10,
+                      },
+                      point: {
+                        pointStyle: "circle",
+                      },
+                    },
+                    interaction: {
+                      mode: "x",
+                    },
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: {
+                        callbacks: {},
+                      },
+
+                      annotation: {
+                        annotations: {},
+                      },
+
+                      legend: {
+                        position: "top",
+                        align: "start",
+                        display: false,
+                        fullSize: true,
+                        labels: {
+                          color: "#fff",
+                          usePointStyle: true,
+                          pointStyle: "rectRounded",
+                        },
+                      },
+                    },
+                    scales: {
+                      x: {
+                        display: false,
+                        stacked: true,
+                      },
+                      y: {
+                        display: false,
+                        stacked: true,
+                      },
+                    },
+                  }}
+                />
+              </div>
+              <div className="chart__subtitle">
+                <p className="typography__label--3">90 Day Trend</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="chart__grid-cell chart__grid-cell--half">
+            <div className="chart__container">
+              <h3 className="typography__label--1">Total Volume</h3>
+              <p className="typography__paragraph--1">
+                NFT trading volume across all transaction types
+              </p>
+
+              <div className="chart__legend">
+                <div className="chart__legend-item chart__legend-item--tertiary">
+                  <p className="typography__label--3">Total Volume</p>
+                </div>
+              </div>
+
+              <div className="chart__bar-wrapper">
+                <Line
+                  data={{
+                    labels: labels
+                      .slice(labels.length - 90)
+                      .map((data: any) => data),
+                    datasets: [
+                      {
+                        label: "Total Volume",
+                        data: totalVolume.slice(totalVolume.length - 90),
+                        borderColor: "rgba(92, 95, 102, 1)",
+                        backgroundColor: "rgba(92, 95, 102, 1)",
+                        pointRadius: 5,
+                        tension: 0.3,
+                        borderWidth: 1,
+                        trendlineLinear: {
+                          colorMin: "rgba(255, 82, 82, 1)",
+                          colorMax: "rgba(250, 82, 82, 1)",
                           lineStyle: "solid",
                           width: 2,
                           projection: false,
                         },
-                      },
-                      {
-                        label: "Loan Volume",
-                        data: loanVolume.slice(loanVolume.length - 90),
-                        borderColor: "rgba(250, 176, 5, 1)",
-                        backgroundColor: "rgba(250, 176, 5, 1)",
-                        pointRadius: 5,
-                        tension: 0.3,
-                        borderWidth: 1,
-                      },
-
-                      {
-                        label: "Fake Volume (Inorganic)",
-                        data: fakeVolume.slice(fakeVolume.length - 90),
-                        borderColor: "rgba(253, 126, 20, 1)",
-                        backgroundColor: "rgba(253, 126, 20, 1)",
-                        pointRadius: 5,
-                        tension: 0.3,
-                        borderWidth: 1,
-                      },
-                      {
-                        label: "Total Volume",
-                        data: totalVolume.slice(totalVolume.length - 90),
-                        borderColor: "rgba(250, 82, 82, 1)",
-                        backgroundColor: "rgba(250, 82, 82, 1)",
-                        pointRadius: 5,
-                        tension: 0.3,
-                        borderWidth: 1,
                       },
                     ],
                   }}
