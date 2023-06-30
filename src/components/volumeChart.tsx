@@ -142,7 +142,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       <section className="chart__wrapper">
         <div className="chart__grid">
           <div className="chart__grid-cell">
-            <h2 className="typography__display--1">Daily True Volume</h2>
+            {/* <h2 className="typography__display--1">Daily True Volume</h2> */}
 
             <div className="chart__container">
               <div className="button-group">
@@ -245,231 +245,239 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
             </div>
           </div>
           <div className="chart__grid-cell">
-            <h2 className="typography__display--1">Last 24 hours</h2>
+            {/* <h2 className="typography__display--1">Last 24 hours</h2> */}
 
-            <div className="chart__grid">
-              <div className="chart__container chart__container--half">
-                <div className="chart__info">
-                  <div className="chart__progress-ring">
-                    <p className="typography__label--2">
-                      <RingProgress
-                        size={110}
-                        thickness={10}
-                        classNames={{
-                          root: "progress-ring__root",
-                        }}
-                        sections={[
-                          {
-                            value: parseInt(renderTrueTotalPercentage()),
-                            color: "rgba(250, 82, 82, 1)",
-                          },
-                        ]}
-                        label={
-                          <Text
-                            color="white"
-                            weight={700}
-                            align="center"
-                            size="xl"
-                          >
-                            {parseInt(renderTrueTotalPercentage())}%
-                          </Text>
-                        }
-                      />
-
-                      {/* </RingProgress> */}
-                    </p>
-                  </div>
-                  <div>
-                    {/*  */}
-                    <p className="typography__label--2">{`${kFormatter(
-                      realPercentDifference[realPercentDifference.length - 1]
-                    )}k`}</p>
-                    <h3 className="typography__label--1">True Volume</h3>
-                    <p className="typography__paragraph--1">
-                      Excludes fake/artificial volume such as loans, points
-                      farming and wash trading.
-                    </p>
-                  </div>
-                </div>
-                <div className="chart__bar-wrapper">
-                  <Bar
-                    data={{
-                      labels: labels
-                        .slice(labels.length - 90)
-                        .map((data: any) => data),
-                      datasets: [
+            <div className="chart__container chart__container">
+              <div className="chart__info">
+                <div className="chart__progress-ring">
+                  <p className="typography__label--2">
+                    <RingProgress
+                      size={110}
+                      thickness={10}
+                      classNames={{
+                        root: "progress-ring__root",
+                      }}
+                      sections={[
                         {
-                          label: "True Volume",
-                          data: trueVolume.slice(trueVolume.length - 90),
-                          borderColor: "white",
-                          backgroundColor: "#5C5F66",
-                          barThickness: 2,
+                          value: parseInt(renderTrueTotalPercentage()),
+                          color: "rgba(250, 82, 82, 1)",
                         },
-                      ],
-                    }}
-                    options={{
-                      interaction: {
-                        mode: "x",
-                      },
-                      maintainAspectRatio: false,
-                      plugins: {
-                        tooltip: {
-                          callbacks: {
-                            // footer: customTooltip,
-                          },
-                        },
-                        annotation: {
-                          annotations: {},
-                        },
-                        title: {
-                          display: false,
-                          text: "Chart.js Bar Chart - Stacked",
-                        },
-                        legend: {
-                          position: "top",
-                          align: "start",
-                          display: false,
-                          fullSize: true,
-                          labels: {
-                            color: "#fff",
-                            usePointStyle: true,
-                            pointStyle: "rectRounded",
-                          },
-                        },
-                      },
-                      scales: {
-                        x: {
-                          display: false,
-                          stacked: true,
-                        },
-                        y: {
-                          display: false,
-                          stacked: true,
-                        },
-                      },
-                    }}
-                  />
+                      ]}
+                      label={
+                        <Text
+                          color="white"
+                          weight={700}
+                          align="center"
+                          size="xl"
+                        >
+                          {parseInt(renderTrueTotalPercentage())}%
+                        </Text>
+                      }
+                    />
+
+                    {/* </RingProgress> */}
+                  </p>
                 </div>
-                <div className="chart__subtitle">
-                  <p className="typography__label--3">90 Day Trend</p>
+                <div>
+                  {/*  */}
+                  <p className="typography__label--2">{`${kFormatter(
+                    realPercentDifference[realPercentDifference.length - 1]
+                  )}k`}</p>
+                  <h3 className="typography__label--1">True Volume</h3>
+                  <p className="typography__paragraph--1">
+                    Excludes fake/artificial volume such as loans, points
+                    farming and wash trading.
+                  </p>
+                </div>
+              </div>
+              <div className="chart__bar-wrapper">
+                <Bar
+                  data={{
+                    labels: labels
+                      .slice(labels.length - 90)
+                      .map((data: any) => data),
+                    datasets: [
+                      {
+                        label: "True Volume",
+                        data: trueVolume.slice(trueVolume.length - 90),
+                        borderColor: "white",
+                        backgroundColor: "#5C5F66",
+                        barThickness: 2,
+                      },
+                    ],
+                  }}
+                  options={{
+                    interaction: {
+                      mode: "x",
+                    },
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: {
+                        callbacks: {
+                          // footer: customTooltip,
+                        },
+                      },
+                      annotation: {
+                        annotations: {},
+                      },
+                      title: {
+                        display: false,
+                        text: "Chart.js Bar Chart - Stacked",
+                      },
+                      legend: {
+                        position: "top",
+                        align: "start",
+                        display: false,
+                        fullSize: true,
+                        labels: {
+                          color: "#fff",
+                          usePointStyle: true,
+                          pointStyle: "rectRounded",
+                        },
+                      },
+                    },
+                    scales: {
+                      x: {
+                        display: false,
+                        stacked: true,
+                      },
+                      y: {
+                        display: false,
+                        stacked: true,
+                      },
+                    },
+                  }}
+                />
+              </div>
+              <div className="chart__subtitle">
+                <p className="typography__label--3">90 Day Trend</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="chart__grid">
+          <div className="chart__container">
+            <div className="chart__grid-cell chart__grid-cell--full">
+              <h3 className="typography__label--1">Total Volume</h3>
+              <p className="typography__paragraph--1">
+                NFT trading volume across all transaction types
+              </p>
+
+              <div className="chart__legend">
+                <div className="chart__legend-item chart__legend-item--real-volume">
+                  <p className="typography__label--3">Real Volume</p>
+                </div>
+                <div className="chart__legend-item chart__legend-item--primary">
+                  <p className="typography__label--3">Loan Volume</p>
+                </div>
+                <div className="chart__legend-item chart__legend-item--secondary">
+                  <p className="typography__label--3">
+                    Fake Volume (Inorganic)
+                  </p>
+                </div>
+                <div className="chart__legend-item chart__legend-item--tertiary">
+                  <p className="typography__label--3">Total Volume</p>
                 </div>
               </div>
 
-              <div className="chart__container chart__container--half">
-                <h3 className="typography__label--1">Total Volume</h3>
-                <p className="typography__paragraph--1">
-                  NFT trading volume across all transaction types
-                </p>
-
-                {/* fake_percent_difference */}
-                {/* real_percent_difference */}
-                <div className="chart__legend">
-                  <div className="chart__legend-item chart__legend-item--real-volume">
-                    <p className="typography__label--3">Real Volume</p>
-                  </div>
-                  <div className="chart__legend-item chart__legend-item--primary">
-                    <p className="typography__label--3">Loan Volume</p>
-                  </div>
-                  <div className="chart__legend-item chart__legend-item--secondary">
-                    <p className="typography__label--3">
-                      Fake Volume (Inorganic)
-                    </p>
-                  </div>
-                  <div className="chart__legend-item chart__legend-item--tertiary">
-                    <p className="typography__label--3">Total Volume</p>
-                  </div>
-                </div>
-
-                <div className="chart__bar-wrapper">
-                  <Line
-                    data={{
-                      labels: labels
-                        .slice(labels.length - 90)
-                        .map((data: any) => data),
-                      datasets: [
-                        {
-                          label: "Real Volume",
-                          data: trueVolume.slice(trueVolume.length - 90),
-                          borderColor: "rgba(255, 255, 255, 1)",
-                          backgroundColor: "rgba(255, 255, 255, 1)",
-                          pointRadius: 0,
-                          tension: 0.6,
-                          borderWidth: 2,
-                        },
-                        {
-                          label: "Loan Volume",
-                          data: loanVolume.slice(loanVolume.length - 90),
-                          borderColor: "rgba(250, 176, 5, 1)",
-                          backgroundColor: "rgba(250, 176, 5, 1)",
-                          pointRadius: 0,
-                          tension: 0.6,
-                          borderWidth: 2,
-                        },
-
-                        {
-                          label: "Fake Volume (Inorganic)",
-                          data: fakeVolume.slice(fakeVolume.length - 90),
-                          borderColor: "rgba(253, 126, 20, 1)",
-                          backgroundColor: "rgba(253, 126, 20, 1)",
-                          pointRadius: 0,
-                          tension: 0.6,
-                          borderWidth: 2,
-                        },
-                        {
-                          label: "Total Volume",
-                          data: totalVolume.slice(totalVolume.length - 90),
-                          borderColor: "rgba(250, 82, 82, 1)",
-                          backgroundColor: "rgba(250, 82, 82, 1)",
-                          pointRadius: 0,
-                          tension: 0.6,
-                          borderWidth: 2,
-                        },
-                      ],
-                    }}
-                    options={{
-                      interaction: {
-                        mode: "x",
+              <div className="chart__bar-wrapper">
+                <Line
+                  data={{
+                    labels: labels
+                      .slice(labels.length - 90)
+                      .map((data: any) => data),
+                    datasets: [
+                      {
+                        label: "Real Volume",
+                        data: trueVolume.slice(trueVolume.length - 90),
+                        borderColor: "rgba(255, 255, 255, 1)",
+                        backgroundColor: "rgba(255, 255, 255, 1)",
+                        pointRadius: 0,
+                        tension: 0.6,
+                        borderWidth: 2,
                       },
-                      maintainAspectRatio: false,
-                      plugins: {
-                        tooltip: {
-                          callbacks: {
-                            // footer: customTooltip,
-                          },
-                        },
+                      {
+                        label: "Loan Volume",
+                        data: loanVolume.slice(loanVolume.length - 90),
+                        borderColor: "rgba(250, 176, 5, 1)",
+                        backgroundColor: "rgba(250, 176, 5, 1)",
+                        pointRadius: 0,
+                        tension: 0.6,
+                        borderWidth: 2,
+                      },
 
-                        annotation: {
-                          annotations: {},
-                        },
+                      {
+                        label: "Fake Volume (Inorganic)",
+                        data: fakeVolume.slice(fakeVolume.length - 90),
+                        borderColor: "rgba(253, 126, 20, 1)",
+                        backgroundColor: "rgba(253, 126, 20, 1)",
+                        pointRadius: 0,
+                        tension: 0.6,
+                        borderWidth: 2,
+                      },
+                      {
+                        label: "Total Volume",
+                        data: totalVolume.slice(totalVolume.length - 90),
+                        borderColor: "rgba(250, 82, 82, 1)",
+                        backgroundColor: "rgba(250, 82, 82, 1)",
+                        pointRadius: 0,
+                        tension: 0.6,
+                        borderWidth: 2,
+                      },
+                    ],
+                  }}
+                  options={{
+                    elements: {
+                      line: {
+                        capBezierPoints: true,
+                        borderJoinStyle: "round",
+                        borderWidth: 10,
+                      },
+                      point: {
+                        pointStyle: "circle",
+                      },
+                    },
+                    interaction: {
+                      mode: "x",
+                    },
+                    maintainAspectRatio: false,
+                    plugins: {
+                      tooltip: {
+                        callbacks: {},
+                      },
 
-                        legend: {
-                          position: "top",
-                          align: "start",
-                          display: false,
-                          fullSize: true,
-                          labels: {
-                            color: "#fff",
-                            usePointStyle: true,
-                            pointStyle: "rectRounded",
-                          },
+                      annotation: {
+                        annotations: {},
+                      },
+
+                      legend: {
+                        position: "top",
+                        align: "start",
+                        display: false,
+                        fullSize: true,
+                        labels: {
+                          color: "#fff",
+                          usePointStyle: true,
+                          pointStyle: "rectRounded",
                         },
                       },
-                      scales: {
-                        x: {
-                          display: false,
-                          stacked: true,
-                        },
-                        y: {
-                          display: false,
-                          stacked: true,
-                        },
+                    },
+                    scales: {
+                      x: {
+                        display: false,
+                        stacked: true,
                       },
-                    }}
-                  />
-                </div>
-                <div className="chart__subtitle">
-                  <p className="typography__label--3">90 Day Trend</p>
-                </div>
+                      y: {
+                        display: false,
+                        stacked: true,
+                      },
+                    },
+                  }}
+                />
+              </div>
+              <div className="chart__subtitle">
+                <p className="typography__label--3">90 Day Trend</p>
               </div>
             </div>
           </div>
@@ -479,11 +487,11 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       {/* Row 2 */}
       <section className="chart__wrapper">
         <div className="chart__grid">
-          <div className="chart__grid-cell">
+          <div className="chart__grid-cell--full">
             <h2 className="typography__display--1">Leaderboards</h2>
 
             <div className="chart__grid">
-              <div className="chart__container chart__container--half">
+              <div className="chart__container chart__container--quarter">
                 <table>
                   <thead>True Volume</thead>
                   <tbody>
@@ -493,9 +501,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                   </tbody>
                 </table>
               </div>
-              <div className="chart__container chart__container--half"></div>
-              <div className="chart__container chart__container--half"></div>
-              <div className="chart__container chart__container--half"></div>
+              <div className="chart__container chart__container--quarter"></div>
+              <div className="chart__container chart__container--quarter"></div>
+              <div className="chart__container chart__container--quarter"></div>
             </div>
           </div>
         </div>

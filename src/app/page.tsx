@@ -1,41 +1,28 @@
+// Components
 import Image from "next/image";
 import Logo from "../../public/DataBeast.svg";
 import VolumeChart from "@components/volumeChart";
+
+// Constants
+import monthNames from "../constants";
+
+// API
+import endpoints from "@api/endpoints";
+
+// Types
 import type { DatasetType } from "@components/volumeChart";
 
 async function getData() {
-  const res = await fetch(
-    "https://data.databeast.xyz/nft_ethereum_summary_daily.json"
-  );
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  // Recommendation: handle errors
+  const res = await fetch(endpoints.nft_ethereum_daily_summary);
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
-
   return res.json();
 }
 
 export default async function Home() {
   const data = await getData();
   const dateFormatter = async () => {
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
     let newDates: any[] = [];
     await data.labels.forEach((date: any) => {
       const fullDate = new Date(date);
