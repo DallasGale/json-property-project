@@ -57,12 +57,12 @@ export default async function Home() {
   // const volumeFarming: Datasets = await data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "volume_farming"
   // );
-  const volumeWashTrading = await data?.datasets.filter(
-    ({ label }: DatasetType) => label === "volume_wash_trading"
-  );
-  const inorganicVolume = await data?.datasets.filter(
-    ({ label }: DatasetType) => label === "volume_fake"
-  );
+  // const volumeWashTrading = await data?.datasets.filter(
+  //   ({ label }: DatasetType) => label === "volume_wash_trading"
+  // );
+  // const inorganicVolume = await data?.datasets.filter(
+  //   ({ label }: DatasetType) => label === "volume_fake"
+  // );
   const loanVolume = await data?.datasets.filter(
     ({ label }: DatasetType) => label === "volume_loan"
   );
@@ -72,9 +72,9 @@ export default async function Home() {
   // const percentDifference: Datasets = data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "percent_difference"
   // );
-  // const realPercentDifference: Datasets = data?.datasets.filter(
-  //   ({ label }: DatasetType) => label === "real_percent_difference"
-  // );
+  const realPercentDifference: Datasets = data?.datasets.filter(
+    ({ label }: DatasetType) => label === "real_percent_difference"
+  );
   // const realRawRatio: Datasets = data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "real_raw_ratio"
   // );
@@ -109,6 +109,7 @@ export default async function Home() {
           trueVolume={realVolume[0].data}
           loanVolume={loanVolume[0].data}
           totalVolume={totalVolume[0].data}
+          realPercentDifference={realPercentDifference[0].data}
           // fakeBlurVolume={volumeWashTrading[0].data}
           // fakeOtherVolume={inorganicVolume[0].data}
         />

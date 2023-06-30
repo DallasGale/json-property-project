@@ -52,6 +52,7 @@ interface VolumeChartProps {
   loanVolume: DatasetType[];
   totalVolume: DatasetType[];
   fakeVolume: DatasetType[];
+  realPercentDifference: number[];
   // fakeBlurVolume: DatasetType[];
   // fakeOtherVolume: DatasetType[];
 }
@@ -60,6 +61,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   trueVolume,
   loanVolume,
   fakeVolume,
+  realPercentDifference,
   // fakeBlurVolume,
   // fakeOtherVolume,
   totalVolume,
@@ -128,6 +130,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       setDailyTrueVolumeLabels(labels);
     }
   }, [timespan, labels, trueVolume, loanVolume, fakeVolume]);
+
   return (
     <>
       <section className="chart__wrapper">
@@ -242,10 +245,16 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               <div className="chart__container chart__container--half">
                 <div className="chart__info">
                   <div className="chart__progress-ring">
-                    <p className="typography__label--2">28%</p>
+                    <p className="typography__label--2">
+                      {/* divide last item in volume_real array by last item in volume_total array */}
+                      28%
+                    </p>
                   </div>
                   <div>
-                    <p className="typography__label--2">3.6k</p>
+                    {/*  */}
+                    <p className="typography__label--2">{`${kFormatter(
+                      realPercentDifference[realPercentDifference.length - 1]
+                    )}k`}</p>
                     <h3 className="typography__label--1">True Volume</h3>
                     <p className="typography__paragraph--1">
                       Excludes fake/artificial volume such as loans, points
@@ -262,7 +271,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       datasets: [
                         {
                           label: "True Volume",
-                          data: trueVolume,
+                          data: trueVolume.slice(trueVolume.length - 90),
                           borderColor: "white",
                           backgroundColor: "#5C5F66",
                           barThickness: 2,
@@ -351,7 +360,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                       datasets: [
                         {
                           label: "Real Volume",
-                          data: trueVolume.slice(labels.length - 90),
+                          data: trueVolume.slice(trueVolume.length - 90),
                           borderColor: "rgba(255, 255, 255, 1)",
                           backgroundColor: "rgba(255, 255, 255, 1)",
                           pointRadius: 0,
@@ -360,7 +369,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         },
                         {
                           label: "Loan Volume",
-                          data: loanVolume.slice(labels.length - 90),
+                          data: loanVolume.slice(loanVolume.length - 90),
                           borderColor: "rgba(250, 176, 5, 1)",
                           backgroundColor: "rgba(250, 176, 5, 1)",
                           pointRadius: 0,
@@ -370,7 +379,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
 
                         {
                           label: "Fake Volume (Inorganic)",
-                          data: fakeVolume.slice(labels.length - 90),
+                          data: fakeVolume.slice(fakeVolume.length - 90),
                           borderColor: "rgba(253, 126, 20, 1)",
                           backgroundColor: "rgba(253, 126, 20, 1)",
                           pointRadius: 0,
@@ -379,7 +388,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         },
                         {
                           label: "Total Volume",
-                          data: totalVolume.slice(labels.length - 90),
+                          data: totalVolume.slice(totalVolume.length - 90),
                           borderColor: "rgba(250, 82, 82, 1)",
                           backgroundColor: "rgba(250, 82, 82, 1)",
                           pointRadius: 0,
