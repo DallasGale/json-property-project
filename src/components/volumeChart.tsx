@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import chartTrendline from "chartjs-plugin-trendline";
 // import chartTrendline from "chartjs-plugin-trendline";
 import { kFormatter } from "../utils/kFormatter";
 import annotationPlugin from "chartjs-plugin-annotation";
@@ -34,8 +35,8 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  annotationPlugin
-  // chartTrendline
+  annotationPlugin,
+  chartTrendline
 );
 
 export interface Datasets {
@@ -396,6 +397,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         pointRadius: 5,
                         tension: 0.3,
                         borderWidth: 1,
+                        trendlineLinear: {
+                          colorMin: "gray",
+                          colorMax: "gray",
+                          lineStyle: "solid",
+                          width: 2,
+                          projection: false,
+                        },
                       },
                       {
                         label: "Loan Volume",
