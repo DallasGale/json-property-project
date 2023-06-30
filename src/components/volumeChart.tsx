@@ -195,6 +195,12 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     const totalV: any = totalVolume[totalVolume.length - 1];
     return (trueV / totalV).toFixed(0);
   };
+
+  const renderTimespanStringAsString = () => {
+    if (trendlineTimespan === -30) return "Last 30 Days";
+    if (trendlineTimespan === -7) return "Last 7 Days";
+    if (trendlineTimespan === null) return "All";
+  };
   return (
     <>
       <section className="chart__wrapper">
@@ -308,7 +314,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
         <div className="chart__grid">
           <div className="chart__title">
             <h2 className="typography__display--1">
-              Last {trendlineTimespan} days
+              {renderTimespanStringAsString()}
             </h2>
             <div className="button-group" style={{ top: "40px" }}>
               {/* <button
