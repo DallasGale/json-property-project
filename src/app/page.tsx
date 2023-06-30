@@ -72,7 +72,7 @@ export default async function Home() {
   // const percentDifference: Datasets = data?.datasets.filter(
   //   ({ label }: DatasetType) => label === "percent_difference"
   // );
-  const realPercentDifference: Datasets = data?.datasets.filter(
+  const realPercentDifference = data?.datasets.filter(
     ({ label }: DatasetType) => label === "real_percent_difference"
   );
   // const realRawRatio: Datasets = data?.datasets.filter(
