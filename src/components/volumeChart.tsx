@@ -445,7 +445,16 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
             <h2 className="typography__display--1">Leaderboards</h2>
 
             <div className="chart__grid">
-              <div className="chart__container chart__container--half"></div>
+              <div className="chart__container chart__container--half">
+                <table>
+                  <thead>True Volume</thead>
+                  <tbody>
+                    <tr>
+                      <td>The Captainz</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <div className="chart__container chart__container--half"></div>
               <div className="chart__container chart__container--half"></div>
               <div className="chart__container chart__container--half"></div>
