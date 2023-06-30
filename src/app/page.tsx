@@ -8,6 +8,7 @@ import monthNames from "../constants";
 
 // API
 import endpoints from "@api/endpoints";
+import leaderBoardData from "../../public/data/leaderboards.json";
 
 // Types
 import type { DatasetType } from "@components/volumeChart";
@@ -19,6 +20,14 @@ async function getData() {
   }
   return res.json();
 }
+
+// async function getLeaderBoardData() {
+//   const res = await fetch(endpoints.nft_ethereum_leaderboard);
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch data");
+//   }
+//   return res.json();
+// }
 
 export default async function Home() {
   const data = await getData();
@@ -97,8 +106,7 @@ export default async function Home() {
           loanVolume={loanVolume[0].data}
           totalVolume={totalVolume[0].data}
           realPercentDifference={realPercentDifference[0].data}
-          // fakeBlurVolume={volumeWashTrading[0].data}
-          // fakeOtherVolume={inorganicVolume[0].data}
+          leaderBoard={leaderBoardData}
         />
       </div>
     </main>

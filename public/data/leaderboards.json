@@ -1,83 +1,84 @@
 {
-  "true_volume": [
+  "datasets": [
     {
-      "label": "The Captainz",
-      "data": {
-        "number": "421",
-        "percent": "100%"
-      }
+      "label": "true_volume",
+      "data": [
+        {
+          "label": "The Captainz",
+          "data": {
+            "number": "421",
+            "percent": "100%"
+          }
+        },
+        {
+          "label": "Art Blocks",
+          "data": {
+            "number": "421",
+            "percent": "100%"
+          }
+        },
+        {
+          "label": "The Potatoz",
+          "data": {
+            "number": "421",
+            "percent": "100%"
+          }
+        },
+        {
+          "label": "ON1 Force",
+          "data": {
+            "number": "421",
+            "percent": "100%"
+          }
+        },
+        {
+          "label": "Opepen Edition",
+          "data": {
+            "number": "421",
+            "percent": "100%"
+          }
+        }
+      ]
     },
     {
-      "label": "The Captainz",
-      "data": {
-        "number": "421",
-        "percent": "100%"
-      }
-    },
-    {
-      "label": "The Captainz",
-      "data": {
-        "number": "421",
-        "percent": "100%"
-      }
-    },
-    {
-      "label": "The Captainz",
-      "data": {
-        "number": "421",
-        "percent": "100%"
-      }
-    },
-    {
-      "label": "The Captainz",
-      "data": {
-        "number": "421",
-        "percent": "100%"
-      }
-    },
-    {
-      "label": "The Captainz",
-      "data": {
-        "number": "421",
-        "percent": "100%"
-      }
+      "label": "fake_volume",
+      "data": [
+        {
+          "label": "Collection",
+          "data": {
+            "number": "0",
+            "percent": "75%"
+          }
+        },
+        {
+          "label": "Collection",
+          "data": {
+            "number": "0",
+            "percent": "75%"
+          }
+        },
+        {
+          "label": "Collection",
+          "data": {
+            "number": "0",
+            "percent": "75%"
+          }
+        },
+        {
+          "label": "Collection",
+          "data": {
+            "number": "0",
+            "percent": "75%"
+          }
+        },
+        {
+          "label": "Collection",
+          "data": {
+            "number": "0",
+            "percent": "75%"
+          }
+        }
+      ]
     }
-  ],
-  "fake_volume": [
-    {
-      "label": "Collection",
-      "data": {
-        "number": "0",
-        "percent": "75%"
-      }
-    },
-    {
-      "label": "Collection",
-      "data": {
-        "number": "0",
-        "percent": "75%"
-      }
-    },
-    {
-      "label": "Collection",
-      "data": {
-        "number": "0",
-        "percent": "75%"
-      }
-    },
-    {
-      "label": "Collection",
-      "data": {
-        "number": "0",
-        "percent": "75%"
-      }
-    },
-    {
-      "label": "Collection",
-      "data": {
-        "number": "0",
-        "percent": "75%"
-      }
-    },
   ]
 }

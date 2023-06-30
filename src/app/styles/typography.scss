@@ -45,6 +45,17 @@ p {
   margin-bottom: 0;
 }
 
+.typography__label--4 {
+  font-size: 10px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 600;
+  color: $dark-bg-3;
+  text-transform: uppercase;
+  line-height: 16px;
+  letter-spacing: 0.25px;
+}
+
 .typography__paragraph--1 {
   color: #a5a5a5;
   font-size: 10px;
@@ -52,4 +63,12 @@ p {
   /* font-weight: 300; */
   line-height: 1.5;
   margin-top: 0;
+}
+
+.typography__color--green {
+  color: $accent-green;
+}
+
+.typography__color--white {
+  color: white;
 }

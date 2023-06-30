@@ -53,8 +53,12 @@ interface VolumeChartProps {
   totalVolume: DatasetType[];
   fakeVolume: DatasetType[];
   realPercentDifference: number[];
-  // fakeBlurVolume: DatasetType[];
-  // fakeOtherVolume: DatasetType[];
+  leaderBoard: {
+    datasets: {
+      label: string;
+      data: DatasetType[];
+    };
+  };
 }
 const VolumeChart: React.FC<VolumeChartProps> = ({
   labels,
@@ -62,9 +66,8 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   loanVolume,
   fakeVolume,
   realPercentDifference,
-  // fakeBlurVolume,
-  // fakeOtherVolume,
   totalVolume,
+  leaderBoard,
 }) => {
   const [timespan, setTimespan] = useState(-30);
   const [trendlineTimespan, setTrendlineTimespan] = useState(-30);
@@ -201,6 +204,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     if (trendlineTimespan === -7) return "Last 7 Days";
     if (trendlineTimespan === null) return "All";
   };
+
+  console.log({ leaderBoard });
+
+  const leaderBoardTrueVolume = leaderBoard.datasets.filter(
+    ({ label }) => label === "true_volume"
+  );
+  console.log({ leaderBoardTrueVolume });
   return (
     <>
       <section className="chart__wrapper">
@@ -841,12 +851,34 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
 
             <div className="chart__grid">
               <div className="chart__container chart__container--quarter">
-                <table>
-                  <thead>True Volume</thead>
+                <table width="100%">
+                  <thead>
+                    <p className="typography__label--4">True Volume</p>
+                  </thead>
                   <tbody>
-                    <tr>
-                      <td>The Captainz</td>
-                    </tr>
+                    {leaderBoardTrueVolume[0].data.map((data: any) => {
+                      console.log({ data });
+
+                      return (
+                        <tr key={data?.label}>
+                          <td>
+                            <p className="typography__display--2 typography__color--white">
+                              {data?.label}
+                            </p>
+                          </td>
+                          <td>
+                            <p className="typography__label--3">
+                              {data?.data.number}
+                            </p>
+                          </td>
+                          <td>
+                            <p className="typography__label--3 typography__color--green">
+                              {data?.data.percent}
+                            </p>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
