@@ -1,0 +1,7 @@
+.progress-ring__root {
+  svg {
+    circle:first-of-type {
+      stroke: $dark-bg-3;
+    }
+  }
+}

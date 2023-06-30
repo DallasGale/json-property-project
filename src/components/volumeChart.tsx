@@ -17,6 +17,7 @@ import { kFormatter } from "../utils/kFormatter";
 import annotationPlugin from "chartjs-plugin-annotation";
 import Data from "../../public/data/volume.json";
 import { Bar, Line } from "react-chartjs-2";
+import { RingProgress, Text } from "@mantine/core";
 
 // window.ChartJS = {
 //   plugins: { register: (...x) => ChartJS.plugins.register(...x) },
@@ -131,6 +132,11 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     }
   }, [timespan, labels, trueVolume, loanVolume, fakeVolume]);
 
+  const renderTrueTotalPercentage = () => {
+    const trueV: any = trueVolume[trueVolume.length - 1];
+    const totalV: any = totalVolume[totalVolume.length - 1];
+    return (trueV / totalV).toFixed(0);
+  };
   return (
     <>
       <section className="chart__wrapper">
@@ -246,8 +252,31 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 <div className="chart__info">
                   <div className="chart__progress-ring">
                     <p className="typography__label--2">
-                      {/* divide last item in volume_real array by last item in volume_total array */}
-                      28%
+                      <RingProgress
+                        size={110}
+                        thickness={10}
+                        classNames={{
+                          root: "progress-ring__root",
+                        }}
+                        sections={[
+                          {
+                            value: parseInt(renderTrueTotalPercentage()),
+                            color: "rgba(250, 82, 82, 1)",
+                          },
+                        ]}
+                        label={
+                          <Text
+                            color="white"
+                            weight={700}
+                            align="center"
+                            size="xl"
+                          >
+                            {parseInt(renderTrueTotalPercentage())}%
+                          </Text>
+                        }
+                      />
+
+                      {/* </RingProgress> */}
                     </p>
                   </div>
                   <div>
