@@ -456,9 +456,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">
-                  {trendlineTimespan} Trend
-                </p>
+                <p className="typography__label--3">Trend</p>
               </div>
             </div>
           </div>
@@ -550,9 +548,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">
-                  {trendlineTimespan} Trend
-                </p>
+                <p className="typography__label--3">Trend</p>
               </div>
             </div>
           </div>
@@ -644,9 +640,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">
-                  {trendlineTimespan} Trend
-                </p>
+                <p className="typography__label--3">Trend</p>
               </div>
             </div>
           </div>
@@ -740,9 +734,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">
-                  {trendlineTimespan} Trend
-                </p>
+                <p className="typography__label--3">Trend</p>
               </div>
             </div>
           </div>
@@ -834,9 +826,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 />
               </div>
               <div className="chart__subtitle">
-                <p className="typography__label--3">
-                  {trendlineTimespan} Trend
-                </p>
+                <p className="typography__label--3">Trend</p>
               </div>
             </div>
           </div>
