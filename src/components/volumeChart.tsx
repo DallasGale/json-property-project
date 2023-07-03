@@ -35,10 +35,10 @@ ChartJS.register(
 );
 interface VolumeChartProps {
   labels: string[];
-  trueVolume: DatasetsType[];
-  loanVolume: DatasetsType[];
-  totalVolume: DatasetsType[];
-  fakeVolume: DatasetsType[];
+  trueVolume: any[];
+  loanVolume: any[];
+  totalVolume: any[];
+  fakeVolume: any[];
   realPercentDifference: number[];
   leaderboardDatasets: DatasetsType[];
   loanVolumeMovingAverage: number[];
@@ -113,13 +113,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   const [trendlineFakeVolumeDataArray, setTrendlineFakeVolumeDataArray] =
     useState(fakeVolume.slice(fakeVolume.length - 30));
 
-  const [
-    totalVolumeMovingAverageDataArray,
-    setTotalVolumeMovingAverageDataArray,
-  ] = useState(
-    totalVolumeMovingAverage.slice(totalVolumeMovingAverage.length - 30)
-  );
-
   useEffect(() => {
     if (timespan === -30) {
       setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
@@ -155,9 +148,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       setTrendlineVolumeLabels(
         labels.slice(labels.length - 30).map((data: any) => data)
       );
-      setTotalVolumeMovingAverageDataArray(
-        totalVolumeMovingAverage.slice(totalVolumeMovingAverage.length - 30)
-      );
     }
     if (trendlineTimespan === -7) {
       setTrendlineLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
@@ -167,9 +157,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       setTrendlineVolumeLabels(
         labels.slice(labels.length - 7).map((data: any) => data)
       );
-      setTotalVolumeMovingAverageDataArray(
-        totalVolumeMovingAverage.slice(totalVolumeMovingAverage.length - 7)
-      );
     }
 
     if (trendlineTimespan === null) {
@@ -178,9 +165,10 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       setTrendlineTotalVolumeArray(totalVolume);
       setTrendlineTrueVolumeArray(trueVolume);
       setTrendlineVolumeLabels(labels);
-      setTotalVolumeMovingAverageDataArray(totalVolumeMovingAverage);
     }
   }, [trendlineTimespan]);
+
+  console.log(totalVolumeMovingAverage.length);
 
   const renderTrueTotalPercentage = () => {
     const trueV: any = trueVolume[trueVolume.length - 1];
@@ -484,9 +472,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     datasets: [
                       {
                         label: "Trend",
-                        data: trueVolumeMovingAverage.slice(
-                          trueVolumeMovingAverage.length - 30
-                        ),
+                        data: trueVolumeMovingAverage,
                         borderColor: "rgba(255, 255, 255)",
                         backgroundColor: "rgba(255, 255, 255)",
                         pointRadius: 0,
@@ -589,9 +575,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     datasets: [
                       {
                         label: "Trend",
-                        data: loanVolumeMovingAverage.slice(
-                          loanVolumeMovingAverage.length - 30
-                        ),
+                        data: loanVolumeMovingAverage,
                         borderColor: "rgba(255, 255, 255)",
                         backgroundColor: "rgba(255, 255, 255)",
                         pointRadius: 0,
@@ -685,9 +669,8 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     datasets: [
                       {
                         label: "Trend",
-                        data: fakeVolumeMovingAverage.slice(
-                          fakeVolumeMovingAverage.length - 30
-                        ),
+                        data: fakeVolumeMovingAverage,
+
                         borderColor: "rgba(255, 255, 255)",
                         backgroundColor: "rgba(255, 255, 255)",
                         pointRadius: 0,
@@ -779,7 +762,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     datasets: [
                       {
                         label: "Trend",
-                        data: totalVolumeMovingAverageDataArray,
+                        data: totalVolumeMovingAverage,
                         borderColor: "rgba(255, 255, 255)",
                         backgroundColor: "rgba(255, 255, 255)",
                         pointRadius: 0,
@@ -854,7 +837,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       </section>
 
       {/* Row 2 */}
-      <Leaderboards
+      {/* <Leaderboards
         labels={leaderboardDatasets.filter(({ label }) => label === "name")}
         true_volume={leaderboardDatasets.filter(
           ({ label }) => label === "total_real_day_volume"
@@ -862,7 +845,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
         loans={leaderboardDatasets.filter(
           ({ label }) => label === "total_day_volume_loan"
         )}
-      />
+      /> */}
     </>
   );
 };
