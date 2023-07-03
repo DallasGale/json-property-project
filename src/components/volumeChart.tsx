@@ -20,6 +20,13 @@ import { RingProgress, Text } from "@mantine/core";
 import Leaderboards from "./leaderboards/leaderboards";
 
 import type { DatasetsType } from "@/app/types";
+import DailyTrueVolumeChart from "./charts/dailyTrueVolume";
+import TrueVolumeLineChart from "./charts/trueVolumeLine";
+import ChartDataToggles from "./toggles/chart_data";
+import LoanVolumeChart from "./charts/loanVolume";
+import FakeVolumeChart from "./charts/fakeVolume";
+import TotalVolumeChart from "./charts/totalVolume";
+import TrueVolumeBarChart from "./charts/trueVolumeBar";
 
 ChartJS.register(
   CategoryScale,
@@ -72,7 +79,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   const [timespan, setTimespan] = useState(-30);
   const [trendlineTimespan, setTrendlineTimespan] = useState(-30);
 
-  function handleClick(e: React.MouseEvent, value: any) {
+  function handleDailyTrueVolumeTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimespan(value);
   }
@@ -82,7 +89,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     setTrendlineTimespan(value);
   }
 
-  console.log({ leaderboard });
   // const customTooltip = (tooltipItems?: any) => {
   //   let sum = 0;
 
@@ -191,111 +197,33 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     if (trendlineTimespan === null) return "All";
   };
 
+  const toggleView = () => {};
   return (
     <>
       <section className="chart__wrapper">
+        {/* Market Overview */}
+
+        {/* MarketExpanded */}
         <div className="chart__grid">
           <div className="chart__title">
             <h2 className="typography__display--1">Daily True Volume</h2>
           </div>
           <div className="chart__grid-cell chart__grid-cell--full">
             <div className="chart__container">
-              <div className="button-group">
-                {/* <button
-                  className="button typography__label--1"
-                  onClick={(e) => handleClick(e, -1)}
-                >
-                  24HR
-                </button> */}
-                <button
-                  className="button typography__label--1"
-                  onClick={(e) => handleClick(e, -7)}
-                >
-                  7D
-                </button>
-                <button
-                  className="button typography__label--1"
-                  onClick={(e) => handleClick(e, -30)}
-                >
-                  30D
-                </button>
-                <button
-                  className="button typography__label--1"
-                  onClick={(e) => handleClick(e, null)}
-                >
-                  ALL
-                </button>
-              </div>
+              <ChartDataToggles
+                onClick={(arg1, arg2) =>
+                  handleDailyTrueVolumeTimeferame(arg1, arg2)
+                }
+              />
 
-              <div className="chart__bar-wrapper">
-                <Bar
-                  data={{
-                    labels: dailyTrueVolumeLabels,
-                    datasets: [
-                      {
-                        label: "True Volume",
-                        data: dailyTrueVolumeDataArray,
-                        borderColor: "white",
-                        backgroundColor: "#5C5F66",
-                      },
-                      {
-                        label: "Loans",
-                        data: dailyLoanVolumeDataArray,
-                        borderColor: "black",
-                        backgroundColor: "#FFD740",
-                      },
-                      {
-                        label: "Fake Volume (Inorganic)",
-                        data: dailyFakeVolumeDataArray,
-                        borderColor: "white",
-                        backgroundColor: "rgba(250, 82, 82, 1)",
-                      },
-                    ],
-                  }}
-                  options={{
-                    interaction: {
-                      mode: "x",
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                      title: {
-                        display: false,
-                        text: "Chart.js Bar Chart - Stacked",
-                      },
-                      legend: {
-                        position: "top",
-                        align: "start",
-                        display: true,
-                        fullSize: true,
-                        labels: {
-                          color: "#fff",
-                          usePointStyle: true,
-                          pointStyle: "rectRounded",
-                        },
-                      },
-                    },
-                    scales: {
-                      x: {
-                        stacked: true,
-                        // ticks: {
-                        //   callback: function (x) {
-                        //     console.log({ x });
-                        //     return ".";
-                        //   },
-                        // },
-                      },
-                      y: {
-                        stacked: true,
-                        ticks: {
-                          callback: function (value: any) {
-                            return kFormatter(value);
-                          },
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>
+              <DailyTrueVolumeChart
+                labels={dailyTrueVolumeLabels}
+                data={{
+                  true_volume: dailyTrueVolumeDataArray,
+                  loan_volume: dailyLoanVolumeDataArray,
+                  fake_volume: dailyFakeVolumeDataArray,
+                }}
+              />
             </div>
           </div>
         </div>
@@ -305,32 +233,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
             <h2 className="typography__display--1">
               {renderTimespanStringAsString()}
             </h2>
-            <div className="button-group" style={{ top: "40px" }}>
-              {/* <button
-                className="button typography__label--1"
-                onClick={(e) => handleTrendChartTimeframe(e, -1)}
-              >
-                24HR
-              </button> */}
-              <button
-                className="button typography__label--1"
-                onClick={(e) => handleTrendChartTimeframe(e, -7)}
-              >
-                7D
-              </button>
-              <button
-                className="button typography__label--1"
-                onClick={(e) => handleTrendChartTimeframe(e, -30)}
-              >
-                30D
-              </button>
-              <button
-                className="button typography__label--1"
-                onClick={(e) => handleTrendChartTimeframe(e, null)}
-              >
-                ALL
-              </button>
-            </div>
+            <ChartDataToggles
+              onClick={(arg1, arg2) => handleTrendChartTimeframe(arg1, arg2)}
+            />
           </div>
         </div>
 
@@ -363,12 +268,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         </Text>
                       }
                     />
-
-                    {/* </RingProgress> */}
                   </p>
                 </div>
                 <div>
-                  {/*  */}
                   <p className="typography__label--2">{`${kFormatter(
                     realPercentDifference[realPercentDifference.length - 1]
                   )}k`}</p>
@@ -379,74 +281,12 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                   </p>
                 </div>
               </div>
-              <div className="chart__bar-wrapper">
-                <Bar
-                  data={{
-                    labels: trendlineVolumeLabels,
-                    datasets: [
-                      {
-                        label: "True Volume",
-                        data: trendlineTrueVolumeArray,
-                        borderColor: "white",
-                        backgroundColor: "#5C5F66",
-                        barThickness: trendlineTimespan === null ? 1 : 5,
-                        // @ts-ignore
-                        trendlineLinear: {
-                          colorMin: "rgba(255, 82, 82, 1)",
-                          colorMax: "rgba(250, 82, 82, 1)",
-                          lineStyle: "solid",
-                          width: 2,
-                          projection: false,
-                        },
-                      },
-                    ],
-                  }}
-                  options={{
-                    interaction: {
-                      mode: "x",
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                      tooltip: {
-                        callbacks: {
-                          // footer: customTooltip,
-                        },
-                      },
-                      annotation: {
-                        annotations: {},
-                      },
-                      title: {
-                        display: false,
-                        text: "Chart.js Bar Chart - Stacked",
-                      },
-                      legend: {
-                        position: "top",
-                        align: "start",
-                        display: false,
-                        fullSize: true,
-                        labels: {
-                          color: "#fff",
-                          usePointStyle: true,
-                          pointStyle: "rectRounded",
-                        },
-                      },
-                    },
-                    scales: {
-                      x: {
-                        display: false,
-                        stacked: true,
-                      },
-                      y: {
-                        display: false,
-                        stacked: true,
-                      },
-                    },
-                  }}
-                />
-              </div>
-              <div className="chart__subtitle">
-                <p className="typography__label--3">Trend</p>
-              </div>
+
+              <TrueVolumeBarChart
+                labels={trendlineVolumeLabels}
+                data={{ true_volume: trendlineTrueVolumeArray }}
+                trend_timespan={trendlineTimespan}
+              />
             </div>
           </div>
 
@@ -466,90 +306,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 </div>
               </div>
 
-              <div className="chart__bar-wrapper">
-                <Line
-                  data={{
-                    labels: trendlineVolumeLabels,
-                    datasets: [
-                      {
-                        label: "Trend",
-                        data: trueVolumeMovingAverage,
-                        borderColor: "rgba(255, 255, 255)",
-                        backgroundColor: "rgba(255, 255, 255)",
-                        pointRadius: 0,
-                        borderWidth: 1,
-                      },
-                      {
-                        label: "Real Volume",
-                        data: trendlineTrueVolumeArray,
-                        borderColor: "rgb(64, 192, 87)",
-                        backgroundColor: "rgb(64, 192, 87)",
-                        pointRadius: trendlineTimespan === null ? 2 : 5,
-                        tension: 0.3,
-                        borderWidth: 1,
-                        // @ts-ignore
-                        // trendlineLinear: {
-                        //   colorMin: "white",
-                        //   colorMax: "white",
-                        //   lineStyle: "solid",
-                        //   width: 2,
-                        //   projection: false,
-                        // },
-                      },
-                    ],
-                  }}
-                  options={{
-                    elements: {
-                      line: {
-                        capBezierPoints: true,
-                        borderJoinStyle: "round",
-                        borderWidth: 10,
-                      },
-                      point: {
-                        pointStyle: "circle",
-                      },
-                    },
-                    interaction: {
-                      mode: "x",
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                      tooltip: {
-                        callbacks: {},
-                      },
-
-                      annotation: {
-                        annotations: {},
-                      },
-
-                      legend: {
-                        position: "top",
-                        align: "start",
-                        display: false,
-                        fullSize: true,
-                        labels: {
-                          color: "#fff",
-                          usePointStyle: true,
-                          pointStyle: "rectRounded",
-                        },
-                      },
-                    },
-                    scales: {
-                      x: {
-                        display: false,
-                        stacked: true,
-                      },
-                      y: {
-                        display: false,
-                        stacked: true,
-                      },
-                    },
-                  }}
-                />
-              </div>
-              <div className="chart__subtitle">
-                <p className="typography__label--3">Trend</p>
-              </div>
+              <TrueVolumeLineChart
+                labels={trendlineVolumeLabels}
+                data={{
+                  true_volume: trendlineTrueVolumeArray,
+                  true_volume_moving_average: loanVolumeMovingAverage,
+                }}
+                trend_timespan={trendlineTimespan}
+              />
             </div>
           </div>
 
@@ -569,79 +333,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 </div>
               </div>
 
-              <div className="chart__bar-wrapper">
-                <Line
-                  data={{
-                    labels: trendlineVolumeLabels,
-                    datasets: [
-                      {
-                        label: "Trend",
-                        data: loanVolumeMovingAverage,
-                        borderColor: "rgba(255, 255, 255)",
-                        backgroundColor: "rgba(255, 255, 255)",
-                        pointRadius: 0,
-                        borderWidth: 1,
-                      },
-                      {
-                        label: "Loan Volume",
-                        data: trendlineLoanVolumeDataArray,
-                        borderColor: "rgba(250, 176, 5, 1)",
-                        backgroundColor: "rgba(250, 176, 5, 1)",
-                        pointRadius: trendlineTimespan === null ? 2 : 5,
-                        tension: 0.3,
-                        borderWidth: 2,
-                      },
-                    ],
-                  }}
-                  options={{
-                    elements: {
-                      line: {
-                        capBezierPoints: true,
-                        borderJoinStyle: "round",
-                        borderWidth: 10,
-                      },
-                      point: {
-                        pointStyle: "circle",
-                      },
-                    },
-                    interaction: {
-                      mode: "x",
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                      tooltip: {
-                        callbacks: {},
-                      },
-
-                      annotation: {
-                        annotations: {},
-                      },
-
-                      legend: {
-                        position: "top",
-                        align: "start",
-                        display: false,
-                        fullSize: true,
-                        labels: {
-                          color: "#fff",
-                          usePointStyle: true,
-                          pointStyle: "rectRounded",
-                        },
-                      },
-                    },
-                    scales: {
-                      x: {
-                        display: false,
-                        stacked: true,
-                      },
-                      y: {
-                        display: false,
-                        stacked: true,
-                      },
-                    },
-                  }}
-                />
-              </div>
+              <LoanVolumeChart
+                labels={trendlineVolumeLabels}
+                data={{
+                  loan_volume: trendlineLoanVolumeDataArray,
+                  loan_volume_moving_average: loanVolumeMovingAverage,
+                }}
+                trend_timespan={trendlineTimespan}
+              />
             </div>
           </div>
 
@@ -663,80 +362,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 </div>
               </div>
 
-              <div className="chart__bar-wrapper">
-                <Line
-                  data={{
-                    labels: trendlineVolumeLabels,
-                    datasets: [
-                      {
-                        label: "Trend",
-                        data: fakeVolumeMovingAverage,
-
-                        borderColor: "rgba(255, 255, 255)",
-                        backgroundColor: "rgba(255, 255, 255)",
-                        pointRadius: 0,
-                        borderWidth: 1,
-                      },
-                      {
-                        label: "Fake Volume (Inorganic)",
-                        data: trendlineFakeVolumeDataArray,
-                        borderColor: "rgba(253, 126, 20, 1)",
-                        backgroundColor: "rgba(253, 126, 20, 1)",
-                        pointRadius: trendlineTimespan === null ? 2 : 5,
-                        tension: 0.3,
-                        borderWidth: 2,
-                      },
-                    ],
-                  }}
-                  options={{
-                    elements: {
-                      line: {
-                        capBezierPoints: true,
-                        borderJoinStyle: "round",
-                        borderWidth: 10,
-                      },
-                      point: {
-                        pointStyle: "circle",
-                      },
-                    },
-                    interaction: {
-                      mode: "x",
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                      tooltip: {
-                        callbacks: {},
-                      },
-
-                      annotation: {
-                        annotations: {},
-                      },
-
-                      legend: {
-                        position: "top",
-                        align: "start",
-                        display: false,
-                        fullSize: true,
-                        labels: {
-                          color: "#fff",
-                          usePointStyle: true,
-                          pointStyle: "rectRounded",
-                        },
-                      },
-                    },
-                    scales: {
-                      x: {
-                        display: false,
-                        stacked: true,
-                      },
-                      y: {
-                        display: false,
-                        stacked: true,
-                      },
-                    },
-                  }}
-                />
-              </div>
+              <FakeVolumeChart
+                labels={trendlineVolumeLabels}
+                data={{
+                  fake_volume: trendlineFakeVolumeDataArray,
+                  fake_volume_moving_average: fakeVolumeMovingAverage,
+                }}
+                trend_timespan={trendlineTimespan}
+              />
             </div>
           </div>
 
@@ -756,82 +389,14 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 </div>
               </div>
 
-              <div className="chart__bar-wrapper">
-                <Line
-                  data={{
-                    labels: trendlineVolumeLabels,
-                    datasets: [
-                      {
-                        label: "Trend",
-                        data: totalVolumeMovingAverage,
-                        borderColor: "rgba(255, 255, 255)",
-                        backgroundColor: "rgba(255, 255, 255)",
-                        pointRadius: 0,
-                        borderWidth: 1,
-                      },
-                      {
-                        label: "Total Volume",
-                        data: trendlineTotalVolumeArray,
-                        borderColor: "rgba(250, 82, 82, 1)",
-                        backgroundColor: "rgba(250, 82, 82, 1)",
-                        pointRadius: trendlineTimespan === null ? 2 : 5,
-                        tension: 0.3,
-                        borderWidth: 2,
-                      },
-                    ],
-                  }}
-                  options={{
-                    elements: {
-                      line: {
-                        capBezierPoints: true,
-                        borderJoinStyle: "round",
-                        borderWidth: 10,
-                      },
-                      point: {
-                        pointStyle: "circle",
-                      },
-                    },
-                    interaction: {
-                      mode: "x",
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                      tooltip: {
-                        callbacks: {},
-                      },
-
-                      annotation: {
-                        annotations: {},
-                      },
-
-                      legend: {
-                        position: "top",
-                        align: "start",
-                        display: false,
-                        fullSize: true,
-                        labels: {
-                          color: "#fff",
-                          usePointStyle: true,
-                          pointStyle: "rectRounded",
-                        },
-                      },
-                    },
-                    scales: {
-                      x: {
-                        display: false,
-                        stacked: true,
-                      },
-                      y: {
-                        display: false,
-                        stacked: true,
-                      },
-                    },
-                  }}
-                />
-              </div>
-              <div className="chart__subtitle">
-                <p className="typography__label--3">Trend</p>
-              </div>
+              <TotalVolumeChart
+                labels={trendlineVolumeLabels}
+                data={{
+                  total_volume: trendlineTotalVolumeArray,
+                  total_volume_moving_average: totalVolumeMovingAverage,
+                }}
+                trend_timespan={trendlineTimespan}
+              />
             </div>
           </div>
         </div>
