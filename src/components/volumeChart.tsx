@@ -51,6 +51,8 @@ interface VolumeChartProps {
     true_volume_percentage: number[];
     loan_volume: number[];
     revenue: number[];
+    fake_volume: number[];
+    fake_volume_percentage: number[];
   };
 }
 const VolumeChart: React.FC<VolumeChartProps> = ({
@@ -842,6 +844,8 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
         true_volume_percentage={leaderboard.true_volume_percentage.slice(0, 5)}
         loan_volume={leaderboard.loan_volume.slice(0, 5)}
         revenue={leaderboard.revenue.slice(0, 5)}
+        fake_volume={leaderboard.fake_volume.slice(0, 5)}
+        fake_volume_percentage={leaderboard.fake_volume_percentage.slice(0, 5)}
         // loans={leaderboardDatasets.filter(
         //   ({ label }) => label === "total_day_volume_loan"
         // )}

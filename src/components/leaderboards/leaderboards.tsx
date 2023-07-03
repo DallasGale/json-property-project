@@ -5,6 +5,8 @@ interface LeaderBoardTypes {
   true_volume_percentage: number[];
   loan_volume: number[];
   revenue: number[];
+  fake_volume: number[];
+  fake_volume_percentage: number[];
 }
 
 const Leaderboards: React.FC<LeaderBoardTypes> = ({
@@ -13,6 +15,8 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
   true_volume_percentage,
   loan_volume,
   revenue,
+  fake_volume,
+  fake_volume_percentage,
 }) => {
   return (
     <section className="chart__wrapper">
@@ -75,7 +79,60 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
                 </div>
               </div>
             </div>
-            <div className="chart__container chart__container--quarter"></div>
+            <div className="chart__container chart__container--quarter u-justifyStart">
+              <p className="typography__label--4">Fake Volume</p>
+              <div
+                style={{ display: "flex", flexDirection: "row", width: "100%" }}
+              >
+                <div style={{ flex: "1", minWidth: "50%", maxWidth: "50%" }}>
+                  <table cellPadding={0} cellSpacing={0} width="100%">
+                    {collection_names.map((label: string) => {
+                      return (
+                        <tr key={label}>
+                          <td height="30" valign="top">
+                            <p className="typography__display--2 typography__color--white">
+                              {truncateString(label, 20)}
+                            </p>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </table>
+                </div>
+                <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
+                  <table cellPadding={0} cellSpacing={0} width="100%">
+                    {fake_volume.map((volume: number, index: number) => {
+                      return (
+                        <tr key={index + volume}>
+                          <td height="30" valign="top" align="right">
+                            <p className="typography__display--2">
+                              {volume.toFixed(2)}
+                            </p>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </table>
+                </div>
+                <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
+                  <table cellPadding={0} cellSpacing={0} width="100%">
+                    {fake_volume_percentage.map(
+                      (percent: number, index: number) => {
+                        return (
+                          <tr key={index + percent}>
+                            <td height="30" valign="top" align="right">
+                              <p className="typography__display--2 typography__color--red">
+                                {percent}%
+                              </p>
+                            </td>
+                          </tr>
+                        );
+                      }
+                    )}
+                  </table>
+                </div>
+              </div>
+            </div>
             <div className="chart__container chart__container--quarter u-justifyStart">
               <p className="typography__label--4">Loans</p>
               <div

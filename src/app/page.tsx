@@ -50,6 +50,13 @@ export default async function Home() {
     ({ label }: any) => label === "total_day_total_royalty"
   );
 
+  const leaderboardCollectionFakeVolume = leaderboardDatasets.filter(
+    ({ label }: any) => label === "total_day_volume_fake"
+  );
+  const leaderboardCollectionFakeVolumePercentage = leaderboardDatasets.filter(
+    ({ label }: any) => label === "total_fake_day_volume_percentage"
+  );
+
   // console.log({ mergedArrays });
 
   const dateFormatter = async () => {
@@ -154,6 +161,9 @@ export default async function Home() {
               leaderboardCollectionsTrueVolumePercentage[0].data,
             loan_volume: leaderboardCollectionsLoanVolumePercentage[0].data,
             revenue: leaderboardCollectionRevenue[0].data,
+            fake_volume: leaderboardCollectionFakeVolume[0].data,
+            fake_volume_percentage:
+              leaderboardCollectionFakeVolumePercentage[0].data,
           }}
         />
       </div>
