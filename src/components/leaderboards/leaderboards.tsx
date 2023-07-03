@@ -57,30 +57,30 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
                   <p className="typography__label--4">Loans</p>
                 </thead>
                 <tbody>
-                  {loans.map((data: any) => {
+                  {/* {loans.map((data: any) => {
                     console.log({ data });
-                    // const loanNumber = data?.fil
+                    const loanNumber = data?.fil
 
-                    // return (
-                    //   <tr key={data?.label}>
-                    //     <td>
-                    //       <p className="typography__display--2 typography__color--white">
-                    //         {data?.label}
-                    //       </p>
-                    //     </td>
-                    //     <td>
-                    //       <p className="typography__label--3">
-                    //         {data?.data.number}
-                    //       </p>
-                    //     </td>
-                    //     <td>
-                    //       <p className="typography__label--3 typography__color--green">
-                    //         {data?.data.percent}
-                    //       </p>
-                    //     </td>
-                    //   </tr>
-                    // );
-                  })}
+                    return (
+                      <tr key={data?.label}>
+                        <td>
+                          <p className="typography__display--2 typography__color--white">
+                            {data?.label}
+                          </p>
+                        </td>
+                        <td>
+                          <p className="typography__label--3">
+                            {data?.data.number}
+                          </p>
+                        </td>
+                        <td>
+                          <p className="typography__label--3 typography__color--green">
+                            {data?.data.percent}
+                          </p>
+                        </td>
+                      </tr>
+                    );
+                  })} */}
                 </tbody>
               </table>
             </div>

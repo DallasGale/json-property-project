@@ -837,7 +837,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       </section>
 
       {/* Row 2 */}
-      {/* <Leaderboards
+      <Leaderboards
         labels={leaderboardDatasets.filter(({ label }) => label === "name")}
         true_volume={leaderboardDatasets.filter(
           ({ label }) => label === "total_real_day_volume"
@@ -845,7 +845,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
         loans={leaderboardDatasets.filter(
           ({ label }) => label === "total_day_volume_loan"
         )}
-      /> */}
+      />
     </>
   );
 };
