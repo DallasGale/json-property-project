@@ -46,10 +46,8 @@ export default async function Home() {
   const leaderboardCollectionsLoanVolumePercentage = leaderboardDatasets.filter(
     ({ label }: any) => label === "total_day_volume_loan_num"
   );
-
-  console.log(
-    leaderboardCollectionNames[0].data,
-    leaderboardCollectionsTrueVolume[0].data
+  const leaderboardCollectionRevenue = leaderboardDatasets.filter(
+    ({ label }: any) => label === "total_day_total_royalty"
   );
 
   // console.log({ mergedArrays });
@@ -155,6 +153,7 @@ export default async function Home() {
             true_volume_percentage:
               leaderboardCollectionsTrueVolumePercentage[0].data,
             loan_volume: leaderboardCollectionsLoanVolumePercentage[0].data,
+            revenue: leaderboardCollectionRevenue[0].data,
           }}
         />
       </div>

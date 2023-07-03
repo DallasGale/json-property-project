@@ -4,6 +4,7 @@ interface LeaderBoardTypes {
   true_volume: number[];
   true_volume_percentage: number[];
   loan_volume: number[];
+  revenue: number[];
 }
 
 const Leaderboards: React.FC<LeaderBoardTypes> = ({
@@ -11,6 +12,7 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
   true_volume,
   true_volume_percentage,
   loan_volume,
+  revenue,
 }) => {
   return (
     <section className="chart__wrapper">
@@ -111,7 +113,43 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
                 </div>
               </div>
             </div>
-            <div className="chart__container chart__container--quarter"></div>
+            <div className="chart__container chart__container--quarter u-justifyStart">
+              <p className="typography__label--4">Revenue</p>
+              <div
+                style={{ display: "flex", flexDirection: "row", width: "100%" }}
+              >
+                <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
+                  <table cellPadding={0} cellSpacing={0} width="100%">
+                    {collection_names.map((label: string) => {
+                      return (
+                        <tr key={label}>
+                          <td height="30" valign="top">
+                            <p className="typography__display--2 typography__color--white">
+                              {truncateString(label, 20)}
+                            </p>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </table>
+                </div>
+                <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
+                  <table cellPadding={0} cellSpacing={0} width="100%">
+                    {revenue.map((amount: number, index: number) => {
+                      return (
+                        <tr key={index + amount}>
+                          <td height="30" valign="top" align="right">
+                            <p className="typography__display--2">
+                              {amount.toFixed(2)}
+                            </p>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
