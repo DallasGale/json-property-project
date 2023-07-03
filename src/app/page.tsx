@@ -13,9 +13,6 @@ import endpoints from "@api/endpoints";
 // Types
 import type { DatasetsType } from "@app/types";
 
-// Utils
-import mergeWith from "lodash.mergewith";
-
 async function getData() {
   const res = await fetch(endpoints.nft_ethereum_daily_summary);
   if (!res.ok) {
@@ -44,6 +41,10 @@ export default async function Home() {
   );
   const leaderboardCollectionsTrueVolumePercentage = leaderboardDatasets.filter(
     ({ label }: any) => label === "total_real_day_volume_percentage"
+  );
+
+  const leaderboardCollectionsLoanVolumePercentage = leaderboardDatasets.filter(
+    ({ label }: any) => label === "total_day_volume_loan_num"
   );
 
   console.log(
@@ -153,6 +154,7 @@ export default async function Home() {
             true_volumes: leaderboardCollectionsTrueVolume[0].data,
             true_volume_percentage:
               leaderboardCollectionsTrueVolumePercentage[0].data,
+            loan_volume: leaderboardCollectionsLoanVolumePercentage[0].data,
           }}
         />
       </div>
