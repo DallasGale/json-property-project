@@ -45,6 +45,11 @@ interface VolumeChartProps {
   fakeVolumeMovingAverage: number[];
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
+  leaderboard: {
+    names: string[];
+    true_volumes: number[];
+    true_volume_percentage: number[];
+  };
 }
 const VolumeChart: React.FC<VolumeChartProps> = ({
   labels,
@@ -58,6 +63,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   fakeVolumeMovingAverage,
   totalVolumeMovingAverage,
   trueVolumeMovingAverage,
+  leaderboard,
 }) => {
   const [timespan, setTimespan] = useState(-30);
   const [trendlineTimespan, setTrendlineTimespan] = useState(-30);
@@ -72,6 +78,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     setTrendlineTimespan(value);
   }
 
+  console.log({ leaderboard });
   // const customTooltip = (tooltipItems?: any) => {
   //   let sum = 0;
 
@@ -167,8 +174,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       setTrendlineVolumeLabels(labels);
     }
   }, [trendlineTimespan]);
-
-  console.log(totalVolumeMovingAverage.length);
 
   const renderTrueTotalPercentage = () => {
     const trueV: any = trueVolume[trueVolume.length - 1];
@@ -838,13 +843,12 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
 
       {/* Row 2 */}
       <Leaderboards
-        labels={leaderboardDatasets.filter(({ label }) => label === "name")}
-        true_volume={leaderboardDatasets.filter(
-          ({ label }) => label === "total_real_day_volume"
-        )}
-        loans={leaderboardDatasets.filter(
-          ({ label }) => label === "total_day_volume_loan"
-        )}
+        collection_names={leaderboard.names.slice(0, 5)}
+        true_volume={leaderboard.true_volumes.slice(0, 5)}
+        true_volume_percentage={leaderboard.true_volume_percentage.slice(0, 5)}
+        // loans={leaderboardDatasets.filter(
+        //   ({ label }) => label === "total_day_volume_loan"
+        // )}
       />
     </>
   );

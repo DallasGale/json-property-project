@@ -13,6 +13,9 @@ import endpoints from "@api/endpoints";
 // Types
 import type { DatasetsType } from "@app/types";
 
+// Utils
+import mergeWith from "lodash.mergewith";
+
 async function getData() {
   const res = await fetch(endpoints.nft_ethereum_daily_summary);
   if (!res.ok) {
@@ -33,14 +36,22 @@ export default async function Home() {
   const data = await getData();
   const leaderBoardData = await getLeaderBoardData();
   const leaderboardDatasets = leaderBoardData.datasets;
-  console.log({ leaderboardDatasets });
-  const obj = [
-    {
-      label: "",
-      value: "",
-    },
-  ];
-  function combineLabelWithTrueVolume() {}
+  const leaderboardCollectionNames = leaderboardDatasets.filter(
+    ({ label }: any) => label === "name"
+  );
+  const leaderboardCollectionsTrueVolume = leaderboardDatasets.filter(
+    ({ label }: any) => label === "total_real_day_volume"
+  );
+  const leaderboardCollectionsTrueVolumePercentage = leaderboardDatasets.filter(
+    ({ label }: any) => label === "total_real_day_volume_percentage"
+  );
+
+  console.log(
+    leaderboardCollectionNames[0].data,
+    leaderboardCollectionsTrueVolume[0].data
+  );
+
+  // console.log({ mergedArrays });
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -137,6 +148,12 @@ export default async function Home() {
           fakeVolumeMovingAverage={fakeVolume30DayMovingAverage[0].data}
           totalVolumeMovingAverage={totalVolume30DayMovingAverage[0].data}
           trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
+          leaderboard={{
+            names: leaderboardCollectionNames[0].data,
+            true_volumes: leaderboardCollectionsTrueVolume[0].data,
+            true_volume_percentage:
+              leaderboardCollectionsTrueVolumePercentage[0].data,
+          }}
         />
       </div>
     </main>
