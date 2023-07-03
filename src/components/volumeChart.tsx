@@ -247,14 +247,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         data: dailyFakeVolumeDataArray,
                         borderColor: "white",
                         backgroundColor: "rgba(250, 82, 82, 1)",
-                        // hidden: true,
-                      },
-                      {
-                        label: "Fake Volume (Inorganic)",
-                        data: dailyFakeVolumeDataArray,
-                        borderColor: "white",
-                        backgroundColor: "rgba(250, 82, 82, 1)",
-                        // hidden: true,
                       },
                     ],
                   }}
