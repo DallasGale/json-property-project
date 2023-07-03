@@ -17,12 +17,9 @@ import { kFormatter } from "../utils/kFormatter";
 import annotationPlugin from "chartjs-plugin-annotation";
 import { Bar, Line } from "react-chartjs-2";
 import { RingProgress, Text } from "@mantine/core";
+import Leaderboards from "./leaderboards/leaderboards";
 
-// window.ChartJS = {
-//   plugins: { register: (...x) => ChartJS.plugins.register(...x) },
-// };
-// require("chartjs-plugin-trendline");
-// delete window.ChartJS;
+import type { DatasetsType } from "@/app/types";
 
 ChartJS.register(
   CategoryScale,
@@ -36,26 +33,18 @@ ChartJS.register(
   annotationPlugin,
   chartTrendline
 );
-
-export interface Datasets {
-  datasets: DatasetType[];
-}
-
-export type DatasetType = {
-  label: string;
-  data: number[];
-};
-
 interface VolumeChartProps {
   labels: string[];
-  trueVolume: DatasetType[];
-  loanVolume: DatasetType[];
-  totalVolume: DatasetType[];
-  fakeVolume: DatasetType[];
+  trueVolume: DatasetsType[];
+  loanVolume: DatasetsType[];
+  totalVolume: DatasetsType[];
+  fakeVolume: DatasetsType[];
   realPercentDifference: number[];
-  leaderBoard: {
-    datasets: any[];
-  };
+  leaderboardDatasets: DatasetsType[];
+  loanVolumeMovingAverage: number[];
+  fakeVolumeMovingAverage: number[];
+  totalVolumeMovingAverage: number[];
+  trueVolumeMovingAverage: number[];
 }
 const VolumeChart: React.FC<VolumeChartProps> = ({
   labels,
@@ -64,7 +53,11 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   fakeVolume,
   realPercentDifference,
   totalVolume,
-  leaderBoard,
+  leaderboardDatasets,
+  loanVolumeMovingAverage,
+  fakeVolumeMovingAverage,
+  totalVolumeMovingAverage,
+  trueVolumeMovingAverage,
 }) => {
   const [timespan, setTimespan] = useState(-30);
   const [trendlineTimespan, setTrendlineTimespan] = useState(-30);
@@ -120,6 +113,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
   const [trendlineFakeVolumeDataArray, setTrendlineFakeVolumeDataArray] =
     useState(fakeVolume.slice(fakeVolume.length - 30));
 
+  const [
+    totalVolumeMovingAverageDataArray,
+    setTotalVolumeMovingAverageDataArray,
+  ] = useState(
+    totalVolumeMovingAverage.slice(totalVolumeMovingAverage.length - 30)
+  );
+
   useEffect(() => {
     if (timespan === -30) {
       setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
@@ -137,14 +137,7 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
         labels.slice(labels.length - 7).map((data: any) => data)
       );
     }
-    // if (timespan === -1) {
-    //   setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
-    //   setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
-    //   setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
-    //   setDailyTrueVolumeLabels(
-    //     labels.slice(labels.length - 1).map((data: any) => data)
-    //   );
-    // }
+
     if (timespan === null) {
       setDailyFakeVolumeDataArray(fakeVolume);
       setDailyLoanVolumeDataArray(loanVolume);
@@ -162,6 +155,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       setTrendlineVolumeLabels(
         labels.slice(labels.length - 30).map((data: any) => data)
       );
+      setTotalVolumeMovingAverageDataArray(
+        totalVolumeMovingAverage.slice(totalVolumeMovingAverage.length - 30)
+      );
     }
     if (trendlineTimespan === -7) {
       setTrendlineLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
@@ -171,22 +167,18 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       setTrendlineVolumeLabels(
         labels.slice(labels.length - 7).map((data: any) => data)
       );
+      setTotalVolumeMovingAverageDataArray(
+        totalVolumeMovingAverage.slice(totalVolumeMovingAverage.length - 7)
+      );
     }
-    // if (trendlineTimespan === -1) {
-    //   setTrendlineLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
-    //   setTrendlineTrueVolumeArray(trueVolume.slice(trueVolume.length - 1));
-    //   setTrendlineTotalVolumeArray(totalVolume.slice(totalVolume.length - 1));
-    //   setTrendlineFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
-    //   setTrendlineVolumeLabels(
-    //     labels.slice(labels.length - 1).map((data: any) => data)
-    //   );
-    // }
+
     if (trendlineTimespan === null) {
       setTrendlineLoanVolumeDataArray(loanVolume);
       setTrendlineFakeVolumeDataArray(fakeVolume);
       setTrendlineTotalVolumeArray(totalVolume);
       setTrendlineTrueVolumeArray(trueVolume);
       setTrendlineVolumeLabels(labels);
+      setTotalVolumeMovingAverageDataArray(totalVolumeMovingAverage);
     }
   }, [trendlineTimespan]);
 
@@ -202,12 +194,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
     if (trendlineTimespan === null) return "All";
   };
 
-  console.log({ leaderBoard });
-
-  const leaderBoardTrueVolume = leaderBoard.datasets.filter(
-    ({ label }: any) => label === "true_volume"
-  );
-  console.log({ leaderBoardTrueVolume });
   return (
     <>
       <section className="chart__wrapper">
@@ -260,6 +246,13 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                         data: dailyLoanVolumeDataArray,
                         borderColor: "black",
                         backgroundColor: "#FFD740",
+                      },
+                      {
+                        label: "Fake Volume (Inorganic)",
+                        data: dailyFakeVolumeDataArray,
+                        borderColor: "white",
+                        backgroundColor: "rgba(250, 82, 82, 1)",
+                        // hidden: true,
                       },
                       {
                         label: "Fake Volume (Inorganic)",
@@ -476,8 +469,11 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
               </p>
 
               <div className="chart__legend">
-                <div className="chart__legend-item chart__legend-item--real-volume">
+                <div className="chart__legend-item chart__legend-item--true-volume">
                   <p className="typography__label--3">Real Volume</p>
+                </div>
+                <div className="chart__legend-item chart__legend-item--trend">
+                  <p className="typography__label--3">Trend</p>
                 </div>
               </div>
 
@@ -487,21 +483,31 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     labels: trendlineVolumeLabels,
                     datasets: [
                       {
+                        label: "Trend",
+                        data: trueVolumeMovingAverage.slice(
+                          trueVolumeMovingAverage.length - 30
+                        ),
+                        borderColor: "rgba(255, 255, 255)",
+                        backgroundColor: "rgba(255, 255, 255)",
+                        pointRadius: 0,
+                        borderWidth: 1,
+                      },
+                      {
                         label: "Real Volume",
                         data: trendlineTrueVolumeArray,
-                        borderColor: "rgba(92, 95, 102, 1)",
-                        backgroundColor: "rgba(92, 95, 102, 1)",
+                        borderColor: "rgb(64, 192, 87)",
+                        backgroundColor: "rgb(64, 192, 87)",
                         pointRadius: trendlineTimespan === null ? 2 : 5,
                         tension: 0.3,
                         borderWidth: 1,
                         // @ts-ignore
-                        trendlineLinear: {
-                          colorMin: "white",
-                          colorMax: "white",
-                          lineStyle: "solid",
-                          width: 2,
-                          projection: false,
-                        },
+                        // trendlineLinear: {
+                        //   colorMin: "white",
+                        //   colorMax: "white",
+                        //   lineStyle: "solid",
+                        //   width: 2,
+                        //   projection: false,
+                        // },
                       },
                     ],
                   }}
@@ -571,6 +577,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 <div className="chart__legend-item chart__legend-item--primary">
                   <p className="typography__label--3">Loan Volume</p>
                 </div>
+                <div className="chart__legend-item chart__legend-item--trend">
+                  <p className="typography__label--3">Trend</p>
+                </div>
               </div>
 
               <div className="chart__bar-wrapper">
@@ -579,21 +588,23 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     labels: trendlineVolumeLabels,
                     datasets: [
                       {
+                        label: "Trend",
+                        data: loanVolumeMovingAverage.slice(
+                          loanVolumeMovingAverage.length - 30
+                        ),
+                        borderColor: "rgba(255, 255, 255)",
+                        backgroundColor: "rgba(255, 255, 255)",
+                        pointRadius: 0,
+                        borderWidth: 1,
+                      },
+                      {
                         label: "Loan Volume",
                         data: trendlineLoanVolumeDataArray,
-                        borderColor: "rgba(92, 95, 102, 1)",
-                        backgroundColor: "rgba(92, 95, 102, 1)",
+                        borderColor: "rgba(250, 176, 5, 1)",
+                        backgroundColor: "rgba(250, 176, 5, 1)",
                         pointRadius: trendlineTimespan === null ? 2 : 5,
                         tension: 0.3,
-                        borderWidth: 1,
-                        // @ts-ignore
-                        trendlineLinear: {
-                          colorMin: "rgba(250, 176, 5, 1)",
-                          colorMax: "rgba(250, 176, 5, 1)",
-                          lineStyle: "solid",
-                          width: 2,
-                          projection: false,
-                        },
+                        borderWidth: 2,
                       },
                     ],
                   }}
@@ -645,9 +656,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     },
                   }}
                 />
-              </div>
-              <div className="chart__subtitle">
-                <p className="typography__label--3">Trend</p>
               </div>
             </div>
           </div>
@@ -665,6 +673,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     Fake Volume (Inorganic)
                   </p>
                 </div>
+                <div className="chart__legend-item chart__legend-item--trend">
+                  <p className="typography__label--3">Trend</p>
+                </div>
               </div>
 
               <div className="chart__bar-wrapper">
@@ -673,21 +684,23 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     labels: trendlineVolumeLabels,
                     datasets: [
                       {
+                        label: "Trend",
+                        data: fakeVolumeMovingAverage.slice(
+                          fakeVolumeMovingAverage.length - 30
+                        ),
+                        borderColor: "rgba(255, 255, 255)",
+                        backgroundColor: "rgba(255, 255, 255)",
+                        pointRadius: 0,
+                        borderWidth: 1,
+                      },
+                      {
                         label: "Fake Volume (Inorganic)",
                         data: trendlineFakeVolumeDataArray,
-                        borderColor: "rgba(92, 95, 102, 1)",
-                        backgroundColor: "rgba(92, 95, 102, 1)",
+                        borderColor: "rgba(253, 126, 20, 1)",
+                        backgroundColor: "rgba(253, 126, 20, 1)",
                         pointRadius: trendlineTimespan === null ? 2 : 5,
                         tension: 0.3,
-                        borderWidth: 1,
-                        // @ts-ignore
-                        trendlineLinear: {
-                          colorMin: "rgba(253, 126, 20, 1)",
-                          colorMax: "rgba(253, 126, 20, 1)",
-                          lineStyle: "solid",
-                          width: 2,
-                          projection: true,
-                        },
+                        borderWidth: 2,
                       },
                     ],
                   }}
@@ -740,9 +753,6 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                   }}
                 />
               </div>
-              <div className="chart__subtitle">
-                <p className="typography__label--3">Trend</p>
-              </div>
             </div>
           </div>
 
@@ -757,6 +767,9 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                 <div className="chart__legend-item chart__legend-item--tertiary">
                   <p className="typography__label--3">Total Volume</p>
                 </div>
+                <div className="chart__legend-item chart__legend-item--trend">
+                  <p className="typography__label--3">Trend</p>
+                </div>
               </div>
 
               <div className="chart__bar-wrapper">
@@ -765,21 +778,21 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
                     labels: trendlineVolumeLabels,
                     datasets: [
                       {
+                        label: "Trend",
+                        data: totalVolumeMovingAverageDataArray,
+                        borderColor: "rgba(255, 255, 255)",
+                        backgroundColor: "rgba(255, 255, 255)",
+                        pointRadius: 0,
+                        borderWidth: 1,
+                      },
+                      {
                         label: "Total Volume",
                         data: trendlineTotalVolumeArray,
-                        borderColor: "rgba(92, 95, 102, 1)",
-                        backgroundColor: "rgba(92, 95, 102, 1)",
+                        borderColor: "rgba(250, 82, 82, 1)",
+                        backgroundColor: "rgba(250, 82, 82, 1)",
                         pointRadius: trendlineTimespan === null ? 2 : 5,
                         tension: 0.3,
-                        borderWidth: 1,
-                        // @ts-ignore
-                        trendlineLinear: {
-                          colorMin: "rgba(255, 82, 82, 1)",
-                          colorMax: "rgba(250, 82, 82, 1)",
-                          lineStyle: "solid",
-                          width: 2,
-                          projection: false,
-                        },
+                        borderWidth: 2,
                       },
                     ],
                   }}
@@ -841,51 +854,15 @@ const VolumeChart: React.FC<VolumeChartProps> = ({
       </section>
 
       {/* Row 2 */}
-      <section className="chart__wrapper">
-        <div className="chart__grid">
-          <div className="chart__grid-cell--full">
-            <h2 className="typography__display--1">Leaderboards</h2>
-
-            <div className="chart__grid">
-              <div className="chart__container chart__container--quarter">
-                <table width="100%">
-                  <thead>
-                    <p className="typography__label--4">True Volume</p>
-                  </thead>
-                  <tbody>
-                    {leaderBoardTrueVolume[0].data.map((data: any) => {
-                      console.log({ data });
-
-                      return (
-                        <tr key={data?.label}>
-                          <td>
-                            <p className="typography__display--2 typography__color--white">
-                              {data?.label}
-                            </p>
-                          </td>
-                          <td>
-                            <p className="typography__label--3">
-                              {data?.data.number}
-                            </p>
-                          </td>
-                          <td>
-                            <p className="typography__label--3 typography__color--green">
-                              {data?.data.percent}
-                            </p>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-              <div className="chart__container chart__container--quarter"></div>
-              <div className="chart__container chart__container--quarter"></div>
-              <div className="chart__container chart__container--quarter"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Leaderboards
+        labels={leaderboardDatasets.filter(({ label }) => label === "name")}
+        true_volume={leaderboardDatasets.filter(
+          ({ label }) => label === "total_real_day_volume"
+        )}
+        loans={leaderboardDatasets.filter(
+          ({ label }) => label === "total_day_volume_loan"
+        )}
+      />
     </>
   );
 };

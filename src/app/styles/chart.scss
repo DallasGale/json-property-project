@@ -132,8 +132,8 @@ $gap: 20px;
   position: relative;
   padding-left: 20px;
   margin-bottom: 8px;
-  &--real-volume:before {
-    background-color: #fff;
+  &--true-volume:before {
+    background-color: $accent-green;
   }
 
   &--primary:before {
@@ -146,6 +146,9 @@ $gap: 20px;
 
   &--tertiary:before {
     background-color: $accent-red;
+  }
+  &--trend:before {
+    background-color: $trend;
   }
 }
 
