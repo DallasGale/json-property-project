@@ -49,7 +49,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   trueVolumeMovingAverage,
   leaderboard,
 }) => {
-  const [toggleView, setToggleView] = useState(false);
+  const [toggleView, setToggleView] = useState(true);
 
   const [timespan, setTimespan] = useState(-30);
   function handleDailyTrueVolumeTimeferame(e: React.MouseEvent, value: any) {
