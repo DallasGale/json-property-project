@@ -30,6 +30,7 @@ import LoanVolumeChart from "@components/charts/loanVolume";
 import FakeVolumeChart from "@components/charts/fakeVolume";
 import TotalVolumeChart from "@components/charts/totalVolume";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
+import Leaderboards from "@components/leaderboards/leaderboards";
 
 import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
@@ -57,6 +58,15 @@ interface VolumeChartProps {
   fakeVolumeMovingAverage: number[];
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
+  leaderboard: {
+    names: string[];
+    true_volumes: number[];
+    true_volume_percentage: number[];
+    loan_volume: number[];
+    revenue: number[];
+    fake_volume: number[];
+    fake_volume_percentage: number[];
+  };
 }
 const ExpandedView: React.FC<VolumeChartProps> = ({
   labels,
@@ -68,6 +78,7 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
   loanVolumeMovingAverage,
   fakeVolumeMovingAverage,
   totalVolumeMovingAverage,
+  leaderboard,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -369,6 +380,16 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
           />
         </div>
       </animated.div>
+
+      <Leaderboards
+        collection_names={leaderboard.names.slice(0, 5)}
+        true_volume={leaderboard.true_volumes.slice(0, 5)}
+        true_volume_percentage={leaderboard.true_volume_percentage.slice(0, 5)}
+        loan_volume={leaderboard.loan_volume.slice(0, 5)}
+        revenue={leaderboard.revenue.slice(0, 5)}
+        fake_volume={leaderboard.fake_volume.slice(0, 5)}
+        fake_volume_percentage={leaderboard.fake_volume_percentage.slice(0, 5)}
+      />
     </>
   );
 };

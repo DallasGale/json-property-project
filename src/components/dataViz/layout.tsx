@@ -121,12 +121,12 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
     .map((data: any) => data);
 
   const [showLeaderboard, setShowLeaderboard] = useState(true);
-  useEffect(() => {
-    setShowLeaderboard(false);
-    setTimeout(() => {
-      setShowLeaderboard(true);
-    }, 350);
-  }, [toggleView]);
+  // useEffect(() => {
+  //   setShowLeaderboard(false);
+  //   setTimeout(() => {
+  //     setShowLeaderboard(true);
+  //   }, 350);
+  // }, [toggleView]);
   return (
     <>
       <div className="content">
@@ -253,6 +253,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                       fakeVolumeMovingAverage={fakeVolumeMovingAverage}
                       totalVolumeMovingAverage={totalVolumeMovingAverage}
                       trueVolumeMovingAverage={trueVolumeMovingAverage}
+                      leaderboard={leaderboard}
                     />
                   </animated.div>
                 )}
@@ -271,10 +272,11 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 fakeVolumeMovingAverage={fakeVolumeMovingAverage}
                 totalVolumeMovingAverage={totalVolumeMovingAverage}
                 trueVolumeMovingAverage={trueVolumeMovingAverage}
+                leaderboard={leaderboard}
               />
             )}
             {/* Row 2 */}
-            {showLeaderboard && (
+            {/* {showLeaderboard && (
               <Leaderboards
                 collection_names={leaderboard.names.slice(0, 5)}
                 true_volume={leaderboard.true_volumes.slice(0, 5)}
@@ -290,7 +292,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                   5
                 )}
               />
-            )}
+            )} */}
           </div>
         </section>
       </div>

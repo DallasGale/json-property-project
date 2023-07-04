@@ -27,6 +27,7 @@ import { RingProgress, Text } from "@mantine/core";
 import TotalVolumeAllLineChart from "@components/charts/totalVolumeAllLine";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
 
+import Leaderboards from "@components/leaderboards/leaderboards";
 import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
 
@@ -55,6 +56,15 @@ interface VolumeChartProps {
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
   toggleView: boolean;
+  leaderboard: {
+    names: string[];
+    true_volumes: number[];
+    true_volume_percentage: number[];
+    loan_volume: number[];
+    revenue: number[];
+    fake_volume: number[];
+    fake_volume_percentage: number[];
+  };
 }
 const CompactView: React.FC<VolumeChartProps> = ({
   labels,
@@ -68,6 +78,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
   fakeVolumeMovingAverage,
   totalVolumeMovingAverage,
   toggleView,
+  leaderboard,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -276,6 +287,16 @@ const CompactView: React.FC<VolumeChartProps> = ({
           </animated.div>
         </div>
       </div>
+
+      <Leaderboards
+        collection_names={leaderboard.names.slice(0, 5)}
+        true_volume={leaderboard.true_volumes.slice(0, 5)}
+        true_volume_percentage={leaderboard.true_volume_percentage.slice(0, 5)}
+        loan_volume={leaderboard.loan_volume.slice(0, 5)}
+        revenue={leaderboard.revenue.slice(0, 5)}
+        fake_volume={leaderboard.fake_volume.slice(0, 5)}
+        fake_volume_percentage={leaderboard.fake_volume_percentage.slice(0, 5)}
+      />
     </div>
   );
 };
