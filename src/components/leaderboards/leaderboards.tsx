@@ -1,4 +1,6 @@
+// Utils
 import { truncateString } from "@/utils/truncateString";
+import { useSpring, animated, easings } from "@react-spring/web";
 interface LeaderBoardTypes {
   collection_names: string[];
   true_volume: number[];
@@ -18,6 +20,51 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
   fake_volume,
   fake_volume_percentage,
 }) => {
+  // Animations
+  const springs1 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 0,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
+  const springs2 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 150,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
+  const springs3 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 300,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
+  const springs4 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 450,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
   return (
     <section className="chart__wrapper">
       <div className="chart__grid">
@@ -25,7 +72,10 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
           <h2 className="typography__display--1">Leaderboards</h2>
 
           <div className="chart__grid">
-            <div className="chart__container chart__container--quarter u-justifyStart">
+            <animated.div
+              style={{ ...springs1 }}
+              className="chart__container chart__container--quarter u-justifyStart"
+            >
               <p className="typography__label--4">True Volume</p>
               <div
                 style={{ display: "flex", flexDirection: "row", width: "100%" }}
@@ -78,8 +128,11 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
                   </table>
                 </div>
               </div>
-            </div>
-            <div className="chart__container chart__container--quarter u-justifyStart">
+            </animated.div>
+            <animated.div
+              style={{ ...springs2 }}
+              className="chart__container chart__container--quarter u-justifyStart"
+            >
               <p className="typography__label--4">Fake Volume</p>
               <div
                 style={{ display: "flex", flexDirection: "row", width: "100%" }}
@@ -132,8 +185,11 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
                   </table>
                 </div>
               </div>
-            </div>
-            <div className="chart__container chart__container--quarter u-justifyStart">
+            </animated.div>
+            <animated.div
+              style={{ ...springs3 }}
+              className="chart__container chart__container--quarter u-justifyStart"
+            >
               <p className="typography__label--4">Loans</p>
               <div
                 style={{ display: "flex", flexDirection: "row", width: "100%" }}
@@ -169,8 +225,11 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
                   </table>
                 </div>
               </div>
-            </div>
-            <div className="chart__container chart__container--quarter u-justifyStart">
+            </animated.div>
+            <animated.div
+              style={{ ...springs4 }}
+              className="chart__container chart__container--quarter u-justifyStart"
+            >
               <p className="typography__label--4">Revenue</p>
               <div
                 style={{ display: "flex", flexDirection: "row", width: "100%" }}
@@ -206,7 +265,7 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
                   </table>
                 </div>
               </div>
-            </div>
+            </animated.div>
           </div>
         </div>
       </div>

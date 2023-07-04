@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 
 // Utils
+import { useSpring, animated, easings } from "@react-spring/web";
+
 import { kFormatter } from "@utils/kFormatter";
 import annotationPlugin from "chartjs-plugin-annotation";
 import chartTrendline from "chartjs-plugin-trendline";
@@ -29,6 +31,8 @@ import FakeVolumeChart from "@components/charts/fakeVolume";
 import TotalVolumeChart from "@components/charts/totalVolume";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
 
+import ChartDataToggles from "@components/toggles/chart_data";
+import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -65,6 +69,64 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
   fakeVolumeMovingAverage,
   totalVolumeMovingAverage,
 }) => {
+  // Animations
+  const springs1 = useSpring({
+    from: { y: -100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 0,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 500,
+      easing: easings.easeInBack,
+    },
+  });
+  const springs2 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 150,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
+  const springs3 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 300,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
+  const springs4 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 450,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
+
+  const springs5 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 600,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
+
   const [timespan, setTimespan] = useState(-30);
   const [trendlineTimespan, setTrendlineTimespan] = useState(-30);
 
@@ -123,54 +185,75 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
     return (trueV / totalV).toFixed(0);
   };
 
+  function handleDailyTrueVolumeTimeferame(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setTimespan(value);
+  }
+  // Daily True
+  const [dailyTrueVolumeLabels, setDailyTrueVolumeLabels] = useState(
+    labels.slice(labels.length - 30).map((data: any) => data)
+  );
+  const [dailyTrueVolumeDataArray, setDailyTrueVolumeDataArray] = useState(
+    trueVolume.slice(trueVolume.length - 30)
+  );
+  const [dailyLoanVolumeDataArray, setDailyLoanVolumeDataArray] = useState(
+    loanVolume.slice(loanVolume.length - 30)
+  );
+  const [dailyFakeVolumeDataArray, setDailyFakeVolumeDataArray] = useState(
+    fakeVolume.slice(fakeVolume.length - 30)
+  );
+  useEffect(() => {
+    if (timespan === -30) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 30).map((data: any) => data)
+      );
+    }
+    if (timespan === -7) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 7).map((data: any) => data)
+      );
+    }
+
+    if (timespan === null) {
+      setDailyFakeVolumeDataArray(fakeVolume);
+      setDailyLoanVolumeDataArray(loanVolume);
+      setDailyTrueVolumeDataArray(trueVolume);
+      setDailyTrueVolumeLabels(labels);
+    }
+  }, [timespan]);
   return (
     <>
-      {/* <div className="chart__grid-cell chart__grid-cell--half">
-        <div className="chart__container chart__container">
-          <div className="chart__info">
-            <div className="chart__progress-ring">
-              <p className="typography__label--2">
-                <RingProgress
-                  size={110}
-                  thickness={10}
-                  classNames={{
-                    root: "progress-ring__root",
-                  }}
-                  sections={[
-                    {
-                      value: parseInt(renderTrueTotalPercentage()),
-                      color: "rgba(250, 82, 82, 1)",
-                    },
-                  ]}
-                  label={
-                    <Text color="white" weight={700} align="center" size="xl">
-                      {parseInt(renderTrueTotalPercentage())}%
-                    </Text>
-                  }
-                />
-              </p>
-            </div>
-            <div>
-              <p className="typography__label--2">{`${kFormatter(
-                realPercentDifference[realPercentDifference.length - 1]
-              )}k`}</p>
-              <h3 className="typography__label--1">True Volume</h3>
-              <p className="typography__paragraph--1">
-                Excludes fake/artificial volume such as loans, points farming
-                and wash trading.
-              </p>
-            </div>
-          </div>
+      <animated.div
+        style={{ ...springs1 }}
+        className="chart__grid-cell chart__grid-cell--full"
+      >
+        <div className="chart__container">
+          <ChartDataToggles
+            onClick={(arg1, arg2) =>
+              handleDailyTrueVolumeTimeferame(arg1, arg2)
+            }
+          />
 
-          <TrueVolumeBarChart
-            labels={trendlineVolumeLabels}
-            data={{ true_volume: trendlineTrueVolumeArray }}
-            trend_timespan={trendlineTimespan}
+          <DailyTrueVolumeChart
+            labels={dailyTrueVolumeLabels}
+            data={{
+              true_volume: dailyTrueVolumeDataArray,
+              loan_volume: dailyLoanVolumeDataArray,
+              fake_volume: dailyFakeVolumeDataArray,
+            }}
           />
         </div>
-      </div> */}
-
-      <div className="chart__grid-cell chart__grid-cell--half">
+      </animated.div>
+      <animated.div
+        style={{ ...springs2 }}
+        className="chart__grid-cell chart__grid-cell--half"
+      >
         <div className="chart__container">
           <h3 className="typography__label--1">Total Volume</h3>
           <p className="typography__paragraph--1">
@@ -195,9 +278,12 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
             trend_timespan={trendlineTimespan}
           />
         </div>
-      </div>
+      </animated.div>
 
-      <div className="chart__grid-cell chart__grid-cell--half">
+      <animated.div
+        style={{ ...springs3 }}
+        className="chart__grid-cell chart__grid-cell--half"
+      >
         <div className="chart__container">
           <h3 className="typography__label--1">Total Volume</h3>
           <p className="typography__paragraph--1">
@@ -222,9 +308,12 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
             trend_timespan={trendlineTimespan}
           />
         </div>
-      </div>
+      </animated.div>
 
-      <div className="chart__grid-cell chart__grid-cell--half">
+      <animated.div
+        style={{ ...springs4 }}
+        className="chart__grid-cell chart__grid-cell--half"
+      >
         <div className="chart__container">
           <h3 className="typography__label--1">Total Volume</h3>
           <p className="typography__paragraph--1">
@@ -249,9 +338,12 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
             trend_timespan={trendlineTimespan}
           />
         </div>
-      </div>
+      </animated.div>
 
-      <div className="chart__grid-cell chart__grid-cell--half">
+      <animated.div
+        style={{ ...springs5 }}
+        className="chart__grid-cell chart__grid-cell--half"
+      >
         <div className="chart__container">
           <h3 className="typography__label--1">Total Volume</h3>
           <p className="typography__paragraph--1">
@@ -276,7 +368,7 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
             trend_timespan={trendlineTimespan}
           />
         </div>
-      </div>
+      </animated.div>
     </>
   );
 };

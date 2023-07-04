@@ -10,6 +10,9 @@ import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
 import { RingProgress, Text } from "@mantine/core";
 import { kFormatter } from "@utils/kFormatter";
 
+// Utils
+import { useSpring, animated } from "@react-spring/web";
+
 // Types
 import type { DatasetsType } from "@/app/types";
 interface DataVizLayoutTypes {
@@ -49,6 +52,12 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   trueVolumeMovingAverage,
   leaderboard,
 }) => {
+  // Animations
+  const springs = useSpring({
+    from: { y: 1000 },
+    to: { y: 0 },
+  });
+
   const [toggleView, setToggleView] = useState(true);
   const [timespan, setTimespan] = useState(-30);
 
@@ -111,20 +120,28 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
     .slice(labels.length - 30)
     .map((data: any) => data);
 
+  const [showLeaderboard, setShowLeaderboard] = useState(true);
+  useEffect(() => {
+    setShowLeaderboard(false);
+    setTimeout(() => {
+      setShowLeaderboard(true);
+    }, 350);
+  }, [toggleView]);
   return (
     <>
       <div className="content">
         <section className="chart__wrapper">
-          <button onClick={() => setToggleView(!toggleView)}>
+          <button
+            onClick={() => setToggleView(!toggleView)}
+            style={{ width: 200 }}
+          >
             Toggle View
           </button>
-          <div className="chart__grid">
-            <div className="chart__title">
-              <h2 className="typography__display--1">Daily True Volume</h2>
-            </div>
-            <div
-              className={`chart__grid-cell chart__grid-cell--${
-                toggleView ? "half" : "full"
+          <div className="chart__grid chart__grid--gap">
+            {/* <animated.div
+              style={{ ...springs }}
+              className={`${
+                toggleView ? "chart__grid-cell" : "chart__grid-cell--full"
               }`}
             >
               <div className="chart__container">
@@ -143,7 +160,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                   }}
                 />
               </div>
-            </div>
+            </animated.div> */}
 
             {!toggleView && (
               <div className="chart__title">
@@ -156,9 +173,13 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
               </div>
             )}
 
-            <div className="chart__grid-cell chart__grid-cell--half">
-              <div className="chart__grid">
-                <div
+            <animated.div
+              style={{ ...springs }}
+              className="chart__grid-cell--full"
+            >
+              <div className="chart__grid chart__grid--gap">
+                {/* <animated.div
+                  style={{ ...springs }}
                   className={`chart__grid-cell chart__grid-cell--${
                     toggleView ? "quarter" : "full"
                   }`}
@@ -212,11 +233,15 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                       trend_timespan={-30}
                     />
                   </div>
-                </div>
+                </animated.div> */}
 
                 {toggleView && (
-                  <div className="chart__grid-cell chart__grid-cell--quarter">
+                  <animated.div
+                    style={{ ...springs }}
+                    className="chart__grid-cell chart__grid-cell--full"
+                  >
                     <CompactView
+                      toggleView={toggleView}
                       labels={labels}
                       trueVolume={trueVolume}
                       totalVolume={totalVolume}
@@ -229,10 +254,10 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                       totalVolumeMovingAverage={totalVolumeMovingAverage}
                       trueVolumeMovingAverage={trueVolumeMovingAverage}
                     />
-                  </div>
+                  </animated.div>
                 )}
               </div>
-            </div>
+            </animated.div>
             {!toggleView && (
               <ExpandedView
                 labels={labels}
@@ -249,21 +274,23 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
               />
             )}
             {/* Row 2 */}
-            <Leaderboards
-              collection_names={leaderboard.names.slice(0, 5)}
-              true_volume={leaderboard.true_volumes.slice(0, 5)}
-              true_volume_percentage={leaderboard.true_volume_percentage.slice(
-                0,
-                5
-              )}
-              loan_volume={leaderboard.loan_volume.slice(0, 5)}
-              revenue={leaderboard.revenue.slice(0, 5)}
-              fake_volume={leaderboard.fake_volume.slice(0, 5)}
-              fake_volume_percentage={leaderboard.fake_volume_percentage.slice(
-                0,
-                5
-              )}
-            />
+            {showLeaderboard && (
+              <Leaderboards
+                collection_names={leaderboard.names.slice(0, 5)}
+                true_volume={leaderboard.true_volumes.slice(0, 5)}
+                true_volume_percentage={leaderboard.true_volume_percentage.slice(
+                  0,
+                  5
+                )}
+                loan_volume={leaderboard.loan_volume.slice(0, 5)}
+                revenue={leaderboard.revenue.slice(0, 5)}
+                fake_volume={leaderboard.fake_volume.slice(0, 5)}
+                fake_volume_percentage={leaderboard.fake_volume_percentage.slice(
+                  0,
+                  5
+                )}
+              />
+            )}
           </div>
         </section>
       </div>
