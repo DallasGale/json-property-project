@@ -162,16 +162,16 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
               </div>
             </animated.div> */}
 
-            {!toggleView && (
-              <div className="chart__title">
-                <h2 className="typography__display--1">Daily True Volume</h2>
-                {/* <ChartDataToggles
+            {/* {!toggleView && ( */}
+            <div className="chart__title">
+              <h2 className="typography__display--1">Daily True Volume</h2>
+              {/* <ChartDataToggles
                   onClick={(arg1, arg2) =>
                     handleTrendlineTimeferame(arg1, arg2)
                   }
                 /> */}
-              </div>
-            )}
+            </div>
+            {/* )} */}
 
             <animated.div
               style={{ ...springs }}
