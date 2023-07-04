@@ -12,7 +12,7 @@ const TrueVolumeBarChart: React.FC<TrueVolumeChartTypes> = ({
   trend_timespan,
 }) => {
   return (
-    <div className="chart__bar-wrapper">
+    <div className="chart__bar-wrapper" style={{ height: "197px" }}>
       <Bar
         data={{
           labels: labels,
