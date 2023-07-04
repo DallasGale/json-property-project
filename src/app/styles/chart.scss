@@ -22,6 +22,11 @@ $gap: 20px;
     flex-direction: row;
     justify-content: flex-start;
   }
+
+  &--leaderboard {
+    gap: $gap;
+    margin-top: $gap;
+  }
 }
 
 .chart__grid--gap {

@@ -71,7 +71,7 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
         <div className="chart__grid-cell--full">
           <h2 className="typography__display--1">Leaderboards</h2>
 
-          <div className="chart__grid">
+          <div className="chart__grid chart__grid--leaderboard">
             <animated.div
               style={{ ...springs1 }}
               className="chart__container chart__container--quarter u-justifyStart"
