@@ -133,7 +133,18 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
         <section className="chart__wrapper">
           <button
             onClick={() => setToggleView(!toggleView)}
-            style={{ width: 200, position: "absolute", top: 0, zIndex: 10 }}
+            style={{
+              width: 100,
+              color: "white",
+              border: "1px solid white",
+              background: "black",
+              position: "absolute",
+              top: 10,
+              padding: 10,
+              right: 10,
+              zIndex: 10,
+              cursor: "pointer",
+            }}
           >
             Toggle View
           </button>
