@@ -241,22 +241,24 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
   return (
     <div className="chart__grid chart__grid--gap">
       <div className="chart__grid-cell chart__grid-cell--full">
-        <animated.div style={{ ...springs1 }} className="chart__container">
+        <div className="chart__chart-actions-lockup">
           <ChartDataToggles
+            title="Daily True Volume"
             onClick={(arg1, arg2) =>
               handleDailyTrueVolumeTimeferame(arg1, arg2)
             }
           />
-
-          <DailyTrueVolumeChart
-            labels={dailyTrueVolumeLabels}
-            data={{
-              true_volume: dailyTrueVolumeDataArray,
-              loan_volume: dailyLoanVolumeDataArray,
-              fake_volume: dailyFakeVolumeDataArray,
-            }}
-          />
-        </animated.div>
+          <animated.div style={{ ...springs1 }} className="chart__container">
+            <DailyTrueVolumeChart
+              labels={dailyTrueVolumeLabels}
+              data={{
+                true_volume: dailyTrueVolumeDataArray,
+                loan_volume: dailyLoanVolumeDataArray,
+                fake_volume: dailyFakeVolumeDataArray,
+              }}
+            />
+          </animated.div>
+        </div>
       </div>
       <animated.div
         style={{ ...springs2 }}

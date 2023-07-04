@@ -18,7 +18,7 @@ $gap: 20px;
   flex-wrap: wrap;
   @include respond-to(desktop-up) {
     height: auto;
-    gap: $gap;
+    // gap: $gap;
     flex-direction: row;
     justify-content: flex-start;
   }
@@ -97,7 +97,6 @@ $gap: 20px;
 .chart__title {
   position: relative;
   display: block;
-  padding-top: 20px;
   width: 100%;
   // top: -60px;
 }
@@ -198,4 +197,11 @@ $gap: 20px;
   max-width: 74px;
   border-radius: 100%;
   border: 6px solid $accent-red;
+}
+
+.chart__chart-actions-lockup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
 }

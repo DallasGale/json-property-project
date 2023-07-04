@@ -65,10 +65,10 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
     e.preventDefault();
     setTimespan(value);
   }
-  function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
-    e.preventDefault();
-    setTimespan(value);
-  }
+  // function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
+  //   e.preventDefault();
+  //   setTimespan(value);
+  // }
 
   // Daily True
   const [dailyTrueVolumeLabels, setDailyTrueVolumeLabels] = useState(
@@ -148,7 +148,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
           >
             Toggle View
           </button>
-          <div className="chart__grid chart__grid--gap">
+          <div className="chart__grid">
             {/* <animated.div
               style={{ ...springs }}
               className={`${
@@ -172,17 +172,6 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 />
               </div>
             </animated.div> */}
-
-            {/* {!toggleView && ( */}
-            <div className="chart__title">
-              <h2 className="typography__display--1">Daily True Volume</h2>
-              {/* <ChartDataToggles
-                  onClick={(arg1, arg2) =>
-                    handleTrendlineTimeferame(arg1, arg2)
-                  }
-                /> */}
-            </div>
-            {/* )} */}
 
             <animated.div
               style={{ ...springs }}

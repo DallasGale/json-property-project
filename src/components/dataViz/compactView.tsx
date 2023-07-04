@@ -171,32 +171,40 @@ const CompactView: React.FC<VolumeChartProps> = ({
       setDailyTrueVolumeLabels(labels);
     }
   }, [timespan]);
+
+  function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setTimespan(value);
+  }
   return (
     <div className="chart__grid chart__grid--gap">
-      <animated.div
-        style={{ ...springs1 }}
-        className="chart__grid-cell chart__grid-cell--half"
-      >
-        <div className="chart__container">
+      <div className="chart__grid-cell chart__grid-cell--half">
+        <div className="chart__chart-actions-lockup">
           <ChartDataToggles
-            onClick={(arg1, arg2) =>
-              handleDailyTrueVolumeTimeferame(arg1, arg2)
-            }
+            title="Daily True Volume"
+            onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
           />
-
-          <DailyTrueVolumeChart
-            labels={dailyTrueVolumeLabels}
-            data={{
-              true_volume: dailyTrueVolumeDataArray,
-              loan_volume: dailyLoanVolumeDataArray,
-              fake_volume: dailyFakeVolumeDataArray,
-            }}
-          />
+          <animated.div style={{ ...springs1 }} className="chart__container">
+            <DailyTrueVolumeChart
+              labels={dailyTrueVolumeLabels}
+              data={{
+                true_volume: dailyTrueVolumeDataArray,
+                loan_volume: dailyLoanVolumeDataArray,
+                fake_volume: dailyFakeVolumeDataArray,
+              }}
+            />
+          </animated.div>
         </div>
-      </animated.div>
+      </div>
 
       <div className="chart__grid-cell chart__grid-cell--half">
         <div className="chart__grid chart__grid--gap">
+          <div className="chart__chart-actions-lockup">
+            <ChartDataToggles
+              title="Last 24 hours"
+              onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
+            />
+          </div>
           <animated.div
             style={{ ...springs2 }}
             className="chart__grid-cell chart__grid-cell--half"
