@@ -50,9 +50,13 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   leaderboard,
 }) => {
   const [toggleView, setToggleView] = useState(true);
-
   const [timespan, setTimespan] = useState(-30);
+
   function handleDailyTrueVolumeTimeferame(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setTimespan(value);
+  }
+  function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimespan(value);
   }
@@ -118,7 +122,11 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
             <div className="chart__title">
               <h2 className="typography__display--1">Daily True Volume</h2>
             </div>
-            <div className="chart__grid-cell chart__grid-cell--half">
+            <div
+              className={`chart__grid-cell chart__grid-cell--${
+                toggleView ? "half" : "full"
+              }`}
+            >
               <div className="chart__container">
                 <ChartDataToggles
                   onClick={(arg1, arg2) =>
@@ -137,7 +145,17 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
               </div>
             </div>
 
-            {/*  */}
+            {!toggleView && (
+              <div className="chart__title">
+                <h2 className="typography__display--1">Daily True Volume</h2>
+                {/* <ChartDataToggles
+                  onClick={(arg1, arg2) =>
+                    handleTrendlineTimeferame(arg1, arg2)
+                  }
+                /> */}
+              </div>
+            )}
+
             <div className="chart__grid-cell chart__grid-cell--half">
               <div className="chart__grid">
                 <div
