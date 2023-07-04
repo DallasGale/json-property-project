@@ -8,7 +8,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "DATABEAST 🐗 - Powered by NFTdb",
+  title: "🧌 DataBeast 🧌 - Powered by NFTdb",
   description: "Powered by NFTdb",
 };
 
