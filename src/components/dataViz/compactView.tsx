@@ -207,7 +207,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
           </div>
           <animated.div
             style={{ ...springs2 }}
-            className="chart__grid-cell chart__grid-cell--half"
+            className=" chart__grid-cell--half"
           >
             <div className="chart__container">
               <div className="chart__info">
@@ -259,7 +259,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
           </animated.div>
           <animated.div
             style={{ ...springs3 }}
-            className="chart__grid-cell chart__grid-cell--half"
+            className="chart__grid-cell--half"
           >
             <div className="chart__container">
               <h3 className="typography__label--1">Total Volume</h3>
