@@ -82,14 +82,14 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
 }) => {
   // Animations
   const springs1 = useSpring({
-    from: { y: -100, opacity: 0 },
+    from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
     delay: 0,
     config: {
       tension: 90,
       friction: 16,
-      duration: 500,
-      easing: easings.easeInBack,
+      duration: 750,
+      easing: easings.easeInOutCubic,
     },
   });
   const springs2 = useSpring({
@@ -138,8 +138,8 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
     },
   });
 
-  const [timespan, setTimespan] = useState(-30);
-  const [trendlineTimespan, setTrendlineTimespan] = useState(-30);
+  const [timespan, setTimespan] = useState(null);
+  const [trendlineTimespan, setTrendlineTimespan] = useState(-90);
 
   function handleTrendChartTimeframe(e: React.MouseEvent, value: any) {
     e.preventDefault();
@@ -239,12 +239,9 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
     }
   }, [timespan]);
   return (
-    <>
-      <animated.div
-        style={{ ...springs1 }}
-        className="chart__grid-cell chart__grid-cell--full"
-      >
-        <div className="chart__container">
+    <div className="chart__grid chart__grid--gap">
+      <div className="chart__grid-cell chart__grid-cell--full">
+        <animated.div style={{ ...springs1 }} className="chart__container">
           <ChartDataToggles
             onClick={(arg1, arg2) =>
               handleDailyTrueVolumeTimeferame(arg1, arg2)
@@ -259,8 +256,8 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
               fake_volume: dailyFakeVolumeDataArray,
             }}
           />
-        </div>
-      </animated.div>
+        </animated.div>
+      </div>
       <animated.div
         style={{ ...springs2 }}
         className="chart__grid-cell chart__grid-cell--half"
@@ -290,7 +287,6 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
           />
         </div>
       </animated.div>
-
       <animated.div
         style={{ ...springs3 }}
         className="chart__grid-cell chart__grid-cell--half"
@@ -320,7 +316,6 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
           />
         </div>
       </animated.div>
-
       <animated.div
         style={{ ...springs4 }}
         className="chart__grid-cell chart__grid-cell--half"
@@ -350,7 +345,6 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
           />
         </div>
       </animated.div>
-
       <animated.div
         style={{ ...springs5 }}
         className="chart__grid-cell chart__grid-cell--half"
@@ -380,7 +374,6 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
           />
         </div>
       </animated.div>
-
       <Leaderboards
         collection_names={leaderboard.names.slice(0, 5)}
         true_volume={leaderboard.true_volumes.slice(0, 5)}
@@ -390,7 +383,7 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
         fake_volume={leaderboard.fake_volume.slice(0, 5)}
         fake_volume_percentage={leaderboard.fake_volume_percentage.slice(0, 5)}
       />
-    </>
+    </div>
   );
 };
 
