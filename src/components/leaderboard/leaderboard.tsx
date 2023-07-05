@@ -1,7 +1,8 @@
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
 import Image from "next/image";
-import { truncateString } from "@/utils/truncateString";
+import { truncateString } from "@utils/truncateString";
+import { kFormatter } from "@utils/kFormatter";
 
 // Assets
 import CryptoIcon from "@assets/icons/crypto.svg";
@@ -120,7 +121,6 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                         <td height="30" valign="top" align="right">
                           <div className="leaderboard__data-cell">
                             <Image src={CryptoIcon} alt="Crypto Icon" />
-
                             <p className="typography__display--2">
                               {total_real_day_volume.toFixed(2)}
                             </p>
@@ -227,7 +227,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <tr key={name}>
                         <td height="30" valign="top">
                           <p className="typography__display--2 typography__color--white">
-                            {truncateString(name, 20)}
+                            {truncateString(name, 40)}
                           </p>
                         </td>
                       </tr>
@@ -242,9 +242,12 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       return (
                         <tr key={index + total_day_volume_loan}>
                           <td height="30" valign="top" align="right">
-                            <p className="typography__display--2">
-                              {total_day_volume_loan.toFixed(2)}
-                            </p>
+                            <div className="leaderboard__data-cell">
+                              <Image src={CryptoIcon} alt="Crypto Icon" />
+                              <p className="typography__display--2">
+                                {kFormatter(total_day_volume_loan.toFixed(2))}
+                              </p>
+                            </div>
                           </td>
                         </tr>
                       );
