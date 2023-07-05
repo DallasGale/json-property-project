@@ -247,6 +247,7 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
             onClick={(arg1, arg2) =>
               handleDailyTrueVolumeTimeferame(arg1, arg2)
             }
+            active={null}
           />
           <animated.div style={{ ...springs1 }} className="chart__container">
             <DailyTrueVolumeChart
