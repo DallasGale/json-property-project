@@ -57,8 +57,6 @@ export default async function Home() {
   //   ({ label }: any) => label === "total_fake_day_volume_percentage"
   // );
 
-  console.log({ leaderBoardData });
-
   const dateFormatter = async () => {
     let newDates: any[] = [];
     await data.labels.forEach((date: any) => {

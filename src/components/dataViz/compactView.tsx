@@ -208,7 +208,6 @@ const CompactView: React.FC<VolumeChartProps> = ({
     }
   }, [dailyTimeframe]);
 
-  // console.log({ dailyTimeframe });
   function handleDailyTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setDailyTimeframe(value);

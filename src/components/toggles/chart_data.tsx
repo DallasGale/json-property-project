@@ -9,7 +9,6 @@ const ChartDataToggles: React.FC<ChartDataTogglesProps> = ({
   title,
   active,
 }) => {
-  console.log({ active });
   return (
     <div className="chart__title">
       <h2 className="typography__display--1">{title}</h2>
