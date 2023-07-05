@@ -26,6 +26,7 @@ import type {
   FakeVolumeTypes,
   TrueVolumeTypes,
   LoanVolumeTypes,
+  RoyaltyTypes,
 } from "@/app/types";
 
 // Components
@@ -69,6 +70,7 @@ interface VolumeChartProps {
     true_volume: TrueVolumeTypes[];
     fake_volume: FakeVolumeTypes[];
     loan_volume: LoanVolumeTypes[];
+    royalty: RoyaltyTypes[];
   };
 }
 const CompactView: React.FC<VolumeChartProps> = ({
@@ -357,6 +359,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
         true_volume={leaderboard.true_volume}
         fake_volume={leaderboard.fake_volume}
         loan_volume={leaderboard.loan_volume}
+        royalty={leaderboard.royalty}
         // collection_names={leaderboard.names.slice(0, 5)}
         // true_volume={leaderboard.true_volumes.slice(0, 5)}
         // true_volume_percentage={leaderboard.true_volume_percentage.slice(0, 5)}

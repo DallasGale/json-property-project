@@ -12,18 +12,21 @@ import type {
   TrueVolumeTypes,
   FakeVolumeTypes,
   LoanVolumeTypes,
+  RoyaltyTypes,
 } from "@app/types";
 
 interface LeaderBoardTypes {
   true_volume: TrueVolumeTypes[];
   fake_volume: FakeVolumeTypes[];
   loan_volume: LoanVolumeTypes[];
+  royalty: RoyaltyTypes[];
 }
 
 const Leaderboard: React.FC<LeaderBoardTypes> = ({
   true_volume,
   fake_volume,
   loan_volume,
+  royalty,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -267,32 +270,35 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
             >
               <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {/* {collection_names.map((label: string) => {
+                  {royalty.map(({ name }) => {
                     return (
-                      <tr key={label}>
+                      <tr key={name}>
                         <td height="30" valign="top">
                           <p className="typography__display--2 typography__color--white">
-                            {truncateString(label, 20)}
+                            {truncateString(name, 40)}
                           </p>
                         </td>
                       </tr>
                     );
-                  })} */}
+                  })}
                 </table>
               </div>
               <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {/* {revenue.map((amount: number, index: number) => {
+                  {royalty.map(({ total_day_total_royalty }, index: number) => {
                     return (
-                      <tr key={index + amount}>
+                      <tr key={index + total_day_total_royalty}>
                         <td height="30" valign="top" align="right">
-                          <p className="typography__display--2">
-                            {amount.toFixed(2)}
-                          </p>
+                          <div className="leaderboard__data-cell">
+                            <Image src={CryptoIcon} alt="Crypto Icon" />
+                            <p className="typography__display--2">
+                              {total_day_total_royalty.toFixed(2)}
+                            </p>
+                          </div>
                         </td>
                       </tr>
                     );
-                  })} */}
+                  })}
                 </table>
               </div>
             </div>

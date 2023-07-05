@@ -20,3 +20,8 @@ export type LoanVolumeTypes = {
   name: string;
   total_day_volume_loan: number;
 };
+
+export type RoyaltyTypes = {
+  name: string;
+  total_day_total_royalty: number;
+};

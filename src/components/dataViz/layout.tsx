@@ -12,6 +12,7 @@ import type {
   TrueVolumeTypes,
   FakeVolumeTypes,
   LoanVolumeTypes,
+  RoyaltyTypes,
 } from "@/app/types";
 interface DataVizLayoutTypes {
   labels: string[];
@@ -29,6 +30,7 @@ interface DataVizLayoutTypes {
     true_volume: TrueVolumeTypes[];
     fake_volume: FakeVolumeTypes[];
     loan_volume: LoanVolumeTypes[];
+    royalty: RoyaltyTypes[];
   };
 }
 
@@ -251,6 +253,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                         true_volume: leaderboard.true_volume,
                         fake_volume: leaderboard.fake_volume,
                         loan_volume: leaderboard.loan_volume,
+                        royalty: leaderboard.royalty,
                       }}
                     />
                   </animated.div>
@@ -274,6 +277,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                   true_volume: leaderboard.true_volume,
                   fake_volume: leaderboard.fake_volume,
                   loan_volume: leaderboard.loan_volume,
+                  royalty: leaderboard.royalty,
                 }}
               />
             )}

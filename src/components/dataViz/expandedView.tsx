@@ -25,6 +25,7 @@ import type {
   DatasetsType,
   FakeVolumeTypes,
   LoanVolumeTypes,
+  RoyaltyTypes,
   TrueVolumeTypes,
 } from "@/app/types";
 
@@ -67,6 +68,7 @@ interface VolumeChartProps {
     true_volume: TrueVolumeTypes[];
     fake_volume: FakeVolumeTypes[];
     loan_volume: LoanVolumeTypes[];
+    royalty: RoyaltyTypes[];
   };
 }
 const ExpandedView: React.FC<VolumeChartProps> = ({
@@ -390,6 +392,7 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
         true_volume={leaderboard.true_volume}
         fake_volume={leaderboard.fake_volume}
         loan_volume={leaderboard.loan_volume}
+        royalty={leaderboard.royalty}
       />
     </div>
   );

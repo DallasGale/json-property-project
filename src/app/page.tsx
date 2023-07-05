@@ -33,29 +33,6 @@ export default async function Home() {
   const data = await getData();
   const leaderBoardData = await getLeaderBoardData();
   const leaderboardDatasets = leaderBoardData.datasets;
-  // const leaderboardCollectionNames = leaderboardDatasets.filter(
-  //   ({ label }: any) => label === "name"
-  // );
-  // const leaderboardCollectionsTrueVolume = leaderboardDatasets.filter(
-  //   ({ label }: any) => label === "total_real_day_volume"
-  // );
-  // const leaderboardCollectionsTrueVolumePercentage = leaderboardDatasets.filter(
-  //   ({ label }: any) => label === "total_real_day_volume_percentage"
-  // );
-
-  // const leaderboardCollectionsLoanVolumePercentage = leaderboardDatasets.filter(
-  //   ({ label }: any) => label === "total_day_volume_loan_num"
-  // );
-  // const leaderboardCollectionRevenue = leaderboardDatasets.filter(
-  //   ({ label }: any) => label === "total_day_total_royalty"
-  // );
-
-  // const leaderboardCollectionFakeVolume = leaderboardDatasets.filter(
-  //   ({ label }: any) => label === "total_day_volume_fake"
-  // );
-  // const leaderboardCollectionFakeVolumePercentage = leaderboardDatasets.filter(
-  //   ({ label }: any) => label === "total_fake_day_volume_percentage"
-  // );
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -79,60 +56,27 @@ export default async function Home() {
   const totalVolume30DayMovingAverage = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
   );
-  // const volumeFarming: Datasets = await data?.datasets.filter(
-  //   ({ label }: DatasetsType) => label === "volume_farming"
-  // );
-  // const volumeWashTrading = await data?.datasets.filter(
-  //   ({ label }: DatasetsType) => label === "volume_wash_trading"
-  // );
-  // const inorganicVolume = await data?.datasets.filter(
-  //   ({ label }: DatasetsType) => label === "volume_fake"
-  // );
   const loanVolume = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_loan"
   );
   const loanVolum30DayMovingAverage = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_loan_30_day_moving_average"
   );
-
   const fakeVolume = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_fake"
   );
   const fakeVolume30DayMovingAverage = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_fake_30_day_moving_average"
   );
-
-  // const percentDifference: Datasets = data?.datasets.filter(
-  //   ({ label }: DatasetsType) => label === "percent_difference"
-  // );
   const realPercentDifference = data?.datasets.filter(
     ({ label }: DatasetsType) => label === "real_percent_difference"
   );
-  // const realRawRatio: Datasets = data?.datasets.filter(
-  //   ({ label }: DatasetsType) => label === "real_raw_ratio"
-  // );
   const trueVolume = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real"
   );
   const trueVolume30DayMovingAverage = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real_30_day_moving_average"
   );
-
-  // const realVolumeHack: Datasets = data?.datasets.filter(
-  //   ({ label }: DatasetsType) => label === "real_volume_hack"
-  // );
-  // const totalPlatform: Datasets = data?.datasets.filter(
-  //   ({ label }: DatasetsType) => label === "total_platform"
-  // );
-  // const totalRoyalty: Datasets = data?.datasets.filter(
-  //   ({ label }: DatasetsType) => label === "total_royalty"
-  // );
-
-  // useEffect(() => {
-  //   if (labels) {
-  //     dateFormatter(labels);
-  //   }
-  // }, [labels]);
 
   return (
     <main className="main-container">
@@ -164,19 +108,12 @@ export default async function Home() {
             ["total_day_volume_loan"],
             "desc"
           ).slice(0, 5),
+          royalty: orderBy(
+            leaderBoardData,
+            ["total_day_total_royalty"],
+            "desc"
+          ).slice(0, 5),
         }}
-
-        // leaderboard={{
-        //   names: leaderboardCollectionNames[0].data,
-        //   true_volumes: leaderboardCollectionsTrueVolume[0].data,
-        //   true_volume_percentage:
-        //     leaderboardCollectionsTrueVolumePercentage[0].data,
-        //   loan_volume: leaderboardCollectionsLoanVolumePercentage[0].data,
-        //   revenue: leaderboardCollectionRevenue[0].data,
-        //   fake_volume: leaderboardCollectionFakeVolume[0].data,
-        //   fake_volume_percentage:
-        //     leaderboardCollectionFakeVolumePercentage[0].data,
-        // }}
       />
     </main>
   );
