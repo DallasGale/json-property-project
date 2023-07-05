@@ -30,6 +30,7 @@ import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
 import Leaderboards from "@components/leaderboards/leaderboards";
 import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
+import { time } from "console";
 
 ChartJS.register(
   CategoryScale,
@@ -122,17 +123,46 @@ const CompactView: React.FC<VolumeChartProps> = ({
 
   const trendlineTrueVolumeArray = trueVolume.slice(trueVolume.length - 30);
 
+  // Timeframe toggle
+  const [timeframe, setTimeframe] = useState(1);
   const renderTrueTotalPercentage = () => {
-    const trueV: any = trueVolume[trueVolume.length - 1];
-    const totalV: any = totalVolume[totalVolume.length - 1];
-    return (trueV / totalV).toFixed(0);
+    let out = "0";
+
+    if (timeframe === 0) {
+      const trueV: any = trueVolume;
+      const totalV: any = totalVolume;
+
+      const totatalledTrueVolume = trueV.reduce((a: any, b: any) => a + b, 0);
+      const totatalledTotalVolume = totalV.reduce((a: any, b: any) => a + b, 0);
+      out = (totatalledTrueVolume / totatalledTotalVolume).toFixed(2);
+    } else if (timeframe === 1) {
+      const trueV: any = trueVolume[trueVolume.length - timeframe];
+      const totalV: any = totalVolume[totalVolume.length - timeframe];
+      out = (trueV / totalV).toFixed(2);
+    } else {
+      const trueV: any = trueVolume.slice(trueVolume.length - timeframe);
+      const totalV: any = totalVolume.slice(totalVolume.length - timeframe);
+
+      const totatalledTrueVolume = trueV.reduce((a: any, b: any) => a + b, 0);
+      const totatalledTotalVolume = totalV.reduce((a: any, b: any) => a + b, 0);
+      out = (totatalledTrueVolume / totatalledTotalVolume).toFixed(2);
+    }
+    return out;
   };
 
-  const [timespan, setTimespan] = useState(-30);
-  function handleDailyTrueVolumeTimeferame(e: React.MouseEvent, value: any) {
+  const renderTimeframeAsString = () => {
+    if (timeframe === 0) return "All Time";
+    else if (timeframe === 1) return "Last 24 Hours";
+    else if (timeframe === 7) return "Last 7 Days";
+    else if (timeframe === 30) return "Last 30 Days";
+    else return;
+  };
+
+  function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
-    setTimespan(value);
+    setTimeframe(value);
   }
+
   // Daily True
   const [dailyTrueVolumeLabels, setDailyTrueVolumeLabels] = useState(
     labels.slice(labels.length - 30).map((data: any) => data)
@@ -146,36 +176,32 @@ const CompactView: React.FC<VolumeChartProps> = ({
   const [dailyFakeVolumeDataArray, setDailyFakeVolumeDataArray] = useState(
     fakeVolume.slice(fakeVolume.length - 30)
   );
-  useEffect(() => {
-    if (timespan === -30) {
-      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
-      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
-      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
-      setDailyTrueVolumeLabels(
-        labels.slice(labels.length - 30).map((data: any) => data)
-      );
-    }
-    if (timespan === -7) {
-      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
-      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
-      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
-      setDailyTrueVolumeLabels(
-        labels.slice(labels.length - 7).map((data: any) => data)
-      );
-    }
+  // useEffect(() => {
+  //   if (timespan === -30) {
+  //     setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
+  //     setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
+  //     setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
+  //     setDailyTrueVolumeLabels(
+  //       labels.slice(labels.length - 30).map((data: any) => data)
+  //     );
+  //   }
+  //   if (timespan === -7) {
+  //     setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
+  //     setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
+  //     setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
+  //     setDailyTrueVolumeLabels(
+  //       labels.slice(labels.length - 7).map((data: any) => data)
+  //     );
+  //   }
 
-    if (timespan === null) {
-      setDailyFakeVolumeDataArray(fakeVolume);
-      setDailyLoanVolumeDataArray(loanVolume);
-      setDailyTrueVolumeDataArray(trueVolume);
-      setDailyTrueVolumeLabels(labels);
-    }
-  }, [timespan]);
+  //   if (timespan === null) {
+  //     setDailyFakeVolumeDataArray(fakeVolume);
+  //     setDailyLoanVolumeDataArray(loanVolume);
+  //     setDailyTrueVolumeDataArray(trueVolume);
+  //     setDailyTrueVolumeLabels(labels);
+  //   }
+  // }, [timespan]);
 
-  function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
-    e.preventDefault();
-    setTimespan(value);
-  }
   return (
     <div className="chart__grid chart__grid--gap">
       <div className="chart__grid-cell chart__grid-cell--half">
@@ -201,7 +227,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
         <div className="chart__grid chart__grid--gap">
           <div className="chart__chart-actions-lockup">
             <ChartDataToggles
-              title="Last 24 hours"
+              title={`${renderTimeframeAsString()}`}
               onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
             />
           </div>
@@ -221,7 +247,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
                       }}
                       sections={[
                         {
-                          value: parseInt(renderTrueTotalPercentage()),
+                          value: parseFloat(renderTrueTotalPercentage()),
                           color: "rgba(250, 82, 82, 1)",
                         },
                       ]}
@@ -232,7 +258,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
                           align="center"
                           size="xl"
                         >
-                          {parseInt(renderTrueTotalPercentage())}%
+                          {renderTrueTotalPercentage()}%
                         </Text>
                       }
                     />
@@ -255,6 +281,9 @@ const CompactView: React.FC<VolumeChartProps> = ({
                 data={{ true_volume: trendlineTrueVolumeArray }}
                 trend_timespan={-30}
               />
+              <p className="typography__label--1 typography__color--white">
+                90 Day Trend
+              </p>
             </div>
           </animated.div>
           <animated.div
@@ -266,7 +295,6 @@ const CompactView: React.FC<VolumeChartProps> = ({
               <p className="typography__paragraph--1">
                 NFT trading volume across all transaction types
               </p>
-
               <div className="chart__legend">
                 <div className="chart__legend-item chart__legend-item--true-volume">
                   <p className="typography__label--3">Real Volume Trend</p>
@@ -281,7 +309,6 @@ const CompactView: React.FC<VolumeChartProps> = ({
                   <p className="typography__label--3">Total Volume Trend</p>
                 </div>
               </div>
-
               <TotalVolumeAllLineChart
                 labels={trendlineVolumeLabels}
                 data={{
@@ -291,6 +318,9 @@ const CompactView: React.FC<VolumeChartProps> = ({
                   total_volume_moving_average: totalVolumeMovingAverage,
                 }}
               />
+              <p className="typography__label--1 typography__color--white">
+                90 Day Trend
+              </p>
             </div>
           </animated.div>
         </div>

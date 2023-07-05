@@ -13,19 +13,25 @@ const ChartDataToggles: React.FC<ChartDataTogglesProps> = ({
       <div className="button-group">
         <button
           className="button typography__label--1"
-          onClick={(e) => onClick(e, -7)}
+          onClick={(e) => onClick(e, 1)}
+        >
+          24H
+        </button>
+        <button
+          className="button typography__label--1"
+          onClick={(e) => onClick(e, 7)}
         >
           7D
         </button>
         <button
           className="button typography__label--1"
-          onClick={(e) => onClick(e, -30)}
+          onClick={(e) => onClick(e, 30)}
         >
           30D
         </button>
         <button
           className="button typography__label--1"
-          onClick={(e) => onClick(e, null)}
+          onClick={(e) => onClick(e, 0)}
         >
           ALL
         </button>
