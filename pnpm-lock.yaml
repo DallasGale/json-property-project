@@ -10,6 +10,7 @@ specifiers:
   '@types/chartjs': ^0.0.31
   '@types/chartjs-plugin-trendline': ^1.0.1
   '@types/lodash.merge': ^4.6.7
+  '@types/lodash.orderby': ^4.6.7
   '@types/node': 20.3.2
   '@types/react': 18.2.14
   '@types/react-dom': 18.2.6
@@ -21,6 +22,8 @@ specifiers:
   eslint-config-next: 13.4.7
   lodash.merge: ^4.6.2
   lodash.mergewith: ^4.6.2
+  lodash.orderby: ^4.6.0
+  lodash.sortby: ^4.7.0
   next: 13.4.7
   react: 18.2.0
   react-chartjs-2: 4.3.1
@@ -37,6 +40,7 @@ dependencies:
   '@react-spring/web': 9.7.3_biqbaboplfbrettd7655fr4n2y
   '@types/chartjs': 0.0.31
   '@types/lodash.merge': 4.6.7
+  '@types/lodash.orderby': 4.6.7
   '@types/node': 20.3.2
   '@types/react': 18.2.14
   '@types/react-dom': 18.2.6
@@ -48,6 +52,8 @@ dependencies:
   eslint-config-next: 13.4.7_7yfldhli4vs6yywnkyiujhawka
   lodash.merge: 4.6.2
   lodash.mergewith: 4.6.2
+  lodash.orderby: 4.6.0
+  lodash.sortby: 4.7.0
   next: 13.4.7_63tktvor3xwbblcac5shyx4aca
   react: 18.2.0
   react-chartjs-2: 4.3.1_jzw32sextkxj6pznyxerjojkqm
@@ -664,6 +670,12 @@ packages:
 
   /@types/lodash.merge/4.6.7:
     resolution: {integrity: sha512-OwxUJ9E50gw3LnAefSHJPHaBLGEKmQBQ7CZe/xflHkyy/wH2zVyEIAKReHvVrrn7zKdF58p16We9kMfh7v0RRQ==}
+    dependencies:
+      '@types/lodash': 4.14.195
+    dev: false
+
+  /@types/lodash.orderby/4.6.7:
+    resolution: {integrity: sha512-GaaUBTS4RTjL8gz1ZXkwAB/defpGMOWwCG9C4HL9g81i4wghIoVVESQCUa1xRsyUBqAb5JwLbSwvL0q36rK0sA==}
     dependencies:
       '@types/lodash': 4.14.195
     dev: false
@@ -2172,6 +2184,14 @@ packages:
 
   /lodash.mergewith/4.6.2:
     resolution: {integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==}
+    dev: false
+
+  /lodash.orderby/4.6.0:
+    resolution: {integrity: sha512-T0rZxKmghOOf5YPnn8EY5iLYeWCpZq8G41FfqoVHH5QDTAFaghJRmAdLiadEDq+ztgM2q5PjA+Z1fOwGrLgmtg==}
+    dev: false
+
+  /lodash.sortby/4.7.0:
+    resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
     dev: false
 
   /loose-envify/1.4.0:

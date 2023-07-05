@@ -21,7 +21,12 @@ import {
 } from "chart.js";
 
 // Types
-import type { DatasetsType } from "@/app/types";
+import type {
+  DatasetsType,
+  FakeVolumeTypes,
+  LoanVolumeTypes,
+  TrueVolumeTypes,
+} from "@/app/types";
 
 // Components
 import { RingProgress, Text } from "@mantine/core";
@@ -29,11 +34,11 @@ import TrueVolumeLineChart from "@components/charts/trueVolumeLine";
 import LoanVolumeChart from "@components/charts/loanVolume";
 import FakeVolumeChart from "@components/charts/fakeVolume";
 import TotalVolumeChart from "@components/charts/totalVolume";
-import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
-import Leaderboards from "@components/leaderboards/leaderboards";
+import Leaderboard from "@components/leaderboard/leaderboard";
 
 import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -59,13 +64,9 @@ interface VolumeChartProps {
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
   leaderboard: {
-    names: string[];
-    true_volumes: number[];
-    true_volume_percentage: number[];
-    loan_volume: number[];
-    revenue: number[];
-    fake_volume: number[];
-    fake_volume_percentage: number[];
+    true_volume: TrueVolumeTypes[];
+    fake_volume: FakeVolumeTypes[];
+    loan_volume: LoanVolumeTypes[];
   };
 }
 const ExpandedView: React.FC<VolumeChartProps> = ({
@@ -377,14 +378,10 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
           />
         </div>
       </animated.div>
-      <Leaderboards
-        collection_names={leaderboard.names.slice(0, 5)}
-        true_volume={leaderboard.true_volumes.slice(0, 5)}
-        true_volume_percentage={leaderboard.true_volume_percentage.slice(0, 5)}
-        loan_volume={leaderboard.loan_volume.slice(0, 5)}
-        revenue={leaderboard.revenue.slice(0, 5)}
-        fake_volume={leaderboard.fake_volume.slice(0, 5)}
-        fake_volume_percentage={leaderboard.fake_volume_percentage.slice(0, 5)}
+      <Leaderboard
+        true_volume={leaderboard.true_volume}
+        fake_volume={leaderboard.fake_volume}
+        loan_volume={leaderboard.loan_volume}
       />
     </div>
   );

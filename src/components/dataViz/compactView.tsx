@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 // Utils
+import Image from "next/image";
 import { useSpring, animated, easings } from "@react-spring/web";
 import { kFormatter } from "@utils/kFormatter";
 import annotationPlugin from "chartjs-plugin-annotation";
@@ -20,17 +21,24 @@ import {
 } from "chart.js";
 
 // Types
-import type { DatasetsType } from "@/app/types";
+import type {
+  DatasetsType,
+  FakeVolumeTypes,
+  TrueVolumeTypes,
+  LoanVolumeTypes,
+} from "@/app/types";
 
 // Components
 import { RingProgress, Text } from "@mantine/core";
 import TotalVolumeAllLineChart from "@components/charts/totalVolumeAllLine";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
 
-import Leaderboards from "@components/leaderboards/leaderboards";
+import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
-import { time } from "console";
+
+// Assets
+import CryptoIcon from "@assets/icons/crypto.svg";
 
 ChartJS.register(
   CategoryScale,
@@ -58,13 +66,9 @@ interface VolumeChartProps {
   trueVolumeMovingAverage: number[];
   toggleView: boolean;
   leaderboard: {
-    names: string[];
-    true_volumes: number[];
-    true_volume_percentage: number[];
-    loan_volume: number[];
-    revenue: number[];
-    fake_volume: number[];
-    fake_volume_percentage: number[];
+    true_volume: TrueVolumeTypes[];
+    fake_volume: FakeVolumeTypes[];
+    loan_volume: LoanVolumeTypes[];
   };
 }
 const CompactView: React.FC<VolumeChartProps> = ({
@@ -176,31 +180,39 @@ const CompactView: React.FC<VolumeChartProps> = ({
   const [dailyFakeVolumeDataArray, setDailyFakeVolumeDataArray] = useState(
     fakeVolume.slice(fakeVolume.length - 30)
   );
-  // useEffect(() => {
-  //   if (timespan === -30) {
-  //     setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
-  //     setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
-  //     setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
-  //     setDailyTrueVolumeLabels(
-  //       labels.slice(labels.length - 30).map((data: any) => data)
-  //     );
-  //   }
-  //   if (timespan === -7) {
-  //     setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
-  //     setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
-  //     setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
-  //     setDailyTrueVolumeLabels(
-  //       labels.slice(labels.length - 7).map((data: any) => data)
-  //     );
-  //   }
 
-  //   if (timespan === null) {
-  //     setDailyFakeVolumeDataArray(fakeVolume);
-  //     setDailyLoanVolumeDataArray(loanVolume);
-  //     setDailyTrueVolumeDataArray(trueVolume);
-  //     setDailyTrueVolumeLabels(labels);
-  //   }
-  // }, [timespan]);
+  const [dailyTimeframe, setDailyTimeframe] = useState(1);
+  useEffect(() => {
+    if (dailyTimeframe === -30) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 30).map((data: any) => data)
+      );
+    }
+    if (dailyTimeframe === -7) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 7).map((data: any) => data)
+      );
+    }
+
+    if (dailyTimeframe === null) {
+      setDailyFakeVolumeDataArray(fakeVolume);
+      setDailyLoanVolumeDataArray(loanVolume);
+      setDailyTrueVolumeDataArray(trueVolume);
+      setDailyTrueVolumeLabels(labels);
+    }
+  }, [dailyTimeframe]);
+
+  // console.log({ dailyTimeframe });
+  function handleDailyTimeferame(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setDailyTimeframe(value);
+  }
 
   return (
     <div className="chart__grid chart__grid--gap">
@@ -208,7 +220,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
         <div className="chart__chart-actions-lockup">
           <ChartDataToggles
             title="Daily True Volume"
-            onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
+            onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
             active={null}
           />
           <animated.div style={{ ...springs1 }} className="chart__container">
@@ -269,9 +281,12 @@ const CompactView: React.FC<VolumeChartProps> = ({
                   </p>
                 </div>
                 <div>
-                  <p className="typography__label--2">{`${kFormatter(
-                    realPercentDifference[realPercentDifference.length - 1]
-                  )}k`}</p>
+                  <p className="typography__label--2">
+                    <Image src={CryptoIcon} alt="Crypto Icon" />
+                    {`${kFormatter(
+                      realPercentDifference[realPercentDifference.length - 1]
+                    )}k`}
+                  </p>
                   <h3 className="typography__label--1">True Volume</h3>
                   <p className="typography__paragraph--1">
                     Excludes fake/artificial volume such as loans, points
@@ -330,14 +345,17 @@ const CompactView: React.FC<VolumeChartProps> = ({
         </div>
       </div>
 
-      <Leaderboards
-        collection_names={leaderboard.names.slice(0, 5)}
-        true_volume={leaderboard.true_volumes.slice(0, 5)}
-        true_volume_percentage={leaderboard.true_volume_percentage.slice(0, 5)}
-        loan_volume={leaderboard.loan_volume.slice(0, 5)}
-        revenue={leaderboard.revenue.slice(0, 5)}
-        fake_volume={leaderboard.fake_volume.slice(0, 5)}
-        fake_volume_percentage={leaderboard.fake_volume_percentage.slice(0, 5)}
+      <Leaderboard
+        true_volume={leaderboard.true_volume}
+        fake_volume={leaderboard.fake_volume}
+        loan_volume={leaderboard.loan_volume}
+        // collection_names={leaderboard.names.slice(0, 5)}
+        // true_volume={leaderboard.true_volumes.slice(0, 5)}
+        // true_volume_percentage={leaderboard.true_volume_percentage.slice(0, 5)}
+        // loan_volume={leaderboard.loan_volume.slice(0, 5)}
+        // revenue={leaderboard.revenue.slice(0, 5)}
+        // fake_volume={leaderboard.fake_volume.slice(0, 5)}
+        // fake_volume_percentage={leaderboard.fake_volume_percentage.slice(0, 5)}
       />
     </div>
   );

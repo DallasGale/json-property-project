@@ -1,24 +1,28 @@
 // Utils
-import { truncateString } from "@/utils/truncateString";
 import { useSpring, animated, easings } from "@react-spring/web";
+import Image from "next/image";
+import { truncateString } from "@/utils/truncateString";
+
+// Assets
+import CryptoIcon from "@assets/icons/crypto.svg";
+
+// Types
+import type {
+  TrueVolumeTypes,
+  FakeVolumeTypes,
+  LoanVolumeTypes,
+} from "@app/types";
+
 interface LeaderBoardTypes {
-  collection_names: string[];
-  true_volume: number[];
-  true_volume_percentage: number[];
-  loan_volume: number[];
-  revenue: number[];
-  fake_volume: number[];
-  fake_volume_percentage: number[];
+  true_volume: TrueVolumeTypes[];
+  fake_volume: FakeVolumeTypes[];
+  loan_volume: LoanVolumeTypes[];
 }
 
-const Leaderboards: React.FC<LeaderBoardTypes> = ({
-  collection_names,
+const Leaderboard: React.FC<LeaderBoardTypes> = ({
   true_volume,
-  true_volume_percentage,
-  loan_volume,
-  revenue,
   fake_volume,
-  fake_volume_percentage,
+  loan_volume,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -76,6 +80,7 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
       easing: easings.easeInOutCubic,
     },
   });
+
   return (
     <div className="chart__grid">
       <div className="chart__grid-cell--full">
@@ -94,12 +99,12 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
             >
               <div style={{ flex: "1", minWidth: "50%", maxWidth: "50%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {collection_names.map((label: string) => {
+                  {true_volume.map(({ name }) => {
                     return (
-                      <tr key={label}>
+                      <tr key={name}>
                         <td height="30" valign="top">
                           <p className="typography__display--2 typography__color--white">
-                            {truncateString(label, 20)}
+                            {truncateString(name, 20)}
                           </p>
                         </td>
                       </tr>
@@ -109,13 +114,17 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
               </div>
               <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {true_volume.map((volume: number, index: number) => {
+                  {true_volume.map(({ total_real_day_volume }, index) => {
                     return (
-                      <tr key={index + volume}>
+                      <tr key={index + total_real_day_volume}>
                         <td height="30" valign="top" align="right">
-                          <p className="typography__display--2">
-                            {volume.toFixed(2)}
-                          </p>
+                          <div className="leaderboard__data-cell">
+                            <Image src={CryptoIcon} alt="Crypto Icon" />
+
+                            <p className="typography__display--2">
+                              {total_real_day_volume.toFixed(2)}
+                            </p>
+                          </div>
                         </td>
                       </tr>
                     );
@@ -124,13 +133,13 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
               </div>
               <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {true_volume_percentage.map(
-                    (percent: number, index: number) => {
+                  {true_volume.map(
+                    ({ total_real_day_volume_percentage }, index: number) => {
                       return (
-                        <tr key={index + percent}>
+                        <tr key={index + total_real_day_volume_percentage}>
                           <td height="30" valign="top" align="right">
                             <p className="typography__display--2 typography__color--green">
-                              {percent}%
+                              {total_real_day_volume_percentage.toFixed(2)}%
                             </p>
                           </td>
                         </tr>
@@ -151,12 +160,12 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
             >
               <div style={{ flex: "1", minWidth: "50%", maxWidth: "50%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {collection_names.map((label: string) => {
+                  {fake_volume.map(({ name }) => {
                     return (
-                      <tr key={label}>
+                      <tr key={name}>
                         <td height="30" valign="top">
                           <p className="typography__display--2 typography__color--white">
-                            {truncateString(label, 20)}
+                            {truncateString(name, 20)}
                           </p>
                         </td>
                       </tr>
@@ -166,28 +175,33 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
               </div>
               <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {fake_volume.map((volume: number, index: number) => {
-                    return (
-                      <tr key={index + volume}>
-                        <td height="30" valign="top" align="right">
-                          <p className="typography__display--2">
-                            {volume.toFixed(2)}
-                          </p>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </table>
-              </div>
-              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {fake_volume_percentage.map(
-                    (percent: number, index: number) => {
+                  {fake_volume.map(
+                    ({ total_day_volume_fake }, index: number) => {
                       return (
-                        <tr key={index + percent}>
+                        <tr key={index + total_day_volume_fake}>
+                          <td height="30" valign="top" align="right">
+                            <div className="leaderboard__data-cell">
+                              <Image src={CryptoIcon} alt="Crypto Icon" />
+                              <p className="typography__display--2">
+                                {total_day_volume_fake.toFixed(2)}
+                              </p>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    }
+                  )}
+                </table>
+              </div>
+              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
+                <table cellPadding={0} cellSpacing={0} width="100%">
+                  {fake_volume.map(
+                    ({ total_fake_day_volume_percentage }, index: number) => {
+                      return (
+                        <tr key={index + total_fake_day_volume_percentage}>
                           <td height="30" valign="top" align="right">
                             <p className="typography__display--2 typography__color--red">
-                              {percent}%
+                              {total_fake_day_volume_percentage.toFixed(2)}%
                             </p>
                           </td>
                         </tr>
@@ -208,12 +222,12 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
             >
               <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {collection_names.map((label: string) => {
+                  {loan_volume.map(({ name }) => {
                     return (
-                      <tr key={label}>
+                      <tr key={name}>
                         <td height="30" valign="top">
                           <p className="typography__display--2 typography__color--white">
-                            {truncateString(label, 20)}
+                            {truncateString(name, 20)}
                           </p>
                         </td>
                       </tr>
@@ -223,17 +237,19 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
               </div>
               <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {loan_volume.map((volume: number, index: number) => {
-                    return (
-                      <tr key={index + volume}>
-                        <td height="30" valign="top" align="right">
-                          <p className="typography__display--2">
-                            {volume.toFixed(2)}
-                          </p>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  {loan_volume.map(
+                    ({ total_day_volume_loan }, index: number) => {
+                      return (
+                        <tr key={index + total_day_volume_loan}>
+                          <td height="30" valign="top" align="right">
+                            <p className="typography__display--2">
+                              {total_day_volume_loan.toFixed(2)}
+                            </p>
+                          </td>
+                        </tr>
+                      );
+                    }
+                  )}
                 </table>
               </div>
             </div>
@@ -248,7 +264,7 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
             >
               <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {collection_names.map((label: string) => {
+                  {/* {collection_names.map((label: string) => {
                     return (
                       <tr key={label}>
                         <td height="30" valign="top">
@@ -258,12 +274,12 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
                         </td>
                       </tr>
                     );
-                  })}
+                  })} */}
                 </table>
               </div>
               <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {revenue.map((amount: number, index: number) => {
+                  {/* {revenue.map((amount: number, index: number) => {
                     return (
                       <tr key={index + amount}>
                         <td height="30" valign="top" align="right">
@@ -273,7 +289,7 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
                         </td>
                       </tr>
                     );
-                  })}
+                  })} */}
                 </table>
               </div>
             </div>
@@ -284,4 +300,4 @@ const Leaderboards: React.FC<LeaderBoardTypes> = ({
   );
 };
 
-export default Leaderboards;
+export default Leaderboard;

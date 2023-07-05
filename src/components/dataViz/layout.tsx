@@ -14,7 +14,12 @@ import { kFormatter } from "@utils/kFormatter";
 import { useSpring, animated } from "@react-spring/web";
 
 // Types
-import type { DatasetsType } from "@/app/types";
+import type {
+  DatasetsType,
+  TrueVolumeTypes,
+  FakeVolumeTypes,
+  LoanVolumeTypes,
+} from "@/app/types";
 interface DataVizLayoutTypes {
   labels: string[];
   trueVolume: any[];
@@ -28,13 +33,9 @@ interface DataVizLayoutTypes {
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
   leaderboard: {
-    names: string[];
-    true_volumes: number[];
-    true_volume_percentage: number[];
-    loan_volume: number[];
-    revenue: number[];
-    fake_volume: number[];
-    fake_volume_percentage: number[];
+    true_volume: TrueVolumeTypes[];
+    fake_volume: FakeVolumeTypes[];
+    loan_volume: LoanVolumeTypes[];
   };
 }
 
@@ -253,7 +254,11 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                       fakeVolumeMovingAverage={fakeVolumeMovingAverage}
                       totalVolumeMovingAverage={totalVolumeMovingAverage}
                       trueVolumeMovingAverage={trueVolumeMovingAverage}
-                      leaderboard={leaderboard}
+                      leaderboard={{
+                        true_volume: leaderboard.true_volume,
+                        fake_volume: leaderboard.fake_volume,
+                        loan_volume: leaderboard.loan_volume,
+                      }}
                     />
                   </animated.div>
                 )}
@@ -272,7 +277,11 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 fakeVolumeMovingAverage={fakeVolumeMovingAverage}
                 totalVolumeMovingAverage={totalVolumeMovingAverage}
                 trueVolumeMovingAverage={trueVolumeMovingAverage}
-                leaderboard={leaderboard}
+                leaderboard={{
+                  true_volume: leaderboard.true_volume,
+                  fake_volume: leaderboard.fake_volume,
+                  loan_volume: leaderboard.loan_volume,
+                }}
               />
             )}
             {/* Row 2 */}
