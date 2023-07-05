@@ -209,6 +209,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
           <ChartDataToggles
             title="Daily True Volume"
             onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
+            active={null}
           />
           <animated.div style={{ ...springs1 }} className="chart__container">
             <DailyTrueVolumeChart
@@ -229,6 +230,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
             <ChartDataToggles
               title={`${renderTimeframeAsString()}`}
               onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
+              active={timeframe}
             />
           </div>
           <animated.div
