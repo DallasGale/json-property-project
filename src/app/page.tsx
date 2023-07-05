@@ -1,6 +1,4 @@
 // Components
-import Image from "next/image";
-import Logo from "../../public/DataBeast.svg";
 import DataVizLayout from "@components/dataViz/layout";
 
 // Constants
@@ -134,10 +132,6 @@ export default async function Home() {
   // }, [labels]);
   return (
     <main className="main-container">
-      <header className="header">
-        <Image src={Logo} alt="Databeast" />
-      </header>
-
       <DataVizLayout
         labels={labels}
         fakeVolume={fakeVolume[0].data}

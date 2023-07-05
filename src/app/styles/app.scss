@@ -5,16 +5,10 @@
 @import "./chart.scss";
 @import "./mantine.scss";
 @import "./utils.scss";
+@import "./header.scss";
 
 body {
-  background-color: $dark-bg-1;
-}
-
-.header {
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
+  background-color: $black;
 }
 
 .content {

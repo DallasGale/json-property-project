@@ -21,6 +21,24 @@ h4 {
   font-weight: 700;
   line-height: 32px;
 }
+.typography__display--3 {
+  color: #757575;
+  font-size: 12px;
+  font-family: Roboto;
+  font-weight: 900;
+  line-height: 16px;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+}
+.typography__display--4 {
+  color: #757575;
+  font-size: 12px;
+  font-family: Roboto;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+}
 
 .typography__label--1 {
   color: #fff;
@@ -79,4 +97,8 @@ h4 {
 
 .typography__color--red {
   color: $accent-red;
+}
+
+.typography__color--highlight {
+  color: $highlight;
 }
