@@ -233,6 +233,8 @@ const CompactView: React.FC<VolumeChartProps> = ({
               active={timeframe}
             />
           </div>
+
+          {/*  */}
           <animated.div
             style={{ ...springs2 }}
             className=" chart__grid-cell--half"
