@@ -128,7 +128,6 @@ const CompactView: React.FC<VolumeChartProps> = ({
   const trendlineTrueVolumeArray = trueVolume.slice(trueVolume.length - 30);
 
   // Timeframe toggle
-  const [timeframe, setTimeframe] = useState(1);
   const renderTrueTotalPercentage = () => {
     let out = "0";
 
@@ -162,6 +161,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
     else return;
   };
 
+  const [timeframe, setTimeframe] = useState(1);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimeframe(value);
@@ -181,9 +181,9 @@ const CompactView: React.FC<VolumeChartProps> = ({
     fakeVolume.slice(fakeVolume.length - 30)
   );
 
-  const [dailyTimeframe, setDailyTimeframe] = useState(1);
+  const [dailyTimeframe, setDailyTimeframe] = useState(30);
   useEffect(() => {
-    if (dailyTimeframe === -30) {
+    if (dailyTimeframe === 30) {
       setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
@@ -191,7 +191,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
         labels.slice(labels.length - 30).map((data: any) => data)
       );
     }
-    if (dailyTimeframe === -7) {
+    if (dailyTimeframe === 7) {
       setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
@@ -200,7 +200,16 @@ const CompactView: React.FC<VolumeChartProps> = ({
       );
     }
 
-    if (dailyTimeframe === null) {
+    if (dailyTimeframe === 1) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 1).map((data: any) => data)
+      );
+    }
+
+    if (dailyTimeframe === 0) {
       setDailyFakeVolumeDataArray(fakeVolume);
       setDailyLoanVolumeDataArray(loanVolume);
       setDailyTrueVolumeDataArray(trueVolume);
@@ -220,7 +229,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
           <ChartDataToggles
             title="Daily True Volume"
             onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
-            active={null}
+            active={dailyTimeframe}
           />
           <animated.div style={{ ...springs1 }} className="chart__container">
             <DailyTrueVolumeChart

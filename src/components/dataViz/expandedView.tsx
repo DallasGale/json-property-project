@@ -139,7 +139,6 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
     },
   });
 
-  const [timespan, setTimespan] = useState(null);
   const [trendlineTimespan, setTrendlineTimespan] = useState(-90);
 
   function handleTrendChartTimeframe(e: React.MouseEvent, value: any) {
@@ -197,9 +196,10 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
     return (trueV / totalV).toFixed(0);
   };
 
+  const [timeframe, setTimeframe] = useState(0);
   function handleDailyTrueVolumeTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
-    setTimespan(value);
+    setTimeframe(value);
   }
   // Daily True
   const [dailyTrueVolumeLabels, setDailyTrueVolumeLabels] = useState(
@@ -215,7 +215,7 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
     fakeVolume.slice(fakeVolume.length - 30)
   );
   useEffect(() => {
-    if (timespan === -30) {
+    if (timeframe === 30) {
       setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
@@ -223,7 +223,7 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
         labels.slice(labels.length - 30).map((data: any) => data)
       );
     }
-    if (timespan === -7) {
+    if (timeframe === 7) {
       setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
       setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
@@ -231,14 +231,22 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
         labels.slice(labels.length - 7).map((data: any) => data)
       );
     }
+    if (timeframe === 1) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 1).map((data: any) => data)
+      );
+    }
 
-    if (timespan === null) {
+    if (timeframe === 0) {
       setDailyFakeVolumeDataArray(fakeVolume);
       setDailyLoanVolumeDataArray(loanVolume);
       setDailyTrueVolumeDataArray(trueVolume);
       setDailyTrueVolumeLabels(labels);
     }
-  }, [timespan]);
+  }, [timeframe]);
   return (
     <div className="chart__grid chart__grid--gap">
       <div className="chart__grid-cell chart__grid-cell--full">
@@ -248,7 +256,7 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
             onClick={(arg1, arg2) =>
               handleDailyTrueVolumeTimeferame(arg1, arg2)
             }
-            active={null}
+            active={timeframe}
           />
           <animated.div style={{ ...springs1 }} className="chart__container">
             <DailyTrueVolumeChart
