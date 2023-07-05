@@ -2,13 +2,6 @@
 import { useEffect, useState } from "react";
 import ExpandedView from "@components/dataViz/expandedView";
 import CompactView from "@components/dataViz/compactView";
-import ChartDataToggles from "@components/toggles/chart_data";
-import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
-import Leaderboards from "@components/leaderboards/leaderboards";
-
-import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
-import { RingProgress, Text } from "@mantine/core";
-import { kFormatter } from "@utils/kFormatter";
 
 // Utils
 import { useSpring, animated } from "@react-spring/web";
