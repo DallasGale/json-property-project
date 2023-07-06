@@ -36,9 +36,9 @@ $gap: 20px;
   flex-wrap: wrap;
   grid-template-columns: 100%;
   @include respond-to(desktop-up) {
-    height: auto;
+    height: 100%;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   &--compact-row {

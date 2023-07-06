@@ -88,9 +88,14 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   return (
     <div className="chart__grid">
       <div className="chart__grid chart__grid--one-col">
-        <animated.h2 style={{ ...springs1 }} className="typography__display--1">
-          Leaderboards
-        </animated.h2>
+        <div className="chart__chart-actions-lockup">
+          <animated.h2
+            style={{ ...springs1 }}
+            className="typography__display--1"
+          >
+            Leaderboards
+          </animated.h2>
+        </div>
       </div>
       <div className="chart__grid chart__grid--four-col">
         <animated.div style={{ ...springs2 }} className="chart__grid-column">

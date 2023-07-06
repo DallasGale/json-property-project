@@ -87,6 +87,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
   toggleView,
   leaderboard,
 }) => {
+  console.log({ realPercentDifference });
   // Animations
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
@@ -233,6 +234,24 @@ const CompactView: React.FC<VolumeChartProps> = ({
     setDailyTimeframe(value);
   }
 
+  const renderKAmount = (timeframe: number) => {
+    let output = "0";
+
+    if (timeframe === 0) {
+      output = `${kFormatter(
+        realPercentDifference.reduce((a: any, b: any) => a + b, 0)
+      )}`;
+    } else {
+      output = `${kFormatter(
+        realPercentDifference
+          .slice(realPercentDifference.length - timeframe)
+          .reduce((a: any, b: any) => a + b, 0)
+      )}`;
+    }
+
+    return output;
+  };
+
   return (
     <>
       <div className="chart__grid chart__grid--two-col">
@@ -316,9 +335,8 @@ const CompactView: React.FC<VolumeChartProps> = ({
                   <div>
                     <p className="typography__label--2">
                       <Image src={CryptoIcon} alt="Crypto Icon" />
-                      {`${kFormatter(
-                        realPercentDifference[realPercentDifference.length - 1]
-                      )}k`}
+
+                      {renderKAmount(timeframe)}
                     </p>
                     <h3 className="typography__label--1">True Volume</h3>
                     <p className="typography__paragraph--1">
