@@ -230,9 +230,10 @@ const CompactView: React.FC<VolumeChartProps> = ({
   }
 
   const ringColor = (value: any) => {
-    if (value < 31) return "rgba(250, 82, 82, 1)";
-    else if (value < 61) return "rgba(253, 126, 20, 1)";
-    else return "rgba(250, 176, 5, 0.3)";
+    console.log({ value });
+    if (value > 0 && value <= 31) return "rgba(250, 82, 82, 1)";
+    else if (value > 31 && value < 61) return "rgba(253, 126, 20, 1)";
+    else return "rgba(250, 176, 5, 1)";
   };
   return (
     <>
@@ -290,7 +291,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
                   <div className="chart__progress-ring">
                     <p className="typography__label--2">
                       <RingProgress
-                        size={108}
+                        size={106}
                         thickness={8}
                         classNames={{
                           root: "progress-ring__root",
