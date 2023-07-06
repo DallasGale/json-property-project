@@ -7,10 +7,9 @@ import navigation from "@/constants/navigation";
 import Tab from "@components/header/tab";
 
 interface HeaderProps {
-  active: string;
   handleTabClick: (e: string) => void;
 }
-const Header: React.FC<HeaderProps> = ({ active, handleTabClick }) => {
+const Header: React.FC<HeaderProps> = ({ handleTabClick }) => {
   const [activeTab, setActiveTab] = useState("market-overview");
 
   return (
