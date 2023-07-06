@@ -124,10 +124,10 @@ const CompactView: React.FC<VolumeChartProps> = ({
 
   // Trendline
   const trendlineVolumeLabels = labels
-    .slice(labels.length - 30)
+    .slice(labels.length - 90)
     .map((data: any) => data);
 
-  const trendlineTrueVolumeArray = trueVolume.slice(trueVolume.length - 30);
+  const trendlineTrueVolumeArray = trueVolume.slice(trueVolume.length - 90);
 
   // Timeframe toggle
   const renderTrueTotalPercentage = () => {
@@ -139,18 +139,18 @@ const CompactView: React.FC<VolumeChartProps> = ({
 
       const totatalledTrueVolume = trueV.reduce((a: any, b: any) => a + b, 0);
       const totatalledTotalVolume = totalV.reduce((a: any, b: any) => a + b, 0);
-      out = (totatalledTrueVolume / totatalledTotalVolume).toFixed(2);
+      out = ((totatalledTrueVolume / totatalledTotalVolume) * 100).toFixed(0);
     } else if (timeframe === 1) {
       const trueV: any = trueVolume[trueVolume.length - timeframe];
       const totalV: any = totalVolume[totalVolume.length - timeframe];
-      out = (trueV / totalV).toFixed(2);
+      out = ((trueV / totalV) * 100).toFixed(0);
     } else {
       const trueV: any = trueVolume.slice(trueVolume.length - timeframe);
       const totalV: any = totalVolume.slice(totalVolume.length - timeframe);
 
       const totatalledTrueVolume = trueV.reduce((a: any, b: any) => a + b, 0);
       const totatalledTotalVolume = totalV.reduce((a: any, b: any) => a + b, 0);
-      out = (totatalledTrueVolume / totatalledTotalVolume).toFixed(2);
+      out = ((totatalledTrueVolume / totatalledTotalVolume) * 100).toFixed(0);
     }
     return out;
   };
@@ -255,64 +255,67 @@ const CompactView: React.FC<VolumeChartProps> = ({
               active={timeframe}
             />
           </div>
-
-          {/*  */}
           <animated.div
             style={{ ...springs2 }}
             className=" chart__grid-cell--half"
           >
             <div className="chart__container">
-              <div className="chart__info">
-                <div className="chart__progress-ring">
-                  <p className="typography__label--2">
-                    <RingProgress
-                      size={110}
-                      thickness={10}
-                      classNames={{
-                        root: "progress-ring__root",
-                      }}
-                      sections={[
-                        {
-                          value: parseFloat(renderTrueTotalPercentage()),
-                          color: "rgba(250, 82, 82, 1)",
-                        },
-                      ]}
-                      label={
-                        <Text
-                          color="white"
-                          weight={700}
-                          align="center"
-                          size="xl"
-                        >
-                          {renderTrueTotalPercentage()}%
-                        </Text>
-                      }
-                    />
-                  </p>
+              <div className="chart__container-body">
+                <div className="chart__info">
+                  <div className="chart__progress-ring">
+                    <p className="typography__label--2">
+                      <RingProgress
+                        size={110}
+                        thickness={10}
+                        classNames={{
+                          root: "progress-ring__root",
+                        }}
+                        sections={[
+                          {
+                            value: parseFloat(renderTrueTotalPercentage()),
+                            color: "rgba(250, 82, 82, 1)",
+                          },
+                        ]}
+                        label={
+                          <Text
+                            color="white"
+                            weight={700}
+                            align="center"
+                            size="xl"
+                          >
+                            {renderTrueTotalPercentage()}%
+                          </Text>
+                        }
+                      />
+                    </p>
+                  </div>
+                  <div>
+                    <p className="typography__label--2">
+                      <Image src={CryptoIcon} alt="Crypto Icon" />
+                      {`${kFormatter(
+                        realPercentDifference[realPercentDifference.length - 1]
+                      )}k`}
+                    </p>
+                    <h3 className="typography__label--1">True Volume</h3>
+                    <p className="typography__paragraph--1">
+                      Excludes fake/artificial volume such as loans, points
+                      farming and wash trading.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="typography__label--2">
-                    <Image src={CryptoIcon} alt="Crypto Icon" />
-                    {`${kFormatter(
-                      realPercentDifference[realPercentDifference.length - 1]
-                    )}k`}
-                  </p>
-                  <h3 className="typography__label--1">True Volume</h3>
-                  <p className="typography__paragraph--1">
-                    Excludes fake/artificial volume such as loans, points
-                    farming and wash trading.
-                  </p>
-                </div>
+
+                <TrueVolumeBarChart
+                  labels={trendlineVolumeLabels}
+                  data={{ true_volume: trendlineTrueVolumeArray }}
+                  trend_timespan={-90}
+                />
               </div>
 
-              <TrueVolumeBarChart
-                labels={trendlineVolumeLabels}
-                data={{ true_volume: trendlineTrueVolumeArray }}
-                trend_timespan={-30}
-              />
-              <p className="typography__label--1 typography__color--white">
-                90 Day Trend
-              </p>
+              <div className="chart__container-footer">
+                <p className="typography__label--3 typography__color--dark-bg-3">
+                  90 Day Trend
+                </p>
+              </div>
             </div>
           </animated.div>
           <animated.div
@@ -320,36 +323,40 @@ const CompactView: React.FC<VolumeChartProps> = ({
             className="chart__grid-cell--half"
           >
             <div className="chart__container">
-              <h3 className="typography__label--1">Total Volume</h3>
-              <p className="typography__paragraph--1">
-                NFT trading volume across all transaction types
-              </p>
-              <div className="chart__legend">
-                <div className="chart__legend-item chart__legend-item--true-volume">
-                  <p className="typography__label--3">Real Volume Trend</p>
+              <div className="chart__container-body">
+                <h3 className="typography__label--1">Total Volume</h3>
+                <p className="typography__paragraph--1">
+                  NFT trading volume across all transaction types
+                </p>
+                <div className="chart__legend">
+                  <div className="chart__legend-item chart__legend-item--true-volume">
+                    <p className="typography__label--3">Real Volume Trend</p>
+                  </div>
+                  <div className="chart__legend-item chart__legend-item--loan-volume">
+                    <p className="typography__label--3">Loan Volume Trend</p>
+                  </div>
+                  <div className="chart__legend-item chart__legend-item--fake-volume">
+                    <p className="typography__label--3">Fake Volume Trend</p>
+                  </div>
+                  <div className="chart__legend-item chart__legend-item--total-volume">
+                    <p className="typography__label--3">Total Volume Trend</p>
+                  </div>
                 </div>
-                <div className="chart__legend-item chart__legend-item--loan-volume">
-                  <p className="typography__label--3">Loan Volume Trend</p>
-                </div>
-                <div className="chart__legend-item chart__legend-item--fake-volume">
-                  <p className="typography__label--3">Fake Volume Trend</p>
-                </div>
-                <div className="chart__legend-item chart__legend-item--total-volume">
-                  <p className="typography__label--3">Total Volume Trend</p>
-                </div>
+                <TotalVolumeAllLineChart
+                  labels={trendlineVolumeLabels}
+                  data={{
+                    true_volume_moving_average: trueVolumeMovingAverage,
+                    loan_volume_moving_average: loanVolumeMovingAverage,
+                    fake_volume_moving_average: fakeVolumeMovingAverage,
+                    total_volume_moving_average: totalVolumeMovingAverage,
+                  }}
+                />
               </div>
-              <TotalVolumeAllLineChart
-                labels={trendlineVolumeLabels}
-                data={{
-                  true_volume_moving_average: trueVolumeMovingAverage,
-                  loan_volume_moving_average: loanVolumeMovingAverage,
-                  fake_volume_moving_average: fakeVolumeMovingAverage,
-                  total_volume_moving_average: totalVolumeMovingAverage,
-                }}
-              />
-              <p className="typography__label--1 typography__color--white">
-                90 Day Trend
-              </p>
+              <div className="chart__container-footer">
+                <p className="typography__label--3  typography__color--dark-bg-3">
+                  90 Day Trend
+                </p>
+              </div>
             </div>
           </animated.div>
         </div>
@@ -360,13 +367,6 @@ const CompactView: React.FC<VolumeChartProps> = ({
         fake_volume={leaderboard.fake_volume}
         loan_volume={leaderboard.loan_volume}
         royalty={leaderboard.royalty}
-        // collection_names={leaderboard.names.slice(0, 5)}
-        // true_volume={leaderboard.true_volumes.slice(0, 5)}
-        // true_volume_percentage={leaderboard.true_volume_percentage.slice(0, 5)}
-        // loan_volume={leaderboard.loan_volume.slice(0, 5)}
-        // revenue={leaderboard.revenue.slice(0, 5)}
-        // fake_volume={leaderboard.fake_volume.slice(0, 5)}
-        // fake_volume_percentage={leaderboard.fake_volume_percentage.slice(0, 5)}
       />
     </div>
   );

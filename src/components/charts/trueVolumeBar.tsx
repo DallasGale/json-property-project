@@ -22,7 +22,7 @@ const TrueVolumeBarChart: React.FC<TrueVolumeChartTypes> = ({
               data: true_volume,
               borderColor: "white",
               backgroundColor: "#5C5F66",
-              barThickness: trend_timespan === null ? 1 : 5,
+              barThickness: 1,
               // @ts-ignore
               trendlineLinear: {
                 colorMin: "rgba(255, 82, 82, 1)",

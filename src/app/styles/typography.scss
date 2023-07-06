@@ -82,7 +82,6 @@ h4 {
   color: #a5a5a5;
   font-size: 10px;
   font-family: Roboto;
-  /* font-weight: 300; */
   line-height: 1.5;
   margin-top: 0;
 }
@@ -101,4 +100,8 @@ h4 {
 
 .typography__color--highlight {
   color: $highlight;
+}
+
+.typography__color--dark-bg-3 {
+  color: $dark-bg-3;
 }
