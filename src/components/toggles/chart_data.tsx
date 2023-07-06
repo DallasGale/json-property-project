@@ -39,6 +39,14 @@ const ChartDataToggles: React.FC<ChartDataTogglesProps> = ({
         </button>
         <button
           className={`button typography__label--1 ${
+            active === 90 ? "active" : ""
+          }`}
+          onClick={(e) => onClick(e, 90)}
+        >
+          90D
+        </button>
+        <button
+          className={`button typography__label--1 ${
             active === 0 ? "active" : ""
           }`}
           onClick={(e) => onClick(e, 0)}

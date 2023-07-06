@@ -19,7 +19,7 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
   },
 }) => {
   return (
-    <div className="chart__bar-wrapper">
+    <div className="chart__bar-wrapper" style={{ height: 140 }}>
       <Line
         data={{
           labels: labels,

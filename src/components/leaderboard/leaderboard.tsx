@@ -87,16 +87,14 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
 
   return (
     <div className="chart__grid">
-      <div className="chart__grid-cell--full">
+      <div className="chart__grid chart__grid--one-col">
         <animated.h2 style={{ ...springs1 }} className="typography__display--1">
           Leaderboards
         </animated.h2>
-
-        <div className="chart__grid chart__grid--leaderboard">
-          <animated.div
-            style={{ ...springs2 }}
-            className="chart__container chart__container--quarter u-justifyStart"
-          >
+      </div>
+      <div className="chart__grid chart__grid--four-col">
+        <animated.div style={{ ...springs2 }} className="chart__grid-column">
+          <div className="chart__container">
             <p className="typography__label--4">True Volume</p>
             <div
               style={{ display: "flex", flexDirection: "row", width: "100%" }}
@@ -152,11 +150,10 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                 </table>
               </div>
             </div>
-          </animated.div>
-          <animated.div
-            style={{ ...springs3 }}
-            className="chart__container chart__container--quarter u-justifyStart"
-          >
+          </div>
+        </animated.div>
+        <animated.div style={{ ...springs3 }} className="chart__grid-column">
+          <div className="chart__container">
             <p className="typography__label--4">Fake Volume</p>
             <div
               style={{ display: "flex", flexDirection: "row", width: "100%" }}
@@ -214,11 +211,10 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                 </table>
               </div>
             </div>
-          </animated.div>
-          <animated.div
-            style={{ ...springs4 }}
-            className="chart__container chart__container--quarter u-justifyStart"
-          >
+          </div>
+        </animated.div>
+        <animated.div style={{ ...springs4 }} className="chart__grid-column">
+          <div className="chart__container">
             <p className="typography__label--4">Loans</p>
             <div
               style={{ display: "flex", flexDirection: "row", width: "100%" }}
@@ -259,11 +255,10 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                 </table>
               </div>
             </div>
-          </animated.div>
-          <animated.div
-            style={{ ...springs5 }}
-            className="chart__container chart__container--quarter u-justifyStart"
-          >
+          </div>
+        </animated.div>
+        <animated.div style={{ ...springs5 }} className="chart__grid-column">
+          <div className="chart__container">
             <p className="typography__label--4">Revenue</p>
             <div
               style={{ display: "flex", flexDirection: "row", width: "100%" }}
@@ -302,8 +297,8 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                 </table>
               </div>
             </div>
-          </animated.div>
-        </div>
+          </div>
+        </animated.div>
       </div>
     </div>
   );

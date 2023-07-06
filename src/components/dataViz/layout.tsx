@@ -68,41 +68,29 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
       <Header handleTabClick={(e) => setActiveTab(e)} />
       <div className="content">
         <section className="chart__wrapper">
-          <div className="chart__grid">
-            <animated.div
-              style={{ ...springs }}
-              className="chart__grid-cell--full"
-            >
-              <div className="chart__grid chart__grid--gap">
-                {activeTab == navigation[0].id && (
-                  <animated.div
-                    style={{ ...springs }}
-                    className="chart__grid-cell chart__grid-cell--full"
-                  >
-                    <CompactView
-                      toggleView={toggleView}
-                      labels={labels}
-                      trueVolume={trueVolume}
-                      totalVolume={totalVolume}
-                      fakeVolume={fakeVolume}
-                      realPercentDifference={realPercentDifference}
-                      loanVolume={loanVolume}
-                      leaderboardDatasets={leaderboardDatasets}
-                      loanVolumeMovingAverage={loanVolumeMovingAverage}
-                      fakeVolumeMovingAverage={fakeVolumeMovingAverage}
-                      totalVolumeMovingAverage={totalVolumeMovingAverage}
-                      trueVolumeMovingAverage={trueVolumeMovingAverage}
-                      leaderboard={{
-                        true_volume: leaderboard.true_volume,
-                        fake_volume: leaderboard.fake_volume,
-                        loan_volume: leaderboard.loan_volume,
-                        royalty: leaderboard.royalty,
-                      }}
-                    />
-                  </animated.div>
-                )}
-              </div>
-            </animated.div>
+          <>
+            {activeTab == navigation[0].id && (
+              <CompactView
+                toggleView={toggleView}
+                labels={labels}
+                trueVolume={trueVolume}
+                totalVolume={totalVolume}
+                fakeVolume={fakeVolume}
+                realPercentDifference={realPercentDifference}
+                loanVolume={loanVolume}
+                leaderboardDatasets={leaderboardDatasets}
+                loanVolumeMovingAverage={loanVolumeMovingAverage}
+                fakeVolumeMovingAverage={fakeVolumeMovingAverage}
+                totalVolumeMovingAverage={totalVolumeMovingAverage}
+                trueVolumeMovingAverage={trueVolumeMovingAverage}
+                leaderboard={{
+                  true_volume: leaderboard.true_volume,
+                  fake_volume: leaderboard.fake_volume,
+                  loan_volume: leaderboard.loan_volume,
+                  royalty: leaderboard.royalty,
+                }}
+              />
+            )}
             {activeTab == navigation[1].id && (
               <ExpandedView
                 labels={labels}
@@ -124,7 +112,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 }}
               />
             )}
-          </div>
+          </>
         </section>
       </div>
     </>

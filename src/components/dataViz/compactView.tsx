@@ -160,6 +160,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
     else if (timeframe === 1) return "Last 24 Hours";
     else if (timeframe === 7) return "Last 7 Days";
     else if (timeframe === 30) return "Last 30 Days";
+    else if (timeframe === 90) return "Last 90 Days";
     else return;
   };
 
@@ -171,20 +172,28 @@ const CompactView: React.FC<VolumeChartProps> = ({
 
   // Daily True
   const [dailyTrueVolumeLabels, setDailyTrueVolumeLabels] = useState(
-    labels.slice(labels.length - 30).map((data: any) => data)
+    labels.slice(labels.length - 90).map((data: any) => data)
   );
   const [dailyTrueVolumeDataArray, setDailyTrueVolumeDataArray] = useState(
-    trueVolume.slice(trueVolume.length - 30)
+    trueVolume.slice(trueVolume.length - 90)
   );
   const [dailyLoanVolumeDataArray, setDailyLoanVolumeDataArray] = useState(
-    loanVolume.slice(loanVolume.length - 30)
+    loanVolume.slice(loanVolume.length - 90)
   );
   const [dailyFakeVolumeDataArray, setDailyFakeVolumeDataArray] = useState(
-    fakeVolume.slice(fakeVolume.length - 30)
+    fakeVolume.slice(fakeVolume.length - 90)
   );
 
-  const [dailyTimeframe, setDailyTimeframe] = useState(30);
+  const [dailyTimeframe, setDailyTimeframe] = useState(90);
   useEffect(() => {
+    if (dailyTimeframe === 90) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 90));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 90));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 90));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 90).map((data: any) => data)
+      );
+    }
     if (dailyTimeframe === 30) {
       setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
@@ -225,41 +234,56 @@ const CompactView: React.FC<VolumeChartProps> = ({
   }
 
   return (
-    <div className="chart__grid chart__grid--gap">
-      <div className="chart__grid-cell chart__grid-cell--half">
-        <div className="chart__chart-actions-lockup">
-          <ChartDataToggles
-            title="Daily True Volume"
-            onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
-            active={dailyTimeframe}
-          />
-          <animated.div style={{ ...springs1 }} className="chart__container">
-            <DailyTrueVolumeChart
-              labels={dailyTrueVolumeLabels}
-              data={{
-                true_volume: dailyTrueVolumeDataArray,
-                loan_volume: dailyLoanVolumeDataArray,
-                fake_volume: dailyFakeVolumeDataArray,
-              }}
-            />
-          </animated.div>
-        </div>
-      </div>
-
-      <div className="chart__grid-cell chart__grid-cell--half">
-        <div className="chart__grid chart__grid--gap">
-          <div className="chart__chart-actions-lockup">
-            <ChartDataToggles
-              title={`${renderTimeframeAsString()}`}
-              onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
-              active={timeframe}
-            />
-          </div>
+    <>
+      <div className="chart__grid chart__grid--two-col">
+        {/* Col 1 */}
+        <div className="chart__grid--row">
           <animated.div
-            style={{ ...springs2 }}
-            className=" chart__grid-cell--half"
+            style={{ ...springs1 }}
+            className="chart__grid chart__grid--one-col"
+          >
+            <div className="chart__chart-actions-lockup">
+              <ChartDataToggles
+                title="Daily True Volume"
+                onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
+                active={dailyTimeframe}
+              />
+            </div>
+          </animated.div>
+          <animated.div
+            style={{ ...springs1 }}
+            className="chart__grid chart__grid--one-col"
           >
             <div className="chart__container">
+              <DailyTrueVolumeChart
+                labels={dailyTrueVolumeLabels}
+                data={{
+                  true_volume: dailyTrueVolumeDataArray,
+                  loan_volume: dailyLoanVolumeDataArray,
+                  fake_volume: dailyFakeVolumeDataArray,
+                }}
+              />
+            </div>
+          </animated.div>
+        </div>
+
+        {/* Col 2 */}
+        <div className="chart__grid--row">
+          <animated.div
+            style={{ ...springs1 }}
+            className="chart__grid chart__grid--one-col"
+          >
+            <div className="chart__chart-actions-lockup">
+              <ChartDataToggles
+                title={`${renderTimeframeAsString()}`}
+                onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
+                active={timeframe}
+              />
+            </div>
+          </animated.div>
+
+          <div className="chart__grid chart__grid--two-col">
+            <animated.div style={{ ...springs2 }} className="chart__container">
               <div className="chart__container-body">
                 <div className="chart__info">
                   <div className="chart__progress-ring">
@@ -316,13 +340,10 @@ const CompactView: React.FC<VolumeChartProps> = ({
                   90 Day Trend
                 </p>
               </div>
-            </div>
-          </animated.div>
-          <animated.div
-            style={{ ...springs3 }}
-            className="chart__grid-cell--half"
-          >
-            <div className="chart__container">
+              {/* </div> */}
+            </animated.div>
+
+            <animated.div style={{ ...springs3 }} className="chart__container">
               <div className="chart__container-body">
                 <h3 className="typography__label--1">Total Volume</h3>
                 <p className="typography__paragraph--1">
@@ -357,8 +378,8 @@ const CompactView: React.FC<VolumeChartProps> = ({
                   90 Day Trend
                 </p>
               </div>
-            </div>
-          </animated.div>
+            </animated.div>
+          </div>
         </div>
       </div>
 
@@ -368,7 +389,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
         loan_volume={leaderboard.loan_volume}
         royalty={leaderboard.royalty}
       />
-    </div>
+    </>
   );
 };
 
