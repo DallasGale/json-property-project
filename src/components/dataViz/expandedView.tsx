@@ -143,27 +143,31 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
 
   const [trendlineTimespan, setTrendlineTimespan] = useState(-90);
 
-  function handleTrendChartTimeframe(e: React.MouseEvent, value: any) {
-    e.preventDefault();
-    setTrendlineTimespan(value);
-  }
-
   // Trendline
   const [trendlineVolumeLabels, setTrendlineVolumeLabels] = useState(
-    labels.slice(labels.length - 30).map((data: any) => data)
+    labels.slice(labels.length - 90).map((data: any) => data)
   );
   const [trendlineTrueVolumeArray, setTrendlineTrueVolumeArray] = useState(
-    trueVolume.slice(trueVolume.length - 30)
+    trueVolume.slice(trueVolume.length - 90)
   );
   const [trendlineTotalVolumeArray, setTrendlineTotalVolumeArray] = useState(
-    totalVolume.slice(totalVolume.length - 30)
+    totalVolume.slice(totalVolume.length - 90)
   );
   const [trendlineLoanVolumeDataArray, setTrendlineLoanVolumeDataArray] =
-    useState(loanVolume.slice(loanVolume.length - 30));
+    useState(loanVolume.slice(loanVolume.length - 90));
   const [trendlineFakeVolumeDataArray, setTrendlineFakeVolumeDataArray] =
-    useState(fakeVolume.slice(fakeVolume.length - 30));
+    useState(fakeVolume.slice(fakeVolume.length - 90));
 
   useEffect(() => {
+    if (trendlineTimespan === -90) {
+      setTrendlineLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 90));
+      setTrendlineTrueVolumeArray(trueVolume.slice(trueVolume.length - 90));
+      setTrendlineTotalVolumeArray(totalVolume.slice(totalVolume.length - 90));
+      setTrendlineFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 90));
+      setTrendlineVolumeLabels(
+        labels.slice(labels.length - 90).map((data: any) => data)
+      );
+    }
     if (trendlineTimespan === -30) {
       setTrendlineLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
       setTrendlineTrueVolumeArray(trueVolume.slice(trueVolume.length - 30));
@@ -192,31 +196,33 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
     }
   }, [trendlineTimespan]);
 
-  const renderTrueTotalPercentage = () => {
-    const trueV: any = trueVolume[trueVolume.length - 1];
-    const totalV: any = totalVolume[totalVolume.length - 1];
-    return (trueV / totalV).toFixed(0);
-  };
-
-  const [timeframe, setTimeframe] = useState(0);
+  const [timeframe, setTimeframe] = useState(90);
   function handleDailyTrueVolumeTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimeframe(value);
   }
   // Daily True
   const [dailyTrueVolumeLabels, setDailyTrueVolumeLabels] = useState(
-    labels.slice(labels.length - 30).map((data: any) => data)
+    labels.slice(labels.length - 90).map((data: any) => data)
   );
   const [dailyTrueVolumeDataArray, setDailyTrueVolumeDataArray] = useState(
-    trueVolume.slice(trueVolume.length - 30)
+    trueVolume.slice(trueVolume.length - 90)
   );
   const [dailyLoanVolumeDataArray, setDailyLoanVolumeDataArray] = useState(
-    loanVolume.slice(loanVolume.length - 30)
+    loanVolume.slice(loanVolume.length - 90)
   );
   const [dailyFakeVolumeDataArray, setDailyFakeVolumeDataArray] = useState(
-    fakeVolume.slice(fakeVolume.length - 30)
+    fakeVolume.slice(fakeVolume.length - 90)
   );
   useEffect(() => {
+    if (timeframe === 90) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 90));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 90));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 90));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 90).map((data: any) => data)
+      );
+    }
     if (timeframe === 30) {
       setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
@@ -250,17 +256,27 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
     }
   }, [timeframe]);
   return (
-    <div className="chart__grid chart__grid--gap">
-      <div className="chart__grid-cell chart__grid-cell--full">
-        <div className="chart__chart-actions-lockup">
-          <ChartDataToggles
-            title="Daily True Volume"
-            onClick={(arg1, arg2) =>
-              handleDailyTrueVolumeTimeferame(arg1, arg2)
-            }
-            active={timeframe}
-          />
-          <animated.div style={{ ...springs1 }} className="chart__container">
+    <div className="chart__grid chart__grid--one-col">
+      <div className="chart__grid--row">
+        <animated.div
+          style={{ ...springs1 }}
+          className="chart__grid chart__grid--one-col"
+        >
+          <div className="chart__chart-actions-lockup">
+            <ChartDataToggles
+              title="Daily True Volume"
+              onClick={(arg1, arg2) =>
+                handleDailyTrueVolumeTimeferame(arg1, arg2)
+              }
+              active={timeframe}
+            />
+          </div>
+        </animated.div>
+        <animated.div
+          style={{ ...springs1 }}
+          className="chart__grid chart__grid--one-col"
+        >
+          <div className="chart__container">
             <DailyTrueVolumeChart
               labels={dailyTrueVolumeLabels}
               data={{
@@ -269,125 +285,128 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
                 fake_volume: dailyFakeVolumeDataArray,
               }}
             />
-          </animated.div>
-        </div>
+          </div>
+        </animated.div>
       </div>
-      <animated.div
-        style={{ ...springs2 }}
-        className="chart__grid-cell chart__grid-cell--half"
-      >
-        <div className="chart__container">
-          <h3 className="typography__label--1">Total Volume</h3>
-          <p className="typography__paragraph--1">
-            NFT trading volume across all transaction types
-          </p>
 
-          <div className="chart__legend">
-            <div className="chart__legend-item chart__legend-item--true-volume">
-              <p className="typography__label--3">Real Volume</p>
+      <div className="chart__grid chart__grid--two-col">
+        <animated.div
+          style={{ ...springs2 }}
+          className="chart__grid chart__grid--one-col"
+        >
+          <div className="chart__container">
+            <h3 className="typography__label--1">Total Volume</h3>
+            <p className="typography__paragraph--1">
+              NFT trading volume across all transaction types
+            </p>
+
+            <div className="chart__legend">
+              <div className="chart__legend-item chart__legend-item--true-volume">
+                <p className="typography__label--3">Real Volume</p>
+              </div>
+              <div className="chart__legend-item chart__legend-item--trend">
+                <p className="typography__label--3">Trend</p>
+              </div>
             </div>
-            <div className="chart__legend-item chart__legend-item--trend">
-              <p className="typography__label--3">Trend</p>
-            </div>
+
+            <TrueVolumeLineChart
+              labels={trendlineVolumeLabels}
+              data={{
+                true_volume: trendlineTrueVolumeArray,
+                true_volume_moving_average: loanVolumeMovingAverage,
+              }}
+              trend_timespan={trendlineTimespan}
+            />
           </div>
+        </animated.div>
+        <animated.div
+          style={{ ...springs3 }}
+          className="chart__grid chart__grid--one-col"
+        >
+          <div className="chart__container">
+            <h3 className="typography__label--1">Total Volume</h3>
+            <p className="typography__paragraph--1">
+              NFT trading volume across all transaction types
+            </p>
 
-          <TrueVolumeLineChart
-            labels={trendlineVolumeLabels}
-            data={{
-              true_volume: trendlineTrueVolumeArray,
-              true_volume_moving_average: loanVolumeMovingAverage,
-            }}
-            trend_timespan={trendlineTimespan}
-          />
-        </div>
-      </animated.div>
-      <animated.div
-        style={{ ...springs3 }}
-        className="chart__grid-cell chart__grid-cell--half"
-      >
-        <div className="chart__container">
-          <h3 className="typography__label--1">Total Volume</h3>
-          <p className="typography__paragraph--1">
-            NFT trading volume across all transaction types
-          </p>
+            <div className="chart__legend">
+              <div className="chart__legend-item chart__legend-item--primary">
+                <p className="typography__label--3">Loan Volume</p>
+              </div>
+              <div className="chart__legend-item chart__legend-item--trend">
+                <p className="typography__label--3">Trend</p>
+              </div>
+            </div>
 
-          <div className="chart__legend">
-            <div className="chart__legend-item chart__legend-item--primary">
-              <p className="typography__label--3">Loan Volume</p>
-            </div>
-            <div className="chart__legend-item chart__legend-item--trend">
-              <p className="typography__label--3">Trend</p>
-            </div>
+            <LoanVolumeChart
+              labels={trendlineVolumeLabels}
+              data={{
+                loan_volume: trendlineLoanVolumeDataArray,
+                loan_volume_moving_average: loanVolumeMovingAverage,
+              }}
+              trend_timespan={trendlineTimespan}
+            />
           </div>
+        </animated.div>
+        <animated.div
+          style={{ ...springs4 }}
+          className="chart__grid chart__grid--one-col"
+        >
+          <div className="chart__container">
+            <h3 className="typography__label--1">Total Volume</h3>
+            <p className="typography__paragraph--1">
+              NFT trading volume across all transaction types
+            </p>
 
-          <LoanVolumeChart
-            labels={trendlineVolumeLabels}
-            data={{
-              loan_volume: trendlineLoanVolumeDataArray,
-              loan_volume_moving_average: loanVolumeMovingAverage,
-            }}
-            trend_timespan={trendlineTimespan}
-          />
-        </div>
-      </animated.div>
-      <animated.div
-        style={{ ...springs4 }}
-        className="chart__grid-cell chart__grid-cell--half"
-      >
-        <div className="chart__container">
-          <h3 className="typography__label--1">Total Volume</h3>
-          <p className="typography__paragraph--1">
-            NFT trading volume across all transaction types
-          </p>
+            <div className="chart__legend">
+              <div className="chart__legend-item chart__legend-item--secondary">
+                <p className="typography__label--3">Fake Volume (Inorganic)</p>
+              </div>
+              <div className="chart__legend-item chart__legend-item--trend">
+                <p className="typography__label--3">Trend</p>
+              </div>
+            </div>
 
-          <div className="chart__legend">
-            <div className="chart__legend-item chart__legend-item--secondary">
-              <p className="typography__label--3">Fake Volume (Inorganic)</p>
-            </div>
-            <div className="chart__legend-item chart__legend-item--trend">
-              <p className="typography__label--3">Trend</p>
-            </div>
+            <FakeVolumeChart
+              labels={trendlineVolumeLabels}
+              data={{
+                fake_volume: trendlineFakeVolumeDataArray,
+                fake_volume_moving_average: fakeVolumeMovingAverage,
+              }}
+              trend_timespan={trendlineTimespan}
+            />
           </div>
+        </animated.div>
+        <animated.div
+          style={{ ...springs5 }}
+          className="chart__grid chart__grid--one-col"
+        >
+          <div className="chart__container">
+            <h3 className="typography__label--1">Total Volume</h3>
+            <p className="typography__paragraph--1">
+              NFT trading volume across all transaction types
+            </p>
 
-          <FakeVolumeChart
-            labels={trendlineVolumeLabels}
-            data={{
-              fake_volume: trendlineFakeVolumeDataArray,
-              fake_volume_moving_average: fakeVolumeMovingAverage,
-            }}
-            trend_timespan={trendlineTimespan}
-          />
-        </div>
-      </animated.div>
-      <animated.div
-        style={{ ...springs5 }}
-        className="chart__grid-cell chart__grid-cell--half"
-      >
-        <div className="chart__container">
-          <h3 className="typography__label--1">Total Volume</h3>
-          <p className="typography__paragraph--1">
-            NFT trading volume across all transaction types
-          </p>
+            <div className="chart__legend">
+              <div className="chart__legend-item chart__legend-item--tertiary">
+                <p className="typography__label--3">Total Volume</p>
+              </div>
+              <div className="chart__legend-item chart__legend-item--trend">
+                <p className="typography__label--3">Trend</p>
+              </div>
+            </div>
 
-          <div className="chart__legend">
-            <div className="chart__legend-item chart__legend-item--tertiary">
-              <p className="typography__label--3">Total Volume</p>
-            </div>
-            <div className="chart__legend-item chart__legend-item--trend">
-              <p className="typography__label--3">Trend</p>
-            </div>
+            <TotalVolumeChart
+              labels={trendlineVolumeLabels}
+              data={{
+                total_volume: trendlineTotalVolumeArray,
+                total_volume_moving_average: totalVolumeMovingAverage,
+              }}
+              trend_timespan={trendlineTimespan}
+            />
           </div>
-
-          <TotalVolumeChart
-            labels={trendlineVolumeLabels}
-            data={{
-              total_volume: trendlineTotalVolumeArray,
-              total_volume_moving_average: totalVolumeMovingAverage,
-            }}
-            trend_timespan={trendlineTimespan}
-          />
-        </div>
-      </animated.div>
+        </animated.div>
+      </div>
       <Leaderboard
         true_volume={leaderboard.true_volume}
         fake_volume={leaderboard.fake_volume}
