@@ -15,7 +15,7 @@ const DailyTrueVolumeChart: React.FC<DailyTrueVolumeTypes> = ({
   data: { true_volume, loan_volume, fake_volume },
 }) => {
   return (
-    <div className="chart__bar-wrapper">
+    <div className="chart__bar-wrapper" style={{ height: 300 }}>
       <Bar
         data={{
           labels: labels,

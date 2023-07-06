@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 // Utils
 import Image from "next/image";
 import { useSpring, animated, easings } from "@react-spring/web";
-import { kFormatter } from "@utils/kFormatter";
+import calculateVolumeTotal from "@utils/calculateVolumeTotal";
 import annotationPlugin from "chartjs-plugin-annotation";
 import chartTrendline from "chartjs-plugin-trendline";
 import {
@@ -234,24 +234,6 @@ const CompactView: React.FC<VolumeChartProps> = ({
     setDailyTimeframe(value);
   }
 
-  const renderKAmount = (timeframe: number) => {
-    let output = "0";
-
-    if (timeframe === 0) {
-      output = `${kFormatter(
-        realPercentDifference.reduce((a: any, b: any) => a + b, 0)
-      )}`;
-    } else {
-      output = `${kFormatter(
-        realPercentDifference
-          .slice(realPercentDifference.length - timeframe)
-          .reduce((a: any, b: any) => a + b, 0)
-      )}`;
-    }
-
-    return output;
-  };
-
   return (
     <>
       <div className="chart__grid chart__grid--two-col">
@@ -336,7 +318,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
                     <p className="typography__label--2">
                       <Image src={CryptoIcon} alt="Crypto Icon" />
 
-                      {renderKAmount(timeframe)}
+                      {calculateVolumeTotal(timeframe, realPercentDifference)}
                     </p>
                     <h3 className="typography__label--1">True Volume</h3>
                     <p className="typography__paragraph--1">
