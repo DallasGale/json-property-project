@@ -27,7 +27,7 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
             {
               label: "Loan Volume Trend",
               data: loan_volume_moving_average.slice(
-                loan_volume_moving_average.length - 30
+                loan_volume_moving_average.length - 90
               ),
               borderColor: "rgba(250, 176, 5, 1)",
               backgroundColor: "rgba(250, 176, 5, 1)",
@@ -37,7 +37,7 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
             {
               label: "Real Volume Trend",
               data: true_volume_moving_average.slice(
-                true_volume_moving_average.length - 30
+                true_volume_moving_average.length - 90
               ),
               borderColor: "rgb(64, 192, 87)",
               backgroundColor: "rgb(64, 192, 87)",
@@ -47,7 +47,7 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
             {
               label: "Fake Volume Trend",
               data: fake_volume_moving_average.slice(
-                fake_volume_moving_average.length - 30
+                fake_volume_moving_average.length - 90
               ),
               borderColor: "rgba(253, 126, 20, 1)",
               backgroundColor: "rgba(253, 126, 20, 1)",
@@ -57,7 +57,7 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
             {
               label: "Total Volume Trend",
               data: total_volume_moving_average.slice(
-                total_volume_moving_average.length - 30
+                total_volume_moving_average.length - 90
               ),
               borderColor: "rgba(250, 82, 82, 1)",
               backgroundColor: "rgba(250, 82, 82, 1)",
