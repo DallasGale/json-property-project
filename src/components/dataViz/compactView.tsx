@@ -3,9 +3,7 @@
 import { useEffect, useState } from "react";
 
 // Utils
-import Image from "next/image";
 import { useSpring, animated, easings } from "@react-spring/web";
-import calculateVolumeTotal from "@utils/calculateVolumeTotal";
 import annotationPlugin from "chartjs-plugin-annotation";
 import chartTrendline from "chartjs-plugin-trendline";
 import {
@@ -33,13 +31,10 @@ import type {
 import { RingProgress, Text } from "@mantine/core";
 import TotalVolumeAllLineChart from "@components/charts/totalVolumeAllLine";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
-
+import DynamicVolumeNumber from "@components/dataViz/dynamicVolumeNumber/dynamicVolumeNumber";
 import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
-
-// Assets
-import CryptoIcon from "@assets/icons/crypto.svg";
 
 ChartJS.register(
   CategoryScale,
@@ -234,6 +229,11 @@ const CompactView: React.FC<VolumeChartProps> = ({
     setDailyTimeframe(value);
   }
 
+  const ringColor = (value: any) => {
+    if (value < 31) return "rgba(250, 82, 82, 1)";
+    else if (value < 61) return "rgba(253, 126, 20, 1)";
+    else return "rgba(250, 176, 5, 0.3)";
+  };
   return (
     <>
       <div className="chart__grid chart__grid--two-col">
@@ -290,15 +290,15 @@ const CompactView: React.FC<VolumeChartProps> = ({
                   <div className="chart__progress-ring">
                     <p className="typography__label--2">
                       <RingProgress
-                        size={110}
-                        thickness={10}
+                        size={108}
+                        thickness={8}
                         classNames={{
                           root: "progress-ring__root",
                         }}
                         sections={[
                           {
                             value: parseFloat(renderTrueTotalPercentage()),
-                            color: "rgba(250, 82, 82, 1)",
+                            color: ringColor(renderTrueTotalPercentage()),
                           },
                         ]}
                         label={
@@ -315,11 +315,10 @@ const CompactView: React.FC<VolumeChartProps> = ({
                     </p>
                   </div>
                   <div>
-                    <p className="typography__label--2">
-                      <Image src={CryptoIcon} alt="Crypto Icon" />
-
-                      {calculateVolumeTotal(timeframe, realPercentDifference)}
-                    </p>
+                    <DynamicVolumeNumber
+                      timeframe={timeframe}
+                      volumes={realPercentDifference}
+                    />
                     <h3 className="typography__label--1">True Volume</h3>
                     <p className="typography__paragraph--1">
                       Excludes fake/artificial volume such as loans, points
@@ -345,23 +344,27 @@ const CompactView: React.FC<VolumeChartProps> = ({
 
             <animated.div style={{ ...springs3 }} className="chart__container">
               <div className="chart__container-body">
+                <DynamicVolumeNumber
+                  timeframe={timeframe}
+                  volumes={realPercentDifference}
+                />
                 <h3 className="typography__label--1">Total Volume</h3>
                 <p className="typography__paragraph--1">
                   NFT trading volume across all transaction types
                 </p>
                 <div className="chart__legend">
-                  <div className="chart__legend-item chart__legend-item--true-volume">
+                  {/* <div className="chart__legend-item chart__legend-item--true-volume">
                     <p className="typography__label--3">Real Volume Trend</p>
-                  </div>
+                  </div> */}
                   <div className="chart__legend-item chart__legend-item--loan-volume">
                     <p className="typography__label--3">Loan Volume Trend</p>
                   </div>
                   <div className="chart__legend-item chart__legend-item--fake-volume">
                     <p className="typography__label--3">Fake Volume Trend</p>
                   </div>
-                  <div className="chart__legend-item chart__legend-item--total-volume">
+                  {/* <div className="chart__legend-item chart__legend-item--total-volume">
                     <p className="typography__label--3">Total Volume Trend</p>
-                  </div>
+                  </div> */}
                 </div>
                 <TotalVolumeAllLineChart
                   labels={trendlineVolumeLabels}

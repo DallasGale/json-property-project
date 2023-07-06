@@ -34,16 +34,16 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
               pointRadius: 0,
               borderWidth: 1,
             },
-            {
-              label: "Real Volume Trend",
-              data: true_volume_moving_average.slice(
-                true_volume_moving_average.length - 90
-              ),
-              borderColor: "rgb(64, 192, 87)",
-              backgroundColor: "rgb(64, 192, 87)",
-              pointRadius: 0,
-              borderWidth: 1,
-            },
+            // {
+            //   label: "Real Volume Trend",
+            //   data: true_volume_moving_average.slice(
+            //     true_volume_moving_average.length - 90
+            //   ),
+            //   borderColor: "rgb(64, 192, 87)",
+            //   backgroundColor: "rgb(64, 192, 87)",
+            //   pointRadius: 0,
+            //   borderWidth: 1,
+            // },
             {
               label: "Fake Volume Trend",
               data: fake_volume_moving_average.slice(
@@ -54,16 +54,16 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
               pointRadius: 0,
               borderWidth: 1,
             },
-            {
-              label: "Total Volume Trend",
-              data: total_volume_moving_average.slice(
-                total_volume_moving_average.length - 90
-              ),
-              borderColor: "rgba(250, 82, 82, 1)",
-              backgroundColor: "rgba(250, 82, 82, 1)",
-              pointRadius: 0,
-              borderWidth: 1,
-            },
+            // {
+            //   label: "Total Volume Trend",
+            //   data: total_volume_moving_average.slice(
+            //     total_volume_moving_average.length - 90
+            //   ),
+            //   borderColor: "rgba(250, 82, 82, 1)",
+            //   backgroundColor: "rgba(250, 82, 82, 1)",
+            //   pointRadius: 0,
+            //   borderWidth: 1,
+            // },
           ],
         }}
         options={{
