@@ -2,7 +2,7 @@
 import DataVizLayout from "@components/dataViz/layout";
 
 // Constants
-import monthNames from "../constants";
+import months from "@constants/months";
 
 // API
 import endpoints from "@api/endpoints";
@@ -40,7 +40,7 @@ export default async function Home() {
       const fullDate = new Date(date);
       const month = fullDate.getMonth();
       const day = fullDate.getDate();
-      const completeDate = `${monthNames[month]} ${day}`;
+      const completeDate = `${months[month]} ${day}`;
       newDates.push(completeDate);
     });
     return newDates;

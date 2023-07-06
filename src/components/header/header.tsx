@@ -1,6 +1,13 @@
+// Components
 import Image from "next/image";
 import Logo from "@assets/DataBeast.svg";
-const Header = () => {
+import navigation from "@/constants/navigation";
+import Tab from "@components/header/tab";
+
+interface HeaderProps {
+  handleTabClick: (e: string) => void;
+}
+const Header: React.FC<HeaderProps> = ({ handleTabClick }) => {
   return (
     <header className="header">
       <div className="header__row">
@@ -9,14 +16,20 @@ const Header = () => {
           Analytics
         </p>
         <p className="typography__display--3 typography__color--white">
-          {" "}
           Off-chain insights
         </p>
       </div>
       <div className="header__row">
-        <p className="typography__display--4">Market Overview</p>
-        <p className="typography__display--4">Marketplaces</p>
-        <p className="typography__display--4">Interesting</p>
+        {navigation.map((nav) => {
+          return (
+            <Tab
+              // active={}
+              key={nav.id}
+              {...nav}
+              onClick={(e) => handleTabClick(e)}
+            />
+          );
+        })}
       </div>
     </header>
   );

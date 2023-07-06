@@ -1,0 +1,13 @@
+.tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  padding: 0 0 10px 0;
+  &.active,
+  &:focus,
+  &:active {
+    border-bottom: 2px solid $highlight;
+    transition: all 0.25s ease;
+  }
+}
