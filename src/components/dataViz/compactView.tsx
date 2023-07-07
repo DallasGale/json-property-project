@@ -11,12 +11,15 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
+  ArcElement,
   LineElement,
   Title,
   PointElement,
   Tooltip,
   Legend,
 } from "chart.js";
+
+import { Doughnut } from "react-chartjs-2";
 
 // Types
 import type {
@@ -42,6 +45,7 @@ ChartJS.register(
   LineElement,
   BarElement,
   PointElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend,
@@ -235,6 +239,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
     else if (value > 31 && value < 61) return "rgba(253, 126, 20, 1)";
     else return "rgba(250, 176, 5, 1)";
   };
+
   return (
     <>
       <div className="chart__grid chart__grid--two-col">
@@ -289,30 +294,34 @@ const CompactView: React.FC<VolumeChartProps> = ({
               <div className="chart__container-body">
                 <div className="chart__info">
                   <div className="chart__progress-ring">
-                    <p className="typography__label--2">
-                      <RingProgress
-                        size={106}
-                        thickness={8}
-                        classNames={{
-                          root: "progress-ring__root",
-                        }}
-                        sections={[
-                          {
-                            value: parseFloat(renderTrueTotalPercentage()),
-                            color: ringColor(renderTrueTotalPercentage()),
+                    <Doughnut
+                      options={{
+                        cutout: "85%",
+                        plugins: {
+                          legend: {
+                            display: false,
                           },
-                        ]}
-                        label={
-                          <Text
-                            color="white"
-                            weight={700}
-                            align="center"
-                            size="xl"
-                          >
-                            {renderTrueTotalPercentage()}%
-                          </Text>
-                        }
-                      />
+                        },
+                      }}
+                      data={{
+                        datasets: [
+                          {
+                            label: "My First Dataset",
+                            data: [100, renderTrueTotalPercentage()],
+                            backgroundColor: [
+                              "rgba(92, 95, 102, 1)",
+                              ringColor(renderTrueTotalPercentage()),
+                            ],
+                            borderColor: "transparent",
+                            hoverOffset: 4,
+                            borderRadius: [0, 5],
+                          },
+                        ],
+                      }}
+                    />
+
+                    <p className="typography__label--2">
+                      {renderTrueTotalPercentage()}
                     </p>
                   </div>
                   <div>
