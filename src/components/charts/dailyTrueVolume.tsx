@@ -50,7 +50,7 @@ const DailyTrueVolumeChart: React.FC<DailyTrueVolumeTypes> = ({
             id: "true-volume",
           },
           {
-            color: "accent-orange",
+            color: "accent-yellow",
             name: "Loan Volume",
             id: "loan-volume",
           },
