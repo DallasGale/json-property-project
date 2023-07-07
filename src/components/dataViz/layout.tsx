@@ -53,16 +53,9 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   trueVolumeMovingAverage,
   leaderboard,
 }) => {
-  // Animations
-  const springs = useSpring({
-    from: { y: 1000 },
-    to: { y: 0 },
-  });
-
   const [toggleView, setToggleView] = useState(true);
 
   const [activeTab, setActiveTab] = useState("market-overview");
-  console.log({ activeTab });
   return (
     <>
       <Header handleTabClick={(e) => setActiveTab(e)} />

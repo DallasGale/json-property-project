@@ -230,8 +230,6 @@ const CompactView: React.FC<VolumeChartProps> = ({
     setDailyTimeframe(value);
   }
 
-  const [disabledLegend, setDisabledLegend] = useState("");
-
   return (
     <>
       <div className="chart__grid chart__grid--two-col">
@@ -285,7 +283,11 @@ const CompactView: React.FC<VolumeChartProps> = ({
             <animated.div style={{ ...springs2 }} className="chart__container">
               <div className="chart__container-body">
                 <div className="chart__info">
-                  <ProgressRing percentage={renderTrueTotalPercentage()} />
+                  <ProgressRing
+                    true_volume={dailyTrueVolumeDataArray}
+                    loan_volume={dailyLoanVolumeDataArray}
+                    fake_volume={dailyFakeVolumeDataArray}
+                  />
                   <div>
                     <DynamicVolumeNumber
                       timeframe={timeframe}

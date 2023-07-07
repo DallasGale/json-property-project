@@ -70,7 +70,7 @@ const DailyTrueVolumeChart: React.FC<DailyTrueVolumeTypes> = ({
                 label: "True Volume",
                 data: trueVolumeDisabled ? [] : true_volume,
                 borderColor: "white",
-                backgroundColor: "rgb(92, 95, 102)",
+                backgroundColor: "rgba(92, 95, 102, 1)",
               },
               {
                 label: "Loans",

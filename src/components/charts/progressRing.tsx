@@ -2,9 +2,31 @@ import { Doughnut } from "react-chartjs-2";
 import doughnutValueColors from "@/utils/doughnutValueColors";
 
 interface ProgressRingTypes {
-  percentage: string;
+  timeframe: number;
+  true_volume: number[];
+  loan_volume: number[];
+  fake_volume: number[];
 }
-const ProgressRing: React.FC<ProgressRingTypes> = ({ percentage }) => {
+const ProgressRing: React.FC<ProgressRingTypes> = ({
+  timeframe,
+  true_volume,
+  loan_volume,
+  fake_volume,
+}) => {
+  console.log(true_volume.slice(true_volume.length - 1));
+
+  // function calculatePercentageDifferenceBetweenThreeNumbers() {
+
+  //   let total = 0
+  //   if (timeframe === 1) {
+  //     total = true_volume.slice(true_volume.length - 1) + loan_volume.slice(loan_volume.length - 1) + fake_volume.slice(fake_volume.length - 1);
+  //     return total
+  //   }
+  //   const truePercentage = Math.round((true_volume / total) * 100);
+  //   const loanPercentage = Math.round((loan_volume / total) * 100);
+  //   const fakePercentage = Math.round((fake_volume / total) * 100);
+  //   return { truePercentage, loanPercentage, fakePercentage };
+  // }
   return (
     <div className="chart__progress-ring">
       <Doughnut
@@ -22,22 +44,22 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({ percentage }) => {
         data={{
           datasets: [
             {
-              label: "My First Dataset",
-              data: percentage,
+              data: [20, 30, 50],
               backgroundColor: [
-                doughnutValueColors(percentage),
-                "rgba(92, 95, 102, 1",
+                "rgb(92, 95, 102)",
+                "rgba(250, 176, 5, 1)",
+                "rgba(253, 126, 20, 1)",
               ],
 
               borderColor: "transparent",
               hoverOffset: 4,
-              borderRadius: [5, 0],
+              borderRadius: [5, 5, 5],
             },
           ],
         }}
       />
 
-      <p className="typography__label--2">{percentage}</p>
+      {/* <p className="typography__label--2">{percentage}</p> */}
     </div>
   );
 };
