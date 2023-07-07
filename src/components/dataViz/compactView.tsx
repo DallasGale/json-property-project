@@ -284,6 +284,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
               <div className="chart__container-body">
                 <div className="chart__info">
                   <ProgressRing
+                    timeframe={timeframe}
                     true_volume={dailyTrueVolumeDataArray}
                     loan_volume={dailyLoanVolumeDataArray}
                     fake_volume={dailyFakeVolumeDataArray}
