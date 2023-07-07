@@ -18,9 +18,9 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
   const [loanVolumeDisabled, setLoanVolumeDisabled] = useState(false);
   const [fakeVolumeDisabled, setFakeVolumeDisabled] = useState(false);
 
-  const domEls = document.getElementsByTagName("input");
+  const domEls = document?.getElementsByTagName("input");
   useEffect(() => {
-    if (domEls) {
+    if (document && domEls) {
       console.log({ domEls });
     }
   }, [domEls]);
