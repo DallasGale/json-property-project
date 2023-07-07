@@ -213,8 +213,11 @@ $gap: 20px;
 
 .chart__legend-item {
   position: relative;
-  padding-left: 20px;
-  margin-bottom: 8px;
+  padding-left: 13px;
+  margin-bottom: 10px;
+  padding-right: 0px;
+  margin-left: 11px;
+
   &--accent-green:before {
     background-color: $accent-green;
   }
