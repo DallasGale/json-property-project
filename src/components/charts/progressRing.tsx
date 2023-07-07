@@ -11,6 +11,9 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({ percentage }) => {
         options={{
           cutout: "85%",
           plugins: {
+            tooltip: {
+              enabled: false,
+            },
             legend: {
               display: false,
             },
