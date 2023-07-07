@@ -215,25 +215,25 @@ $gap: 20px;
   position: relative;
   padding-left: 20px;
   margin-bottom: 8px;
-  &--true-volume:before {
+  &--accent-green:before {
     background-color: $accent-green;
   }
 
-  &--loan-volume:before {
+  &--accent-yellow:before {
     background-color: $accent-yellow;
   }
-  &--fake-volume:before {
+  &--accent-orang:before {
     background-color: $accent-orange;
   }
-  &--total-volume:before {
+  &--accent-red:before {
     background-color: $accent-red;
   }
 
-  &--primary:before {
+  &--accent-yellow:before {
     background-color: $accent-yellow;
   }
 
-  &--secondary:before {
+  &--accent-orange:before {
     background-color: $accent-orange;
   }
 
@@ -243,6 +243,17 @@ $gap: 20px;
   &--trend:before {
     background-color: $trend;
   }
+}
+
+.chart__legend-item {
+  appearance: none;
+}
+.chart__legend-item:checked {
+  opacity: 0.4;
+}
+
+.chart__legend-item:checked + label {
+  opacity: 0.4;
 }
 
 // Info

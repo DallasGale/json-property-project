@@ -34,14 +34,6 @@ const TrueVolumeLineChart: React.FC<TrueVolumeChartTypes> = ({
               pointRadius: trend_timespan === null ? 2 : 5,
               tension: 0.3,
               borderWidth: 1,
-              // @ts-ignore
-              // trendlineLinear: {
-              //   colorMin: "white",
-              //   colorMax: "white",
-              //   lineStyle: "solid",
-              //   width: 2,
-              //   projection: false,
-              // },
             },
           ],
         }}

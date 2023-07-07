@@ -16,7 +16,6 @@ import {
   Title,
   PointElement,
   Tooltip,
-  Legend,
 } from "chart.js";
 
 // Types
@@ -36,6 +35,7 @@ import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
 import ProgressRing from "@components/charts/progressRing";
+import Legend from "@components/dataViz/legend/legend";
 
 ChartJS.register(
   CategoryScale,
@@ -46,7 +46,6 @@ ChartJS.register(
   ArcElement,
   Title,
   Tooltip,
-  Legend,
   annotationPlugin,
   chartTrendline
 );
@@ -231,12 +230,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
     setDailyTimeframe(value);
   }
 
-  const ringColor = (value: any) => {
-    console.log({ value });
-    if (value > 0 && value <= 31) return "rgba(250, 82, 82, 1)";
-    else if (value > 31 && value < 61) return "rgba(253, 126, 20, 1)";
-    else return "rgba(250, 176, 5, 1)";
-  };
+  const [disabledLegend, setDisabledLegend] = useState("");
 
   return (
     <>
@@ -317,7 +311,6 @@ const CompactView: React.FC<VolumeChartProps> = ({
                   90 Day Trend
                 </p>
               </div>
-              {/* </div> */}
             </animated.div>
 
             <animated.div style={{ ...springs3 }} className="chart__container">
@@ -330,27 +323,26 @@ const CompactView: React.FC<VolumeChartProps> = ({
                 <p className="typography__paragraph--1">
                   NFT trading volume across all transaction types
                 </p>
-                <div className="chart__legend">
-                  {/* <div className="chart__legend-item chart__legend-item--true-volume">
-                    <p className="typography__label--3">Real Volume Trend</p>
-                  </div> */}
-                  <div className="chart__legend-item chart__legend-item--loan-volume">
-                    <p className="typography__label--3">Loan Volume Trend</p>
-                  </div>
-                  <div className="chart__legend-item chart__legend-item--fake-volume">
-                    <p className="typography__label--3">Fake Volume Trend</p>
-                  </div>
-                  {/* <div className="chart__legend-item chart__legend-item--total-volume">
-                    <p className="typography__label--3">Total Volume Trend</p>
-                  </div> */}
-                </div>
+                {/* <Legend
+                  onClick={(e) => (setDisabledLegend(e), handleLegendClick(e))}
+                  labels={[
+                    {
+                      color: "accent-yellow",
+                      name: "Loan Volume Trend",
+                      id: "loan-volume-trend",
+                    },
+                    {
+                      color: "accent-orange",
+                      name: "Fake Volume Trend",
+                      id: "fake-volume-trend",
+                    },
+                  ]}
+                /> */}
                 <TotalVolumeAllLineChart
                   labels={trendlineVolumeLabels}
                   data={{
-                    true_volume_moving_average: trueVolumeMovingAverage,
                     loan_volume_moving_average: loanVolumeMovingAverage,
                     fake_volume_moving_average: fakeVolumeMovingAverage,
-                    total_volume_moving_average: totalVolumeMovingAverage,
                   }}
                 />
               </div>

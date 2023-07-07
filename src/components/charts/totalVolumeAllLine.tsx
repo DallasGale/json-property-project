@@ -1,120 +1,147 @@
+"use client";
+import { useState, useRef, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import Legend from "@components/dataViz/legend/legend";
 
 interface TotalVolumeChartTypes {
   labels: string[];
   data: {
-    true_volume_moving_average: number[];
     loan_volume_moving_average: number[];
     fake_volume_moving_average: number[];
-    total_volume_moving_average: number[];
   };
 }
+
 const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
   labels,
-  data: {
-    true_volume_moving_average,
-    loan_volume_moving_average,
-    fake_volume_moving_average,
-    total_volume_moving_average,
-  },
+  data: { loan_volume_moving_average, fake_volume_moving_average },
 }) => {
+  const [loanVolumeDisabled, setLoanVolumeDisabled] = useState(false);
+  const [fakeVolumeDisabled, setFakeVolumeDisabled] = useState(false);
+
+  const domEls = document.getElementsByTagName("input");
+  useEffect(() => {
+    if (domEls) {
+      console.log({ domEls });
+    }
+  }, [domEls]);
+
+  const onClick = (e: string) => {
+    console.log({ e, domEls });
+
+    for (let i = 0; i < domEls.length; i++) {
+      if (domEls[i].id === e) {
+        if (domEls[i].id === "loan-volume-trend") {
+          setLoanVolumeDisabled(!loanVolumeDisabled);
+        }
+        if (domEls[i].id === "fake-volume-trend") {
+          setFakeVolumeDisabled(!fakeVolumeDisabled);
+        }
+      }
+    }
+  };
   return (
-    <div className="chart__bar-wrapper">
-      <Line
-        data={{
-          labels: labels,
-          datasets: [
-            {
-              label: "Loan Volume Trend",
-              data: loan_volume_moving_average.slice(
-                loan_volume_moving_average.length - 90
-              ),
-              borderColor: "rgba(250, 176, 5, 1)",
-              backgroundColor: "rgba(250, 176, 5, 1)",
-              pointRadius: 0,
-              borderWidth: 1,
-            },
-            // {
-            //   label: "Real Volume Trend",
-            //   data: true_volume_moving_average.slice(
-            //     true_volume_moving_average.length - 90
-            //   ),
-            //   borderColor: "rgb(64, 192, 87)",
-            //   backgroundColor: "rgb(64, 192, 87)",
-            //   pointRadius: 0,
-            //   borderWidth: 1,
-            // },
-            {
-              label: "Fake Volume Trend",
-              data: fake_volume_moving_average.slice(
-                fake_volume_moving_average.length - 90
-              ),
-              borderColor: "rgba(253, 126, 20, 1)",
-              backgroundColor: "rgba(253, 126, 20, 1)",
-              pointRadius: 0,
-              borderWidth: 1,
-            },
-            // {
-            //   label: "Total Volume Trend",
-            //   data: total_volume_moving_average.slice(
-            //     total_volume_moving_average.length - 90
-            //   ),
-            //   borderColor: "rgba(250, 82, 82, 1)",
-            //   backgroundColor: "rgba(250, 82, 82, 1)",
-            //   pointRadius: 0,
-            //   borderWidth: 1,
-            // },
-          ],
-        }}
-        options={{
-          elements: {
-            line: {
-              capBezierPoints: true,
-              borderJoinStyle: "round",
-              borderWidth: 10,
-            },
-            point: {
-              pointStyle: "circle",
-            },
+    <>
+      <Legend
+        onClick={(e) => onClick(e)}
+        labels={[
+          {
+            color: "accent-yellow",
+            name: "Loan Volume Trend",
+            id: "loan-volume-trend",
           },
-          interaction: {
-            mode: "x",
+          {
+            color: "accent-orange",
+            name: "Fake Volume Trend",
+            id: "fake-volume-trend",
           },
-          maintainAspectRatio: false,
-          plugins: {
-            tooltip: {
-              callbacks: {},
-            },
+        ]}
+      />
 
-            annotation: {
-              annotations: {},
-            },
-
-            legend: {
-              position: "top",
-              align: "start",
-              display: false,
-              fullSize: true,
-              labels: {
-                color: "#fff",
-                usePointStyle: true,
-                pointStyle: "rectRounded",
+      <div className="chart__bar-wrapper">
+        <Line
+          data={{
+            labels: labels,
+            datasets: [
+              {
+                label: "Loan Volume Trend",
+                data: loan_volume_moving_average.slice(
+                  loan_volume_moving_average.length - 90
+                ),
+                borderColor: loanVolumeDisabled
+                  ? "rgba(250, 176, 5, 0)"
+                  : "rgba(250, 176, 5, 1)",
+                backgroundColor: loanVolumeDisabled
+                  ? "rgba(250, 176, 5, 0)"
+                  : "rgba(250, 176, 5, 1)",
+                pointRadius: 0,
+                borderWidth: 1,
+              },
+              {
+                label: "Fake Volume Trend",
+                data: fake_volume_moving_average.slice(
+                  fake_volume_moving_average.length - 90
+                ),
+                borderColor: fakeVolumeDisabled
+                  ? "rgba(253, 126, 20, 0)"
+                  : "rgba(253, 126, 20, 1)",
+                backgroundColor: fakeVolumeDisabled
+                  ? "rgba(253, 126, 20, 0)"
+                  : "rgba(253, 126, 20, 1)",
+                pointRadius: 0,
+                borderWidth: 1,
+              },
+            ],
+          }}
+          options={{
+            elements: {
+              line: {
+                capBezierPoints: true,
+                borderJoinStyle: "round",
+                borderWidth: 10,
+              },
+              point: {
+                pointStyle: "circle",
               },
             },
-          },
-          scales: {
-            x: {
-              display: false,
-              stacked: true,
+            interaction: {
+              mode: "x",
             },
-            y: {
-              display: false,
-              stacked: true,
+            maintainAspectRatio: false,
+            plugins: {
+              tooltip: {
+                callbacks: {},
+              },
+
+              annotation: {
+                annotations: {},
+              },
+
+              legend: {
+                position: "top",
+                align: "start",
+                display: false,
+                fullSize: true,
+                labels: {
+                  color: "#fff",
+                  usePointStyle: true,
+                  pointStyle: "rectRounded",
+                },
+              },
             },
-          },
-        }}
-      />
-    </div>
+            scales: {
+              x: {
+                display: false,
+                stacked: false,
+              },
+              y: {
+                display: false,
+                stacked: false,
+              },
+            },
+          }}
+        />
+      </div>
+    </>
   );
 };
 
