@@ -49,11 +49,6 @@ const DailyTrueVolumeChart: React.FC<DailyTrueVolumeTypes> = ({
               display: false,
               text: "Chart.js Bar Chart - Stacked",
             },
-
-            htmlLegend: {
-              // ID of the container to put the legend in
-              containerID: "legend-container",
-            },
             legend: {
               position: "top",
               align: "start",

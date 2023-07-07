@@ -19,8 +19,6 @@ import {
   Legend,
 } from "chart.js";
 
-import { Doughnut } from "react-chartjs-2";
-
 // Types
 import type {
   DatasetsType,
@@ -31,13 +29,13 @@ import type {
 } from "@/app/types";
 
 // Components
-import { RingProgress, Text } from "@mantine/core";
 import TotalVolumeAllLineChart from "@components/charts/totalVolumeAllLine";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
 import DynamicVolumeNumber from "@components/dataViz/dynamicVolumeNumber/dynamicVolumeNumber";
 import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
+import ProgressRing from "@components/charts/progressRing";
 
 ChartJS.register(
   CategoryScale,
@@ -293,37 +291,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
             <animated.div style={{ ...springs2 }} className="chart__container">
               <div className="chart__container-body">
                 <div className="chart__info">
-                  <div className="chart__progress-ring">
-                    <Doughnut
-                      options={{
-                        cutout: "85%",
-                        plugins: {
-                          legend: {
-                            display: false,
-                          },
-                        },
-                      }}
-                      data={{
-                        datasets: [
-                          {
-                            label: "My First Dataset",
-                            data: [100, renderTrueTotalPercentage()],
-                            backgroundColor: [
-                              "rgba(92, 95, 102, 1)",
-                              ringColor(renderTrueTotalPercentage()),
-                            ],
-                            borderColor: "transparent",
-                            hoverOffset: 4,
-                            borderRadius: [0, 5],
-                          },
-                        ],
-                      }}
-                    />
-
-                    <p className="typography__label--2">
-                      {renderTrueTotalPercentage()}
-                    </p>
-                  </div>
+                  <ProgressRing percentage={renderTrueTotalPercentage()} />
                   <div>
                     <DynamicVolumeNumber
                       timeframe={timeframe}
