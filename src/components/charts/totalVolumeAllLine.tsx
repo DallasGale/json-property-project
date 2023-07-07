@@ -18,7 +18,10 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
   const [loanVolumeDisabled, setLoanVolumeDisabled] = useState(false);
   const [fakeVolumeDisabled, setFakeVolumeDisabled] = useState(false);
 
-  const domEls = document?.getElementsByTagName("input");
+  let domEls: any = null;
+  if (document) {
+    domEls = document?.getElementsByTagName("input");
+  }
   useEffect(() => {
     if (document && domEls) {
       console.log({ domEls });
@@ -26,8 +29,6 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
   }, [domEls]);
 
   const onClick = (e: string) => {
-    console.log({ e, domEls });
-
     for (let i = 0; i < domEls.length; i++) {
       if (domEls[i].id === e) {
         if (domEls[i].id === "loan-volume-trend") {
