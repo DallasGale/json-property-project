@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import Legend from "@components/dataViz/legend/legend";
 

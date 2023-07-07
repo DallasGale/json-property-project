@@ -2,6 +2,7 @@
 import { useState } from "react";
 interface LegendProps {
   labels: LabelTypes[];
+  modifierClass?: string;
   onClick: (e: string) => void;
 }
 
@@ -10,9 +11,9 @@ type LabelTypes = {
   name: string;
   id: string;
 };
-const Legend: React.FC<LegendProps> = ({ labels, onClick }) => {
+const Legend: React.FC<LegendProps> = ({ modifierClass, labels, onClick }) => {
   return (
-    <div className="chart__legend">
+    <div className={`chart__legend ${modifierClass}`}>
       <form>
         {labels.map(({ name, color, id }) => {
           return (

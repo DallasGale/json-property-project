@@ -323,21 +323,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
                 <p className="typography__paragraph--1">
                   NFT trading volume across all transaction types
                 </p>
-                {/* <Legend
-                  onClick={(e) => (setDisabledLegend(e), handleLegendClick(e))}
-                  labels={[
-                    {
-                      color: "accent-yellow",
-                      name: "Loan Volume Trend",
-                      id: "loan-volume-trend",
-                    },
-                    {
-                      color: "accent-orange",
-                      name: "Fake Volume Trend",
-                      id: "fake-volume-trend",
-                    },
-                  ]}
-                /> */}
+
                 <TotalVolumeAllLineChart
                   labels={trendlineVolumeLabels}
                   data={{

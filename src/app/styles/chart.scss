@@ -236,6 +236,9 @@ $gap: 20px;
   &--accent-orange:before {
     background-color: $accent-orange;
   }
+  &--accent-grey:before {
+    background-color: $accent-grey;
+  }
 
   &--tertiary:before {
     background-color: $accent-red;
@@ -252,8 +255,25 @@ $gap: 20px;
   opacity: 0.4;
 }
 
+.chart__legend-item + label {
+  cursor: pointer;
+}
+
 .chart__legend-item:checked + label {
   opacity: 0.4;
+}
+
+.chart__legend-modifier--daily-true-volume {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  border-top: 0;
+  padding-top: 0;
+  margin-top: -13px;
 }
 
 // Info
