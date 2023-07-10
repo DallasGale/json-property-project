@@ -407,12 +407,12 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       />
 
       {/* Traders row */}
-      <Traders
+      {/* <Traders
         labels={labels}
         only_bought={leaderboard.true_volume}
         only_sold={leaderboard.fake_volume}
         bought_and_sold={leaderboard.loan_volume}
-      />
+      /> */}
     </>
   );
 };

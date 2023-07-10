@@ -69,7 +69,7 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
                   ? "rgba(250, 176, 5, 0)"
                   : "rgba(250, 176, 5, 1)",
                 pointRadius: 0,
-                borderWidth: 1,
+                borderWidth: 4,
               },
               {
                 label: "Fake Volume Trend",
@@ -83,13 +83,14 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
                   ? "rgba(253, 126, 20, 0)"
                   : "rgba(253, 126, 20, 1)",
                 pointRadius: 0,
-                borderWidth: 1,
+                borderWidth: 4,
               },
             ],
           }}
           options={{
             elements: {
               line: {
+                tension: 0,
                 capBezierPoints: true,
                 borderJoinStyle: "round",
                 borderWidth: 10,
