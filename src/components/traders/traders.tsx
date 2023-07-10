@@ -1,3 +1,6 @@
+// Components
+import HeroBarChart from "@components/charts/heroBarChart";
+
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
 import Image from "next/image";
@@ -16,6 +19,7 @@ import type {
 } from "@app/types";
 
 interface LeaderBoardTypes {
+  labels: string[];
   true_volume: TrueVolumeTypes[];
   fake_volume: FakeVolumeTypes[];
   loan_volume: LoanVolumeTypes[];
@@ -23,10 +27,10 @@ interface LeaderBoardTypes {
 }
 
 const Traders: React.FC<LeaderBoardTypes> = ({
-  true_volume,
-  fake_volume,
-  loan_volume,
-  royalty,
+  labels,
+  only_bought,
+  only_sold,
+  bought_and_sold,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -98,66 +102,32 @@ const Traders: React.FC<LeaderBoardTypes> = ({
         </div>
       </div>
       <div className="chart__grid chart__grid--four-col">
-        <animated.div style={{ ...springs2 }} className="chart__grid-column">
-          <div className="chart__container">
-            <p className="typography__label--4">True Volume</p>
-            <div
-              style={{ display: "flex", flexDirection: "row", width: "100%" }}
-            >
-              <div style={{ flex: "1", minWidth: "50%", maxWidth: "50%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {true_volume.map(({ name }) => {
-                    return (
-                      <tr key={name}>
-                        <td height="30" valign="top">
-                          <p className="typography__display--2 typography__color--white">
-                            {truncateString(name, 20)}
-                          </p>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </table>
-              </div>
-              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {true_volume.map(({ total_real_day_volume }, index) => {
-                    return (
-                      <tr key={index + total_real_day_volume}>
-                        <td height="30" valign="top" align="right">
-                          <div className="leaderboard__data-cell">
-                            <Image src={CryptoIcon} alt="Crypto Icon" />
-                            <p className="typography__display--2">
-                              {total_real_day_volume.toFixed(2)}
-                            </p>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </table>
-              </div>
-              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {true_volume.map(
-                    ({ total_real_day_volume_percentage }, index: number) => {
-                      return (
-                        <tr key={index + total_real_day_volume_percentage}>
-                          <td height="30" valign="top" align="right">
-                            <p className="typography__display--2 typography__color--green">
-                              {total_real_day_volume_percentage.toFixed(2)}%
-                            </p>
-                          </td>
-                        </tr>
-                      );
-                    }
-                  )}
-                </table>
-              </div>
-            </div>
-          </div>
-        </animated.div>
-        <animated.div style={{ ...springs3 }} className="chart__grid-column">
+        {/* <HeroBarChart
+          labels={labels}
+          legendLables={[
+            {
+              color: "accent-purple",
+              name: "Only Bought",
+              id: "only-bought",
+            },
+            {
+              color: "accent-red",
+              name: "Only Sold",
+              id: "only-sold",
+            },
+            {
+              color: "accent-green",
+              name: "Bought and Sold",
+              id: "bought-and-sold",
+            },
+          ]}
+          data={{
+            bar1: only_bought,
+            bar2: only_sold,
+            bar3: bought_and_sold,
+          }}
+        /> */}
+        {/* <animated.div style={{ ...springs3 }} className="chart__grid-column">
           <div className="chart__container">
             <p className="typography__label--4">Fake Volume</p>
             <div
@@ -165,7 +135,7 @@ const Traders: React.FC<LeaderBoardTypes> = ({
             >
               <div style={{ flex: "1", minWidth: "50%", maxWidth: "50%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {fake_volume.map(({ name }) => {
+                  {bar1.map(({ name }) => {
                     return (
                       <tr key={name}>
                         <td height="30" valign="top">
@@ -180,7 +150,7 @@ const Traders: React.FC<LeaderBoardTypes> = ({
               </div>
               <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {fake_volume.map(
+                  {bar2.map(
                     ({ total_day_volume_fake }, index: number) => {
                       return (
                         <tr key={index + total_day_volume_fake}>
@@ -200,7 +170,7 @@ const Traders: React.FC<LeaderBoardTypes> = ({
               </div>
               <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
-                  {fake_volume.map(
+                  {bar3.map(
                     ({ total_fake_day_volume_percentage }, index: number) => {
                       return (
                         <tr key={index + total_fake_day_volume_percentage}>
@@ -303,7 +273,7 @@ const Traders: React.FC<LeaderBoardTypes> = ({
               </div>
             </div>
           </div>
-        </animated.div>
+        </animated.div> */}
       </div>
     </div>
   );

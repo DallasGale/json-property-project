@@ -33,9 +33,8 @@ import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
 import DynamicVolumeNumber from "@components/dataViz/dynamicVolumeNumber/dynamicVolumeNumber";
 import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
-import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
+import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
-import Legend from "@components/dataViz/legend/legend";
 import Traders from "../traders/traders";
 
 ChartJS.register(
@@ -81,7 +80,6 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
   fakeVolumeMovingAverage,
   leaderboard,
 }) => {
-  console.log({ realPercentDifference });
   // Animations
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
@@ -228,13 +226,33 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     setDailyTimeframe(value);
   }
 
+  const [trueVolumeDisabled, setTrueVolumeDisabled] = useState(false);
+  const [loanVolumeDisabled, setLoanVolumeDisabled] = useState(false);
+  const [fakeVolumeDisabled, setFakeVolumeDisabled] = useState(false);
+
+  const onClick = (e: string) => {
+    if (document) {
+      const domEls = document?.getElementsByTagName("input");
+      for (let i = 0; i < domEls.length; i++) {
+        if (domEls[i].id === e) {
+          if (domEls[i].id === "true-volume") {
+            setTrueVolumeDisabled(!trueVolumeDisabled);
+          }
+          if (domEls[i].id === "loan-volume") {
+            setLoanVolumeDisabled(!loanVolumeDisabled);
+          }
+          if (domEls[i].id === "fake-volume") {
+            setFakeVolumeDisabled(!fakeVolumeDisabled);
+          }
+        }
+      }
+    }
+  };
+
   return (
     <>
       {/* TWO COLUMN GRID */}
       <div className="chart__grid chart__grid--two-col">
-        {/* Col 1 */}
-        {/* <div className="chart__grid--row"> */}
-
         {/* COL. 1 */}
         <div className="chart__grid">
           <animated.div
@@ -254,19 +272,52 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
             className="chart__grid chart__grid--one-col"
           >
             <div className="chart__container">
-              <DailyTrueVolumeChart
+              <HeroBarChart
+                legendOnClick={(e: string) => onClick(e)}
                 labels={dailyTrueVolumeLabels}
-                data={{
-                  true_volume: dailyTrueVolumeDataArray,
-                  loan_volume: dailyLoanVolumeDataArray,
-                  fake_volume: dailyFakeVolumeDataArray,
-                }}
+                datasets={[
+                  {
+                    label: "True Volume",
+                    data: trueVolumeDisabled ? [] : dailyTrueVolumeDataArray,
+                    borderColor: "white",
+                    backgroundColor: "rgba(64, 192, 87, 1)",
+                  },
+                  {
+                    label: "Loans",
+                    data: loanVolumeDisabled ? [] : dailyLoanVolumeDataArray,
+                    borderColor: "black",
+                    backgroundColor: "rgba(250, 176, 5, 1)",
+                  },
+                  {
+                    label: "Fake Volume (Inorganic)",
+                    data: fakeVolumeDisabled ? [] : dailyFakeVolumeDataArray,
+                    borderColor: "white",
+                    backgroundColor: "rgba(253, 126, 20, 1)",
+                  },
+                ]}
+                legendLables={[
+                  {
+                    color: "accent-green",
+                    name: "True Volume",
+                    id: "true-volume",
+                  },
+                  {
+                    color: "accent-yellow",
+                    name: "Loan Volume",
+                    id: "loan-volume",
+                  },
+                  {
+                    color: "accent-orange",
+                    name: "Fake Volume",
+                    id: "fake-volume",
+                  },
+                ]}
               />
             </div>
           </animated.div>
         </div>
 
-        {/* Col 2 */}
+        {/* COL 2 */}
         <div className="chart__grid">
           <animated.div
             style={{ ...springs1 }}
@@ -357,10 +408,10 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
 
       {/* Traders row */}
       <Traders
-        true_volume={leaderboard.true_volume}
-        fake_volume={leaderboard.fake_volume}
-        loan_volume={leaderboard.loan_volume}
-        royalty={leaderboard.royalty}
+        labels={labels}
+        only_bought={leaderboard.true_volume}
+        only_sold={leaderboard.fake_volume}
+        bought_and_sold={leaderboard.loan_volume}
       />
     </>
   );

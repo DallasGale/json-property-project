@@ -34,7 +34,7 @@ import FakeVolumeChart from "@components/charts/fakeVolume";
 import TotalVolumeChart from "@components/charts/totalVolume";
 import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
-import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
+// import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
 
 ChartJS.register(
   CategoryScale,
@@ -272,14 +272,14 @@ const Marketplaces: React.FC<VolumeChartProps> = ({
           className="chart__grid chart__grid--one-col"
         >
           <div className="chart__container">
-            <DailyTrueVolumeChart
+            {/* <DailyTrueVolumeChart
               labels={dailyTrueVolumeLabels}
               data={{
                 true_volume: dailyTrueVolumeDataArray,
                 loan_volume: dailyLoanVolumeDataArray,
                 fake_volume: dailyFakeVolumeDataArray,
               }}
-            />
+            /> */}
           </div>
         </animated.div>
       </div>
