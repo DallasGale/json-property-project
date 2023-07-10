@@ -10,23 +10,14 @@ import { kFormatter } from "@utils/kFormatter";
 // Assets
 import CryptoIcon from "@assets/icons/crypto.svg";
 
-// Types
-import type {
-  TrueVolumeTypes,
-  FakeVolumeTypes,
-  LoanVolumeTypes,
-  RoyaltyTypes,
-} from "@app/types";
-
-interface LeaderBoardTypes {
+interface TradersTypes {
   labels: string[];
-  true_volume: TrueVolumeTypes[];
-  fake_volume: FakeVolumeTypes[];
-  loan_volume: LoanVolumeTypes[];
-  royalty: RoyaltyTypes[];
+  only_bought: number[];
+  only_sold: number[];
+  bought_and_sold: number[];
 }
 
-const Traders: React.FC<LeaderBoardTypes> = ({
+const Traders: React.FC<TradersTypes> = ({
   labels,
   only_bought,
   only_sold,
