@@ -61,7 +61,10 @@ const DailyTrueVolumeChart: React.FC<DailyTrueVolumeTypes> = ({
           },
         ]}
       />
-      <div className="chart__bar-wrapper" style={{ height: 290 }}>
+      <div
+        className="chart__bar-wrapper chart__bar-wrapper--daily-true-volume"
+        style={{ height: 290 }}
+      >
         <Bar
           data={{
             labels: labels,
@@ -90,6 +93,7 @@ const DailyTrueVolumeChart: React.FC<DailyTrueVolumeTypes> = ({
             interaction: {
               mode: "x",
             },
+            responsive: true,
             maintainAspectRatio: false,
             plugins: {
               title: {

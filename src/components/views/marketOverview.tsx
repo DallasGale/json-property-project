@@ -36,6 +36,7 @@ import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
 import ProgressRing from "@components/charts/progressRing";
 import Legend from "@components/dataViz/legend/legend";
+import Traders from "../traders/traders";
 
 ChartJS.register(
   CategoryScale,
@@ -69,7 +70,7 @@ interface VolumeChartProps {
     royalty: RoyaltyTypes[];
   };
 }
-const CompactView: React.FC<VolumeChartProps> = ({
+const MarketOverview: React.FC<VolumeChartProps> = ({
   labels,
   trueVolume,
   realPercentDifference,
@@ -77,10 +78,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
   loanVolume,
   fakeVolume,
   loanVolumeMovingAverage,
-  trueVolumeMovingAverage,
   fakeVolumeMovingAverage,
-  totalVolumeMovingAverage,
-  toggleView,
   leaderboard,
 }) => {
   console.log({ realPercentDifference });
@@ -232,9 +230,13 @@ const CompactView: React.FC<VolumeChartProps> = ({
 
   return (
     <>
+      {/* TWO COLUMN GRID */}
       <div className="chart__grid chart__grid--two-col">
         {/* Col 1 */}
-        <div className="chart__grid--row">
+        {/* <div className="chart__grid--row"> */}
+
+        {/* COL. 1 */}
+        <div className="chart__grid">
           <animated.div
             style={{ ...springs1 }}
             className="chart__grid chart__grid--one-col"
@@ -265,7 +267,7 @@ const CompactView: React.FC<VolumeChartProps> = ({
         </div>
 
         {/* Col 2 */}
-        <div className="chart__grid--row">
+        <div className="chart__grid">
           <animated.div
             style={{ ...springs1 }}
             className="chart__grid chart__grid--one-col"
@@ -345,7 +347,16 @@ const CompactView: React.FC<VolumeChartProps> = ({
         </div>
       </div>
 
+      {/* Leaderboard Row */}
       <Leaderboard
+        true_volume={leaderboard.true_volume}
+        fake_volume={leaderboard.fake_volume}
+        loan_volume={leaderboard.loan_volume}
+        royalty={leaderboard.royalty}
+      />
+
+      {/* Traders row */}
+      <Traders
         true_volume={leaderboard.true_volume}
         fake_volume={leaderboard.fake_volume}
         loan_volume={leaderboard.loan_volume}
@@ -355,4 +366,4 @@ const CompactView: React.FC<VolumeChartProps> = ({
   );
 };
 
-export default CompactView;
+export default MarketOverview;

@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
-
-import { kFormatter } from "@utils/kFormatter";
 import annotationPlugin from "chartjs-plugin-annotation";
 import chartTrendline from "chartjs-plugin-trendline";
 import {
@@ -30,13 +28,11 @@ import type {
 } from "@/app/types";
 
 // Components
-import { RingProgress, Text } from "@mantine/core";
 import TrueVolumeLineChart from "@components/charts/trueVolumeLine";
 import LoanVolumeChart from "@components/charts/loanVolume";
 import FakeVolumeChart from "@components/charts/fakeVolume";
 import TotalVolumeChart from "@components/charts/totalVolume";
 import Leaderboard from "@components/leaderboard/leaderboard";
-
 import ChartDataToggles from "@components/toggles/chart_data";
 import DailyTrueVolumeChart from "@components/charts/dailyTrueVolume";
 
@@ -71,12 +67,11 @@ interface VolumeChartProps {
     royalty: RoyaltyTypes[];
   };
 }
-const ExpandedView: React.FC<VolumeChartProps> = ({
+const Marketplaces: React.FC<VolumeChartProps> = ({
   labels,
   trueVolume,
   loanVolume,
   fakeVolume,
-  realPercentDifference,
   totalVolume,
   loanVolumeMovingAverage,
   fakeVolumeMovingAverage,
@@ -417,4 +412,4 @@ const ExpandedView: React.FC<VolumeChartProps> = ({
   );
 };
 
-export default ExpandedView;
+export default Marketplaces;

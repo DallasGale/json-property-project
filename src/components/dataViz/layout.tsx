@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import ExpandedView from "@components/dataViz/expandedView";
-import CompactView from "@components/dataViz/compactView";
+import Marketplaces from "@views/marketplaces";
+import MarketOverview from "@views/marketOverview";
 
 // Utils
 import { useSpring, animated } from "@react-spring/web";
@@ -63,7 +63,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
         <section className="chart__wrapper">
           <>
             {activeTab == navigation[0].id && (
-              <CompactView
+              <MarketOverview
                 toggleView={toggleView}
                 labels={labels}
                 trueVolume={trueVolume}
@@ -85,7 +85,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
               />
             )}
             {activeTab == navigation[1].id && (
-              <ExpandedView
+              <Marketplaces
                 labels={labels}
                 trueVolume={trueVolume}
                 totalVolume={totalVolume}
