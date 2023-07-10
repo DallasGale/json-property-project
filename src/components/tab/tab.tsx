@@ -1,4 +1,4 @@
-interface TabProps {
+export interface TabProps {
   active: string;
   name: string;
   id: string;

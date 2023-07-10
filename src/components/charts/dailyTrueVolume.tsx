@@ -45,7 +45,7 @@ const DailyTrueVolumeChart: React.FC<DailyTrueVolumeTypes> = ({
         onClick={(e) => onClick(e)}
         labels={[
           {
-            color: "accent-grey",
+            color: "highlight",
             name: "True Volume",
             id: "true-volume",
           },
@@ -70,7 +70,7 @@ const DailyTrueVolumeChart: React.FC<DailyTrueVolumeTypes> = ({
                 label: "True Volume",
                 data: trueVolumeDisabled ? [] : true_volume,
                 borderColor: "white",
-                backgroundColor: "rgba(92, 95, 102, 1)",
+                backgroundColor: "rgb(213, 244, 21)",
               },
               {
                 label: "Loans",

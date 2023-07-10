@@ -1,17 +1,12 @@
-"use client";
-import { useState } from "react";
 // Components
 import Image from "next/image";
 import Logo from "@assets/DataBeast.svg";
-import navigation from "@/constants/navigation";
-import Tab from "@components/header/tab";
+import Navigation from "@components/navigation/navigation";
 
 interface HeaderProps {
   handleTabClick: (e: string) => void;
 }
 const Header: React.FC<HeaderProps> = ({ handleTabClick }) => {
-  const [activeTab, setActiveTab] = useState("market-overview");
-
   return (
     <header className="header">
       <div className="header__row">
@@ -24,16 +19,7 @@ const Header: React.FC<HeaderProps> = ({ handleTabClick }) => {
         </p>
       </div>
       <div className="header__row">
-        {navigation.map((nav) => {
-          return (
-            <Tab
-              active={activeTab}
-              key={nav.id}
-              {...nav}
-              onClick={(e) => (setActiveTab(e), handleTabClick(e))}
-            />
-          );
-        })}
+        <Navigation handleTabClick={handleTabClick} />
       </div>
     </header>
   );

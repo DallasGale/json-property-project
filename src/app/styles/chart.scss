@@ -218,6 +218,9 @@ $gap: 20px;
   padding-right: 0px;
   margin-left: 11px;
 
+  &--highlight:before {
+    background-color: $highlight;
+  }
   &--accent-green:before {
     background-color: $accent-green;
   }
