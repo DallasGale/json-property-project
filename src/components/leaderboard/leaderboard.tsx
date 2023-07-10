@@ -231,7 +231,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <tr key={name}>
                         <td height="30" valign="top">
                           <p className="typography__display--2 typography__color--white">
-                            {truncateString(name, 40)}
+                            {truncateString(name, 32)}
                           </p>
                         </td>
                       </tr>
