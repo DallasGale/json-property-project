@@ -32,10 +32,15 @@ interface DataVizLayoutTypes {
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
   leaderboard: {
-    true_volume: TrueVolumeTypes[];
-    fake_volume: FakeVolumeTypes[];
-    loan_volume: LoanVolumeTypes[];
+    trueVolume: TrueVolumeTypes[];
+    fakeVolume: FakeVolumeTypes[];
+    loanVolume: LoanVolumeTypes[];
     royalty: RoyaltyTypes[];
+  };
+  traders: {
+    onlyBought: any[];
+    onlySold: any[];
+    boughtAndSold: any[];
   };
 }
 
@@ -52,6 +57,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   totalVolumeMovingAverage,
   trueVolumeMovingAverage,
   leaderboard,
+  traders,
 }) => {
   const [toggleView, setToggleView] = useState(true);
 
@@ -77,10 +83,15 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 totalVolumeMovingAverage={totalVolumeMovingAverage}
                 trueVolumeMovingAverage={trueVolumeMovingAverage}
                 leaderboard={{
-                  true_volume: leaderboard.true_volume,
-                  fake_volume: leaderboard.fake_volume,
-                  loan_volume: leaderboard.loan_volume,
+                  trueVolume: leaderboard.trueVolume,
+                  fakeVolume: leaderboard.fakeVolume,
+                  loanVolume: leaderboard.loanVolume,
                   royalty: leaderboard.royalty,
+                }}
+                traders={{
+                  onlyBought: traders.onlyBought,
+                  onlySold: traders.onlySold,
+                  boughtAndSold: traders.boughtAndSold,
                 }}
               />
             )}
@@ -98,9 +109,9 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 totalVolumeMovingAverage={totalVolumeMovingAverage}
                 trueVolumeMovingAverage={trueVolumeMovingAverage}
                 leaderboard={{
-                  true_volume: leaderboard.true_volume,
-                  fake_volume: leaderboard.fake_volume,
-                  loan_volume: leaderboard.loan_volume,
+                  true_volume: leaderboard.trueVolume,
+                  fake_volume: leaderboard.fakeVolume,
+                  loan_volume: leaderboard.loanVolume,
                   royalty: leaderboard.royalty,
                 }}
               />

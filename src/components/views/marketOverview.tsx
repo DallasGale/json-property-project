@@ -63,10 +63,15 @@ interface VolumeChartProps {
   trueVolumeMovingAverage: number[];
   toggleView: boolean;
   leaderboard: {
-    true_volume: TrueVolumeTypes[];
-    fake_volume: FakeVolumeTypes[];
-    loan_volume: LoanVolumeTypes[];
+    trueVolume: TrueVolumeTypes[];
+    fakeVolume: FakeVolumeTypes[];
+    loanVolume: LoanVolumeTypes[];
     royalty: RoyaltyTypes[];
+  };
+  traders: {
+    onlyBought: any[];
+    onlySold: any[];
+    boughtAndSold: any[];
   };
 }
 const MarketOverview: React.FC<VolumeChartProps> = ({
@@ -79,6 +84,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
   loanVolumeMovingAverage,
   fakeVolumeMovingAverage,
   leaderboard,
+  traders,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -400,19 +406,19 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
 
       {/* Leaderboard Row */}
       <Leaderboard
-        true_volume={leaderboard.true_volume}
-        fake_volume={leaderboard.fake_volume}
-        loan_volume={leaderboard.loan_volume}
+        true_volume={leaderboard.trueVolume}
+        fake_volume={leaderboard.fakeVolume}
+        loan_volume={leaderboard.loanVolume}
         royalty={leaderboard.royalty}
       />
 
       {/* Traders row */}
-      {/* <Traders
+      <Traders
         labels={labels}
-        only_bought={leaderboard.true_volume}
-        only_sold={leaderboard.fake_volume}
-        bought_and_sold={leaderboard.loan_volume}
-      /> */}
+        onlyBought={traders.onlyBought}
+        onlySold={traders.onlySold}
+        boughtAndSold={traders.boughtAndSold}
+      />
     </>
   );
 };

@@ -78,6 +78,18 @@ export default async function Home() {
     ({ label }: DatasetsType) => label === "volume_real_30_day_moving_average"
   );
 
+  // Traders
+  const onlyBought = await data?.datasets.filter(
+    ({ label }: DatasetsType) => label === "true_trades_num"
+  );
+
+  const onlySold = await data?.datasets.filter(
+    ({ label }: DatasetsType) => label === "wash_trades_num"
+  );
+  const boughtAndSold = await data?.datasets.filter(
+    ({ label }: DatasetsType) => label === "farm_trades_num"
+  );
+
   return (
     <main className="main-container">
       <DataVizLayout
@@ -93,17 +105,17 @@ export default async function Home() {
         totalVolumeMovingAverage={totalVolume30DayMovingAverage[0].data}
         trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
         leaderboard={{
-          true_volume: orderBy(
+          trueVolume: orderBy(
             leaderBoardData,
             ["total_real_day_volume"],
             "desc"
           ).slice(0, 5),
-          fake_volume: orderBy(
+          fakeVolume: orderBy(
             leaderBoardData,
             ["total_day_volume_fake"],
             "desc"
           ).slice(0, 5),
-          loan_volume: orderBy(
+          loanVolume: orderBy(
             leaderBoardData,
             ["total_day_volume_loan"],
             "desc"
@@ -113,6 +125,11 @@ export default async function Home() {
             ["total_day_total_royalty"],
             "desc"
           ).slice(0, 5),
+        }}
+        traders={{
+          onlyBought: onlyBought[0].data,
+          onlySold: onlySold[0].data,
+          boughtAndSold: boughtAndSold[0].data,
         }}
       />
     </main>

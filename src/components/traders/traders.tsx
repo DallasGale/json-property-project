@@ -1,5 +1,9 @@
+"use client";
+import { useState, useEffect } from "react";
+
 // Components
 import HeroBarChart from "@components/charts/heroBarChart";
+import ChartDataToggles from "@components/toggles/chart_data";
 
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
@@ -9,19 +13,23 @@ import { kFormatter } from "@utils/kFormatter";
 
 // Assets
 import CryptoIcon from "@assets/icons/crypto.svg";
+import { DatasetsType } from "@/app/types";
 
 interface TradersTypes {
   labels: string[];
-  only_bought: number[];
-  only_sold: number[];
-  bought_and_sold: number[];
+  onlyBought: number[];
+  onlySold: number[];
+  boughtAndSold: number[];
 }
 
 const Traders: React.FC<TradersTypes> = ({
   labels,
-  only_bought,
-  only_sold,
-  bought_and_sold,
+  onlyBought,
+  onlySold,
+  boughtAndSold,
+  // onlyBoughtDataArray,
+  // onlySoldDataArray,
+  // boughtAndSoldDataArray,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -80,191 +88,153 @@ const Traders: React.FC<TradersTypes> = ({
     },
   });
 
+  const [onlyBoughtDisabled, setOnlyBoughtDisabled] = useState(false);
+  const [onlySoldDisabled, setOnlySoldDisabled] = useState(false);
+  const [boughtAndSoldDisabled, setBoughtAndSoldDisabled] = useState(false);
+
+  const onClick = (e: string) => {
+    if (document) {
+      const domEls = document?.getElementsByTagName("input");
+      for (let i = 0; i < domEls.length; i++) {
+        if (domEls[i].id === e) {
+          if (domEls[i].id === "only-bought") {
+            setOnlyBoughtDisabled(!onlyBoughtDisabled);
+          }
+          if (domEls[i].id === "only-sold") {
+            setOnlySoldDisabled(!onlySoldDisabled);
+          }
+          if (domEls[i].id === "bought-and-sold") {
+            setBoughtAndSoldDisabled(!boughtAndSoldDisabled);
+          }
+        }
+      }
+    }
+  };
+
+  const [tradersLabels, setTradersLabels] = useState(
+    labels.slice(labels.length - 90).map((data: any) => data)
+  );
+  const [onlyBoughtDataArray, setOnlyBoughtDataArray] = useState(
+    onlyBought.slice(onlyBought.length - 90)
+  );
+  const [onlySoldDataArray, setOnlySoldDataArray] = useState(
+    onlySold.slice(onlySold.length - 90)
+  );
+  const [boughtAndSoldDataArray, setBoughtAndSoldDataArray] = useState(
+    onlySold.slice(onlySold.length - 90)
+  );
+  const [tradersTimeframe, setTradersTimeframe] = useState(90);
+  useEffect(() => {
+    if (tradersTimeframe === 90) {
+      setOnlyBoughtDataArray(onlyBought.slice(onlyBought.length - 90));
+      setOnlySoldDataArray(onlySold.slice(onlySold.length - 90));
+      setBoughtAndSoldDataArray(boughtAndSold.slice(boughtAndSold.length - 90));
+      setTradersLabels(
+        labels.slice(labels.length - 90).map((data: any) => data)
+      );
+    }
+    if (tradersTimeframe === 30) {
+      setOnlyBoughtDataArray(onlyBought.slice(onlyBought.length - 30));
+      setOnlySoldDataArray(onlySold.slice(onlySold.length - 30));
+      setBoughtAndSoldDataArray(boughtAndSold.slice(boughtAndSold.length - 39));
+      setTradersLabels(
+        labels.slice(labels.length - 30).map((data: any) => data)
+      );
+    }
+    if (tradersTimeframe === 7) {
+      setOnlyBoughtDataArray(onlyBought.slice(onlyBought.length - 7));
+      setOnlySoldDataArray(onlySold.slice(onlySold.length - 7));
+      setBoughtAndSoldDataArray(boughtAndSold.slice(boughtAndSold.length - 7));
+      setTradersLabels(
+        labels.slice(labels.length - 7).map((data: any) => data)
+      );
+    }
+
+    if (tradersTimeframe === 1) {
+      setOnlyBoughtDataArray(onlyBought.slice(onlyBought.length - 1));
+      setOnlySoldDataArray(onlySold.slice(onlySold.length - 1));
+      setBoughtAndSoldDataArray(boughtAndSold.slice(boughtAndSold.length - 1));
+      setTradersLabels(
+        labels.slice(labels.length - 1).map((data: any) => data)
+      );
+    }
+
+    if (tradersTimeframe === 0) {
+      setOnlyBoughtDataArray(onlyBought);
+      setOnlySoldDataArray(onlySold);
+      setBoughtAndSoldDataArray(boughtAndSold);
+      setTradersLabels(labels);
+    }
+  }, [tradersTimeframe]);
+
+  function handleDailyTimeferame(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setTradersTimeframe(value);
+  }
   return (
-    <div className="chart__grid">
-      <div className="chart__grid chart__grid--one-col">
-        <div className="chart__chart-actions-lockup">
-          <animated.h2
-            style={{ ...springs1 }}
-            className="typography__display--1"
-          >
-            Traders
-          </animated.h2>
-        </div>
-      </div>
-      <div className="chart__grid chart__grid--four-col">
-        {/* <HeroBarChart
-          labels={labels}
-          legendLables={[
-            {
-              color: "accent-purple",
-              name: "Only Bought",
-              id: "only-bought",
-            },
-            {
-              color: "accent-red",
-              name: "Only Sold",
-              id: "only-sold",
-            },
-            {
-              color: "accent-green",
-              name: "Bought and Sold",
-              id: "bought-and-sold",
-            },
-          ]}
-          data={{
-            bar1: only_bought,
-            bar2: only_sold,
-            bar3: bought_and_sold,
-          }}
-        /> */}
-        {/* <animated.div style={{ ...springs3 }} className="chart__grid-column">
-          <div className="chart__container">
-            <p className="typography__label--4">Fake Volume</p>
-            <div
-              style={{ display: "flex", flexDirection: "row", width: "100%" }}
-            >
-              <div style={{ flex: "1", minWidth: "50%", maxWidth: "50%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {bar1.map(({ name }) => {
-                    return (
-                      <tr key={name}>
-                        <td height="30" valign="top">
-                          <p className="typography__display--2 typography__color--white">
-                            {truncateString(name, 20)}
-                          </p>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </table>
-              </div>
-              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {bar2.map(
-                    ({ total_day_volume_fake }, index: number) => {
-                      return (
-                        <tr key={index + total_day_volume_fake}>
-                          <td height="30" valign="top" align="right">
-                            <div className="leaderboard__data-cell">
-                              <Image src={CryptoIcon} alt="Crypto Icon" />
-                              <p className="typography__display--2">
-                                {total_day_volume_fake.toFixed(2)}
-                              </p>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    }
-                  )}
-                </table>
-              </div>
-              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {bar3.map(
-                    ({ total_fake_day_volume_percentage }, index: number) => {
-                      return (
-                        <tr key={index + total_fake_day_volume_percentage}>
-                          <td height="30" valign="top" align="right">
-                            <p className="typography__display--2 typography__color--red">
-                              {total_fake_day_volume_percentage.toFixed(2)}%
-                            </p>
-                          </td>
-                        </tr>
-                      );
-                    }
-                  )}
-                </table>
-              </div>
-            </div>
+    <div className="chart__grid chart__grid--two-col">
+      <div className="chart__grid">
+        <animated.div
+          style={{ ...springs1 }}
+          className="chart__grid chart__grid--one-col"
+        >
+          <div className="chart__chart-actions-lockup">
+            <ChartDataToggles
+              title="Traders"
+              onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
+              active={tradersTimeframe}
+            />
           </div>
         </animated.div>
-        <animated.div style={{ ...springs4 }} className="chart__grid-column">
+        <animated.div
+          style={{ ...springs1 }}
+          className="chart__grid chart__grid--one-col"
+        >
           <div className="chart__container">
-            <p className="typography__label--4">Loans</p>
-            <div
-              style={{ display: "flex", flexDirection: "row", width: "100%" }}
-            >
-              <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {loan_volume.map(({ name }) => {
-                    return (
-                      <tr key={name}>
-                        <td height="30" valign="top">
-                          <p className="typography__display--2 typography__color--white">
-                            {truncateString(name, 32)}
-                          </p>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </table>
-              </div>
-              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {loan_volume.map(
-                    ({ total_day_volume_loan }, index: number) => {
-                      return (
-                        <tr key={index + total_day_volume_loan}>
-                          <td height="30" valign="top" align="right">
-                            <div className="leaderboard__data-cell">
-                              <Image src={CryptoIcon} alt="Crypto Icon" />
-                              <p className="typography__display--2">
-                                {kFormatter(total_day_volume_loan.toFixed(2))}
-                              </p>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    }
-                  )}
-                </table>
-              </div>
-            </div>
+            <HeroBarChart
+              labels={tradersLabels}
+              legendOnClick={onClick}
+              legendLables={[
+                {
+                  color: "accent-purple",
+                  name: "Only Bought",
+                  id: "only-bought",
+                },
+                {
+                  color: "accent-red",
+                  name: "Only Sold",
+                  id: "only-sold",
+                },
+                {
+                  color: "accent-green",
+                  name: "Bought and Sold",
+                  id: "bought-and-sold",
+                },
+              ]}
+              datasets={[
+                {
+                  label: "Only Bought",
+                  data: onlyBoughtDisabled ? [] : onlyBoughtDataArray,
+                  borderColor: "white",
+                  backgroundColor: "rgba(95, 61, 196, 1)",
+                },
+                {
+                  label: "Only Sold",
+                  data: onlySoldDisabled ? [] : onlySoldDataArray,
+                  borderColor: "black",
+                  backgroundColor: "rgba(250, 82, 82, 1)",
+                },
+                {
+                  label: "Bought and Sold",
+                  data: boughtAndSoldDisabled ? [] : boughtAndSoldDataArray,
+                  borderColor: "white",
+                  backgroundColor: "rgba(64, 192, 87, 1)",
+                },
+              ]}
+            />
           </div>
         </animated.div>
-        <animated.div style={{ ...springs5 }} className="chart__grid-column">
-          <div className="chart__container">
-            <p className="typography__label--4">Revenue</p>
-            <div
-              style={{ display: "flex", flexDirection: "row", width: "100%" }}
-            >
-              <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {royalty.map(({ name }) => {
-                    return (
-                      <tr key={name}>
-                        <td height="30" valign="top">
-                          <p className="typography__display--2 typography__color--white">
-                            {truncateString(name, 40)}
-                          </p>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </table>
-              </div>
-              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
-                <table cellPadding={0} cellSpacing={0} width="100%">
-                  {royalty.map(({ total_day_total_royalty }, index: number) => {
-                    return (
-                      <tr key={index + total_day_total_royalty}>
-                        <td height="30" valign="top" align="right">
-                          <div className="leaderboard__data-cell">
-                            <Image src={CryptoIcon} alt="Crypto Icon" />
-                            <p className="typography__display--2">
-                              {total_day_total_royalty.toFixed(2)}
-                            </p>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </table>
-              </div>
-            </div>
-          </div>
-        </animated.div> */}
+        <div />
       </div>
     </div>
   );
