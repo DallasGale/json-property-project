@@ -80,14 +80,14 @@ export default async function Home() {
 
   // Traders
   const onlyBought = await data?.datasets.filter(
-    ({ label }: DatasetsType) => label === "true_trades_num"
+    ({ label }: DatasetsType) => label === "unique_buyer_wallets"
   );
 
   const onlySold = await data?.datasets.filter(
-    ({ label }: DatasetsType) => label === "wash_trades_num"
+    ({ label }: DatasetsType) => label === "unique_seller_wallets"
   );
   const boughtAndSold = await data?.datasets.filter(
-    ({ label }: DatasetsType) => label === "farm_trades_num"
+    ({ label }: DatasetsType) => label === "unique_seller_and_buyer_wallets"
   );
 
   return (
