@@ -27,6 +27,8 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({
   //   const fakePercentage = Math.round((fake_volume / total) * 100);
   //   return { truePercentage, loanPercentage, fakePercentage };
   // }
+
+  const percentage = "20";
   return (
     <div className="chart__progress-ring">
       <Doughnut
@@ -59,7 +61,7 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({
         }}
       />
 
-      {/* <p className="typography__label--2">{percentage}</p> */}
+      <p className="typography__label--2">{percentage}</p>
     </div>
   );
 };
