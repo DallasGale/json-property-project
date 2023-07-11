@@ -205,9 +205,15 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       return (
                         <tr key={index + total_fake_day_volume_percentage}>
                           <td height="30" valign="top" align="right">
-                            <p className="typography__display--2 typography__color--red">
-                              {total_fake_day_volume_percentage.toFixed(2)}%
-                            </p>
+                            {total_fake_day_volume_percentage ? (
+                              <p className="typography__display--2 typography__color--red">
+                                {total_fake_day_volume_percentage.toFixed(2)}%
+                              </p>
+                            ) : (
+                              <p className="typography__display--2 typography__color--grey">
+                                --
+                              </p>
+                            )}
                           </td>
                         </tr>
                       );

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import Legend from "@components/dataViz/legend/legend";
 
-interface TotalVolumeChartTypes {
+interface TrendLineChartTypes {
   labels: string[];
   data: {
     loan_volume_moving_average: number[];
@@ -11,7 +11,7 @@ interface TotalVolumeChartTypes {
   };
 }
 
-const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
+const TrendLineChart: React.FC<TrendLineChartTypes> = ({
   labels,
   data: { loan_volume_moving_average, fake_volume_moving_average },
 }) => {
@@ -69,7 +69,9 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
                   ? "rgba(250, 176, 5, 0)"
                   : "rgba(250, 176, 5, 1)",
                 pointRadius: 0,
-                borderWidth: 4,
+                borderWidth: 2,
+                fill: false,
+                tension: 0.6,
               },
               {
                 label: "Fake Volume Trend",
@@ -84,6 +86,8 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
                   : "rgba(253, 126, 20, 1)",
                 pointRadius: 0,
                 borderWidth: 4,
+                fill: false,
+                tension: 1,
               },
             ],
           }}
@@ -91,16 +95,15 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
             elements: {
               line: {
                 tension: 0,
-                capBezierPoints: true,
-                borderJoinStyle: "round",
                 borderWidth: 10,
+                cubicInterpolationMode: "default",
               },
               point: {
                 pointStyle: "circle",
               },
             },
             interaction: {
-              mode: "x",
+              intersect: false,
             },
             maintainAspectRatio: false,
             plugins: {
@@ -132,6 +135,8 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
               y: {
                 display: false,
                 stacked: false,
+                suggestedMin: -10,
+                suggestedMax: 200,
               },
             },
           }}
@@ -141,4 +146,4 @@ const TotalVolumeAllLineChart: React.FC<TotalVolumeChartTypes> = ({
   );
 };
 
-export default TotalVolumeAllLineChart;
+export default TrendLineChart;

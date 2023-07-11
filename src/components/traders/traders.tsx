@@ -14,6 +14,8 @@ import { kFormatter } from "@utils/kFormatter";
 // Assets
 import CryptoIcon from "@assets/icons/crypto.svg";
 import { DatasetsType } from "@/app/types";
+import TimeframeAsString from "@/utils/timeframeAsString";
+import TrendLineChart from "../charts/trendLineChart";
 
 interface TradersTypes {
   labels: string[];
@@ -171,6 +173,12 @@ const Traders: React.FC<TradersTypes> = ({
     e.preventDefault();
     setTradersTimeframe(value);
   }
+
+  const [timeframe, setTimeframe] = useState<number>(1);
+  function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setTimeframe(value);
+  }
   return (
     <div className="chart__grid chart__grid--two-col">
       <div className="chart__grid">
@@ -235,6 +243,33 @@ const Traders: React.FC<TradersTypes> = ({
           </div>
         </animated.div>
         <div />
+      </div>
+
+      <div className="chart__grid">
+        <animated.div
+          style={{ ...springs1 }}
+          className="chart__grid chart__grid--one-col"
+        >
+          <div className="chart__chart-actions-lockup">
+            <ChartDataToggles
+              title={TimeframeAsString(timeframe)}
+              onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
+              active={timeframe}
+            />
+          </div>
+        </animated.div>
+        <div className="chart__grid chart__grid--two-col">
+          <div>
+            <TrendLineChart
+              labels={tradersLabels}
+              data={{
+                loan_volume_moving_average: [],
+                fake_volume_moving_average: [],
+              }}
+            />
+          </div>
+          <div>col 2</div>
+        </div>
       </div>
     </div>
   );

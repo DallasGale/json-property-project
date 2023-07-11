@@ -28,7 +28,7 @@ import type {
 } from "@/app/types";
 
 // Components
-import TotalVolumeAllLineChart from "@components/charts/totalVolumeAllLine";
+import TrendLineChart from "@components/charts/trendLineChart";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
 import DynamicVolumeNumber from "@components/dataViz/dynamicVolumeNumber/dynamicVolumeNumber";
 import Leaderboard from "@components/leaderboard/leaderboard";
@@ -36,6 +36,7 @@ import ChartDataToggles from "@components/toggles/chart_data";
 import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
 import Traders from "../traders/traders";
+import TimeframeAsString from "@/utils/timeframeAsString";
 
 ChartJS.register(
   CategoryScale,
@@ -154,16 +155,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     return out;
   };
 
-  const renderTimeframeAsString = () => {
-    if (timeframe === 0) return "All Time";
-    else if (timeframe === 1) return "Last 24 Hours";
-    else if (timeframe === 7) return "Last 7 Days";
-    else if (timeframe === 30) return "Last 30 Days";
-    else if (timeframe === 90) return "Last 90 Days";
-    else return;
-  };
-
-  const [timeframe, setTimeframe] = useState(1);
+  const [timeframe, setTimeframe] = useState<number>(1);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimeframe(value);
@@ -331,7 +323,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
           >
             <div className="chart__chart-actions-lockup">
               <ChartDataToggles
-                title={`${renderTimeframeAsString()}`}
+                title={TimeframeAsString(timeframe)}
                 onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
                 active={timeframe}
               />
@@ -386,7 +378,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                   NFT trading volume across all transaction types
                 </p>
 
-                <TotalVolumeAllLineChart
+                <TrendLineChart
                   labels={trendlineVolumeLabels}
                   data={{
                     loan_volume_moving_average: loanVolumeMovingAverage,
