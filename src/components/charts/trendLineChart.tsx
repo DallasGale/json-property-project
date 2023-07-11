@@ -69,7 +69,7 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
                   ? "rgba(250, 176, 5, 0)"
                   : "rgba(250, 176, 5, 1)",
                 pointRadius: 0,
-                borderWidth: 2,
+                borderWidth: 4,
                 fill: false,
                 tension: 0.6,
               },
@@ -116,15 +116,7 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
               },
 
               legend: {
-                position: "top",
-                align: "start",
                 display: false,
-                fullSize: true,
-                labels: {
-                  color: "#fff",
-                  usePointStyle: true,
-                  pointStyle: "rectRounded",
-                },
               },
             },
             scales: {
@@ -135,8 +127,6 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
               y: {
                 display: false,
                 stacked: false,
-                suggestedMin: -10,
-                suggestedMax: 200,
               },
             },
           }}
