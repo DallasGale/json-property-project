@@ -25,3 +25,25 @@ export type RoyaltyTypes = {
   name: string;
   total_day_total_royalty: number;
 };
+
+export type BarChartDatasetsType = {
+  label: string;
+  data: number[] | [];
+  borderColor: string;
+  backgroundColor: string;
+};
+export type LineChartDatasetsType = {
+  label: string;
+  data: number[] | [];
+  borderColor: string;
+  backgroundColor: string;
+  pointRadius: number;
+  borderWidth: number;
+};
+export type LegendLabelTypes = {
+  color: string;
+  name: string;
+  id: string;
+};
+
+export type LegendFormatTypes = "vertical" | "horizontal";

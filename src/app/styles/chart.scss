@@ -19,6 +19,9 @@ $gap: 20px;
   position: relative;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .chart__container--quarter {
@@ -204,6 +207,13 @@ $gap: 20px;
   width: 100%;
   height: auto;
   width: 99.9%;
+}
+.chart__line-wrapper {
+  background-size: cover !important;
+  background-position: center bottom !important;
+  background-repeat: no-repeat !important;
+  height: 98px;
+  margin-top: 30px;
 }
 // --------------------------------------
 // Legend

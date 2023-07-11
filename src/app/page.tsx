@@ -82,12 +82,21 @@ export default async function Home() {
   const onlyBought = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_buyer_wallets"
   );
+  const onlyBoughtMovingAverage = await data?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_30_day_moving_average" // to be updated with the correct moving average data
+  );
 
   const onlySold = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_seller_wallets"
   );
+  const onlySoldMovingAverage = await data?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_fake_30_day_moving_average"
+  );
   const boughtAndSold = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_seller_and_buyer_wallets"
+  );
+  const boughtAndSoldMovingAverage = await data?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
   );
 
   return (
@@ -128,8 +137,11 @@ export default async function Home() {
         }}
         traders={{
           onlyBought: onlyBought[0].data,
+          onlyBoughtMovingAverage: onlyBoughtMovingAverage[0].data,
           onlySold: onlySold[0].data,
+          onlySoldMovingAverage: onlySoldMovingAverage[0].data,
           boughtAndSold: boughtAndSold[0].data,
+          boughtAndSoldMovingAverage: boughtAndSoldMovingAverage[0].data,
         }}
       />
     </main>

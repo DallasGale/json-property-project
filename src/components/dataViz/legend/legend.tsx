@@ -1,8 +1,8 @@
-"use client";
-import { useState } from "react";
+import { LegendFormatTypes } from "@/app/types";
 interface LegendProps {
   labels: LabelTypes[];
   modifierClass?: string;
+  legendFormat?: LegendFormatTypes;
   onClick: (e: string) => void;
 }
 
@@ -11,13 +11,18 @@ type LabelTypes = {
   name: string;
   id: string;
 };
-const Legend: React.FC<LegendProps> = ({ modifierClass, labels, onClick }) => {
+const Legend: React.FC<LegendProps> = ({
+  modifierClass,
+  labels,
+  onClick,
+  legendFormat = "horizontal",
+}) => {
   return (
     <div className={`chart__legend ${modifierClass}`}>
-      <form>
+      <form className={`legend__format legend__format--${legendFormat}`}>
         {labels.map(({ name, color, id }) => {
           return (
-            <>
+            <div key={id}>
               <input
                 className={`chart__legend-item  chart__legend-item--${color}`}
                 type="checkbox"
@@ -29,7 +34,7 @@ const Legend: React.FC<LegendProps> = ({ modifierClass, labels, onClick }) => {
               <label htmlFor={id} className="typography__label--1">
                 {name}
               </label>
-            </>
+            </div>
           );
         })}
       </form>

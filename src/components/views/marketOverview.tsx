@@ -62,7 +62,6 @@ interface VolumeChartProps {
   fakeVolumeMovingAverage: number[];
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
-  toggleView: boolean;
   leaderboard: {
     trueVolume: TrueVolumeTypes[];
     fakeVolume: FakeVolumeTypes[];
@@ -70,9 +69,12 @@ interface VolumeChartProps {
     royalty: RoyaltyTypes[];
   };
   traders: {
-    onlyBought: any[];
-    onlySold: any[];
-    boughtAndSold: any[];
+    onlyBought: number[];
+    onlyBoughtMovingAverage: number[];
+    onlySold: number[];
+    onlySoldMovingAverage: number[];
+    boughtAndSold: number[];
+    boughtAndSoldMovingAverage: number[];
   };
 }
 const MarketOverview: React.FC<VolumeChartProps> = ({
@@ -247,6 +249,26 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     }
   };
 
+  const [loanVolumeTrendDisabled, setLoanVolumeTrendDisabled] = useState(false);
+  const [fakeVolumeTrendDisabled, setFakeVolumeTrendDisabled] = useState(false);
+
+  const trendlineLegendOnClick = (e: string) => {
+    if (document) {
+      const domEls = document?.getElementsByTagName("input");
+
+      for (let i = 0; i < domEls.length; i++) {
+        if (domEls[i].id === e) {
+          if (domEls[i].id === "loan-volume-trend") {
+            setLoanVolumeTrendDisabled(!loanVolumeTrendDisabled);
+          }
+          if (domEls[i].id === "fake-volume-trend") {
+            setFakeVolumeTrendDisabled(!fakeVolumeTrendDisabled);
+          }
+        }
+      }
+    }
+  };
+
   return (
     <>
       {/* TWO COLUMN GRID */}
@@ -293,7 +315,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                     backgroundColor: "rgba(253, 126, 20, 1)",
                   },
                 ]}
-                legendLables={[
+                legendLabels={[
                   {
                     color: "accent-green",
                     name: "True Volume",
@@ -379,11 +401,54 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                 </p>
 
                 <TrendLineChart
+                  legendOnClick={(e: string) => trendlineLegendOnClick(e)}
                   labels={trendlineVolumeLabels}
-                  data={{
-                    loan_volume_moving_average: loanVolumeMovingAverage,
-                    fake_volume_moving_average: fakeVolumeMovingAverage,
-                  }}
+                  legendLabels={[
+                    {
+                      color: "accent-yellow",
+                      name: "Loan Volume Trend",
+                      id: "loan-volume-trend",
+                    },
+                    {
+                      color: "accent-orange",
+                      name: "Fake Volume Trend",
+                      id: "fake-volume-trend",
+                    },
+                  ]}
+                  datasets={[
+                    {
+                      label: "Loan Volume Trend",
+                      data: loanVolumeTrendDisabled
+                        ? []
+                        : loanVolumeMovingAverage.slice(
+                            loanVolumeMovingAverage.length - 90
+                          ),
+                      borderColor: loanVolumeDisabled
+                        ? "rgba(250, 176, 5, 0)"
+                        : "rgba(250, 176, 5, 1)",
+                      backgroundColor: loanVolumeDisabled
+                        ? "rgba(250, 176, 5, 0)"
+                        : "rgba(250, 176, 5, 1)",
+                      pointRadius: 0,
+                      borderWidth: 3,
+                    },
+                    {
+                      label: "Fake Volume Trend",
+                      data: fakeVolumeTrendDisabled
+                        ? []
+                        : fakeVolumeMovingAverage.slice(
+                            fakeVolumeMovingAverage.length - 90
+                          ),
+                      borderColor: fakeVolumeDisabled
+                        ? "rgba(253, 126, 20, 0)"
+                        : "rgba(253, 126, 20, 1)",
+                      backgroundColor: fakeVolumeDisabled
+                        ? "rgba(253, 126, 20, 0)"
+                        : "rgba(253, 126, 20, 1)",
+                      pointRadius: 0,
+                      borderWidth: 3,
+                    },
+                  ]}
                 />
               </div>
               <div className="chart__container-footer">
@@ -407,9 +472,13 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       {/* Traders row */}
       <Traders
         labels={labels}
+        realPercentDifference={[32.4]} // to be updated
         onlyBought={traders.onlyBought}
+        onlyBoughtMovingAverage={traders.onlyBoughtMovingAverage}
         onlySold={traders.onlySold}
+        onlySoldMovingAverage={traders.onlySoldMovingAverage}
         boughtAndSold={traders.boughtAndSold}
+        boughtAndSoldMovingAverage={traders.boughtAndSoldMovingAverage}
       />
     </>
   );

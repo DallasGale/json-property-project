@@ -8,12 +8,13 @@
 @import "./utils.scss";
 @import "./header.scss";
 @import "./tab.scss";
+@import "./legend.scss";
 
 body {
   background-color: $black;
 }
 
 .content {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: auto;
 }

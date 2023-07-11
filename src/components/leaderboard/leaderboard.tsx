@@ -112,7 +112,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <tr key={name}>
                         <td height="30" valign="top">
                           <p className="typography__display--2 typography__color--white">
-                            {truncateString(name, 24)}
+                            {truncateString(name, 20)}
                           </p>
                         </td>
                       </tr>
@@ -180,7 +180,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <tr key={name}>
                         <td height="30" valign="top">
                           <p className="typography__display--2 typography__color--white">
-                            {truncateString(name, 24)}
+                            {truncateString(name, 20)}
                           </p>
                         </td>
                       </tr>
@@ -250,7 +250,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <tr key={name}>
                         <td height="30" valign="top">
                           <p className="typography__display--2 typography__color--white">
-                            {truncateString(name, 32)}
+                            {truncateString(name, 20)}
                           </p>
                         </td>
                       </tr>

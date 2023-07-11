@@ -3,9 +3,6 @@ import { useState } from "react";
 import Marketplaces from "@views/marketplaces";
 import MarketOverview from "@views/marketOverview";
 
-// Utils
-import { useSpring, animated } from "@react-spring/web";
-
 // Types
 import type {
   DatasetsType,
@@ -38,9 +35,12 @@ interface DataVizLayoutTypes {
     royalty: RoyaltyTypes[];
   };
   traders: {
-    onlyBought: any[];
-    onlySold: any[];
-    boughtAndSold: any[];
+    onlyBought: number[];
+    onlyBoughtMovingAverage: number[];
+    onlySold: number[];
+    onlySoldMovingAverage: number[];
+    boughtAndSold: number[];
+    boughtAndSoldMovingAverage: number[];
   };
 }
 
@@ -59,8 +59,6 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   leaderboard,
   traders,
 }) => {
-  const [toggleView, setToggleView] = useState(true);
-
   const [activeTab, setActiveTab] = useState("market-overview");
   return (
     <>
@@ -70,7 +68,6 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
           <>
             {activeTab == navigation[0].id && (
               <MarketOverview
-                toggleView={toggleView}
                 labels={labels}
                 trueVolume={trueVolume}
                 totalVolume={totalVolume}
@@ -90,8 +87,12 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 }}
                 traders={{
                   onlyBought: traders.onlyBought,
+                  onlyBoughtMovingAverage: traders.onlyBoughtMovingAverage,
                   onlySold: traders.onlySold,
+                  onlySoldMovingAverage: traders.onlySoldMovingAverage,
                   boughtAndSold: traders.boughtAndSold,
+                  boughtAndSoldMovingAverage:
+                    traders.boughtAndSoldMovingAverage,
                 }}
               />
             )}
