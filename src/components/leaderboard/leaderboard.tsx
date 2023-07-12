@@ -100,18 +100,18 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
       </div>
       <div className="chart__grid chart__grid--four-col">
         <animated.div style={{ ...springs2 }} className="chart__grid-column">
-          <div className="chart__container">
-            <p className="typography__label--4">True Volume</p>
+          <div className="chart__container chart__container--module">
+            <p className="typography__subtitle--module">True Volume</p>
             <div
               style={{ display: "flex", flexDirection: "row", width: "100%" }}
             >
-              <div style={{ flex: "1", minWidth: "60%", maxWidth: "60%" }}>
+              <div style={{ flex: "1" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {true_volume.map(({ name }) => {
                     return (
                       <tr key={name}>
-                        <td height="30" valign="top">
-                          <p className="typography__display--2 typography__color--white">
+                        <td height="28" valign="middle">
+                          <p className="typography__paragraph--2">
                             {truncateString(name, 24)}
                           </p>
                         </td>
@@ -120,15 +120,15 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                   })}
                 </table>
               </div>
-              <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
+              <div style={{ flex: "1", minWidth: "48px", maxWidth: "48px" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {true_volume.map(({ total_real_day_volume }, index) => {
                     return (
                       <tr key={index + total_real_day_volume}>
-                        <td height="30" valign="top" align="right">
+                        <td height="28" valign="middle" align="right">
                           <div className="leaderboard__data-cell">
                             <Image src={CryptoIcon} alt="Crypto Icon" />
-                            <p className="typography__display--2">
+                            <p className="typography__paragraph--2">
                               {DecimalFormatter(total_real_day_volume)}
                             </p>
                           </div>
@@ -138,15 +138,15 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                   })}
                 </table>
               </div>
-              <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
+              <div style={{ flex: "1", minWidth: "48px", maxWidth: "48px" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {true_volume.map(
                     ({ total_real_day_volume_percentage }, index: number) => {
                       return (
                         <tr key={index + total_real_day_volume_percentage}>
-                          <td height="30" valign="top" align="right">
+                          <td height="28" valign="middle" align="right">
                             {total_real_day_volume_percentage ? (
-                              <p className="typography__display--2 typography__color--green">
+                              <p className="typography__subtitle--2 typography__color--green">
                                 {DecimalFormatter(
                                   total_real_day_volume_percentage
                                 )}
@@ -168,18 +168,18 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           </div>
         </animated.div>
         <animated.div style={{ ...springs3 }} className="chart__grid-column">
-          <div className="chart__container">
-            <p className="typography__label--4">Fake Volume</p>
+          <div className="chart__container chart__container--module">
+            <p className="typography__subtitle--module">Fake Volume</p>
             <div
               style={{ display: "flex", flexDirection: "row", width: "100%" }}
             >
-              <div style={{ flex: "1", minWidth: "60%", maxWidth: "60%" }}>
+              <div style={{ flex: "1" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {fake_volume.map(({ name }) => {
                     return (
                       <tr key={name}>
-                        <td height="30" valign="top">
-                          <p className="typography__display--2 typography__color--white">
+                        <td height="28" valign="middle">
+                          <p className="typography__paragraph--2">
                             {truncateString(name, 24)}
                           </p>
                         </td>
@@ -188,16 +188,16 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                   })}
                 </table>
               </div>
-              <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
+              <div style={{ flex: "1", minWidth: "48px", maxWidth: "48px" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {fake_volume.map(
                     ({ total_day_volume_fake }, index: number) => {
                       return (
                         <tr key={index + total_day_volume_fake}>
-                          <td height="30" valign="top" align="right">
+                          <td height="28" valign="middle" align="right">
                             <div className="leaderboard__data-cell">
                               <Image src={CryptoIcon} alt="Crypto Icon" />
-                              <p className="typography__display--2">
+                              <p className="typography__paragraph--2">
                                 {DecimalFormatter(total_day_volume_fake)}
                               </p>
                             </div>
@@ -208,22 +208,22 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                   )}
                 </table>
               </div>
-              <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
+              <div style={{ flex: "1", minWidth: "48px", maxWidth: "48px" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {fake_volume.map(
                     ({ total_fake_day_volume_percentage }, index: number) => {
                       return (
                         <tr key={index + total_fake_day_volume_percentage}>
-                          <td height="30" valign="top" align="right">
+                          <td height="28" valign="middle" align="right">
                             {total_fake_day_volume_percentage ? (
-                              <p className="typography__display--2 typography__color--red">
+                              <p className="typography__subtitle--2 typography__color--red">
                                 {DecimalFormatter(
                                   total_fake_day_volume_percentage
                                 )}
                                 %
                               </p>
                             ) : (
-                              <p className="typography__display--2 typography__color--grey">
+                              <p className="typography__subtitle--2 typography__color--grey">
                                 --
                               </p>
                             )}
@@ -238,18 +238,18 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           </div>
         </animated.div>
         <animated.div style={{ ...springs4 }} className="chart__grid-column">
-          <div className="chart__container">
-            <p className="typography__label--4">Loans</p>
+          <div className="chart__container chart__container--module">
+            <p className="typography__subtitle--module">Loans</p>
             <div
               style={{ display: "flex", flexDirection: "row", width: "100%" }}
             >
-              <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
+              <div style={{ flex: "1" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {loan_volume.map(({ name }) => {
                     return (
                       <tr key={name}>
-                        <td height="30" valign="top">
-                          <p className="typography__display--2 typography__color--white">
+                        <td height="28" valign="middle">
+                          <p className="typography__paragraph--2">
                             {truncateString(name, 32)}
                           </p>
                         </td>
@@ -258,16 +258,16 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                   })}
                 </table>
               </div>
-              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
+              <div style={{ flex: "1", minWidth: "48px", maxWidth: "48px" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {loan_volume.map(
                     ({ total_day_volume_loan }, index: number) => {
                       return (
                         <tr key={index + total_day_volume_loan}>
-                          <td height="30" valign="top" align="right">
+                          <td height="28" valign="top" align="right">
                             <div className="leaderboard__data-cell">
                               <Image src={CryptoIcon} alt="Crypto Icon" />
-                              <p className="typography__display--2">
+                              <p className="typography__subtitle--2">
                                 {DecimalFormatter(total_day_volume_loan)}
                               </p>
                             </div>
@@ -282,18 +282,18 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           </div>
         </animated.div>
         <animated.div style={{ ...springs5 }} className="chart__grid-column">
-          <div className="chart__container">
-            <p className="typography__label--4">Revenue</p>
+          <div className="chart__container chart__container--module">
+            <p className="typography__subtitle--module">Revenue</p>
             <div
               style={{ display: "flex", flexDirection: "row", width: "100%" }}
             >
-              <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
+              <div style={{ flex: "1" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {royalty.map(({ name }) => {
                     return (
                       <tr key={name}>
-                        <td height="30" valign="top">
-                          <p className="typography__display--2 typography__color--white">
+                        <td height="28" valign="middle">
+                          <p className="typography__paragraph--2">
                             {truncateString(name, 40)}
                           </p>
                         </td>
@@ -302,15 +302,15 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                   })}
                 </table>
               </div>
-              <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
+              <div style={{ flex: "1", minWidth: "48px", maxWidth: "48px" }}>
                 <table cellPadding={0} cellSpacing={0} width="100%">
                   {royalty.map(({ total_day_total_royalty }, index: number) => {
                     return (
                       <tr key={index + total_day_total_royalty}>
-                        <td height="30" valign="top" align="right">
+                        <td height="28" valign="top" align="right">
                           <div className="leaderboard__data-cell">
                             <Image src={CryptoIcon} alt="Crypto Icon" />
-                            <p className="typography__display--2">
+                            <p className="typography__subtitle--2">
                               {DecimalFormatter(total_day_total_royalty)}
                             </p>
                           </div>

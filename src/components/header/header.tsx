@@ -14,9 +14,6 @@ const Header: React.FC<HeaderProps> = ({ handleTabClick }) => {
         <p className="typography__display--3 typography__color--highlight">
           Analytics
         </p>
-        <p className="typography__display--3 typography__color--white">
-          Off-chain insights
-        </p>
       </div>
       <div className="header__row">
         <Navigation handleTabClick={handleTabClick} />

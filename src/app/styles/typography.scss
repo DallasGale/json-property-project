@@ -8,11 +8,11 @@ h4 {
   line-height: 1.3;
 }
 .typography__display--1 {
-  color: #fff;
-  font-size: 24px;
+  color: $white;
+  font-size: 20px;
   font-family: Roboto;
   font-weight: 700;
-  line-height: 32px;
+  line-height: 26px;
 }
 .typography__display--2 {
   color: #757575;
@@ -42,11 +42,12 @@ h4 {
 
 .typography__label--1 {
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   font-family: Roboto;
-  font-weight: 500;
+  font-weight: 700;
+  line-height: 16px;
   list-height: 1;
-  margin-bottom: 5px;
+  // margin-bottom: 5px;
 }
 
 .typography__label--2 {
@@ -79,11 +80,40 @@ h4 {
 }
 
 .typography__paragraph--1 {
-  color: #a5a5a5;
+  color: $dark-medium-emphasis;
+  font-size: 11px;
+  font-family: Roboto;
+  line-height: 16px;
+  margin-top: 0;
+}
+
+.typography__paragraph--2 {
+  color: $dark-high-emphasis;
+  font-size: 12px;
+  font-family: Roboto;
+  letter-spacing: 0.4px;
+  line-height: 16px;
+  margin-top: 0;
+}
+
+.typography__subtitle--2 {
+  color: $dark-medium-emphasis;
+  font-size: 12px;
+  font-family: Roboto;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+
+.typography__subtitle--module {
+  color: $dark-medium-emphasis;
   font-size: 10px;
   font-family: Roboto;
-  line-height: 1.5;
-  margin-top: 0;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .typography__color--green {

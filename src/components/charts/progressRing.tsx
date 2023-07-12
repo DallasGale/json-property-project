@@ -33,7 +33,7 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({
     <div className="chart__progress-ring">
       <Doughnut
         options={{
-          cutout: "85%",
+          cutout: "88%",
           plugins: {
             tooltip: {
               enabled: false,
@@ -56,6 +56,7 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({
               borderColor: "transparent",
               hoverOffset: 4,
               borderRadius: [5, 5, 5],
+              spacing: 6,
             },
           ],
         }}

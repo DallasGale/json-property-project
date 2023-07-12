@@ -345,7 +345,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       timeframe={timeframe}
                       volumes={realPercentDifference}
                     />
-                    <h3 className="typography__label--1">True Volume</h3>
+                    <h3 className="typography__subtitle--2">True Volume</h3>
                     <p className="typography__paragraph--1">
                       Excludes fake/artificial volume such as loans, points
                       farming and wash trading.
@@ -373,7 +373,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                   timeframe={timeframe}
                   volumes={realPercentDifference}
                 />
-                <h3 className="typography__label--1">Total Volume</h3>
+                <h3 className="typography__subtitle--2">Total Volume</h3>
                 <p className="typography__paragraph--1">
                   NFT trading volume across all transaction types
                 </p>
