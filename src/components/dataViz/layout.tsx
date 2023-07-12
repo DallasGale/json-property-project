@@ -15,6 +15,7 @@ import type {
 // Components
 import Header from "@/components/header/header";
 import navigation from "@/constants/navigation";
+import Interesting from "../views/interesting";
 
 interface DataVizLayoutTypes {
   labels: string[];
@@ -60,11 +61,13 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   traders,
 }) => {
   const [activeTab, setActiveTab] = useState("market-overview");
+
+  console.log({ activeTab });
   return (
     <>
       <Header handleTabClick={(e) => setActiveTab(e)} />
       <div className="content">
-        <section className="chart__wrapper">
+        <section className="wrapper">
           <>
             {activeTab == navigation[0].id && (
               <MarketOverview
@@ -117,6 +120,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 }}
               />
             )}
+            {activeTab == navigation[2].id && <Interesting />}
           </>
         </section>
       </div>

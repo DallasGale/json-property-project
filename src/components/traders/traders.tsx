@@ -12,6 +12,7 @@ import { useSpring, animated, easings } from "@react-spring/web";
 // Assets
 import TimeframeAsString from "@/utils/timeframeAsString";
 import TrendLineChart from "../charts/trendLineChart";
+import TwoColumnGrid from "@/grids/twoColumnGrid";
 
 interface TradersTypes {
   labels: string[];
@@ -184,162 +185,170 @@ const Traders: React.FC<TradersTypes> = ({
     },
   ];
   return (
-    <div className="chart__grid chart__grid--two-col">
-      <div className="chart__grid">
-        <animated.div
-          style={{ ...springs1 }}
-          className="chart__grid chart__grid--one-col"
-        >
-          <div className="chart__chart-actions-lockup">
-            <ChartDataToggles
-              title="Traders"
-              onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
-              active={tradersTimeframe}
-            />
-          </div>
-        </animated.div>
-        <animated.div
-          style={{ ...springs2 }}
-          className="chart__grid chart__grid--one-col traders-col"
-        >
-          <div className="chart__container">
-            <HeroBarChart
-              labels={tradersLabels}
-              legendOnClick={onClick}
-              legendLabels={...legendLabels}
-              datasets={[
-                {
-                  label: "Only Bought",
-                  data: onlyBoughtDisabled ? [] : onlyBoughtDataArray,
-                  borderColor: "white",
-                  backgroundColor: "rgba(95, 61, 196, 1)",
-                },
-                {
-                  label: "Only Sold",
-                  data: onlySoldDisabled ? [] : onlySoldDataArray,
-                  borderColor: "black",
-                  backgroundColor: "rgba(250, 82, 82, 1)",
-                },
-                {
-                  label: "Bought and Sold",
-                  data: boughtAndSoldDisabled ? [] : boughtAndSoldDataArray,
-                  borderColor: "white",
-                  backgroundColor: "rgba(64, 192, 87, 1)",
-                },
-              ]}
-            />
-          </div>
-        </animated.div>
-      </div>
-
-      <div className="chart__grid">
-        <animated.div
-          style={{ ...springs3 }}
-          className="chart__grid chart__grid--one-col"
-        >
-          <div className="chart__chart-actions-lockup">
-            <ChartDataToggles
-              title={TimeframeAsString(timeframe)}
-              onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
-              active={timeframe}
-            />
-          </div>
-        </animated.div>
-        <div className="chart__grid chart__grid--two-col traders__col">
-          <animated.div style={{ ...springs3 }} className="chart__container">
-            <div className="chart__container-body">
-              <div>
-                <DynamicVolumeNumber
-                  timeframe={timeframe}
-                  volumes={realPercentDifference}
+    <>
+      <TwoColumnGrid
+        column1={{
+          header: (
+            <animated.div style={{ ...springs1 }}>
+              <div className="chart__chart-actions-lockup">
+                <ChartDataToggles
+                  title="Traders"
+                  onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
+                  active={tradersTimeframe}
                 />
-                <h3 className="typography__label--1">Active Wallets</h3>
-                <p className="typography__paragraph--1">
-                  Wallets that have bought/sold within the last 24 hours.
-                </p>
               </div>
-              <TrendLineChart
-                legendOnClick={() => null}
-                labels={tradersLabels}
-                legendLabels={...legendLabels}
-                legendFormat="vertical"
-                datasets={[
-                  {
-                    label: "Only Bought",
-                    data: false
-                      ? []
-                      : onlyBoughtMovingAverageDataArray.slice(
-                          onlyBoughtMovingAverageDataArray.length - 90
-                        ),
-                    borderColor: false
-                      ? "rgba(95, 61, 196, 0)"
-                      : "rgba(95, 61, 196, 1)",
-                    backgroundColor: false
-                      ? "rgba(95, 61, 196, 0)"
-                      : "rgba(95, 61, 196, 1)",
-                    pointRadius: 0,
-                    borderWidth: 3,
-                  },
-                  {
-                    label: "Only Sold",
-                    data: false
-                      ? []
-                      : onlySoldMovingAverage.slice(
-                          onlySoldMovingAverage.length - 90
-                        ),
-                    borderColor: false
-                      ? "rgba(253, 126, 20, 0)"
-                      : "rgba(253, 126, 20, 1)",
-                    backgroundColor: false
-                      ? "rgba(253, 126, 20, 0)"
-                      : "rgba(253, 126, 20, 1)",
-                    pointRadius: 0,
-                    borderWidth: 3,
-                  },
-                  {
-                    label: "Bought And Sold",
-                    data: false
-                      ? []
-                      : boughtAndSoldMovingAverage.slice(
-                          boughtAndSoldMovingAverage.length - 90
-                        ),
-                    borderColor: false
-                      ? "rgba(64, 192, 87, 0)"
-                      : "rgba(64, 192, 87, 1)",
-                    backgroundColor: false
-                      ? "rgba(64, 192, 87, 0)"
-                      : "rgba(64, 192, 87, 1)",
-                    pointRadius: 0,
-                    borderWidth: 3,
-                  },
-                ]}
-              />
-            </div>
-          </animated.div>
-          <animated.div style={{ ...springs3 }} className="chart__container">
-            <div className="chart__container-body">
+            </animated.div>
+          ),
+          content: (
+            <animated.div style={{ ...springs2 }} className="grid__col-content">
               <div>
-                <DynamicVolumeNumber
-                  timeframe={timeframe}
-                  volumes={realPercentDifference}
+                <HeroBarChart
+                  labels={tradersLabels}
+                  legendOnClick={onClick}
+                  legendLabels={...legendLabels}
+                  datasets={[
+                    {
+                      label: "Only Bought",
+                      data: onlyBoughtDisabled ? [] : onlyBoughtDataArray,
+                      borderColor: "white",
+                      backgroundColor: "rgba(95, 61, 196, 1)",
+                    },
+                    {
+                      label: "Only Sold",
+                      data: onlySoldDisabled ? [] : onlySoldDataArray,
+                      borderColor: "black",
+                      backgroundColor: "rgba(250, 82, 82, 1)",
+                    },
+                    {
+                      label: "Bought and Sold",
+                      data: boughtAndSoldDisabled ? [] : boughtAndSoldDataArray,
+                      borderColor: "white",
+                      backgroundColor: "rgba(64, 192, 87, 1)",
+                    },
+                  ]}
                 />
-                <h3 className="typography__label--1">New Wallets</h3>
-                <p className="typography__paragraph--1">
-                  Wallets that have been created within the last 24 hours.
-                </p>
               </div>
-              <TrendLineChart
-                legendOnClick={() => null}
-                labels={tradersLabels}
-                legendLabels={[]}
-                legendFormat="vertical"
-                datasets={[]}
-              />
+            </animated.div>
+          ),
+        }}
+        column2={{
+          header: (
+            <animated.div style={{ ...springs3 }}>
+              <div className="chart__chart-actions-lockup">
+                <ChartDataToggles
+                  title={TimeframeAsString(timeframe)}
+                  onClick={(arg1, arg2) =>
+                    handleTrendlineTimeferame(arg1, arg2)
+                  }
+                  active={timeframe}
+                />
+              </div>
+            </animated.div>
+          ),
+          content: (
+            <div className="grid grid__two-col">
+              <animated.div
+                style={{ ...springs3 }}
+                className="grid__col-content"
+              >
+                <div className="grid__col-container-body">
+                  <div>
+                    <DynamicVolumeNumber
+                      timeframe={timeframe}
+                      volumes={realPercentDifference}
+                    />
+                    <h3 className="typography__label--1">Active Wallets</h3>
+                    <p className="typography__paragraph--1">
+                      Wallets that have bought/sold within the last 24 hours.
+                    </p>
+                  </div>
+                  <TrendLineChart
+                    legendOnClick={() => null}
+                    labels={tradersLabels}
+                    legendLabels={...legendLabels}
+                    legendFormat="vertical"
+                    datasets={[
+                      {
+                        label: "Only Bought",
+                        data: false
+                          ? []
+                          : onlyBoughtMovingAverageDataArray.slice(
+                              onlyBoughtMovingAverageDataArray.length - 90
+                            ),
+                        borderColor: false
+                          ? "rgba(95, 61, 196, 0)"
+                          : "rgba(95, 61, 196, 1)",
+                        backgroundColor: false
+                          ? "rgba(95, 61, 196, 0)"
+                          : "rgba(95, 61, 196, 1)",
+                        pointRadius: 0,
+                        borderWidth: 3,
+                      },
+                      {
+                        label: "Only Sold",
+                        data: false
+                          ? []
+                          : onlySoldMovingAverage.slice(
+                              onlySoldMovingAverage.length - 90
+                            ),
+                        borderColor: false
+                          ? "rgba(253, 126, 20, 0)"
+                          : "rgba(253, 126, 20, 1)",
+                        backgroundColor: false
+                          ? "rgba(253, 126, 20, 0)"
+                          : "rgba(253, 126, 20, 1)",
+                        pointRadius: 0,
+                        borderWidth: 3,
+                      },
+                      {
+                        label: "Bought And Sold",
+                        data: false
+                          ? []
+                          : boughtAndSoldMovingAverage.slice(
+                              boughtAndSoldMovingAverage.length - 90
+                            ),
+                        borderColor: false
+                          ? "rgba(64, 192, 87, 0)"
+                          : "rgba(64, 192, 87, 1)",
+                        backgroundColor: false
+                          ? "rgba(64, 192, 87, 0)"
+                          : "rgba(64, 192, 87, 1)",
+                        pointRadius: 0,
+                        borderWidth: 3,
+                      },
+                    ]}
+                  />
+                </div>
+              </animated.div>
+              <animated.div
+                style={{ ...springs3 }}
+                className="grid__col-content"
+              >
+                <div className="grid__col-container-body">
+                  <div>
+                    <DynamicVolumeNumber
+                      timeframe={timeframe}
+                      volumes={realPercentDifference}
+                    />
+                    <h3 className="typography__label--1">New Wallets</h3>
+                    <p className="typography__paragraph--1">
+                      Wallets that have been created within the last 24 hours.
+                    </p>
+                  </div>
+                  <TrendLineChart
+                    legendOnClick={() => null}
+                    labels={tradersLabels}
+                    legendLabels={[]}
+                    legendFormat="vertical"
+                    datasets={[]}
+                  />
+                </div>
+              </animated.div>
             </div>
-          </animated.div>
-        </div>
-      </div>
-    </div>
+          ),
+        }}
+      />
+    </>
   );
 };
 

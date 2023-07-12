@@ -1,0 +1,49 @@
+.tabled-dot-points {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabled-dot-point__list {
+  padding-left: 0;
+}
+
+.tabled-dot-point__list-item {
+  display: flex;
+  width: calc(100% - 20px);
+  justify-content: space-between;
+  padding-left: 0;
+  list-style: none;
+  position: relative;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  &:before {
+    border-radius: 6px;
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 4px;
+    height: 6px;
+    width: 6px;
+  }
+  &.accent-green {
+    &::before {
+      background-color: $accent-green;
+    }
+  }
+  &.accent-blue {
+    &::before {
+      background-color: $accent-blue;
+    }
+  }
+  &.accent-purple {
+    &::before {
+      background-color: $accent-purple;
+    }
+  }
+  &.accent-orange {
+    &::before {
+      background-color: $accent-orange;
+    }
+  }
+}
