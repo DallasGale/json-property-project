@@ -391,14 +391,16 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
 
             <animated.div style={{ ...springs3 }} className="chart__container">
               <div className="chart__container-body">
-                <DynamicVolumeNumber
-                  timeframe={timeframe}
-                  volumes={realPercentDifference}
-                />
-                <h3 className="typography__label--1">Total Volume</h3>
-                <p className="typography__paragraph--1">
-                  NFT trading volume across all transaction types
-                </p>
+                <div>
+                  <DynamicVolumeNumber
+                    timeframe={timeframe}
+                    volumes={realPercentDifference}
+                  />
+                  <h3 className="typography__label--1">Total Volume</h3>
+                  <p className="typography__paragraph--1">
+                    NFT trading volume across all transaction types
+                  </p>
+                </div>
 
                 <TrendLineChart
                   legendOnClick={(e: string) => trendlineLegendOnClick(e)}

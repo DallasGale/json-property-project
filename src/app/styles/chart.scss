@@ -205,8 +205,11 @@ $gap: 20px;
   display: flex;
   align-items: flex-end;
   width: 100%;
-  height: auto;
+  height: 100%;
   width: 99.9%;
+  canvas {
+    min-height: 300px;
+  }
 }
 .chart__line-wrapper {
   background-size: cover !important;
@@ -295,7 +298,8 @@ $gap: 20px;
   opacity: 0.4;
 }
 
-.chart__legend-modifier--daily-true-volume {
+// modifiers
+.chart__legend.hero-legend {
   position: absolute;
   width: 100%;
   display: flex;

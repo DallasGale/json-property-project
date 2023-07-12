@@ -33,7 +33,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 0,
+    delay: 450,
     config: {
       tension: 90,
       friction: 16,
@@ -44,7 +44,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   const springs2 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 150,
+    delay: 600,
     config: {
       tension: 90,
       friction: 16,
@@ -55,7 +55,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   const springs3 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 300,
+    delay: 750,
     config: {
       tension: 90,
       friction: 16,
@@ -66,7 +66,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   const springs4 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 450,
+    delay: 900,
     config: {
       tension: 90,
       friction: 16,
@@ -77,7 +77,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   const springs5 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 600,
+    delay: 1000,
     config: {
       tension: 90,
       friction: 16,

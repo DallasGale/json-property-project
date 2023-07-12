@@ -7,6 +7,7 @@ interface DailyTrueVolumeTypes {
   labels: string[];
   datasets: BarChartDatasetsType[];
   legendLabels: LegendLabelTypes[];
+  legendModifierClass?: string;
   legendOnClick: (e: string) => void;
 }
 
@@ -19,15 +20,12 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
   return (
     <>
       <Legend
-        modifierClass="chart__legend-modifier--daily-true-volume"
+        modifierClass="hero-legend"
         onClick={(e) => legendOnClick(e)}
         labels={...legendLabels}
         legendFormat="horizontal"
       />
-      <div
-        className="chart__bar-wrapper chart__bar-wrapper--daily-true-volume"
-        style={{ height: 290 }}
-      >
+      <div className="chart__bar-wrapper">
         <Bar
           data={{
             labels: labels,

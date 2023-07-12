@@ -38,7 +38,7 @@ const Traders: React.FC<TradersTypes> = ({
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 0,
+    delay: 1150,
     config: {
       tension: 90,
       friction: 16,
@@ -49,7 +49,7 @@ const Traders: React.FC<TradersTypes> = ({
   const springs2 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 150,
+    delay: 1300,
     config: {
       tension: 90,
       friction: 16,
@@ -60,29 +60,7 @@ const Traders: React.FC<TradersTypes> = ({
   const springs3 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 300,
-    config: {
-      tension: 90,
-      friction: 16,
-      duration: 750,
-      easing: easings.easeInOutCubic,
-    },
-  });
-  const springs4 = useSpring({
-    from: { y: 100, opacity: 0 },
-    to: { y: 0, opacity: 1 },
-    delay: 450,
-    config: {
-      tension: 90,
-      friction: 16,
-      duration: 750,
-      easing: easings.easeInOutCubic,
-    },
-  });
-  const springs5 = useSpring({
-    from: { y: 100, opacity: 0 },
-    to: { y: 0, opacity: 1 },
-    delay: 600,
+    delay: 1450,
     config: {
       tension: 90,
       friction: 16,
@@ -221,8 +199,8 @@ const Traders: React.FC<TradersTypes> = ({
           </div>
         </animated.div>
         <animated.div
-          style={{ ...springs1 }}
-          className="chart__grid chart__grid--one-col"
+          style={{ ...springs2 }}
+          className="chart__grid chart__grid--one-col traders-col"
         >
           <div className="chart__container">
             <HeroBarChart
@@ -252,12 +230,11 @@ const Traders: React.FC<TradersTypes> = ({
             />
           </div>
         </animated.div>
-        <div />
       </div>
 
       <div className="chart__grid">
         <animated.div
-          style={{ ...springs1 }}
+          style={{ ...springs3 }}
           className="chart__grid chart__grid--one-col"
         >
           <div className="chart__chart-actions-lockup">
@@ -268,17 +245,19 @@ const Traders: React.FC<TradersTypes> = ({
             />
           </div>
         </animated.div>
-        <div className="chart__grid chart__grid--two-col">
+        <div className="chart__grid chart__grid--two-col traders__col">
           <animated.div style={{ ...springs3 }} className="chart__container">
             <div className="chart__container-body">
-              <DynamicVolumeNumber
-                timeframe={timeframe}
-                volumes={realPercentDifference}
-              />
-              <h3 className="typography__label--1">Active Wallets</h3>
-              <p className="typography__paragraph--1">
-                Wallets that have bought/sold within the last 24 hours.
-              </p>
+              <div>
+                <DynamicVolumeNumber
+                  timeframe={timeframe}
+                  volumes={realPercentDifference}
+                />
+                <h3 className="typography__label--1">Active Wallets</h3>
+                <p className="typography__paragraph--1">
+                  Wallets that have bought/sold within the last 24 hours.
+                </p>
+              </div>
               <TrendLineChart
                 legendOnClick={() => null}
                 labels={tradersLabels}
@@ -337,9 +316,28 @@ const Traders: React.FC<TradersTypes> = ({
               />
             </div>
           </animated.div>
+          <animated.div style={{ ...springs3 }} className="chart__container">
+            <div className="chart__container-body">
+              <div>
+                <DynamicVolumeNumber
+                  timeframe={timeframe}
+                  volumes={realPercentDifference}
+                />
+                <h3 className="typography__label--1">New Wallets</h3>
+                <p className="typography__paragraph--1">
+                  Wallets that have been created within the last 24 hours.
+                </p>
+              </div>
+              <TrendLineChart
+                legendOnClick={() => null}
+                labels={tradersLabels}
+                legendLabels={[]}
+                legendFormat="vertical"
+                datasets={[]}
+              />
+            </div>
+          </animated.div>
         </div>
-        <div>col 2</div>
-        {/* </div> */}
       </div>
     </div>
   );
