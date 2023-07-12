@@ -257,7 +257,7 @@ const Traders: React.FC<TradersTypes> = ({
                       timeframe={timeframe}
                       volumes={realPercentDifference}
                     />
-                    <h3 className="typography__label--1">Active Wallets</h3>
+                    <h3 className="typography__subtitle--2">Active Wallets</h3>
                     <p className="typography__paragraph--1">
                       Wallets that have bought/sold within the last 24 hours.
                     </p>
@@ -330,7 +330,7 @@ const Traders: React.FC<TradersTypes> = ({
                       timeframe={timeframe}
                       volumes={realPercentDifference}
                     />
-                    <h3 className="typography__label--1">New Wallets</h3>
+                    <h3 className="typography__subtitle--2">New Wallets</h3>
                     <p className="typography__paragraph--1">
                       Wallets that have been created within the last 24 hours.
                     </p>
