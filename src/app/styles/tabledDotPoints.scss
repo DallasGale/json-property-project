@@ -26,9 +26,24 @@
     height: 6px;
     width: 6px;
   }
+  &.black {
+    &::before {
+      background-color: $black;
+    }
+  }
   &.accent-green {
     &::before {
       background-color: $accent-green;
+    }
+  }
+  &.dark-green {
+    &::before {
+      background-color: $dark-green;
+    }
+  }
+  &.darker-green {
+    &::before {
+      background-color: $darker-green;
     }
   }
   &.accent-blue {

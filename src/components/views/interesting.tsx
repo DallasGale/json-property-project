@@ -24,10 +24,10 @@ const Interesting = () => {
         content: (
           <TabledDotPoints
             dotpoints={[
-              { title: "NFT Top 20", value: 0.8, color: "green" },
-              { title: "NFT Top 20", value: 0.8, color: "green" },
-              { title: "NFT Top 20", value: 0.8, color: "green" },
-              { title: "NFT Top 20", value: 0.8, color: "green" },
+              { title: "NFT Top 20", value: 0.8, color: "black" },
+              { title: "NFT Top 20", value: 0.8, color: "darker-green" },
+              { title: "NFT Top 20", value: 0.8, color: "dark-green" },
+              { title: "NFT Top 20", value: 0.8, color: "accent-green" },
             ]}
           />
         ),

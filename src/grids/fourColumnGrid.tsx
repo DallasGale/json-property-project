@@ -62,7 +62,16 @@ const FourColumnGrid: React.FC<FourColumnGridTypes> = ({
   });
   return (
     <>
-      {gridHeading && <h2 className="typography__display--1">{gridHeading}</h2>}
+      <animated.div
+        style={{ ...springs1 }}
+        className="chart__grid chart__grid--one-col"
+      >
+        <div className="chart__chart-actions-lockup">
+          {gridHeading && (
+            <h2 className="typography__display--1">{gridHeading}</h2>
+          )}
+        </div>
+      </animated.div>
       <div className="grid grid__four-col">
         <animated.div style={{ ...springs1 }} className="grid__col">
           {column1.header && (
