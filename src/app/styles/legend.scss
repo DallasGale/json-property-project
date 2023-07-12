@@ -1,0 +1,10 @@
+.legend__format {
+  display: flex;
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &--horizontal {
+    flex-direction: row;
+  }
+}

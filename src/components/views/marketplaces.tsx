@@ -290,7 +290,7 @@ const Marketplaces: React.FC<VolumeChartProps> = ({
           className="chart__grid chart__grid--one-col"
         >
           <div className="chart__container">
-            <h3 className="typography__label--1">Total Volume</h3>
+            <h3 className="typography__subtitle--2">Total Volume</h3>
             <p className="typography__paragraph--1">
               NFT trading volume across all transaction types
             </p>
@@ -319,7 +319,7 @@ const Marketplaces: React.FC<VolumeChartProps> = ({
           className="chart__grid chart__grid--one-col"
         >
           <div className="chart__container">
-            <h3 className="typography__label--1">Total Volume</h3>
+            <h3 className="typography__subtitle--2">Total Volume</h3>
             <p className="typography__paragraph--1">
               NFT trading volume across all transaction types
             </p>
@@ -348,7 +348,7 @@ const Marketplaces: React.FC<VolumeChartProps> = ({
           className="chart__grid chart__grid--one-col"
         >
           <div className="chart__container">
-            <h3 className="typography__label--1">Total Volume</h3>
+            <h3 className="typography__subtitle--2">Total Volume</h3>
             <p className="typography__paragraph--1">
               NFT trading volume across all transaction types
             </p>
@@ -377,7 +377,7 @@ const Marketplaces: React.FC<VolumeChartProps> = ({
           className="chart__grid chart__grid--one-col"
         >
           <div className="chart__container">
-            <h3 className="typography__label--1">Total Volume</h3>
+            <h3 className="typography__subtitle--2">Total Volume</h3>
             <p className="typography__paragraph--1">
               NFT trading volume across all transaction types
             </p>

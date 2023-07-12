@@ -12,6 +12,10 @@ const navigation: NavigationTypes[] = [
     name: "Marketplaces",
     id: "marketplaces",
   },
+  {
+    name: "Interesting",
+    id: "interesting",
+  },
 ];
 
 export default navigation;

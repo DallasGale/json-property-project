@@ -8,12 +8,25 @@
 @import "./utils.scss";
 @import "./header.scss";
 @import "./tab.scss";
+@import "./legend.scss";
+@import "./traders.scss";
+@import "./grid.scss";
+
+@import "./tabledDotPoints.scss";
 
 body {
   background-color: $black;
 }
 
 .content {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: auto;
+}
+
+.wrapper {
+  flex-direction: column;
+  margin: auto;
+  margin-top: 130px;
+  width: 100%;
+  display: flex;
 }

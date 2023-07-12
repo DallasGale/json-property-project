@@ -39,6 +39,14 @@ h4 {
   letter-spacing: 0.25px;
   text-transform: uppercase;
 }
+.typography__display--5 {
+  color: $light-grey-1;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
 
 .typography__label--1 {
   color: #fff;
@@ -77,6 +85,15 @@ h4 {
   text-transform: uppercase;
   line-height: 16px;
   letter-spacing: 0.25px;
+}
+.typography__label--5 {
+  font-size: 12px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  color: $light-grey-1;
+  line-height: 16px;
+  letter-spacing: 0.4px;
 }
 
 .typography__paragraph--1 {

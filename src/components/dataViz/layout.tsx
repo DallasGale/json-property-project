@@ -3,9 +3,6 @@ import { useState } from "react";
 import Marketplaces from "@views/marketplaces";
 import MarketOverview from "@views/marketOverview";
 
-// Utils
-import { useSpring, animated } from "@react-spring/web";
-
 // Types
 import type {
   DatasetsType,
@@ -18,6 +15,7 @@ import type {
 // Components
 import Header from "@/components/header/header";
 import navigation from "@/constants/navigation";
+import Interesting from "../views/interesting";
 
 interface DataVizLayoutTypes {
   labels: string[];
@@ -38,9 +36,12 @@ interface DataVizLayoutTypes {
     royalty: RoyaltyTypes[];
   };
   traders: {
-    onlyBought: any[];
-    onlySold: any[];
-    boughtAndSold: any[];
+    onlyBought: number[];
+    onlyBoughtMovingAverage: number[];
+    onlySold: number[];
+    onlySoldMovingAverage: number[];
+    boughtAndSold: number[];
+    boughtAndSoldMovingAverage: number[];
   };
 }
 
@@ -59,18 +60,17 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   leaderboard,
   traders,
 }) => {
-  const [toggleView, setToggleView] = useState(true);
-
   const [activeTab, setActiveTab] = useState("market-overview");
+
+  console.log({ activeTab });
   return (
     <>
       <Header handleTabClick={(e) => setActiveTab(e)} />
       <div className="content">
-        <section className="chart__wrapper">
+        <section className="wrapper">
           <>
             {activeTab == navigation[0].id && (
               <MarketOverview
-                toggleView={toggleView}
                 labels={labels}
                 trueVolume={trueVolume}
                 totalVolume={totalVolume}
@@ -90,8 +90,12 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 }}
                 traders={{
                   onlyBought: traders.onlyBought,
+                  onlyBoughtMovingAverage: traders.onlyBoughtMovingAverage,
                   onlySold: traders.onlySold,
+                  onlySoldMovingAverage: traders.onlySoldMovingAverage,
                   boughtAndSold: traders.boughtAndSold,
+                  boughtAndSoldMovingAverage:
+                    traders.boughtAndSoldMovingAverage,
                 }}
               />
             )}
@@ -116,6 +120,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 }}
               />
             )}
+            {activeTab == navigation[2].id && <Interesting />}
           </>
         </section>
       </div>

@@ -37,6 +37,7 @@ import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
 import Traders from "../traders/traders";
 import TimeframeAsString from "@/utils/timeframeAsString";
+import TwoColumnGrid from "@/grids/twoColumnGrid";
 
 ChartJS.register(
   CategoryScale,
@@ -62,7 +63,6 @@ interface VolumeChartProps {
   fakeVolumeMovingAverage: number[];
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
-  toggleView: boolean;
   leaderboard: {
     trueVolume: TrueVolumeTypes[];
     fakeVolume: FakeVolumeTypes[];
@@ -70,9 +70,12 @@ interface VolumeChartProps {
     royalty: RoyaltyTypes[];
   };
   traders: {
-    onlyBought: any[];
-    onlySold: any[];
-    boughtAndSold: any[];
+    onlyBought: number[];
+    onlyBoughtMovingAverage: number[];
+    onlySold: number[];
+    onlySoldMovingAverage: number[];
+    boughtAndSold: number[];
+    boughtAndSoldMovingAverage: number[];
   };
 }
 const MarketOverview: React.FC<VolumeChartProps> = ({
@@ -247,154 +250,233 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     }
   };
 
+  const [loanVolumeTrendDisabled, setLoanVolumeTrendDisabled] = useState(false);
+  const [fakeVolumeTrendDisabled, setFakeVolumeTrendDisabled] = useState(false);
+
+  const trendlineLegendOnClick = (e: string) => {
+    if (document) {
+      const domEls = document?.getElementsByTagName("input");
+
+      for (let i = 0; i < domEls.length; i++) {
+        if (domEls[i].id === e) {
+          if (domEls[i].id === "loan-volume-trend") {
+            setLoanVolumeTrendDisabled(!loanVolumeTrendDisabled);
+          }
+          if (domEls[i].id === "fake-volume-trend") {
+            setFakeVolumeTrendDisabled(!fakeVolumeTrendDisabled);
+          }
+        }
+      }
+    }
+  };
+
   return (
     <>
       {/* TWO COLUMN GRID */}
-      <div className="chart__grid chart__grid--two-col">
-        {/* COL. 1 */}
-        <div className="chart__grid">
-          <animated.div
-            style={{ ...springs1 }}
-            className="chart__grid chart__grid--one-col"
-          >
-            <div className="chart__chart-actions-lockup">
-              <ChartDataToggles
-                title="Daily True Volume"
-                onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
-                active={dailyTimeframe}
-              />
-            </div>
-          </animated.div>
-          <animated.div
-            style={{ ...springs1 }}
-            className="chart__grid chart__grid--one-col"
-          >
-            <div className="chart__container">
-              <HeroBarChart
-                legendOnClick={(e: string) => onClick(e)}
-                labels={dailyTrueVolumeLabels}
-                datasets={[
-                  {
-                    label: "True Volume",
-                    data: trueVolumeDisabled ? [] : dailyTrueVolumeDataArray,
-                    borderColor: "white",
-                    backgroundColor: "rgba(64, 192, 87, 1)",
-                  },
-                  {
-                    label: "Loans",
-                    data: loanVolumeDisabled ? [] : dailyLoanVolumeDataArray,
-                    borderColor: "black",
-                    backgroundColor: "rgba(250, 176, 5, 1)",
-                  },
-                  {
-                    label: "Fake Volume (Inorganic)",
-                    data: fakeVolumeDisabled ? [] : dailyFakeVolumeDataArray,
-                    borderColor: "white",
-                    backgroundColor: "rgba(253, 126, 20, 1)",
-                  },
-                ]}
-                legendLables={[
-                  {
-                    color: "accent-green",
-                    name: "True Volume",
-                    id: "true-volume",
-                  },
-                  {
-                    color: "accent-yellow",
-                    name: "Loan Volume",
-                    id: "loan-volume",
-                  },
-                  {
-                    color: "accent-orange",
-                    name: "Fake Volume",
-                    id: "fake-volume",
-                  },
-                ]}
-              />
-            </div>
-          </animated.div>
-        </div>
+      <TwoColumnGrid
+        column1={{
+          header: (
+            <animated.div
+              style={{ ...springs1 }}
+              className="chart__grid chart__grid--one-col"
+            >
+              <div className="chart__chart-actions-lockup">
+                <ChartDataToggles
+                  title="Daily True Volume"
+                  onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
+                  active={dailyTimeframe}
+                />
+              </div>
+            </animated.div>
+          ),
+          content: (
+            <>
+              <animated.div
+                style={{ ...springs1 }}
+                className="grid__col-content"
+              >
+                <HeroBarChart
+                  legendOnClick={(e: string) => onClick(e)}
+                  labels={dailyTrueVolumeLabels}
+                  datasets={[
+                    {
+                      label: "True Volume",
+                      data: trueVolumeDisabled ? [] : dailyTrueVolumeDataArray,
+                      borderColor: "white",
+                      backgroundColor: "rgba(64, 192, 87, 1)",
+                    },
+                    {
+                      label: "Loans",
+                      data: loanVolumeDisabled ? [] : dailyLoanVolumeDataArray,
+                      borderColor: "black",
+                      backgroundColor: "rgba(250, 176, 5, 1)",
+                    },
+                    {
+                      label: "Fake Volume (Inorganic)",
+                      data: fakeVolumeDisabled ? [] : dailyFakeVolumeDataArray,
+                      borderColor: "white",
+                      backgroundColor: "rgba(253, 126, 20, 1)",
+                    },
+                  ]}
+                  legendLabels={[
+                    {
+                      color: "accent-green",
+                      name: "True Volume",
+                      id: "true-volume",
+                    },
+                    {
+                      color: "accent-yellow",
+                      name: "Loan Volume",
+                      id: "loan-volume",
+                    },
+                    {
+                      color: "accent-orange",
+                      name: "Fake Volume",
+                      id: "fake-volume",
+                    },
+                  ]}
+                />
+              </animated.div>
+            </>
+          ),
+        }}
+        column2={{
+          header: (
+            <animated.div
+              style={{ ...springs1 }}
+              className="grid grid--one-col"
+            >
+              <div className="chart__chart-actions-lockup">
+                <ChartDataToggles
+                  title={TimeframeAsString(timeframe)}
+                  onClick={(arg1, arg2) =>
+                    handleTrendlineTimeferame(arg1, arg2)
+                  }
+                  active={timeframe}
+                />
+              </div>
+            </animated.div>
+          ),
+          content: (
+            <>
+              <div className="grid grid__two-col">
+                <animated.div
+                  style={{ ...springs2 }}
+                  className="grid__col-content"
+                >
+                  <div className="grid__col-container-body">
+                    <div className="chart__info">
+                      <ProgressRing
+                        timeframe={timeframe}
+                        true_volume={dailyTrueVolumeDataArray}
+                        loan_volume={dailyLoanVolumeDataArray}
+                        fake_volume={dailyFakeVolumeDataArray}
+                      />
+                      <div>
+                        <DynamicVolumeNumber
+                          timeframe={timeframe}
+                          volumes={realPercentDifference}
+                        />
+                        <h3 className="typography__subtitle--2">True Volume</h3>
+                        <p className="typography__paragraph--1">
+                          Excludes fake/artificial volume such as loans, points
+                          farming and wash trading.
+                        </p>
+                      </div>
+                    </div>
 
-        {/* COL 2 */}
-        <div className="chart__grid">
-          <animated.div
-            style={{ ...springs1 }}
-            className="chart__grid chart__grid--one-col"
-          >
-            <div className="chart__chart-actions-lockup">
-              <ChartDataToggles
-                title={TimeframeAsString(timeframe)}
-                onClick={(arg1, arg2) => handleTrendlineTimeferame(arg1, arg2)}
-                active={timeframe}
-              />
-            </div>
-          </animated.div>
-
-          <div className="chart__grid chart__grid--two-col">
-            <animated.div style={{ ...springs2 }} className="chart__container">
-              <div className="chart__container-body">
-                <div className="chart__info">
-                  <ProgressRing
-                    timeframe={timeframe}
-                    true_volume={dailyTrueVolumeDataArray}
-                    loan_volume={dailyLoanVolumeDataArray}
-                    fake_volume={dailyFakeVolumeDataArray}
-                  />
-                  <div>
-                    <DynamicVolumeNumber
-                      timeframe={timeframe}
-                      volumes={realPercentDifference}
+                    <TrueVolumeBarChart
+                      labels={trendlineVolumeLabels}
+                      data={{ true_volume: trendlineTrueVolumeArray }}
+                      trend_timespan={-90}
                     />
-                    <h3 className="typography__subtitle--2">True Volume</h3>
-                    <p className="typography__paragraph--1">
-                      Excludes fake/artificial volume such as loans, points
-                      farming and wash trading.
+                  </div>
+
+                  <div className="chart__container-footer">
+                    <p className="typography__label--3 typography__color--dark-bg-3">
+                      90 Day Trend
                     </p>
                   </div>
-                </div>
+                </animated.div>
 
-                <TrueVolumeBarChart
-                  labels={trendlineVolumeLabels}
-                  data={{ true_volume: trendlineTrueVolumeArray }}
-                  trend_timespan={-90}
-                />
-              </div>
+                <animated.div
+                  style={{ ...springs3 }}
+                  className="grid__col-content"
+                >
+                  <div className="grid__col-container-body">
+                    <div>
+                      <DynamicVolumeNumber
+                        timeframe={timeframe}
+                        volumes={realPercentDifference}
+                      />
+                      <h3 className="typography__subtitle--2">Total Volume</h3>
+                      <p className="typography__paragraph--1">
+                        NFT trading volume across all transaction types
+                      </p>
+                    </div>
 
-              <div className="chart__container-footer">
-                <p className="typography__label--3 typography__color--dark-bg-3">
-                  90 Day Trend
-                </p>
+                    <TrendLineChart
+                      legendOnClick={(e: string) => trendlineLegendOnClick(e)}
+                      labels={trendlineVolumeLabels}
+                      legendLabels={[
+                        {
+                          color: "accent-yellow",
+                          name: "Loan Volume Trend",
+                          id: "loan-volume-trend",
+                        },
+                        {
+                          color: "accent-orange",
+                          name: "Fake Volume Trend",
+                          id: "fake-volume-trend",
+                        },
+                      ]}
+                      datasets={[
+                        {
+                          label: "Loan Volume Trend",
+                          data: loanVolumeTrendDisabled
+                            ? []
+                            : loanVolumeMovingAverage.slice(
+                                loanVolumeMovingAverage.length - 90
+                              ),
+                          borderColor: loanVolumeDisabled
+                            ? "rgba(250, 176, 5, 0)"
+                            : "rgba(250, 176, 5, 1)",
+                          backgroundColor: loanVolumeDisabled
+                            ? "rgba(250, 176, 5, 0)"
+                            : "rgba(250, 176, 5, 1)",
+                          pointRadius: 0,
+                          borderWidth: 3,
+                        },
+                        {
+                          label: "Fake Volume Trend",
+                          data: fakeVolumeTrendDisabled
+                            ? []
+                            : fakeVolumeMovingAverage.slice(
+                                fakeVolumeMovingAverage.length - 90
+                              ),
+                          borderColor: fakeVolumeDisabled
+                            ? "rgba(253, 126, 20, 0)"
+                            : "rgba(253, 126, 20, 1)",
+                          backgroundColor: fakeVolumeDisabled
+                            ? "rgba(253, 126, 20, 0)"
+                            : "rgba(253, 126, 20, 1)",
+                          pointRadius: 0,
+                          borderWidth: 3,
+                        },
+                      ]}
+                    />
+                  </div>
+                  <div className="chart__container-footer">
+                    <p className="typography__label--3  typography__color--dark-bg-3">
+                      90 Day Trend
+                    </p>
+                  </div>
+                </animated.div>
               </div>
-            </animated.div>
-
-            <animated.div style={{ ...springs3 }} className="chart__container">
-              <div className="chart__container-body">
-                <DynamicVolumeNumber
-                  timeframe={timeframe}
-                  volumes={realPercentDifference}
-                />
-                <h3 className="typography__subtitle--2">Total Volume</h3>
-                <p className="typography__paragraph--1">
-                  NFT trading volume across all transaction types
-                </p>
-
-                <TrendLineChart
-                  labels={trendlineVolumeLabels}
-                  data={{
-                    loan_volume_moving_average: loanVolumeMovingAverage,
-                    fake_volume_moving_average: fakeVolumeMovingAverage,
-                  }}
-                />
-              </div>
-              <div className="chart__container-footer">
-                <p className="typography__label--3  typography__color--dark-bg-3">
-                  90 Day Trend
-                </p>
-              </div>
-            </animated.div>
-          </div>
-        </div>
-      </div>
+            </>
+          ),
+        }}
+      />
 
       {/* Leaderboard Row */}
       <Leaderboard
@@ -407,9 +489,13 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       {/* Traders row */}
       <Traders
         labels={labels}
+        realPercentDifference={[32.4]} // to be updated
         onlyBought={traders.onlyBought}
+        onlyBoughtMovingAverage={traders.onlyBoughtMovingAverage}
         onlySold={traders.onlySold}
+        onlySoldMovingAverage={traders.onlySoldMovingAverage}
         boughtAndSold={traders.boughtAndSold}
+        boughtAndSoldMovingAverage={traders.boughtAndSoldMovingAverage}
       />
     </>
   );
