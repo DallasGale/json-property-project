@@ -2,7 +2,7 @@ import { useSpring, animated, easings } from "@react-spring/web";
 import { ColumnTypes } from "./types";
 
 interface FourColumnGridTypes {
-  gridHeading: string;
+  gridHeading?: string;
   column1: ColumnTypes;
   column2: ColumnTypes;
   column3: ColumnTypes;
