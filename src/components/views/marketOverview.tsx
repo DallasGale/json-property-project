@@ -390,12 +390,11 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       data={{ true_volume: trendlineTrueVolumeArray }}
                       trend_timespan={-90}
                     />
-                  </div>
-
-                  <div className="chart__container-footer">
-                    <p className="typography__label--3 typography__color--dark-bg-3">
-                      90 Day Trend
-                    </p>
+                    <div className="chart__container-footer">
+                      <p className="typography__label--3 typography__color--dark-bg-3">
+                        90 Day Trend
+                      </p>
+                    </div>
                   </div>
                 </animated.div>
 
@@ -465,11 +464,11 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         },
                       ]}
                     />
-                  </div>
-                  <div className="chart__container-footer">
-                    <p className="typography__label--3  typography__color--dark-bg-3">
-                      90 Day Trend
-                    </p>
+                    <div className="chart__container-footer">
+                      <p className="typography__label--3  typography__color--dark-bg-3">
+                        90 Day Trend
+                      </p>
+                    </div>
                   </div>
                 </animated.div>
               </div>
