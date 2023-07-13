@@ -24,7 +24,7 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
   legendFormat,
 }) => {
   return (
-    <>
+    <div>
       <Legend
         onClick={(e) => legendOnClick(e)}
         labels={...legendLabels}
@@ -80,7 +80,7 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
           }}
         />
       </div>
-    </>
+    </div>
   );
 };
 
