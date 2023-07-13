@@ -479,9 +479,9 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
 
       {/* Leaderboard Row */}
       <Leaderboard
-        true_volume={leaderboard.trueVolume}
-        fake_volume={leaderboard.fakeVolume}
-        loan_volume={leaderboard.loanVolume}
+        trueVolume={leaderboard.trueVolume}
+        fakeVolume={leaderboard.fakeVolume}
+        loanVolume={leaderboard.loanVolume}
         royalty={leaderboard.royalty}
       />
 

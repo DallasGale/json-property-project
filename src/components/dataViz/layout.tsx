@@ -16,6 +16,7 @@ import type {
 import Header from "@/components/header/header";
 import navigation from "@/constants/navigation";
 import Interesting from "../views/interesting";
+import Leaderboards from "../views/leaderboards";
 
 interface DataVizLayoutTypes {
   labels: string[];
@@ -69,7 +70,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
       <div className="content">
         <section className="wrapper">
           <>
-            {activeTab == navigation[0].id && (
+            {activeTab == "market-overview" && (
               <MarketOverview
                 labels={labels}
                 trueVolume={trueVolume}
@@ -99,7 +100,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 }}
               />
             )}
-            {activeTab == navigation[1].id && (
+            {activeTab == "marketplaces" && (
               <Marketplaces
                 labels={labels}
                 trueVolume={trueVolume}
@@ -120,7 +121,16 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 }}
               />
             )}
-            {activeTab == navigation[2].id && <Interesting />}
+            {activeTab == "leaderboards" && (
+              <Leaderboards
+                leaderboard={{
+                  trueVolume: leaderboard.trueVolume,
+                  fakeVolume: leaderboard.fakeVolume,
+                  loanVolume: leaderboard.loanVolume,
+                  royalty: leaderboard.royalty,
+                }}
+              />
+            )}
           </>
         </section>
       </div>

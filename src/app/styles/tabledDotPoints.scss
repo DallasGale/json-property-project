@@ -4,6 +4,8 @@
 }
 
 .tabled-dot-point__list {
+  margin-top: 0;
+  margin-bottom: 0;
   padding-left: 0;
 }
 
@@ -16,6 +18,9 @@
   position: relative;
   padding-left: 20px;
   padding-right: 20px;
+  p {
+    line-height: 2;
+  }
 
   &:before {
     border-radius: 6px;

@@ -39,7 +39,7 @@ const Traders: React.FC<TradersTypes> = ({
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 1150,
+    delay: 0,
     config: {
       tension: 90,
       friction: 16,
@@ -50,7 +50,7 @@ const Traders: React.FC<TradersTypes> = ({
   const springs2 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 1300,
+    delay: 150,
     config: {
       tension: 90,
       friction: 16,
@@ -61,7 +61,7 @@ const Traders: React.FC<TradersTypes> = ({
   const springs3 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 1450,
+    delay: 300,
     config: {
       tension: 90,
       friction: 16,

@@ -10,7 +10,7 @@ const TwoColumnGrid: React.FC<TwoColumnGridTypes> = ({ column1, column2 }) => {
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 450,
+    delay: 0,
     config: {
       tension: 90,
       friction: 16,
@@ -21,7 +21,7 @@ const TwoColumnGrid: React.FC<TwoColumnGridTypes> = ({ column1, column2 }) => {
   const springs2 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 600,
+    delay: 150,
     config: {
       tension: 90,
       friction: 16,

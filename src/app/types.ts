@@ -44,6 +44,7 @@ export type LegendLabelTypes = {
   color: string;
   name: string;
   id: string;
+  value?: number;
 };
 
-export type LegendFormatTypes = "vertical" | "horizontal";
+export type LegendFormatTypes = "vertical" | "horizontal" | "tabled";

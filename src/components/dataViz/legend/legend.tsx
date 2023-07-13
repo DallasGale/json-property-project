@@ -1,4 +1,6 @@
 import { LegendFormatTypes } from "@/app/types";
+import TabledDotPoints from "@components/tabledDotPoints/tabledDotPoints";
+
 interface LegendProps {
   labels: LabelTypes[];
   modifierClass?: string;
@@ -10,6 +12,7 @@ type LabelTypes = {
   color: string;
   name: string;
   id: string;
+  value?: number;
 };
 const Legend: React.FC<LegendProps> = ({
   modifierClass,
@@ -17,7 +20,9 @@ const Legend: React.FC<LegendProps> = ({
   onClick,
   legendFormat = "horizontal",
 }) => {
-  return (
+  return legendFormat === "tabled" ? (
+    <TabledDotPoints dotpoints={...labels} />
+  ) : (
     <div className={`chart__legend ${modifierClass}`}>
       <form className={`legend__format legend__format--${legendFormat}`}>
         {labels.map(({ name, color, id }) => {

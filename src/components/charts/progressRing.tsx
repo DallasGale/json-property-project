@@ -1,5 +1,5 @@
 import { Doughnut } from "react-chartjs-2";
-import doughnutValueColors from "@/utils/doughnutValueColors";
+// import goodToBadColors from "@/utils/goodToBadColors";
 
 interface ProgressRingTypes {
   timeframe: number;
@@ -13,8 +13,6 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({
   loan_volume,
   fake_volume,
 }) => {
-  console.log(true_volume.slice(true_volume.length - 1));
-
   // function calculatePercentageDifferenceBetweenThreeNumbers() {
 
   //   let total = 0
