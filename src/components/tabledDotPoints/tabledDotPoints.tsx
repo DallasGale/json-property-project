@@ -7,7 +7,7 @@ interface DotPointProps {
 
 type DotPointTypes = {
   name: string;
-  value: number;
+  value?: number;
   color: string;
   id: string;
 };
@@ -31,13 +31,15 @@ const TabledDotPoints: React.FC<DotPointProps> = ({ dotpoints, onClick }) => {
               <p className="tabled-dot-point__title typography__label--5">
                 {name}
               </p>
-              <p
-                className={`tabled-dot-point__value typography__display--2 typography__color--${valueColor(
-                  value
-                )}`}
-              >
-                {DecimalFormatter(value)}%
-              </p>
+              {value && (
+                <p
+                  className={`tabled-dot-point__value typography__display--2 typography__color--${valueColor(
+                    value
+                  )}`}
+                >
+                  {DecimalFormatter(value)}%
+                </p>
+              )}
             </li>
           );
         })}

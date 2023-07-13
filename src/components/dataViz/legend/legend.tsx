@@ -21,7 +21,7 @@ const Legend: React.FC<LegendProps> = ({
   legendFormat = "horizontal",
 }) => {
   return legendFormat === "tabled" ? (
-    <TabledDotPoints dotpoints={...labels} />
+    <TabledDotPoints dotpoints={...labels} onClick={onClick} />
   ) : (
     <div className={`chart__legend ${modifierClass}`}>
       <form className={`legend__format legend__format--${legendFormat}`}>

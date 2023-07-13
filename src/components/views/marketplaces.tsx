@@ -403,9 +403,9 @@ const Marketplaces: React.FC<VolumeChartProps> = ({
         </animated.div>
       </div>
       <Leaderboard
-        true_volume={leaderboard.true_volume}
-        fake_volume={leaderboard.fake_volume}
-        loan_volume={leaderboard.loan_volume}
+        trueVolume={leaderboard.true_volume}
+        fakeVolume={leaderboard.fake_volume}
+        loanVolume={leaderboard.loan_volume}
         royalty={leaderboard.royalty}
       />
     </div>
