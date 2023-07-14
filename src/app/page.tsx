@@ -21,8 +21,28 @@ async function getData() {
   return res.json();
 }
 
-async function getLeaderBoardData() {
-  const res = await fetch(endpoints.nft_ethereum_collection_summary);
+async function getLeaderBoard30dData() {
+  const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  console.log({ res });
+
+  return res.json();
+}
+
+async function getLeaderBoard7dData() {
+  const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  console.log({ res });
+
+  return res.json();
+}
+
+async function getLeaderBoard1dData() {
+  const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -33,7 +53,9 @@ async function getLeaderBoardData() {
 
 export default async function Home() {
   const data = await getData();
-  const leaderBoardData = await getLeaderBoardData();
+  const leaderBoard30dData = await getLeaderBoard30dData();
+  const leaderBoard7dData = await getLeaderBoard7dData();
+  const leaderBoard301Data = await getLeaderBoard1dData();
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -115,27 +137,27 @@ export default async function Home() {
         trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
         leaderboard={{
           top100: orderBy(
-            leaderBoardData,
+            leaderBoard30dData,
             ["total_raw_day_volume"],
             "desc"
           ).slice(0, 100),
           trueVolume: orderBy(
-            leaderBoardData,
+            leaderBoard30dData,
             ["total_real_day_volume"],
             "desc"
           ).slice(0, 5),
           fakeVolume: orderBy(
-            leaderBoardData,
+            leaderBoard30dData,
             ["total_day_volume_fake"],
             "desc"
           ).slice(0, 5),
           loanVolume: orderBy(
-            leaderBoardData,
+            leaderBoard30dData,
             ["total_day_volume_loan"],
             "desc"
           ).slice(0, 5),
           royalty: orderBy(
-            leaderBoardData,
+            leaderBoard30dData,
             ["total_day_total_royalty"],
             "desc"
           ).slice(0, 5),

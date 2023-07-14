@@ -14,11 +14,11 @@ import { CollectionTypes, DatasetsType } from "@/app/types";
 
 // Components
 import ChartDataToggles from "@components/toggles/chart_data";
+import { kFormatter } from "@/utils/kFormatter";
 
 interface DataTableProps {
   tableTitle?: string;
   tableHead: TabelHeadTypes[];
-  tableBody: TableBodyTypes[];
   tableBodyData: CollectionTypes[];
 }
 
@@ -28,23 +28,7 @@ type TabelHeadTypes = {
   hasChevronDown?: boolean;
 };
 
-type TableBodyTypes = {
-  number: number;
-  os: number;
-  collection: string;
-  volume: number;
-  trueV: number;
-  trueVPercent: number;
-  floor: number;
-  sales: number;
-  hasChevronDown?: boolean;
-};
-const DataTable: React.FC<DataTableProps> = ({
-  tableTitle,
-  tableHead,
-  tableBody,
-  tableBodyData,
-}) => {
+const DataTable: React.FC<DataTableProps> = ({ tableHead, tableBodyData }) => {
   // Animations
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
@@ -58,18 +42,6 @@ const DataTable: React.FC<DataTableProps> = ({
     },
   });
   const springs2 = useSpring({
-    from: { y: 100, opacity: 0 },
-    to: { y: 0, opacity: 1 },
-    delay: 150,
-    config: {
-      tension: 90,
-      friction: 16,
-      duration: 750,
-      easing: easings.easeInOutCubic,
-    },
-  });
-
-  const springs3 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
     delay: 150,
@@ -186,11 +158,11 @@ const DataTable: React.FC<DataTableProps> = ({
                     <td width="50">
                       <p className="typography__display--2">{count}</p>
                     </td>
-                    <td width="50">
+                    {/* <td width="50">
                       <p className="typography__display--2">
-                        {DecimalFormatter(total_day_total_platform)}
+                        {DecimalFormatter(total_raw_day_volume)} rank
                       </p>
-                    </td>
+                    </td> */}
                     <td>
                       <p className="typography__display--6">{name}</p>
                     </td>
@@ -202,7 +174,7 @@ const DataTable: React.FC<DataTableProps> = ({
                           className="data-table__icon data-table__icon--crypto"
                         />
                         <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                          {DecimalFormatter(total_raw_day_volume)}
+                          {kFormatter(DecimalFormatter(total_raw_day_volume))}
                         </p>
                       </div>
                     </td>
@@ -214,7 +186,7 @@ const DataTable: React.FC<DataTableProps> = ({
                           className="data-table__icon data-table__icon--crypto"
                         />
                         <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                          {DecimalFormatter(total_real_day_volume)}
+                          {kFormatter(DecimalFormatter(total_real_day_volume))}
                         </p>
                       </div>
                     </td>
@@ -234,7 +206,7 @@ const DataTable: React.FC<DataTableProps> = ({
                         <p className="typography__display--2">--</p>
                       )}
                     </td>
-                    <td width="70" align="right">
+                    {/* <td width="70" align="right">
                       <div className="data-table__cell-content">
                         <Image
                           src={CryptoIcon}
@@ -245,10 +217,17 @@ const DataTable: React.FC<DataTableProps> = ({
                           {DecimalFormatter(total_raw_day_volume)}
                         </p>
                       </div>
-                    </td>
-                    <td width="70" align="right">
+                    </td> */}
+
+                    {/* loans */}
+                    {/* revenue */}
+                    {/* fake_volume */}
+                    {/* total sales count */}
+                    {/* true sales count */}
+
+                    <td width="110" align="right">
                       <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                        {DecimalFormatter(total_real_day_trade_num)}
+                        {kFormatter(total_real_day_trade_num)}
                       </p>
                     </td>
                   </tr>
