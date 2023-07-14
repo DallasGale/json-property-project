@@ -18,8 +18,13 @@ import { kFormatter } from "@/utils/kFormatter";
 
 interface DataTableProps {
   tableTitle?: string;
-  tableHead: TabelHeadTypes[];
-  tableBodyData: CollectionTypes[];
+  tableBodyData: {
+    OneDayTop100: CollectionTypes[];
+    SevenDayTop100: CollectionTypes[];
+    ThirtyDayTop100: CollectionTypes[];
+    NinetyDayTop100?: CollectionTypes[];
+    AllTop100?: CollectionTypes[];
+  };
 }
 
 type TabelHeadTypes = {
@@ -28,7 +33,41 @@ type TabelHeadTypes = {
   hasChevronDown?: boolean;
 };
 
-const DataTable: React.FC<DataTableProps> = ({ tableHead, tableBodyData }) => {
+const tableHead: TabelHeadTypes[] = [
+  {
+    name: "#",
+    id: "number",
+    hasChevronDown: false,
+  },
+
+  {
+    name: "Collection",
+    id: "collection",
+    hasChevronDown: false,
+  },
+  {
+    name: "Volume",
+    id: "volume",
+    hasChevronDown: true,
+  },
+  {
+    name: "True V",
+    id: "true-v",
+    hasChevronDown: true,
+  },
+  {
+    name: "True V %",
+    id: "true-v-percent",
+    hasChevronDown: true,
+  },
+  {
+    name: "True Sales",
+    id: "sales",
+    hasChevronDown: true,
+  },
+];
+
+const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
   // Animations
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
@@ -53,25 +92,27 @@ const DataTable: React.FC<DataTableProps> = ({ tableHead, tableBodyData }) => {
     },
   });
 
-  const [timeframe, setTimeframe] = useState(0);
-  const [top100Data, setTop100Data] = useState(tableBodyData);
+  const [timeframe, setTimeframe] = useState(-30);
+  const [top100Data, setTop100Data] = useState(tableBodyData.ThirtyDayTop100);
+
+  console.log({ top100Data });
   useEffect(() => {
     if (timeframe === 90) {
-      setTop100Data(tableBodyData.slice(tableBodyData.length - 90));
+      setTop100Data(tableBodyData.NinetyDayTop100 || []);
     }
     if (timeframe === 30) {
-      setTop100Data(tableBodyData.slice(tableBodyData.length - 30));
+      setTop100Data(tableBodyData.ThirtyDayTop100);
     }
     if (timeframe === 7) {
-      setTop100Data(tableBodyData.slice(tableBodyData.length - 7));
+      setTop100Data(tableBodyData.SevenDayTop100);
     }
 
     if (timeframe === 1) {
-      setTop100Data(tableBodyData.slice(tableBodyData.length - 1));
+      setTop100Data(tableBodyData.OneDayTop100);
     }
 
     if (timeframe === 0) {
-      setTop100Data(tableBodyData);
+      setTop100Data(tableBodyData.AllTop100 || []);
     }
   }, [timeframe]);
 
@@ -105,8 +146,10 @@ const DataTable: React.FC<DataTableProps> = ({ tableHead, tableBodyData }) => {
             {tableHead.length &&
               tableHead.map(({ name, id, hasChevronDown }) => (
                 <td
+                  id={id}
+                  onClick={(e) => console.log(e.currentTarget.id)}
                   key={id}
-                  className={`data-table__cell--${name.toLowerCase()}`}
+                  className={`data-table__cell data-table__cell--${name.toLowerCase()}`}
                 >
                   {hasChevronDown ? (
                     <div className="data-table__cell-content">

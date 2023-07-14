@@ -31,7 +31,11 @@ interface DataVizLayoutTypes {
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
   leaderboard: {
-    top100: CollectionTypes[];
+    top100: {
+      OneDayTop100: CollectionTypes[];
+      SevenDayTop100: CollectionTypes[];
+      ThirtyDayTop100: CollectionTypes[];
+    };
     trueVolume: TrueVolumeTypes[];
     fakeVolume: FakeVolumeTypes[];
     loanVolume: LoanVolumeTypes[];
@@ -120,7 +124,11 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
             {activeTab == "leaderboards" && (
               <Leaderboards
                 leaderboard={{
-                  top100: leaderboard.top100,
+                  top100: {
+                    OneDayTop100: leaderboard.top100.OneDayTop100,
+                    SevenDayTop100: leaderboard.top100.SevenDayTop100,
+                    ThirtyDayTop100: leaderboard.top100.ThirtyDayTop100,
+                  },
                   trueVolume: leaderboard.trueVolume,
                   fakeVolume: leaderboard.fakeVolume,
                   loanVolume: leaderboard.loanVolume,

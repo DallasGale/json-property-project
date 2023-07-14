@@ -21,8 +21,8 @@ async function getData() {
   return res.json();
 }
 
-async function getLeaderBoard30dData() {
-  const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
+async function getLeaderBoard1dData() {
+  const res = await fetch(endpoints.nft_ethereum_collection_summary["1d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -32,7 +32,7 @@ async function getLeaderBoard30dData() {
 }
 
 async function getLeaderBoard7dData() {
-  const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
+  const res = await fetch(endpoints.nft_ethereum_collection_summary["7d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -40,8 +40,7 @@ async function getLeaderBoard7dData() {
 
   return res.json();
 }
-
-async function getLeaderBoard1dData() {
+async function getLeaderBoard30dData() {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -53,9 +52,9 @@ async function getLeaderBoard1dData() {
 
 export default async function Home() {
   const data = await getData();
+  const leaderBoard1dData = await getLeaderBoard1dData();
   const leaderBoard30dData = await getLeaderBoard30dData();
   const leaderBoard7dData = await getLeaderBoard7dData();
-  const leaderBoard301Data = await getLeaderBoard1dData();
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -121,7 +120,23 @@ export default async function Home() {
   const boughtAndSoldMovingAverage = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
   );
+  //   OneDayTop100: orderBy(
+  //     leaderBoard7dData,
+  //       ["total_raw_day_volume"],
+  //       "desc"
+  //     ).slice(0, 100),
 
+  // SevenDayTop100:  orderBy(
+  //     leaderBoard7dData,
+  //       ["total_raw_day_volume"],
+  //       "desc"
+  //     ).slice(0, 100)
+
+  //   ThirtyDayTop100: orderBy(leaderBoard30dData,
+  //     ["total_raw_day_volume"],
+  //     "desc"
+  //   ).slice(0, 100)
+  // },
   return (
     <main className="main-container">
       <DataVizLayout
@@ -136,11 +151,23 @@ export default async function Home() {
         totalVolumeMovingAverage={totalVolume30DayMovingAverage[0].data}
         trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
         leaderboard={{
-          top100: orderBy(
-            leaderBoard30dData,
-            ["total_raw_day_volume"],
-            "desc"
-          ).slice(0, 100),
+          top100: {
+            OneDayTop100: orderBy(
+              leaderBoard1dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 100),
+            SevenDayTop100: orderBy(
+              leaderBoard7dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 100),
+            ThirtyDayTop100: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 100),
+          },
           trueVolume: orderBy(
             leaderBoard30dData,
             ["total_real_day_volume"],

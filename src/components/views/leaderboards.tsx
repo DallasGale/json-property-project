@@ -12,7 +12,11 @@ import DataTable from "../dataTable/dataTable";
 // Types
 interface LeaderboardsTypes {
   leaderboard: {
-    top100: CollectionTypes[];
+    top100: {
+      OneDayTop100: CollectionTypes[];
+      SevenDayTop100: CollectionTypes[];
+      ThirtyDayTop100: CollectionTypes[];
+    };
     trueVolume: TrueVolumeTypes[];
     fakeVolume: FakeVolumeTypes[];
     loanVolume: LoanVolumeTypes[];
@@ -32,48 +36,6 @@ const Leaderboards: React.FC<LeaderboardsTypes> = ({ leaderboard }) => {
 
       <DataTable
         tableTitle="Top 100 Collections"
-        tableHead={[
-          {
-            name: "#",
-            id: "number",
-            hasChevronDown: false,
-          },
-          // {
-          //   name: "OS",
-          //   id: "OS",
-          //   hasChevronDown: false,
-          // },
-          {
-            name: "Collection",
-            id: "collection",
-            hasChevronDown: false,
-          },
-          {
-            name: "Volume",
-            id: "volume",
-            hasChevronDown: true,
-          },
-          {
-            name: "True V",
-            id: "true-v",
-            hasChevronDown: true,
-          },
-          {
-            name: "True V %",
-            id: "true-v-percent",
-            hasChevronDown: true,
-          },
-          // {
-          //   name: "Floor",
-          //   id: "floor",
-          //   hasChevronDown: true,
-          // },
-          {
-            name: "True Sales",
-            id: "sales",
-            hasChevronDown: true,
-          },
-        ]}
         tableBodyData={leaderboard.top100}
       />
     </>
