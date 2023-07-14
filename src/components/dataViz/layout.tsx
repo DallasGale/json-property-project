@@ -10,6 +10,7 @@ import type {
   FakeVolumeTypes,
   LoanVolumeTypes,
   RoyaltyTypes,
+  CollectionTypes,
 } from "@/app/types";
 
 // Components
@@ -25,12 +26,12 @@ interface DataVizLayoutTypes {
   totalVolume: any[];
   fakeVolume: any[];
   realPercentDifference: number[];
-  leaderboardDatasets: DatasetsType[];
   loanVolumeMovingAverage: number[];
   fakeVolumeMovingAverage: number[];
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
   leaderboard: {
+    top100: CollectionTypes[];
     trueVolume: TrueVolumeTypes[];
     fakeVolume: FakeVolumeTypes[];
     loanVolume: LoanVolumeTypes[];
@@ -53,7 +54,6 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   fakeVolume,
   realPercentDifference,
   totalVolume,
-  leaderboardDatasets,
   loanVolumeMovingAverage,
   fakeVolumeMovingAverage,
   totalVolumeMovingAverage,
@@ -62,8 +62,6 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   traders,
 }) => {
   const [activeTab, setActiveTab] = useState("market-overview");
-
-  console.log({ activeTab });
   return (
     <>
       <Header handleTabClick={(e) => setActiveTab(e)} />
@@ -78,7 +76,6 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 fakeVolume={fakeVolume}
                 realPercentDifference={realPercentDifference}
                 loanVolume={loanVolume}
-                leaderboardDatasets={leaderboardDatasets}
                 loanVolumeMovingAverage={loanVolumeMovingAverage}
                 fakeVolumeMovingAverage={fakeVolumeMovingAverage}
                 totalVolumeMovingAverage={totalVolumeMovingAverage}
@@ -108,7 +105,6 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 fakeVolume={fakeVolume}
                 realPercentDifference={realPercentDifference}
                 loanVolume={loanVolume}
-                leaderboardDatasets={leaderboardDatasets}
                 loanVolumeMovingAverage={loanVolumeMovingAverage}
                 fakeVolumeMovingAverage={fakeVolumeMovingAverage}
                 totalVolumeMovingAverage={totalVolumeMovingAverage}
@@ -124,6 +120,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
             {activeTab == "leaderboards" && (
               <Leaderboards
                 leaderboard={{
+                  top100: leaderboard.top100,
                   trueVolume: leaderboard.trueVolume,
                   fakeVolume: leaderboard.fakeVolume,
                   loanVolume: leaderboard.loanVolume,

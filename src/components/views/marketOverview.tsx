@@ -58,7 +58,6 @@ interface VolumeChartProps {
   totalVolume: any[];
   fakeVolume: any[];
   realPercentDifference: number[];
-  leaderboardDatasets: DatasetsType[];
   loanVolumeMovingAverage: number[];
   fakeVolumeMovingAverage: number[];
   totalVolumeMovingAverage: number[];

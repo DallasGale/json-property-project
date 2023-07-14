@@ -26,13 +26,14 @@ async function getLeaderBoardData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
+  console.log({ res });
+
   return res.json();
 }
 
 export default async function Home() {
   const data = await getData();
   const leaderBoardData = await getLeaderBoardData();
-  const leaderboardDatasets = leaderBoardData.datasets;
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -108,12 +109,16 @@ export default async function Home() {
         loanVolume={loanVolume[0].data}
         totalVolume={totalVolume[0].data}
         realPercentDifference={realPercentDifference[0].data}
-        leaderboardDatasets={leaderboardDatasets}
         loanVolumeMovingAverage={loanVolum30DayMovingAverage[0].data}
         fakeVolumeMovingAverage={fakeVolume30DayMovingAverage[0].data}
         totalVolumeMovingAverage={totalVolume30DayMovingAverage[0].data}
         trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
         leaderboard={{
+          top100: orderBy(
+            leaderBoardData,
+            ["total_raw_day_volume"],
+            "desc"
+          ).slice(0, 100),
           trueVolume: orderBy(
             leaderBoardData,
             ["total_real_day_volume"],

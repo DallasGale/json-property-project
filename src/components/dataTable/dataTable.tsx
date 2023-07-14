@@ -8,11 +8,13 @@ import ChevronDown from "@assets/icons/chevron-down.svg";
 // Utils
 import GoodToBadColors from "@/utils/goodToBadColors";
 import DecimalFormatter from "@/utils/decimalFormatter";
+import { CollectionTypes, DatasetsType } from "@/app/types";
 
 interface DataTableProps {
   tableTitle?: string;
   tableHead: TabelHeadTypes[];
   tableBody: TableBodyTypes[];
+  tableBodyData: CollectionTypes[];
 }
 
 type TabelHeadTypes = {
@@ -36,7 +38,9 @@ const DataTable: React.FC<DataTableProps> = ({
   tableTitle,
   tableHead,
   tableBody,
+  tableBodyData,
 }) => {
+  console.log({ tableBodyData });
   // Animations
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
@@ -49,6 +53,18 @@ const DataTable: React.FC<DataTableProps> = ({
       easing: easings.easeInOutCubic,
     },
   });
+  const springs2 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 150,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
+
   return (
     <div className="data-table">
       <animated.div
@@ -61,7 +77,12 @@ const DataTable: React.FC<DataTableProps> = ({
           )}
         </div>
       </animated.div>
-      <table cellPadding={6} cellSpacing={0} width="100%">
+      <animated.table
+        style={{ ...springs2 }}
+        cellPadding={6}
+        cellSpacing={0}
+        width="100%"
+      >
         <thead>
           <tr>
             {tableHead.length &&
@@ -91,82 +112,106 @@ const DataTable: React.FC<DataTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {tableBody.length &&
-            tableBody.map(
-              ({
-                number,
-                os,
-                collection,
-                volume,
-                trueV,
-                trueVPercent,
-                floor,
-                sales,
-              }) => (
-                <tr key={number}>
-                  <td width="50">
-                    <p className="typography__display--2">{number}</p>
-                  </td>
-                  <td width="50">
-                    <p className="typography__display--2">{os}</p>
-                  </td>
-                  <td>
-                    <p className="typography__display--6">{collection}</p>
-                  </td>
-                  <td width="70">
-                    <div className="data-table__cell-content">
-                      <Image
-                        src={CryptoIcon}
-                        alt="Crypto Icon"
-                        className="data-table__icon data-table__icon--crypto"
-                      />
-                      <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                        {DecimalFormatter(volume)}
+          {tableBodyData.length &&
+            tableBodyData.map(
+              (
+                {
+                  name,
+                  contract_address,
+                  total_day_total_platform,
+                  total_day_total_royalty,
+                  total_day_trade_num,
+                  total_day_volume_fake,
+                  total_day_volume_farming,
+                  total_day_volume_loan,
+                  total_day_volume_loan_num,
+                  total_day_volume_wash_trading,
+                  total_fake_day_volume_percentage,
+                  total_loan_day_volume_percentage,
+                  total_raw_day_volume,
+                  total_real_day_trade_num,
+                  total_real_day_volume,
+                  total_real_day_volume_percentage,
+                },
+                index
+              ) => {
+                let count = index + 1;
+                return (
+                  <tr key={contract_address}>
+                    <td width="50">
+                      <p className="typography__display--2">{count}</p>
+                    </td>
+                    <td width="50">
+                      <p className="typography__display--2">
+                        {DecimalFormatter(total_day_total_platform)}
                       </p>
-                    </div>
-                  </td>
-                  <td width="70" align="right">
-                    <div className="data-table__cell-content">
-                      <Image
-                        src={CryptoIcon}
-                        alt="Crypto Icon"
-                        className="data-table__icon data-table__icon--crypto"
-                      />
+                    </td>
+                    <td>
+                      <p className="typography__display--6">{name}</p>
+                    </td>
+                    <td width="70">
+                      <div className="data-table__cell-content">
+                        <Image
+                          src={CryptoIcon}
+                          alt="Crypto Icon"
+                          className="data-table__icon data-table__icon--crypto"
+                        />
+                        <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                          {DecimalFormatter(total_raw_day_volume)}
+                        </p>
+                      </div>
+                    </td>
+                    <td width="70" align="right">
+                      <div className="data-table__cell-content">
+                        <Image
+                          src={CryptoIcon}
+                          alt="Crypto Icon"
+                          className="data-table__icon data-table__icon--crypto"
+                        />
+                        <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                          {DecimalFormatter(total_real_day_volume)}
+                        </p>
+                      </div>
+                    </td>
+                    <td width="70" align="right">
+                      {total_real_day_volume_percentage ? (
+                        <p
+                          className="typography__display--2"
+                          style={{
+                            color: GoodToBadColors(
+                              total_real_day_volume_percentage
+                            ),
+                          }}
+                        >
+                          {DecimalFormatter(total_real_day_volume_percentage)}%
+                        </p>
+                      ) : (
+                        <p className="typography__display--2">--</p>
+                      )}
+                    </td>
+                    <td width="70" align="right">
+                      <div className="data-table__cell-content">
+                        <Image
+                          src={CryptoIcon}
+                          alt="Crypto Icon"
+                          className="data-table__icon data-table__icon--crypto"
+                        />
+                        <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                          {DecimalFormatter(total_raw_day_volume)}
+                        </p>
+                      </div>
+                    </td>
+                    <td width="70" align="right">
                       <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                        {DecimalFormatter(trueV)}
+                        {DecimalFormatter(total_real_day_trade_num)}
                       </p>
-                    </div>
-                  </td>
-                  <td width="70" align="right">
-                    <p
-                      className="typography__display--2"
-                      style={{ color: GoodToBadColors(trueVPercent) }}
-                    >
-                      {trueVPercent}
-                    </p>
-                  </td>
-                  <td width="70" align="right">
-                    <div className="data-table__cell-content">
-                      <Image
-                        src={CryptoIcon}
-                        alt="Crypto Icon"
-                        className="data-table__icon data-table__icon--crypto"
-                      />
-                      <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                        {DecimalFormatter(floor)}
-                      </p>
-                    </div>
-                  </td>
-                  <td width="70" align="right">
-                    <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                      {sales}
-                    </p>
-                  </td>
-                </tr>
-              )
+                    </td>
+                  </tr>
+                );
+              }
             )}
         </tbody>
-      </table>
+      </animated.table>
     </div>
   );
 };
