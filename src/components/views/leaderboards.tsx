@@ -24,6 +24,7 @@ const Leaderboards: React.FC<LeaderboardsTypes> = ({ leaderboard }) => {
   return (
     <>
       <Leaderboard
+        showTimeframeToggles={true}
         trueVolume={leaderboard.trueVolume}
         fakeVolume={leaderboard.fakeVolume}
         loanVolume={leaderboard.loanVolume}

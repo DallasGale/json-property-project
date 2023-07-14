@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import { useSpring, animated, easings } from "@react-spring/web";
 import Image from "next/image";
 
@@ -9,6 +11,9 @@ import ChevronDown from "@assets/icons/chevron-down.svg";
 import GoodToBadColors from "@/utils/goodToBadColors";
 import DecimalFormatter from "@/utils/decimalFormatter";
 import { CollectionTypes, DatasetsType } from "@/app/types";
+
+// Components
+import ChartDataToggles from "@components/toggles/chart_data";
 
 interface DataTableProps {
   tableTitle?: string;
@@ -40,7 +45,6 @@ const DataTable: React.FC<DataTableProps> = ({
   tableBody,
   tableBodyData,
 }) => {
-  console.log({ tableBodyData });
   // Animations
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
@@ -65,6 +69,45 @@ const DataTable: React.FC<DataTableProps> = ({
     },
   });
 
+  const springs3 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 150,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
+
+  const [timeframe, setTimeframe] = useState(0);
+  const [top100Data, setTop100Data] = useState(tableBodyData);
+  useEffect(() => {
+    if (timeframe === 90) {
+      setTop100Data(tableBodyData.slice(tableBodyData.length - 90));
+    }
+    if (timeframe === 30) {
+      setTop100Data(tableBodyData.slice(tableBodyData.length - 30));
+    }
+    if (timeframe === 7) {
+      setTop100Data(tableBodyData.slice(tableBodyData.length - 7));
+    }
+
+    if (timeframe === 1) {
+      setTop100Data(tableBodyData.slice(tableBodyData.length - 1));
+    }
+
+    if (timeframe === 0) {
+      setTop100Data(tableBodyData);
+    }
+  }, [timeframe]);
+
+  function handleDailyTimeferame(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setTimeframe(value);
+  }
+
   return (
     <div className="data-table">
       <animated.div
@@ -72,9 +115,11 @@ const DataTable: React.FC<DataTableProps> = ({
         className="chart__grid chart__grid--one-col"
       >
         <div className="chart__chart-actions-lockup">
-          {tableTitle && (
-            <h2 className="typography__display--1">{tableTitle}</h2>
-          )}
+          <ChartDataToggles
+            title="Top 100 Collections"
+            onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
+            active={timeframe}
+          />
         </div>
       </animated.div>
       <animated.table
@@ -112,8 +157,8 @@ const DataTable: React.FC<DataTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {tableBodyData.length &&
-            tableBodyData.map(
+          {top100Data.length &&
+            top100Data.map(
               (
                 {
                   name,
