@@ -168,26 +168,119 @@ export default async function Home() {
               "desc"
             ).slice(0, 100),
           },
-          trueVolume: orderBy(
-            leaderBoard30dData,
-            ["total_real_day_volume"],
-            "desc"
-          ).slice(0, 5),
-          fakeVolume: orderBy(
-            leaderBoard30dData,
-            ["total_day_volume_fake"],
-            "desc"
-          ).slice(0, 5),
-          loanVolume: orderBy(
-            leaderBoard30dData,
-            ["total_day_volume_loan"],
-            "desc"
-          ).slice(0, 5),
-          royalty: orderBy(
-            leaderBoard30dData,
-            ["total_day_total_royalty"],
-            "desc"
-          ).slice(0, 5),
+          trueVolume: {
+            oneDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            sevenDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            ninetyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            all: orderBy(leaderBoard30dData, ["total_raw_day_volume"], "desc"),
+          },
+          fakeVolume: {
+            oneDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            sevenDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            ninetyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            all: orderBy(leaderBoard30dData, ["total_raw_day_volume"], "desc"),
+          },
+          loanVolume: {
+            oneDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            sevenDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            ninetyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            all: orderBy(leaderBoard30dData, ["total_raw_day_volume"], "desc"),
+          },
+          royalty: {
+            oneDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            sevenDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            ninetyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ),
+            all: orderBy(leaderBoard30dData, ["total_raw_day_volume"], "desc"),
+          },
+
+          // trueVolume: orderBy(
+          //   leaderBoard30dData,
+          //   ["total_real_day_volume"],
+          //   "desc"
+          // ).slice(0, 5),
+          // fakeVolume: orderBy(
+          //   leaderBoard30dData,
+          //   ["total_day_volume_fake"],
+          //   "desc"
+          // ).slice(0, 5),
+          // loanVolume: orderBy(
+          //   leaderBoard30dData,
+          //   ["total_day_volume_loan"],
+          //   "desc"
+          // ).slice(0, 5),
+          // royalty: orderBy(
+          //   leaderBoard30dData,
+          //   ["total_day_total_royalty"],
+          //   "desc"
+          // ).slice(0, 5),
         }}
         traders={{
           onlyBought: onlyBought[0].data,
