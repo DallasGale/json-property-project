@@ -13,12 +13,11 @@ import type { DatasetsType } from "@app/types";
 // Helpers
 import orderBy from "lodash.orderby";
 
-async function getData() {
+async function getDailySummaryData() {
   const res = await fetch(endpoints.nft_ethereum_daily_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }
 
 async function getLeaderBoard1dData() {
@@ -26,7 +25,6 @@ async function getLeaderBoard1dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  console.log({ res });
 
   return res.json();
 }
@@ -36,7 +34,6 @@ async function getLeaderBoard7dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  console.log({ res });
 
   return res.json();
 }
@@ -45,7 +42,6 @@ async function getLeaderBoard30dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  console.log({ res });
 
   return res.json();
 }
@@ -55,28 +51,26 @@ async function getLeaderBoard90dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  console.log({ res });
 
   return res.json();
 }
 
-async function getLeaderBoardAllData() {
-  const res = await fetch(endpoints.nft_ethereum_collection_summary["all"]);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  console.log({ res });
+// async function getLeaderBoardAllData() {
+//   const res = await fetch(endpoints.nft_ethereum_collection_summary["all"]);
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch data");
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
 
 export default async function Home() {
-  const data = await getData();
+  const data = await getDailySummaryData();
   const leaderBoard1dData = await getLeaderBoard1dData();
   const leaderBoard7dData = await getLeaderBoard7dData();
   const leaderBoard30dData = await getLeaderBoard30dData();
   const leaderBoard90dData = await getLeaderBoard90dData();
-  const leaderBoardAllData = await getLeaderBoardAllData();
+  // const leaderBoardAllData = await getLeaderBoardAllData();
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -181,11 +175,12 @@ export default async function Home() {
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 100),
-            allTop100: orderBy(
-              leaderBoardAllData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 100),
+            allTop100: [],
+            // allTop100: orderBy(
+            //   leaderBoardAllData,
+            //   ["total_raw_day_volume"],
+            //   "desc"
+            // ).slice(0, 100),
           },
           trueVolume: {
             oneDay: orderBy(
@@ -208,11 +203,12 @@ export default async function Home() {
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 5),
-            all: orderBy(
-              leaderBoardAllData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 5),
+            all: [],
+            // all: orderBy(
+            //   leaderBoardAllData,
+            //   ["total_raw_day_volume"],
+            //   "desc"
+            // ).slice(0, 5),
           },
           fakeVolume: {
             oneDay: orderBy(
@@ -235,11 +231,12 @@ export default async function Home() {
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 5),
-            all: orderBy(
-              leaderBoardAllData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 5),
+            all: [],
+            // all: orderBy(
+            //   leaderBoardAllData,
+            //   ["total_raw_day_volume"],
+            //   "desc"
+            // ).slice(0, 5),
           },
           loanVolume: {
             oneDay: orderBy(
@@ -262,11 +259,12 @@ export default async function Home() {
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 5),
-            all: orderBy(
-              leaderBoardAllData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 5),
+            all: [],
+            // all: orderBy(
+            //   leaderBoardAllData,
+            //   ["total_raw_day_volume"],
+            //   "desc"
+            // ).slice(0, 5),
           },
           royalty: {
             oneDay: orderBy(
@@ -289,11 +287,12 @@ export default async function Home() {
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 5),
-            all: orderBy(
-              leaderBoardAllData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 5),
+            all: [],
+            // all: orderBy(
+            //   leaderBoardAllData,
+            //   ["total_raw_day_volume"],
+            //   "desc"
+            // ).slice(0, 5),
           },
         }}
         traders={{

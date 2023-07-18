@@ -65,6 +65,21 @@ const tableHead: TabelHeadTypes[] = [
     id: "sales",
     hasChevronDown: true,
   },
+  {
+    name: "Loans",
+    id: "loans",
+    hasChevronDown: true,
+  },
+  // {
+  //   name: "True Sales",
+  //   id: "sales",
+  //   hasChevronDown: true,
+  // },
+  // {
+  //   name: "True Sales",
+  //   id: "sales",
+  //   hasChevronDown: true,
+  // },
 ];
 
 const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
@@ -261,17 +276,23 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                       </div>
                     </td> */}
 
-                    {/* loans */}
-                    {/* revenue */}
-                    {/* fake_volume */}
-                    {/* total sales count */}
-                    {/* true sales count */}
-
                     <td width="110" align="right">
                       <p className="typography__display--2 typography__color--dark-medium-emphasis">
                         {kFormatter(total_real_day_trade_num)}
                       </p>
                     </td>
+
+                    {/* loans */}
+                    <td width="110" align="right">
+                      <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                        {kFormatter(total_real_day_trade_num)}
+                      </p>
+                    </td>
+
+                    {/* revenue */}
+                    {/* fake_volume */}
+                    {/* total sales count */}
+                    {/* true sales count */}
                   </tr>
                 );
               }
