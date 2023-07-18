@@ -35,6 +35,8 @@ interface DataVizLayoutTypes {
       oneDayTop100: CollectionTypes[];
       sevenDayTop100: CollectionTypes[];
       thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
     };
     trueVolume: {
       oneDay: TrueVolumeTypes[];
@@ -174,9 +176,11 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
               <Leaderboards
                 leaderboard={{
                   top100: {
-                    OneDayTop100: leaderboard.top100.oneDayTop100,
-                    SevenDayTop100: leaderboard.top100.sevenDayTop100,
-                    ThirtyDayTop100: leaderboard.top100.thirtyDayTop100,
+                    oneDayTop100: leaderboard.top100.oneDayTop100,
+                    sevenDayTop100: leaderboard.top100.sevenDayTop100,
+                    thirtyDayTop100: leaderboard.top100.thirtyDayTop100,
+                    ninetyDayTop100: leaderboard.top100.ninetyDayTop100,
+                    allTop100: leaderboard.top100.allTop100,
                   },
                   trueVolume: {
                     oneDay: leaderboard.trueVolume.oneDay,

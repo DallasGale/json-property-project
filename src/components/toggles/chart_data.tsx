@@ -14,36 +14,41 @@ const ChartDataToggles: React.FC<ChartDataTogglesProps> = ({
       <h2 className="typography__display--1">{title}</h2>
       <div className="button-group">
         <button
-          className={`button typography__label--1 ${active === 1 ? "active" : ""
-            }`}
+          className={`button typography__label--1 ${
+            active === 1 ? "active" : ""
+          }`}
           onClick={(e) => onClick(e, 1)}
         >
           24H
         </button>
         <button
-          className={`button typography__label--1 ${active === 7 ? "active" : ""
-            }`}
+          className={`button typography__label--1 ${
+            active === 7 ? "active" : ""
+          }`}
           onClick={(e) => onClick(e, 7)}
         >
           7D
         </button>
         <button
-          className={`button typography__label--1 ${active === 30 ? "active" : ""
-            }`}
+          className={`button typography__label--1 ${
+            active === 30 ? "active" : ""
+          }`}
           onClick={(e) => onClick(e, 30)}
         >
           30D
         </button>
         <button
-          className={`button typography__label--1 ${active === 90 ? "active" : ""
-            }`}
+          className={`button typography__label--1 ${
+            active === 90 ? "active" : ""
+          }`}
           onClick={(e) => onClick(e, 90)}
         >
           90D
         </button>
         <button
-          className={`button typography__label--1 ${active === 0 ? "active" : ""
-            }`}
+          className={`button typography__label--1 ${
+            active === 0 ? "active" : ""
+          }`}
           onClick={(e) => onClick(e, 0)}
         >
           ALL

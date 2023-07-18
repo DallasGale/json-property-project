@@ -50,11 +50,33 @@ async function getLeaderBoard30dData() {
   return res.json();
 }
 
+async function getLeaderBoard90dData() {
+  const res = await fetch(endpoints.nft_ethereum_collection_summary["90d"]);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  console.log({ res });
+
+  return res.json();
+}
+
+async function getLeaderBoardAllData() {
+  const res = await fetch(endpoints.nft_ethereum_collection_summary["all"]);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  console.log({ res });
+
+  return res.json();
+}
+
 export default async function Home() {
   const data = await getData();
   const leaderBoard1dData = await getLeaderBoard1dData();
-  const leaderBoard30dData = await getLeaderBoard30dData();
   const leaderBoard7dData = await getLeaderBoard7dData();
+  const leaderBoard30dData = await getLeaderBoard30dData();
+  const leaderBoard90dData = await getLeaderBoard90dData();
+  const leaderBoardAllData = await getLeaderBoardAllData();
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -151,6 +173,16 @@ export default async function Home() {
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 100),
+            ninetyDayTop100: orderBy(
+              leaderBoard90dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 100),
+            allTop100: orderBy(
+              leaderBoardAllData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 100),
           },
           trueVolume: {
             oneDay: orderBy(
@@ -169,11 +201,15 @@ export default async function Home() {
               "desc"
             ).slice(0, 5),
             ninetyDay: orderBy(
+              leaderBoard90dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            all: orderBy(
               leaderBoard30dData,
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 5),
-            all: orderBy(leaderBoard30dData, ["total_raw_day_volume"], "desc"),
           },
           fakeVolume: {
             oneDay: orderBy(
@@ -182,7 +218,7 @@ export default async function Home() {
               "desc"
             ).slice(0, 5),
             sevenDay: orderBy(
-              leaderBoard30dData,
+              leaderBoard7dData,
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 5),
@@ -192,11 +228,15 @@ export default async function Home() {
               "desc"
             ).slice(0, 5),
             ninetyDay: orderBy(
-              leaderBoard30dData,
+              leaderBoard90dData,
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 5),
-            all: orderBy(leaderBoard30dData, ["total_raw_day_volume"], "desc"),
+            all: orderBy(
+              leaderBoardAllData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
           },
           loanVolume: {
             oneDay: orderBy(
@@ -219,7 +259,11 @@ export default async function Home() {
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 5),
-            all: orderBy(leaderBoard30dData, ["total_raw_day_volume"], "desc"),
+            all: orderBy(
+              leaderBoardAllData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
           },
           royalty: {
             oneDay: orderBy(
@@ -238,11 +282,15 @@ export default async function Home() {
               "desc"
             ).slice(0, 5),
             ninetyDay: orderBy(
-              leaderBoard30dData,
+              leaderBoard90dData,
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 5),
-            all: orderBy(leaderBoard30dData, ["total_raw_day_volume"], "desc"),
+            all: orderBy(
+              leaderBoardAllData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
           },
         }}
         traders={{

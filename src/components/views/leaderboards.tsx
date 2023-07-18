@@ -13,9 +13,11 @@ import DataTable from "../dataTable/dataTable";
 interface LeaderboardsTypes {
   leaderboard: {
     top100: {
-      OneDayTop100: CollectionTypes[];
-      SevenDayTop100: CollectionTypes[];
-      ThirtyDayTop100: CollectionTypes[];
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
     };
     trueVolume: {
       oneDay: TrueVolumeTypes[];
