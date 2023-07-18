@@ -165,27 +165,27 @@ export default async function Home() {
               leaderBoard1dData,
               ["total_raw_day_volume"],
               "desc"
-            ).slice(0, 10),
+            ).slice(0, 100),
             sevenDayTop100: orderBy(
               leaderBoard7dData,
               ["total_raw_day_volume"],
               "desc"
-            ).slice(0, 10),
+            ).slice(0, 100),
             thirtyDayTop100: orderBy(
               leaderBoard30dData,
               ["total_raw_day_volume"],
               "desc"
-            ).slice(0, 10),
+            ).slice(0, 100),
             ninetyDayTop100: orderBy(
               leaderBoard90dData,
               ["total_raw_day_volume"],
               "desc"
-            ).slice(0, 10),
+            ).slice(0, 100),
             allTop100: orderBy(
               leaderBoardAllData,
               ["total_raw_day_volume"],
               "desc"
-            ).slice(0, 10),
+            ).slice(0, 100),
           },
           trueVolume: {
             oneDay: orderBy(
