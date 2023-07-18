@@ -95,7 +95,6 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
   const [timeframe, setTimeframe] = useState(-30);
   const [top100Data, setTop100Data] = useState(tableBodyData.ThirtyDayTop100);
 
-  console.log({ top100Data });
   useEffect(() => {
     if (timeframe === 90) {
       setTop100Data(tableBodyData.NinetyDayTop100 || []);

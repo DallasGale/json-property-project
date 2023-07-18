@@ -24,27 +24,27 @@ interface LeaderboardsTypes {
       ninetyDay: TrueVolumeTypes[];
       all: TrueVolumeTypes[];
     };
-    // fakeVolume: {
-    //   oneDay: FakeVolumeTypes[];
-    //   sevenDay: FakeVolumeTypes[];
-    //   thirtyDay: FakeVolumeTypes[];
-    //   ninetyDay: FakeVolumeTypes[];
-    //   all: FakeVolumeTypes[];
-    // };
-    // loanVolume: {
-    //   oneDay: LoanVolumeTypes[];
-    //   sevenDay: LoanVolumeTypes[];
-    //   thirtyDay: LoanVolumeTypes[];
-    //   ninetyDay: LoanVolumeTypes[];
-    //   all: LoanVolumeTypes[];
-    // };
-    // royalty: {
-    //   oneDay: RoyaltyTypes[];
-    //   sevenDay: RoyaltyTypes[];
-    //   thirtyDay: RoyaltyTypes[];
-    //   ninetyDay: RoyaltyTypes[];
-    //   all: RoyaltyTypes[];
-    // };
+    fakeVolume: {
+      oneDay: FakeVolumeTypes[];
+      sevenDay: FakeVolumeTypes[];
+      thirtyDay: FakeVolumeTypes[];
+      ninetyDay: FakeVolumeTypes[];
+      all: FakeVolumeTypes[];
+    };
+    loanVolume: {
+      oneDay: LoanVolumeTypes[];
+      sevenDay: LoanVolumeTypes[];
+      thirtyDay: LoanVolumeTypes[];
+      ninetyDay: LoanVolumeTypes[];
+      all: LoanVolumeTypes[];
+    };
+    royalty: {
+      oneDay: RoyaltyTypes[];
+      sevenDay: RoyaltyTypes[];
+      thirtyDay: RoyaltyTypes[];
+      ninetyDay: RoyaltyTypes[];
+      all: RoyaltyTypes[];
+    };
   };
 }
 const Leaderboards: React.FC<LeaderboardsTypes> = ({ leaderboard }) => {

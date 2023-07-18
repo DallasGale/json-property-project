@@ -34,27 +34,27 @@ interface LeaderBoardTypes {
       ninetyDay: TrueVolumeTypes[];
       all: TrueVolumeTypes[];
     };
-    // fakeVolume: {
-    //   oneDay: FakeVolumeTypes[];
-    //   sevenDay: FakeVolumeTypes[];
-    //   thirtyDay: FakeVolumeTypes[];
-    //   ninetyDay: FakeVolumeTypes[];
-    //   all: FakeVolumeTypes[];
-    // };
-    // loanVolume: {
-    //   oneDay: LoanVolumeTypes[];
-    //   sevenDay: LoanVolumeTypes[];
-    //   thirtyDay: LoanVolumeTypes[];
-    //   ninetyDay: LoanVolumeTypes[];
-    //   all: LoanVolumeTypes[];
-    // };
-    // royalty: {
-    //   oneDay: RoyaltyTypes[];
-    //   sevenDay: RoyaltyTypes[];
-    //   thirtyDay: RoyaltyTypes[];
-    //   ninetyDay: RoyaltyTypes[];
-    //   all: RoyaltyTypes[];
-    // };
+    fakeVolume: {
+      oneDay: FakeVolumeTypes[];
+      sevenDay: FakeVolumeTypes[];
+      thirtyDay: FakeVolumeTypes[];
+      ninetyDay: FakeVolumeTypes[];
+      all: FakeVolumeTypes[];
+    };
+    loanVolume: {
+      oneDay: LoanVolumeTypes[];
+      sevenDay: LoanVolumeTypes[];
+      thirtyDay: LoanVolumeTypes[];
+      ninetyDay: LoanVolumeTypes[];
+      all: LoanVolumeTypes[];
+    };
+    royalty: {
+      oneDay: RoyaltyTypes[];
+      sevenDay: RoyaltyTypes[];
+      thirtyDay: RoyaltyTypes[];
+      ninetyDay: RoyaltyTypes[];
+      all: RoyaltyTypes[];
+    };
   };
 }
 
@@ -76,52 +76,56 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   });
 
   // Daily True
-  const [trueVolumeDataArray, setTrueVolumeDataArray] = useState(
+  const [trueVolumeDataArray, setTrueVolumeDataArray] = useState<any[]>(
     leaderboardData.trueVolume.thirtyDay
+    // []
   );
-  // const [loanVolumeDataArray, setLoanVolumeDataArray] = useState(
-  //   leaderboardData.loanVolume.thirtyDay
-  // );
-  // const [fakeVolumeDataArray, setFakeVolumeDataArray] = useState(
-  //   leaderboardData.fakeVolume.thirtyDay
-  // );
-  // const [revenueDataArray, setRevenueVolumeDataArray] = useState(
-  //   leaderboardData.royalty.thirtyDay
-  // );
+  const [loanVolumeDataArray, setLoanVolumeDataArray] = useState<any[]>(
+    leaderboardData.loanVolume.thirtyDay
+    // []
+  );
+  const [fakeVolumeDataArray, setFakeVolumeDataArray] = useState<any[]>(
+    leaderboardData.fakeVolume.thirtyDay
+    // []
+  );
+  const [revenueDataArray, setRevenueVolumeDataArray] = useState<any[]>(
+    leaderboardData.royalty.thirtyDay
+    // []
+  );
 
   const [timeframe, setTimeframe] = useState(90);
   useEffect(() => {
     if (timeframe === 90) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.ninetyDay);
-      // setLoanVolumeDataArray(leaderboardData.loanVolume.ninetyDay);
-      // setFakeVolumeDataArray(leaderboardData.fakeVolume.ninetyDay);
-      // setRevenueVolumeDataArray(leaderboardData.royalty.ninetyDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.ninetyDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.ninetyDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.ninetyDay);
     }
     if (timeframe === 30) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.thirtyDay);
-      // setLoanVolumeDataArray(leaderboardData.loanVolume.thirtyDay);
-      // setFakeVolumeDataArray(leaderboardData.fakeVolume.thirtyDay);
-      // setRevenueVolumeDataArray(leaderboardData.royalty.thirtyDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.thirtyDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.thirtyDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.thirtyDay);
     }
     if (timeframe === 7) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.sevenDay);
-      // setLoanVolumeDataArray(leaderboardData.loanVolume.sevenDay);
-      // setFakeVolumeDataArray(leaderboardData.fakeVolume.sevenDay);
-      // setRevenueVolumeDataArray(leaderboardData.royalty.sevenDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.sevenDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.sevenDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.sevenDay);
     }
 
     if (timeframe === 1) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.oneDay);
-      // setLoanVolumeDataArray(leaderboardData.loanVolume.oneDay);
-      // setFakeVolumeDataArray(leaderboardData.fakeVolume.oneDay);
-      // setRevenueVolumeDataArray(leaderboardData.royalty.oneDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.oneDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.oneDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.oneDay);
     }
 
     if (timeframe === 0) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.all);
-      // setLoanVolumeDataArray(leaderboardData.loanVolume.all);
-      // setFakeVolumeDataArray(leaderboardData.fakeVolume.all);
-      // setRevenueVolumeDataArray(leaderboardData.royalty.all);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.all);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.all);
+      setRevenueVolumeDataArray(leaderboardData.royalty.all);
     }
   }, [timeframe]);
 
@@ -139,7 +143,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         >
           <div className="chart__chart-actions-lockup">
             <ChartDataToggles
-              title="Top 100 Collections"
+              title="Leaderboard"
               onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
               active={timeframe}
             />
@@ -237,7 +241,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                 style={{ display: "flex", flexDirection: "row", width: "100%" }}
               >
                 <div style={{ flex: "1", minWidth: "60%", maxWidth: "60%" }}>
-                  {/* <table cellPadding={0} cellSpacing={0} width="100%">
+                  <table cellPadding={0} cellSpacing={0} width="100%">
                     {fakeVolumeDataArray.map(({ name }) => {
                       return (
                         <tr key={name}>
@@ -249,11 +253,11 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                         </tr>
                       );
                     })}
-                  </table> */}
+                  </table>
                 </div>
                 <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
                   <table cellPadding={0} cellSpacing={0} width="100%">
-                    {/* {fakeVolumeDataArray.map(
+                    {fakeVolumeDataArray.map(
                       ({ total_day_volume_fake }, index: number) => {
                         return (
                           <tr key={index + total_day_volume_fake}>
@@ -270,12 +274,12 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           </tr>
                         );
                       }
-                    )} */}
+                    )}
                   </table>
                 </div>
                 <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
                   <table cellPadding={0} cellSpacing={0} width="100%">
-                    {/* {fakeVolumeDataArray.map(
+                    {fakeVolumeDataArray.map(
                       ({ total_fake_day_volume_percentage }, index: number) => {
                         return (
                           <tr key={index + total_fake_day_volume_percentage}>
@@ -303,7 +307,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           </tr>
                         );
                       }
-                    )} */}
+                    )}
                   </table>
                 </div>
               </div>
@@ -319,7 +323,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
               >
                 <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
                   <table cellPadding={0} cellSpacing={0} width="100%">
-                    {/* {loanVolumeDataArray.map(({ name }) => {
+                    {loanVolumeDataArray.map(({ name }) => {
                       return (
                         <tr key={name}>
                           <td height="30" valign="top">
@@ -329,12 +333,12 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           </td>
                         </tr>
                       );
-                    })} */}
+                    })}
                   </table>
                 </div>
                 <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                   <table cellPadding={0} cellSpacing={0} width="100%">
-                    {/* {loanVolumeDataArray.map(
+                    {loanVolumeDataArray.map(
                       ({ total_day_volume_loan }, index: number) => {
                         return (
                           <tr key={index + total_day_volume_loan}>
@@ -351,7 +355,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           </tr>
                         );
                       }
-                    )} */}
+                    )}
                   </table>
                 </div>
               </div>
@@ -367,7 +371,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
               >
                 <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
                   <table cellPadding={0} cellSpacing={0} width="100%">
-                    {/* {revenueDataArray.map(({ name }) => {
+                    {revenueDataArray.map(({ name }) => {
                       return (
                         <tr key={name}>
                           <td height="30" valign="top">
@@ -377,12 +381,12 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           </td>
                         </tr>
                       );
-                    })} */}
+                    })}
                   </table>
                 </div>
                 <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
                   <table cellPadding={0} cellSpacing={0} width="100%">
-                    {/* {revenueDataArray.map(
+                    {revenueDataArray.map(
                       ({ total_day_total_royalty }, index: number) => {
                         return (
                           <tr key={index + total_day_total_royalty}>
@@ -399,7 +403,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           </tr>
                         );
                       }
-                    )} */}
+                    )}
                   </table>
                 </div>
               </div>

@@ -62,10 +62,34 @@ interface VolumeChartProps {
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
   leaderboard: {
-    trueVolume: TrueVolumeTypes[];
-    fakeVolume: FakeVolumeTypes[];
-    loanVolume: LoanVolumeTypes[];
-    royalty: RoyaltyTypes[];
+    trueVolume: {
+      oneDay: TrueVolumeTypes[];
+      sevenDay: TrueVolumeTypes[];
+      thirtyDay: TrueVolumeTypes[];
+      ninetyDay: TrueVolumeTypes[];
+      all: TrueVolumeTypes[];
+    };
+    fakeVolume: {
+      oneDay: FakeVolumeTypes[];
+      sevenDay: FakeVolumeTypes[];
+      thirtyDay: FakeVolumeTypes[];
+      ninetyDay: FakeVolumeTypes[];
+      all: FakeVolumeTypes[];
+    };
+    loanVolume: {
+      oneDay: LoanVolumeTypes[];
+      sevenDay: LoanVolumeTypes[];
+      thirtyDay: LoanVolumeTypes[];
+      ninetyDay: LoanVolumeTypes[];
+      all: LoanVolumeTypes[];
+    };
+    royalty: {
+      oneDay: RoyaltyTypes[];
+      sevenDay: RoyaltyTypes[];
+      thirtyDay: RoyaltyTypes[];
+      ninetyDay: RoyaltyTypes[];
+      all: RoyaltyTypes[];
+    };
   };
   traders: {
     onlyBought: number[];
@@ -477,10 +501,36 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
 
       {/* Leaderboard Row */}
       <Leaderboard
-        trueVolume={leaderboard.trueVolume}
-        fakeVolume={leaderboard.fakeVolume}
-        loanVolume={leaderboard.loanVolume}
-        royalty={leaderboard.royalty}
+        leaderboardData={{
+          trueVolume: {
+            oneDay: leaderboard.trueVolume.oneDay,
+            sevenDay: leaderboard.trueVolume.sevenDay,
+            thirtyDay: leaderboard.trueVolume.thirtyDay,
+            ninetyDay: leaderboard.trueVolume.ninetyDay,
+            all: leaderboard.trueVolume.all,
+          },
+          fakeVolume: {
+            oneDay: leaderboard.fakeVolume.oneDay,
+            sevenDay: leaderboard.fakeVolume.sevenDay,
+            thirtyDay: leaderboard.fakeVolume.thirtyDay,
+            ninetyDay: leaderboard.fakeVolume.ninetyDay,
+            all: leaderboard.fakeVolume.all,
+          },
+          loanVolume: {
+            oneDay: leaderboard.loanVolume.oneDay,
+            sevenDay: leaderboard.loanVolume.sevenDay,
+            thirtyDay: leaderboard.loanVolume.thirtyDay,
+            ninetyDay: leaderboard.loanVolume.ninetyDay,
+            all: leaderboard.loanVolume.all,
+          },
+          royalty: {
+            oneDay: leaderboard.royalty.oneDay,
+            sevenDay: leaderboard.royalty.sevenDay,
+            thirtyDay: leaderboard.royalty.thirtyDay,
+            ninetyDay: leaderboard.royalty.ninetyDay,
+            all: leaderboard.royalty.all,
+          },
+        }}
       />
 
       {/* Traders row */}
