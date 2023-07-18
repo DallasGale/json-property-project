@@ -84,7 +84,10 @@ export default async function Home() {
       const fullDate = new Date(date);
       const month = fullDate.getMonth();
       const day = fullDate.getDate();
-      const completeDate = `${months[month]} ${day}`;
+      const year = fullDate.getFullYear();
+      const completeDate = `${months[month]} ${day} '${year
+        .toString()
+        .slice(2, 4)}`;
       newDates.push(completeDate);
     });
     return newDates;
