@@ -32,6 +32,8 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
             datasets: datasets,
           }}
           options={{
+            // animation: false,
+
             interaction: {
               mode: "x",
             },
