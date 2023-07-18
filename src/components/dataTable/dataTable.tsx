@@ -46,13 +46,13 @@ const tableHead: TabelHeadTypes[] = [
     hasChevronDown: false,
   },
   {
-    name: "Volume",
-    id: "volume",
+    name: "True Volume",
+    id: "true-volume",
     hasChevronDown: true,
   },
   {
-    name: "True V",
-    id: "true-v",
+    name: "Total Volume",
+    id: "total-volume",
     hasChevronDown: true,
   },
   {
@@ -208,7 +208,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                     <td>
                       <p className="typography__display--6">{name}</p>
                     </td>
-                    <td width="70">
+                    <td width="120">
                       <div className="data-table__cell-content">
                         <Image
                           src={CryptoIcon}
@@ -220,7 +220,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                         </p>
                       </div>
                     </td>
-                    <td width="70" align="right">
+                    <td width="120" align="right">
                       <div className="data-table__cell-content">
                         <Image
                           src={CryptoIcon}
