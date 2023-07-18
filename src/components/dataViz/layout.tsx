@@ -152,7 +152,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 }}
               />
             )}
-            {activeTab == "marketplaces" && (
+            {/* {activeTab == "marketplaces" && (
               <Marketplaces
                 labels={labels}
                 trueVolume={trueVolume}
@@ -171,7 +171,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                   royalty: leaderboard.royalty.thirtyDay,
                 }}
               />
-            )}
+            )} */}
             {activeTab == "leaderboards" && (
               <Leaderboards
                 leaderboard={{
