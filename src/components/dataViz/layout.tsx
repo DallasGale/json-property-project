@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Marketplaces from "@views/marketplaces";
+// import Marketplaces from "@views/marketplaces";
 import MarketOverview from "@views/marketOverview";
 
 // Types
@@ -15,8 +15,8 @@ import type {
 
 // Components
 import Header from "@/components/header/header";
-import navigation from "@/constants/navigation";
-import Interesting from "../views/interesting";
+// import navigation from "@/constants/navigation";
+// import Interesting from "../views/interesting";
 import Leaderboards from "../views/leaderboards";
 
 interface DataVizLayoutTypes {
@@ -32,14 +32,40 @@ interface DataVizLayoutTypes {
   trueVolumeMovingAverage: number[];
   leaderboard: {
     top100: {
-      OneDayTop100: CollectionTypes[];
-      SevenDayTop100: CollectionTypes[];
-      ThirtyDayTop100: CollectionTypes[];
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
     };
-    trueVolume: TrueVolumeTypes[];
-    fakeVolume: FakeVolumeTypes[];
-    loanVolume: LoanVolumeTypes[];
-    royalty: RoyaltyTypes[];
+    trueVolume: {
+      oneDay: TrueVolumeTypes[];
+      sevenDay: TrueVolumeTypes[];
+      thirtyDay: TrueVolumeTypes[];
+      ninetyDay: TrueVolumeTypes[];
+      all: TrueVolumeTypes[];
+    };
+    fakeVolume: {
+      oneDay: FakeVolumeTypes[];
+      sevenDay: FakeVolumeTypes[];
+      thirtyDay: FakeVolumeTypes[];
+      ninetyDay: FakeVolumeTypes[];
+      all: FakeVolumeTypes[];
+    };
+    loanVolume: {
+      oneDay: LoanVolumeTypes[];
+      sevenDay: LoanVolumeTypes[];
+      thirtyDay: LoanVolumeTypes[];
+      ninetyDay: LoanVolumeTypes[];
+      all: LoanVolumeTypes[];
+    };
+    royalty: {
+      oneDay: RoyaltyTypes[];
+      sevenDay: RoyaltyTypes[];
+      thirtyDay: RoyaltyTypes[];
+      ninetyDay: RoyaltyTypes[];
+      all: RoyaltyTypes[];
+    };
   };
   traders: {
     onlyBought: number[];
@@ -65,6 +91,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   leaderboard,
   traders,
 }) => {
+  console.log({ leaderboard });
   const [activeTab, setActiveTab] = useState("market-overview");
   return (
     <>
@@ -85,10 +112,34 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 totalVolumeMovingAverage={totalVolumeMovingAverage}
                 trueVolumeMovingAverage={trueVolumeMovingAverage}
                 leaderboard={{
-                  trueVolume: leaderboard.trueVolume,
-                  fakeVolume: leaderboard.fakeVolume,
-                  loanVolume: leaderboard.loanVolume,
-                  royalty: leaderboard.royalty,
+                  trueVolume: {
+                    oneDay: leaderboard.trueVolume.oneDay,
+                    sevenDay: leaderboard.trueVolume.sevenDay,
+                    thirtyDay: leaderboard.trueVolume.thirtyDay,
+                    ninetyDay: leaderboard.trueVolume.ninetyDay,
+                    all: leaderboard.trueVolume.all,
+                  },
+                  fakeVolume: {
+                    oneDay: leaderboard.fakeVolume.oneDay,
+                    sevenDay: leaderboard.fakeVolume.sevenDay,
+                    thirtyDay: leaderboard.fakeVolume.thirtyDay,
+                    ninetyDay: leaderboard.fakeVolume.ninetyDay,
+                    all: leaderboard.fakeVolume.all,
+                  },
+                  loanVolume: {
+                    oneDay: leaderboard.loanVolume.oneDay,
+                    sevenDay: leaderboard.loanVolume.sevenDay,
+                    thirtyDay: leaderboard.loanVolume.thirtyDay,
+                    ninetyDay: leaderboard.loanVolume.ninetyDay,
+                    all: leaderboard.loanVolume.all,
+                  },
+                  royalty: {
+                    oneDay: leaderboard.royalty.oneDay,
+                    sevenDay: leaderboard.royalty.sevenDay,
+                    thirtyDay: leaderboard.royalty.thirtyDay,
+                    ninetyDay: leaderboard.royalty.ninetyDay,
+                    all: leaderboard.royalty.all,
+                  },
                 }}
                 traders={{
                   onlyBought: traders.onlyBought,
@@ -101,7 +152,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 }}
               />
             )}
-            {activeTab == "marketplaces" && (
+            {/* {activeTab == "marketplaces" && (
               <Marketplaces
                 labels={labels}
                 trueVolume={trueVolume}
@@ -114,25 +165,51 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                 totalVolumeMovingAverage={totalVolumeMovingAverage}
                 trueVolumeMovingAverage={trueVolumeMovingAverage}
                 leaderboard={{
-                  true_volume: leaderboard.trueVolume,
-                  fake_volume: leaderboard.fakeVolume,
-                  loan_volume: leaderboard.loanVolume,
-                  royalty: leaderboard.royalty,
+                  true_volume: leaderboard.trueVolume.thirtyDay,
+                  fake_volume: leaderboard.fakeVolume.thirtyDay,
+                  loan_volume: leaderboard.loanVolume.thirtyDay,
+                  royalty: leaderboard.royalty.thirtyDay,
                 }}
               />
-            )}
+            )} */}
             {activeTab == "leaderboards" && (
               <Leaderboards
                 leaderboard={{
                   top100: {
-                    OneDayTop100: leaderboard.top100.OneDayTop100,
-                    SevenDayTop100: leaderboard.top100.SevenDayTop100,
-                    ThirtyDayTop100: leaderboard.top100.ThirtyDayTop100,
+                    oneDayTop100: leaderboard.top100.oneDayTop100,
+                    sevenDayTop100: leaderboard.top100.sevenDayTop100,
+                    thirtyDayTop100: leaderboard.top100.thirtyDayTop100,
+                    ninetyDayTop100: leaderboard.top100.ninetyDayTop100,
+                    allTop100: leaderboard.top100.allTop100,
                   },
-                  trueVolume: leaderboard.trueVolume,
-                  fakeVolume: leaderboard.fakeVolume,
-                  loanVolume: leaderboard.loanVolume,
-                  royalty: leaderboard.royalty,
+                  trueVolume: {
+                    oneDay: leaderboard.trueVolume.oneDay,
+                    sevenDay: leaderboard.trueVolume.sevenDay,
+                    thirtyDay: leaderboard.trueVolume.thirtyDay,
+                    ninetyDay: leaderboard.trueVolume.ninetyDay,
+                    all: leaderboard.trueVolume.all,
+                  },
+                  fakeVolume: {
+                    oneDay: leaderboard.fakeVolume.oneDay,
+                    sevenDay: leaderboard.fakeVolume.sevenDay,
+                    thirtyDay: leaderboard.fakeVolume.thirtyDay,
+                    ninetyDay: leaderboard.fakeVolume.ninetyDay,
+                    all: leaderboard.fakeVolume.all,
+                  },
+                  loanVolume: {
+                    oneDay: leaderboard.loanVolume.oneDay,
+                    sevenDay: leaderboard.loanVolume.sevenDay,
+                    thirtyDay: leaderboard.loanVolume.thirtyDay,
+                    ninetyDay: leaderboard.loanVolume.ninetyDay,
+                    all: leaderboard.loanVolume.all,
+                  },
+                  royalty: {
+                    oneDay: leaderboard.royalty.oneDay,
+                    sevenDay: leaderboard.royalty.sevenDay,
+                    thirtyDay: leaderboard.royalty.thirtyDay,
+                    ninetyDay: leaderboard.royalty.ninetyDay,
+                    all: leaderboard.royalty.all,
+                  },
                 }}
               />
             )}

@@ -13,26 +13,46 @@ import DataTable from "../dataTable/dataTable";
 interface LeaderboardsTypes {
   leaderboard: {
     top100: {
-      OneDayTop100: CollectionTypes[];
-      SevenDayTop100: CollectionTypes[];
-      ThirtyDayTop100: CollectionTypes[];
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
     };
-    trueVolume: TrueVolumeTypes[];
-    fakeVolume: FakeVolumeTypes[];
-    loanVolume: LoanVolumeTypes[];
-    royalty: RoyaltyTypes[];
+    trueVolume: {
+      oneDay: TrueVolumeTypes[];
+      sevenDay: TrueVolumeTypes[];
+      thirtyDay: TrueVolumeTypes[];
+      ninetyDay: TrueVolumeTypes[];
+      all: TrueVolumeTypes[];
+    };
+    fakeVolume: {
+      oneDay: FakeVolumeTypes[];
+      sevenDay: FakeVolumeTypes[];
+      thirtyDay: FakeVolumeTypes[];
+      ninetyDay: FakeVolumeTypes[];
+      all: FakeVolumeTypes[];
+    };
+    loanVolume: {
+      oneDay: LoanVolumeTypes[];
+      sevenDay: LoanVolumeTypes[];
+      thirtyDay: LoanVolumeTypes[];
+      ninetyDay: LoanVolumeTypes[];
+      all: LoanVolumeTypes[];
+    };
+    royalty: {
+      oneDay: RoyaltyTypes[];
+      sevenDay: RoyaltyTypes[];
+      thirtyDay: RoyaltyTypes[];
+      ninetyDay: RoyaltyTypes[];
+      all: RoyaltyTypes[];
+    };
   };
 }
 const Leaderboards: React.FC<LeaderboardsTypes> = ({ leaderboard }) => {
   return (
     <>
-      <Leaderboard
-        showTimeframeToggles={true}
-        trueVolume={leaderboard.trueVolume}
-        fakeVolume={leaderboard.fakeVolume}
-        loanVolume={leaderboard.loanVolume}
-        royalty={leaderboard.royalty}
-      />
+      <Leaderboard showTimeframeToggles={true} leaderboardData={leaderboard} />
 
       <DataTable
         tableTitle="Top 100 Collections"

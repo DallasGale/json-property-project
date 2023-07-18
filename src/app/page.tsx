@@ -50,11 +50,33 @@ async function getLeaderBoard30dData() {
   return res.json();
 }
 
+async function getLeaderBoard90dData() {
+  const res = await fetch(endpoints.nft_ethereum_collection_summary["90d"]);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  console.log({ res });
+
+  return res.json();
+}
+
+async function getLeaderBoardAllData() {
+  const res = await fetch(endpoints.nft_ethereum_collection_summary["all"]);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  console.log({ res });
+
+  return res.json();
+}
+
 export default async function Home() {
   const data = await getData();
   const leaderBoard1dData = await getLeaderBoard1dData();
-  const leaderBoard30dData = await getLeaderBoard30dData();
   const leaderBoard7dData = await getLeaderBoard7dData();
+  const leaderBoard30dData = await getLeaderBoard30dData();
+  const leaderBoard90dData = await getLeaderBoard90dData();
+  const leaderBoardAllData = await getLeaderBoardAllData();
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -120,23 +142,7 @@ export default async function Home() {
   const boughtAndSoldMovingAverage = await data?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
   );
-  //   OneDayTop100: orderBy(
-  //     leaderBoard7dData,
-  //       ["total_raw_day_volume"],
-  //       "desc"
-  //     ).slice(0, 100),
 
-  // SevenDayTop100:  orderBy(
-  //     leaderBoard7dData,
-  //       ["total_raw_day_volume"],
-  //       "desc"
-  //     ).slice(0, 100)
-
-  //   ThirtyDayTop100: orderBy(leaderBoard30dData,
-  //     ["total_raw_day_volume"],
-  //     "desc"
-  //   ).slice(0, 100)
-  // },
   return (
     <main className="main-container">
       <DataVizLayout
@@ -152,42 +158,140 @@ export default async function Home() {
         trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
         leaderboard={{
           top100: {
-            OneDayTop100: orderBy(
+            oneDayTop100: orderBy(
               leaderBoard1dData,
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 100),
-            SevenDayTop100: orderBy(
+            sevenDayTop100: orderBy(
               leaderBoard7dData,
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 100),
-            ThirtyDayTop100: orderBy(
+            thirtyDayTop100: orderBy(
               leaderBoard30dData,
               ["total_raw_day_volume"],
               "desc"
             ).slice(0, 100),
+            ninetyDayTop100: orderBy(
+              leaderBoard90dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 100),
+            allTop100: orderBy(
+              leaderBoardAllData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 100),
           },
-          trueVolume: orderBy(
-            leaderBoard30dData,
-            ["total_real_day_volume"],
-            "desc"
-          ).slice(0, 5),
-          fakeVolume: orderBy(
-            leaderBoard30dData,
-            ["total_day_volume_fake"],
-            "desc"
-          ).slice(0, 5),
-          loanVolume: orderBy(
-            leaderBoard30dData,
-            ["total_day_volume_loan"],
-            "desc"
-          ).slice(0, 5),
-          royalty: orderBy(
-            leaderBoard30dData,
-            ["total_day_total_royalty"],
-            "desc"
-          ).slice(0, 5),
+          trueVolume: {
+            oneDay: orderBy(
+              leaderBoard7dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            sevenDay: orderBy(
+              leaderBoard7dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            ninetyDay: orderBy(
+              leaderBoard90dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            all: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+          },
+          fakeVolume: {
+            oneDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            sevenDay: orderBy(
+              leaderBoard7dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            ninetyDay: orderBy(
+              leaderBoard90dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            all: orderBy(
+              leaderBoardAllData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+          },
+          loanVolume: {
+            oneDay: orderBy(
+              leaderBoard7dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            sevenDay: orderBy(
+              leaderBoard7dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            ninetyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            all: orderBy(
+              leaderBoardAllData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+          },
+          royalty: {
+            oneDay: orderBy(
+              leaderBoard7dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            sevenDay: orderBy(
+              leaderBoard7dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            ninetyDay: orderBy(
+              leaderBoard90dData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            all: orderBy(
+              leaderBoardAllData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
+          },
         }}
         traders={{
           onlyBought: onlyBought[0].data,

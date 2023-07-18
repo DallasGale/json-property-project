@@ -19,11 +19,11 @@ import { kFormatter } from "@/utils/kFormatter";
 interface DataTableProps {
   tableTitle?: string;
   tableBodyData: {
-    OneDayTop100: CollectionTypes[];
-    SevenDayTop100: CollectionTypes[];
-    ThirtyDayTop100: CollectionTypes[];
-    NinetyDayTop100?: CollectionTypes[];
-    AllTop100?: CollectionTypes[];
+    oneDayTop100: CollectionTypes[];
+    sevenDayTop100: CollectionTypes[];
+    thirtyDayTop100: CollectionTypes[];
+    ninetyDayTop100: CollectionTypes[];
+    allTop100: CollectionTypes[];
   };
 }
 
@@ -93,26 +93,25 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
   });
 
   const [timeframe, setTimeframe] = useState(-30);
-  const [top100Data, setTop100Data] = useState(tableBodyData.ThirtyDayTop100);
+  const [top100Data, setTop100Data] = useState(tableBodyData.thirtyDayTop100);
 
-  console.log({ top100Data });
   useEffect(() => {
     if (timeframe === 90) {
-      setTop100Data(tableBodyData.NinetyDayTop100 || []);
+      setTop100Data(tableBodyData.ninetyDayTop100);
     }
     if (timeframe === 30) {
-      setTop100Data(tableBodyData.ThirtyDayTop100);
+      setTop100Data(tableBodyData.thirtyDayTop100);
     }
     if (timeframe === 7) {
-      setTop100Data(tableBodyData.SevenDayTop100);
+      setTop100Data(tableBodyData.sevenDayTop100);
     }
 
     if (timeframe === 1) {
-      setTop100Data(tableBodyData.OneDayTop100);
+      setTop100Data(tableBodyData.oneDayTop100);
     }
 
     if (timeframe === 0) {
-      setTop100Data(tableBodyData.AllTop100 || []);
+      setTop100Data(tableBodyData.allTop100);
     }
   }, [timeframe]);
 

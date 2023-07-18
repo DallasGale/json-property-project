@@ -26,18 +26,41 @@ import GoodToBadColors from "@/utils/goodToBadColors";
 
 interface LeaderBoardTypes {
   showTimeframeToggles?: boolean;
-  trueVolume: TrueVolumeTypes[];
-  fakeVolume: FakeVolumeTypes[];
-  loanVolume: LoanVolumeTypes[];
-  royalty: RoyaltyTypes[];
+  leaderboardData: {
+    trueVolume: {
+      oneDay: TrueVolumeTypes[];
+      sevenDay: TrueVolumeTypes[];
+      thirtyDay: TrueVolumeTypes[];
+      ninetyDay: TrueVolumeTypes[];
+      all: TrueVolumeTypes[];
+    };
+    fakeVolume: {
+      oneDay: FakeVolumeTypes[];
+      sevenDay: FakeVolumeTypes[];
+      thirtyDay: FakeVolumeTypes[];
+      ninetyDay: FakeVolumeTypes[];
+      all: FakeVolumeTypes[];
+    };
+    loanVolume: {
+      oneDay: LoanVolumeTypes[];
+      sevenDay: LoanVolumeTypes[];
+      thirtyDay: LoanVolumeTypes[];
+      ninetyDay: LoanVolumeTypes[];
+      all: LoanVolumeTypes[];
+    };
+    royalty: {
+      oneDay: RoyaltyTypes[];
+      sevenDay: RoyaltyTypes[];
+      thirtyDay: RoyaltyTypes[];
+      ninetyDay: RoyaltyTypes[];
+      all: RoyaltyTypes[];
+    };
+  };
 }
 
 const Leaderboard: React.FC<LeaderBoardTypes> = ({
   showTimeframeToggles = false,
-  trueVolume,
-  fakeVolume,
-  loanVolume,
-  royalty,
+  leaderboardData,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -53,52 +76,56 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   });
 
   // Daily True
-  const [trueVolumeDataArray, setTrueVolumeDataArray] = useState(
-    trueVolume.slice(trueVolume.length - 90)
+  const [trueVolumeDataArray, setTrueVolumeDataArray] = useState<any[]>(
+    leaderboardData.trueVolume.thirtyDay
+    // []
   );
-  const [loanVolumeDataArray, setLoanVolumeDataArray] = useState(
-    loanVolume.slice(loanVolume.length - 90)
+  const [loanVolumeDataArray, setLoanVolumeDataArray] = useState<any[]>(
+    leaderboardData.loanVolume.thirtyDay
+    // []
   );
-  const [fakeVolumeDataArray, setFakeVolumeDataArray] = useState(
-    fakeVolume.slice(fakeVolume.length - 90)
+  const [fakeVolumeDataArray, setFakeVolumeDataArray] = useState<any[]>(
+    leaderboardData.fakeVolume.thirtyDay
+    // []
   );
-  const [revenueDataArray, setRevenueVolumeDataArray] = useState(
-    royalty.slice(royalty.length - 90)
+  const [revenueDataArray, setRevenueVolumeDataArray] = useState<any[]>(
+    leaderboardData.royalty.thirtyDay
+    // []
   );
 
   const [timeframe, setTimeframe] = useState(90);
   useEffect(() => {
     if (timeframe === 90) {
-      setFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 90));
-      setLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 90));
-      setTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 90));
-      setRevenueVolumeDataArray(royalty.slice(royalty.length - 90));
+      setTrueVolumeDataArray(leaderboardData.trueVolume.ninetyDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.ninetyDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.ninetyDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.ninetyDay);
     }
     if (timeframe === 30) {
-      setFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
-      setLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
-      setTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
-      setRevenueVolumeDataArray(royalty.slice(royalty.length - 30));
+      setTrueVolumeDataArray(leaderboardData.trueVolume.thirtyDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.thirtyDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.thirtyDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.thirtyDay);
     }
     if (timeframe === 7) {
-      setFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 7));
-      setLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 7));
-      setTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 7));
-      setRevenueVolumeDataArray(royalty.slice(royalty.length - 7));
+      setTrueVolumeDataArray(leaderboardData.trueVolume.sevenDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.sevenDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.sevenDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.sevenDay);
     }
 
     if (timeframe === 1) {
-      setFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
-      setLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
-      setTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
-      setRevenueVolumeDataArray(royalty.slice(royalty.length - 1));
+      setTrueVolumeDataArray(leaderboardData.trueVolume.oneDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.oneDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.oneDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.oneDay);
     }
 
     if (timeframe === 0) {
-      setFakeVolumeDataArray(fakeVolume);
-      setLoanVolumeDataArray(loanVolume);
-      setTrueVolumeDataArray(trueVolume);
-      setRevenueVolumeDataArray(royalty);
+      setTrueVolumeDataArray(leaderboardData.trueVolume.all);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.all);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.all);
+      setRevenueVolumeDataArray(leaderboardData.royalty.all);
     }
   }, [timeframe]);
 
@@ -116,7 +143,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         >
           <div className="chart__chart-actions-lockup">
             <ChartDataToggles
-              title="Top 100 Collections"
+              title="Leaderboard"
               onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
               active={timeframe}
             />
