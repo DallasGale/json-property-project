@@ -13,7 +13,7 @@ import type { DatasetsType } from "@app/types";
 // Helpers
 import orderBy from "lodash.orderby";
 
-async function getData() {
+async function getDailySummaryData() {
   const res = await fetch(endpoints.nft_ethereum_daily_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -26,7 +26,6 @@ async function getLeaderBoard1dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  console.log({ res });
 
   return res.json();
 }
@@ -36,7 +35,6 @@ async function getLeaderBoard7dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  console.log({ res });
 
   return res.json();
 }
@@ -45,7 +43,6 @@ async function getLeaderBoard30dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  console.log({ res });
 
   return res.json();
 }
@@ -55,7 +52,6 @@ async function getLeaderBoard90dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  console.log({ res });
 
   return res.json();
 }
@@ -65,13 +61,12 @@ async function getLeaderBoardAllData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-  console.log({ res });
 
   return res.json();
 }
 
 export default async function Home() {
-  const data = await getData();
+  const dailySummaryData = await getDailySummaryData();
   const leaderBoard1dData = await getLeaderBoard1dData();
   const leaderBoard7dData = await getLeaderBoard7dData();
   const leaderBoard30dData = await getLeaderBoard30dData();
@@ -80,7 +75,7 @@ export default async function Home() {
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
-    await data.labels.forEach((date: any) => {
+    await dailySummaryData.labels.forEach((date: any) => {
       const fullDate = new Date(date);
       const month = fullDate.getMonth();
       const day = fullDate.getDate();
@@ -97,52 +92,52 @@ export default async function Home() {
   const labels = await dateFormatter();
 
   // Datasets
-  const totalVolume = await data?.datasets.filter(
+  const totalVolume = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total"
   );
-  const totalVolume30DayMovingAverage = await data?.datasets.filter(
+  const totalVolume30DayMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
   );
-  const loanVolume = await data?.datasets.filter(
+  const loanVolume = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_loan"
   );
-  const loanVolum30DayMovingAverage = await data?.datasets.filter(
+  const loanVolum30DayMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_loan_30_day_moving_average"
   );
-  const fakeVolume = await data?.datasets.filter(
+  const fakeVolume = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_fake"
   );
-  const fakeVolume30DayMovingAverage = await data?.datasets.filter(
+  const fakeVolume30DayMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_fake_30_day_moving_average"
   );
-  const realPercentDifference = data?.datasets.filter(
+  const realPercentDifference = dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "real_percent_difference"
   );
-  const trueVolume = await data?.datasets.filter(
+  const trueVolume = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real"
   );
-  const trueVolume30DayMovingAverage = await data?.datasets.filter(
+  const trueVolume30DayMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real_30_day_moving_average"
   );
 
   // Traders
-  const onlyBought = await data?.datasets.filter(
+  const onlyBought = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_buyer_wallets"
   );
-  const onlyBoughtMovingAverage = await data?.datasets.filter(
+  const onlyBoughtMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real_30_day_moving_average" // to be updated with the correct moving average data
   );
 
-  const onlySold = await data?.datasets.filter(
+  const onlySold = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_seller_wallets"
   );
-  const onlySoldMovingAverage = await data?.datasets.filter(
+  const onlySoldMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_fake_30_day_moving_average"
   );
-  const boughtAndSold = await data?.datasets.filter(
+  const boughtAndSold = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_seller_and_buyer_wallets"
   );
-  const boughtAndSoldMovingAverage = await data?.datasets.filter(
+  const boughtAndSoldMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
   );
 
