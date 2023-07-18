@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Marketplaces from "@views/marketplaces";
+// import Marketplaces from "@views/marketplaces";
 import MarketOverview from "@views/marketOverview";
 
 // Types
@@ -15,8 +15,8 @@ import type {
 
 // Components
 import Header from "@/components/header/header";
-import navigation from "@/constants/navigation";
-import Interesting from "../views/interesting";
+// import navigation from "@/constants/navigation";
+// import Interesting from "../views/interesting";
 import Leaderboards from "../views/leaderboards";
 
 interface DataVizLayoutTypes {
