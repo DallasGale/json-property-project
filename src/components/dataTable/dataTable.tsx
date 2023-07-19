@@ -257,7 +257,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                           className="data-table__icon data-table__icon--crypto"
                         />
                         <p className="typography__display--2  typography__color--white">
-                          {kFormatter(DecimalFormatter(total_raw_day_volume))}
+                          {kFormatter(DecimalFormatter(total_real_day_volume))}
                         </p>
                       </div>
                     </td>
@@ -269,7 +269,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                           className="data-table__icon data-table__icon--crypto"
                         />
                         <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                          {kFormatter(DecimalFormatter(total_real_day_volume))}
+                          {kFormatter(DecimalFormatter(total_raw_day_volume))}
                         </p>
                       </div>
                     </td>
