@@ -18,6 +18,7 @@ import Header from "@/components/header/header";
 // import navigation from "@/constants/navigation";
 // import Interesting from "../views/interesting";
 import Leaderboards from "../views/leaderboards";
+import type { TradersTimeframeTypes } from "../traders/traders";
 
 interface DataVizLayoutTypes {
   labels: string[];
@@ -74,6 +75,8 @@ interface DataVizLayoutTypes {
     onlySoldMovingAverage: number[];
     boughtAndSold: number[];
     boughtAndSoldMovingAverage: number[];
+    activeWallets: TradersTimeframeTypes;
+    newWallets: TradersTimeframeTypes;
   };
 }
 
@@ -149,6 +152,8 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                   boughtAndSold: traders.boughtAndSold,
                   boughtAndSoldMovingAverage:
                     traders.boughtAndSoldMovingAverage,
+                  activeWallets: traders.activeWallets,
+                  newWallets: traders.newWallets,
                 }}
               />
             )}

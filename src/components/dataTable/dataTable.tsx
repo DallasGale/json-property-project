@@ -14,7 +14,7 @@ import { CollectionTypes, DatasetsType } from "@/app/types";
 
 // Components
 import ChartDataToggles from "@components/toggles/chart_data";
-import { kFormatter } from "@/utils/kFormatter";
+import { numFormatter } from "@/utils/numFormatter";
 
 interface DataTableProps {
   tableTitle?: string;
@@ -263,7 +263,9 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                               : "typography__color--dark-medium-emphasis"
                           }`}
                         >
-                          {kFormatter(DecimalFormatter(total_real_day_volume))}
+                          {numFormatter(
+                            DecimalFormatter(total_real_day_volume)
+                          )}
                         </p>
                       </div>
                     </td>
@@ -302,7 +304,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                               : "typography__color--dark-medium-emphasis"
                           }`}
                         >
-                          {kFormatter(DecimalFormatter(total_raw_day_volume))}
+                          {numFormatter(DecimalFormatter(total_raw_day_volume))}
                         </p>
                       </div>
                     </td>
@@ -315,7 +317,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                             : "typography__color--dark-medium-emphasis"
                         }`}
                       >
-                        {kFormatter(total_real_day_trade_num)}
+                        {numFormatter(total_real_day_trade_num)}
                       </p>
                     </td>
 
@@ -334,7 +336,9 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                               : "typography__color--dark-medium-emphasis"
                           }`}
                         >
-                          {kFormatter(DecimalFormatter(total_day_volume_loan))}
+                          {numFormatter(
+                            DecimalFormatter(total_day_volume_loan)
+                          )}
                         </p>
                       </div>
                     </td>
@@ -354,7 +358,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                               : "typography__color--dark-medium-emphasis"
                           }`}
                         >
-                          {kFormatter(
+                          {numFormatter(
                             DecimalFormatter(total_day_total_royalty)
                           )}
                         </p>
@@ -375,7 +379,9 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                               : "typography__color--dark-medium-emphasis"
                           }`}
                         >
-                          {kFormatter(DecimalFormatter(total_day_volume_fake))}
+                          {numFormatter(
+                            DecimalFormatter(total_day_volume_fake)
+                          )}
                         </p>
                       </div>
                     </td>
@@ -394,7 +400,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                               : "typography__color--dark-medium-emphasis"
                           }`}
                         >
-                          {kFormatter(DecimalFormatter(total_day_trade_num))}
+                          {numFormatter(DecimalFormatter(total_day_trade_num))}
                         </p>
                       </div>
                     </td>

@@ -34,7 +34,7 @@ import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
-import Traders from "../traders/traders";
+import Traders, { TradersTimeframeTypes } from "../traders/traders";
 import TimeframeAsString from "@/utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 
@@ -98,6 +98,8 @@ interface VolumeChartProps {
     onlySoldMovingAverage: number[];
     boughtAndSold: number[];
     boughtAndSoldMovingAverage: number[];
+    activeWallets: TradersTimeframeTypes;
+    newWallets: TradersTimeframeTypes;
   };
 }
 const MarketOverview: React.FC<VolumeChartProps> = ({
@@ -395,6 +397,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         fake_volume={dailyFakeVolumeDataArray}
                       />
                       <div>
+                        {/* Add deltas  eg: -5% */}
                         <DynamicVolumeNumber
                           timeframe={timeframe}
                           volumes={realPercentDifference}
@@ -544,6 +547,8 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
         onlySoldMovingAverage={traders.onlySoldMovingAverage}
         boughtAndSold={traders.boughtAndSold}
         boughtAndSoldMovingAverage={traders.boughtAndSoldMovingAverage}
+        activeWallets={traders.activeWallets}
+        newWallets={traders.newWallets}
       />
     </>
   );

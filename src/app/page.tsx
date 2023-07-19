@@ -65,6 +65,15 @@ async function getLeaderBoardAllData() {
   return res.json();
 }
 
+async function getWalletSummary() {
+  const res = await fetch(endpoints.nft_ethereum_timeframe_wallet_summary);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
 export default async function Home() {
   const dailySummaryData = await getDailySummaryData();
   const leaderBoard1dData = await getLeaderBoard1dData();
@@ -72,6 +81,7 @@ export default async function Home() {
   const leaderBoard30dData = await getLeaderBoard30dData();
   const leaderBoard90dData = await getLeaderBoard90dData();
   const leaderBoardAllData = await getLeaderBoardAllData();
+  const walletSummararyData = await getWalletSummary();
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -139,6 +149,49 @@ export default async function Home() {
   );
   const boughtAndSoldMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
+  );
+
+  // Timeframe Summary
+  // Active Wallet
+  const activeWallet1Day = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "unique_total_buyer_seller_24h"
+  );
+
+  const activeWallet7Day = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "unique_total_buyer_seller_7d"
+  );
+
+  const activeWallet30Day = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "unique_total_buyer_seller_30d"
+  );
+
+  const activeWallet90Day = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "unique_total_buyer_seller_90d"
+  );
+
+  const activeWalletAll = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "unique_total_buyer_seller_all"
+  );
+
+  // New Wallet
+  const newWallet1Day = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "new_wallet_24h"
+  );
+
+  const newWallet7Day = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "new_wallet_7d"
+  );
+
+  const newWallet30Day = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "new_wallet_30d"
+  );
+
+  const newWallet90Day = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "new_wallet_90d"
+  );
+
+  const newWalletAll = walletSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "new_wallet_all"
   );
 
   return (
@@ -303,6 +356,20 @@ export default async function Home() {
           onlySoldMovingAverage: onlySoldMovingAverage[0].data,
           boughtAndSold: boughtAndSold[0].data,
           boughtAndSoldMovingAverage: boughtAndSoldMovingAverage[0].data,
+          activeWallets: {
+            oneDay: activeWallet1Day[0].data,
+            sevenDay: activeWallet7Day[0].data,
+            thirtyDay: activeWallet30Day[0].data,
+            ninetyDay: activeWallet90Day[0].data,
+            all: activeWalletAll[0].data,
+          },
+          newWallets: {
+            oneDay: newWallet1Day[0].data,
+            sevenDay: newWallet7Day[0].data,
+            thirtyDay: newWallet30Day[0].data,
+            ninetyDay: newWallet90Day[0].data,
+            all: newWalletAll[0].data,
+          },
         }}
       />
     </main>

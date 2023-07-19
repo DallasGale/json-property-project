@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 // Components
 import HeroBarChart from "@components/charts/heroBarChart";
@@ -13,7 +14,16 @@ import { useSpring, animated, easings } from "@react-spring/web";
 import TimeframeAsString from "@/utils/timeframeAsString";
 import TrendLineChart from "../charts/trendLineChart";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
+import CryptoIcon from "@assets/icons/crypto.svg";
+import { numFormatter } from "@/utils/numFormatter";
 
+export type TradersTimeframeTypes = {
+  oneDay: number;
+  sevenDay: number;
+  thirtyDay: number;
+  ninetyDay: number;
+  all: number;
+};
 interface TradersTypes {
   labels: string[];
   realPercentDifference: number[];
@@ -23,6 +33,8 @@ interface TradersTypes {
   onlySoldMovingAverage: number[];
   boughtAndSold: number[];
   boughtAndSoldMovingAverage: number[];
+  activeWallets: TradersTimeframeTypes;
+  newWallets: TradersTimeframeTypes;
 }
 
 const Traders: React.FC<TradersTypes> = ({
@@ -34,6 +46,8 @@ const Traders: React.FC<TradersTypes> = ({
   onlySoldMovingAverage,
   boughtAndSold,
   boughtAndSoldMovingAverage,
+  activeWallets,
+  newWallets,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -184,6 +198,39 @@ const Traders: React.FC<TradersTypes> = ({
       id: "bought-and-sold",
     },
   ];
+
+  // Active Wallets
+  const [uniqueTotalBuyerSellerData, setuUniqueTotalBuyerSellerData] =
+    useState(0);
+  // New Wallets
+  const [newWalletsData, setNewWalletsDate] = useState<number>(0);
+
+  useEffect(() => {
+    if (timeframe === 1) {
+      setNewWalletsDate(newWallets.oneDay);
+      setuUniqueTotalBuyerSellerData(activeWallets.oneDay);
+    }
+
+    if (timeframe === 7) {
+      setNewWalletsDate(newWallets.sevenDay);
+      setuUniqueTotalBuyerSellerData(activeWallets.sevenDay);
+    }
+    if (timeframe === 30) {
+      setNewWalletsDate(newWallets.thirtyDay);
+      setuUniqueTotalBuyerSellerData(activeWallets.thirtyDay);
+    }
+    if (timeframe === 90) {
+      setNewWalletsDate(newWallets.ninetyDay);
+      setuUniqueTotalBuyerSellerData(activeWallets.ninetyDay);
+    }
+    if (timeframe === 0) {
+      setNewWalletsDate(newWallets.all);
+      setuUniqueTotalBuyerSellerData(activeWallets.all);
+    }
+  }, [timeframe]);
+
+  const [totalUniqueWallets] = useState(2032);
+  const [accumulatedUniqueWallets] = useState(2032);
   return (
     <>
       <TwoColumnGrid
@@ -253,66 +300,39 @@ const Traders: React.FC<TradersTypes> = ({
               >
                 <div className="grid__col-container-body">
                   <div>
-                    <DynamicVolumeNumber
-                      timeframe={timeframe}
-                      volumes={realPercentDifference}
-                    />
+                    <p className="typography__label--2">
+                      <Image src={CryptoIcon} alt="Crypto Icon" />
+                      {numFormatter(uniqueTotalBuyerSellerData)}
+                    </p>
                     <h3 className="typography__subtitle--2">Active Wallets</h3>
                     <p className="typography__paragraph--1">
                       Wallets that have bought/sold within the last 24 hours.
                     </p>
                   </div>
+
                   <TrendLineChart
                     legendOnClick={() => null}
                     labels={tradersLabels}
                     legendLabels={...legendLabels}
                     legendFormat="vertical"
                     datasets={[
+                      /* 
+                    total_unique_wallets
+                    accumulated_unique_wallets
+                  */
                       {
                         label: "Only Bought",
-                        data: false
-                          ? []
-                          : onlyBoughtMovingAverageDataArray.slice(
-                              onlyBoughtMovingAverageDataArray.length - 90
-                            ),
-                        borderColor: false
-                          ? "rgba(95, 61, 196, 0)"
-                          : "rgba(95, 61, 196, 1)",
-                        backgroundColor: false
-                          ? "rgba(95, 61, 196, 0)"
-                          : "rgba(95, 61, 196, 1)",
+                        data: totalUniqueWallets,
+                        borderColor: "rgba(95, 61, 196, 1)",
+                        backgroundColor: "rgba(95, 61, 196, 1)",
                         pointRadius: 0,
                         borderWidth: 3,
                       },
                       {
                         label: "Only Sold",
-                        data: false
-                          ? []
-                          : onlySoldMovingAverage.slice(
-                              onlySoldMovingAverage.length - 90
-                            ),
-                        borderColor: false
-                          ? "rgba(253, 126, 20, 0)"
-                          : "rgba(253, 126, 20, 1)",
-                        backgroundColor: false
-                          ? "rgba(253, 126, 20, 0)"
-                          : "rgba(253, 126, 20, 1)",
-                        pointRadius: 0,
-                        borderWidth: 3,
-                      },
-                      {
-                        label: "Bought And Sold",
-                        data: false
-                          ? []
-                          : boughtAndSoldMovingAverage.slice(
-                              boughtAndSoldMovingAverage.length - 90
-                            ),
-                        borderColor: false
-                          ? "rgba(64, 192, 87, 0)"
-                          : "rgba(64, 192, 87, 1)",
-                        backgroundColor: false
-                          ? "rgba(64, 192, 87, 0)"
-                          : "rgba(64, 192, 87, 1)",
+                        data: accumulatedUniqueWallets,
+                        borderColor: "rgba(253, 126, 20, 1)",
+                        backgroundColor: "rgba(253, 126, 20, 1)",
                         pointRadius: 0,
                         borderWidth: 3,
                       },
@@ -326,22 +346,64 @@ const Traders: React.FC<TradersTypes> = ({
               >
                 <div className="grid__col-container-body">
                   <div>
-                    <DynamicVolumeNumber
+                    {/*
+                    
+                    new_wallets_1s
+                    new_wallets_7d
+                    new_wallets_30d
+                    new_wallets_90d
+                    new_wallets_all
+                    
+                    */}
+                    {/* <DynamicVolumeNumber
                       timeframe={timeframe}
                       volumes={realPercentDifference}
-                    />
+                    /> */}
+                    <p className="typography__label--2">
+                      <Image src={CryptoIcon} alt="Crypto Icon" />
+                      {numFormatter(newWalletsData)}
+                    </p>
                     <h3 className="typography__subtitle--2">New Wallets</h3>
                     <p className="typography__paragraph--1">
                       Wallets that have been created within the last 24 hours.
                     </p>
                   </div>
-                  <TrendLineChart
+
+                  {/* Daily Summary Endpoint */}
+
+                  {/* 
+                       new_wallets - is daily amount
+                       accumulated_new_wallets - 
+                  
+                  */}
+                  {/* <TrendLineChart
                     legendOnClick={() => null}
                     labels={tradersLabels}
                     legendLabels={[]}
                     legendFormat="vertical"
-                    datasets={[]}
-                  />
+                    datasets={[
+                      {
+                        label: "New Wallets",
+                        data: newWalletsData,
+                        borderColor: "rgba(95, 61, 196, 1)",
+                        backgroundColor: "rgba(95, 61, 196, 1)",
+                        pointRadius: 0,
+                        borderWidth: 3,
+                      },
+                      {
+                        label: "New Wallets",
+                        data: accumulatedNewWalletsData,
+                        borderColor: false
+                          ? "rgba(95, 61, 196, 0)"
+                          : "rgba(95, 61, 196, 1)",
+                        backgroundColor: false
+                          ? "rgba(95, 61, 196, 0)"
+                          : "rgba(95, 61, 196, 1)",
+                        pointRadius: 0,
+                        borderWidth: 3,
+                      },
+                    ]}
+                  /> */}
                 </div>
               </animated.div>
             </div>
