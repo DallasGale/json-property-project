@@ -55,14 +55,14 @@ const tableHead: TabelHeadTypes[] = [
     active: true,
   },
   {
-    name: "Total Volume",
-    id: "total-volume",
+    name: "True V %",
+    id: "true-volume-percentage",
     hasChevronDown: true,
     active: false,
   },
   {
-    name: "True V %",
-    id: "true-v-percent",
+    name: "Total Volume",
+    id: "total-volume",
     hasChevronDown: true,
     active: false,
   },
@@ -91,8 +91,8 @@ const tableHead: TabelHeadTypes[] = [
     active: false,
   },
   {
-    name: "Total Sales",
-    id: "total-sales",
+    name: "Total Sales Count",
+    id: "total-sales-count",
     hasChevronDown: true,
     active: false,
   },
@@ -161,6 +161,11 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
     setTimeframe(value);
   }
 
+  const [activeColumn, setActiveColumn] = useState("true-volume");
+  const handleSorting = (id: string) => {
+    setActiveColumn(id);
+  };
+
   return (
     <div className="data-table">
       <animated.div
@@ -187,7 +192,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
               tableHead.map(({ name, id, hasChevronDown }) => (
                 <td
                   id={id}
-                  onClick={(e) => console.log(e.currentTarget.id)}
+                  onClick={(e) => handleSorting(e.currentTarget.id)}
                   key={id}
                   className={`data-table__cell data-table__cell--${name.toLowerCase()}`}
                 >
@@ -198,7 +203,13 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                         alt="Crypto Icon"
                         className="data-table__icon data-table__icon--chevron"
                       />
-                      <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                      <p
+                        className={`typography__display--2 ${
+                          activeColumn === id
+                            ? "typography__color--white typography__weight--700"
+                            : "typography__color--dark-medium-emphasis"
+                        }`}
+                      >
                         {name}
                       </p>
                     </div>
@@ -218,16 +229,10 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                 {
                   name,
                   contract_address,
-                  total_day_total_platform,
                   total_day_total_royalty,
                   total_day_trade_num,
                   total_day_volume_fake,
-                  total_day_volume_farming,
                   total_day_volume_loan,
-                  total_day_volume_loan_num,
-                  total_day_volume_wash_trading,
-                  total_fake_day_volume_percentage,
-                  total_loan_day_volume_percentage,
                   total_raw_day_volume,
                   total_real_day_trade_num,
                   total_real_day_volume,
@@ -241,11 +246,6 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                     <td width="50">
                       <p className="typography__display--2">{count}</p>
                     </td>
-                    {/* <td width="50">
-                      <p className="typography__display--2">
-                        {DecimalFormatter(total_raw_day_volume)} rank
-                      </p>
-                    </td> */}
                     <td>
                       <p className="typography__display--6">{name}</p>
                     </td>
@@ -256,32 +256,30 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                           alt="Crypto Icon"
                           className="data-table__icon data-table__icon--crypto"
                         />
-                        <p className="typography__display--2  typography__color--white">
+                        <p
+                          className={`typography__display--2 ${
+                            activeColumn === "true-volume"
+                              ? "typography__color--white typography__weight--700"
+                              : "typography__color--dark-medium-emphasis"
+                          }`}
+                        >
                           {kFormatter(DecimalFormatter(total_real_day_volume))}
-                        </p>
-                      </div>
-                    </td>
-                    <td width="120" align="right">
-                      <div className="data-table__cell-content">
-                        <Image
-                          src={CryptoIcon}
-                          alt="Crypto Icon"
-                          className="data-table__icon data-table__icon--crypto"
-                        />
-                        <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                          {kFormatter(DecimalFormatter(total_raw_day_volume))}
                         </p>
                       </div>
                     </td>
                     <td width="70" align="right">
                       {total_real_day_volume_percentage ? (
                         <p
-                          className="typography__display--2"
                           style={{
                             color: GoodToBadColors(
                               total_real_day_volume_percentage
                             ),
                           }}
+                          className={`typography__display--2 ${
+                            activeColumn === "true-volume-percentage"
+                              ? "typography__weight--700"
+                              : "typography__weight--300"
+                          }`}
                         >
                           {DecimalFormatter(total_real_day_volume_percentage)}%
                         </p>
@@ -290,8 +288,33 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                       )}
                     </td>
 
+                    <td width="100" align="right">
+                      <div className="data-table__cell-content">
+                        <Image
+                          src={CryptoIcon}
+                          alt="Crypto Icon"
+                          className="data-table__icon data-table__icon--crypto"
+                        />
+                        <p
+                          className={`typography__display--2 ${
+                            activeColumn === "total-volume"
+                              ? "typography__color--white typography__weight--700"
+                              : "typography__color--dark-medium-emphasis"
+                          }`}
+                        >
+                          {kFormatter(DecimalFormatter(total_raw_day_volume))}
+                        </p>
+                      </div>
+                    </td>
+
                     <td width="90" align="right">
-                      <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                      <p
+                        className={`typography__display--2 ${
+                          activeColumn === "sales"
+                            ? "typography__color--white typography__weight--700"
+                            : "typography__color--dark-medium-emphasis"
+                        }`}
+                      >
                         {kFormatter(total_real_day_trade_num)}
                       </p>
                     </td>
@@ -304,7 +327,13 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                           alt="Crypto Icon"
                           className="data-table__icon data-table__icon--crypto"
                         />
-                        <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                        <p
+                          className={`typography__display--2 ${
+                            activeColumn === "loans"
+                              ? "typography__color--white typography__weight--700"
+                              : "typography__color--dark-medium-emphasis"
+                          }`}
+                        >
                           {kFormatter(DecimalFormatter(total_day_volume_loan))}
                         </p>
                       </div>
@@ -318,7 +347,13 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                           alt="Crypto Icon"
                           className="data-table__icon data-table__icon--crypto"
                         />
-                        <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                        <p
+                          className={`typography__display--2 ${
+                            activeColumn === "revenue"
+                              ? "typography__color--white typography__weight--700"
+                              : "typography__color--dark-medium-emphasis"
+                          }`}
+                        >
                           {kFormatter(
                             DecimalFormatter(total_day_total_royalty)
                           )}
@@ -333,25 +368,36 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
                           alt="Crypto Icon"
                           className="data-table__icon data-table__icon--crypto"
                         />
-                        <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                        <p
+                          className={`typography__display--2 ${
+                            activeColumn === "fake"
+                              ? "typography__color--white typography__weight--700"
+                              : "typography__color--dark-medium-emphasis"
+                          }`}
+                        >
                           {kFormatter(DecimalFormatter(total_day_volume_fake))}
                         </p>
                       </div>
                     </td>
                     {/* total sales count */}
-                    <td width="90" align="right">
+                    <td width="120" align="right">
                       <div className="leaderboard__data-cell">
                         <Image
                           src={CryptoIcon}
                           alt="Crypto Icon"
                           className="data-table__icon data-table__icon--crypto"
                         />
-                        <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                        <p
+                          className={`typography__display--2 ${
+                            activeColumn === "total-sales-count"
+                              ? "typography__color--white typography__weight--700"
+                              : "typography__color--dark-medium-emphasis"
+                          }`}
+                        >
                           {kFormatter(DecimalFormatter(total_day_trade_num))}
                         </p>
                       </div>
                     </td>
-                    {/* true sales count */}
                   </tr>
                 );
               }
