@@ -45,14 +45,14 @@ const ChartDataToggles: React.FC<ChartDataTogglesProps> = ({
         >
           90D
         </button>
-        <button
+        {/* <button
           className={`button typography__label--1 ${
             active === 0 ? "active" : ""
           }`}
           onClick={(e) => onClick(e, 0)}
         >
           ALL
-        </button>
+        </button> */}
       </div>
     </div>
   );
