@@ -501,6 +501,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
 
       {/* Leaderboard Row */}
       <Leaderboard
+        showTimeframeToggles={true}
         leaderboardData={{
           trueVolume: {
             oneDay: leaderboard.trueVolume.oneDay,
