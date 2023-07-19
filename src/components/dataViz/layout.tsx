@@ -77,6 +77,8 @@ interface DataVizLayoutTypes {
     boughtAndSoldMovingAverage: number[];
     activeWallets: TradersTimeframeTypes;
     newWallets: TradersTimeframeTypes;
+    trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
   };
 }
 
@@ -154,6 +156,10 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                     traders.boughtAndSoldMovingAverage,
                   activeWallets: traders.activeWallets,
                   newWallets: traders.newWallets,
+                  trueVolumeTimeframeSummaryData:
+                    traders.trueVolumeTimeframeSummaryData,
+                  totalVolumeTimeframeSummaryData:
+                    traders.totalVolumeTimeframeSummaryData,
                 }}
               />
             )}

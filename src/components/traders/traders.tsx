@@ -9,13 +9,13 @@ import DynamicVolumeNumber from "@components/dataViz/dynamicVolumeNumber/dynamic
 
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
+import { numFormatter } from "@/utils/numFormatter";
 
 // Assets
 import TimeframeAsString from "@/utils/timeframeAsString";
 import TrendLineChart from "../charts/trendLineChart";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import CryptoIcon from "@assets/icons/crypto.svg";
-import { numFormatter } from "@/utils/numFormatter";
 
 export type TradersTimeframeTypes = {
   oneDay: number;
@@ -322,7 +322,7 @@ const Traders: React.FC<TradersTypes> = ({
                   */
                       {
                         label: "Only Bought",
-                        data: totalUniqueWallets,
+                        data: [totalUniqueWallets],
                         borderColor: "rgba(95, 61, 196, 1)",
                         backgroundColor: "rgba(95, 61, 196, 1)",
                         pointRadius: 0,
@@ -330,7 +330,7 @@ const Traders: React.FC<TradersTypes> = ({
                       },
                       {
                         label: "Only Sold",
-                        data: accumulatedUniqueWallets,
+                        data: [accumulatedUniqueWallets],
                         borderColor: "rgba(253, 126, 20, 1)",
                         backgroundColor: "rgba(253, 126, 20, 1)",
                         pointRadius: 0,

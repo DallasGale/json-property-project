@@ -26,7 +26,6 @@ async function getLeaderBoard1dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-
   return res.json();
 }
 
@@ -35,7 +34,6 @@ async function getLeaderBoard7dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-
   return res.json();
 }
 async function getLeaderBoard30dData() {
@@ -43,7 +41,6 @@ async function getLeaderBoard30dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-
   return res.json();
 }
 
@@ -52,7 +49,6 @@ async function getLeaderBoard90dData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-
   return res.json();
 }
 
@@ -61,16 +57,21 @@ async function getLeaderBoardAllData() {
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-
   return res.json();
 }
 
-async function getWalletSummary() {
+async function getWalletTimeframeSummary() {
   const res = await fetch(endpoints.nft_ethereum_timeframe_wallet_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
-
+  return res.json();
+}
+async function getVolumeTimeframeSummary() {
+  const res = await fetch(endpoints.nft_ethereum_timeframe_volume_summary);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
   return res.json();
 }
 
@@ -81,7 +82,8 @@ export default async function Home() {
   const leaderBoard30dData = await getLeaderBoard30dData();
   const leaderBoard90dData = await getLeaderBoard90dData();
   const leaderBoardAllData = await getLeaderBoardAllData();
-  const walletSummararyData = await getWalletSummary();
+  const walletSummararyData = await getWalletTimeframeSummary();
+  const volumeSummararyData = await getVolumeTimeframeSummary();
 
   const dateFormatter = async () => {
     let newDates: any[] = [];
@@ -192,6 +194,47 @@ export default async function Home() {
 
   const newWalletAll = walletSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "new_wallet_all"
+  );
+
+  // Volume
+  // True
+  const trueVolumeSummary1Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_1d"
+  );
+
+  const trueVolumeSummary7Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_7d"
+  );
+  const trueVolumeSummary30Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_30d"
+  );
+
+  const trueVolumeSummary90Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_90d"
+  );
+
+  const trueVolumeSummaryAll = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_all_time"
+  );
+
+  // Total
+  const totalVolumeSummary1Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_1d"
+  );
+
+  const totalVolumeSummary7Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_7d"
+  );
+  const totalVolumeSummary30Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_30d"
+  );
+
+  const totalVolumeSummary90Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_90d"
+  );
+
+  const totalVolumeSummaryAll = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_all_time"
   );
 
   return (
@@ -369,6 +412,20 @@ export default async function Home() {
             thirtyDay: newWallet30Day[0].data,
             ninetyDay: newWallet90Day[0].data,
             all: newWalletAll[0].data,
+          },
+          trueVolumeTimeframeSummaryData: {
+            oneDay: trueVolumeSummary1Day[0].data,
+            sevenDay: trueVolumeSummary7Day[0].data,
+            thirtyDay: trueVolumeSummary30Day[0].data,
+            ninetyDay: trueVolumeSummary90Day[0].data,
+            all: trueVolumeSummaryAll[0].data,
+          },
+          totalVolumeTimeframeSummaryData: {
+            oneDay: totalVolumeSummary1Day[0].data,
+            sevenDay: totalVolumeSummary7Day[0].data,
+            thirtyDay: totalVolumeSummary30Day[0].data,
+            ninetyDay: totalVolumeSummary90Day[0].data,
+            all: totalVolumeSummaryAll[0].data,
           },
         }}
       />
