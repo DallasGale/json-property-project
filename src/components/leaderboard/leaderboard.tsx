@@ -21,7 +21,7 @@ import DecimalFormatter from "@/utils/decimalFormatter";
 // Components
 import FourColumnGrid from "@/grids/fourColumnGrid";
 import ChartDataToggles from "@components/toggles/chart_data";
-import { kFormatter } from "@/utils/kFormatter";
+import { numFormatter } from "@/utils/numFormatter";
 import GoodToBadColors from "@/utils/goodToBadColors";
 
 interface LeaderBoardTypes {
@@ -180,7 +180,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                               <div className="leaderboard__data-cell">
                                 <Image src={CryptoIcon} alt="Crypto Icon" />
                                 <p className="typography__display--2">
-                                  {kFormatter(
+                                  {numFormatter(
                                     DecimalFormatter(total_real_day_volume)
                                   )}
                                 </p>
@@ -261,7 +261,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                               <div className="leaderboard__data-cell">
                                 <Image src={CryptoIcon} alt="Crypto Icon" />
                                 <p className="typography__display--2">
-                                  {kFormatter(
+                                  {numFormatter(
                                     DecimalFormatter(total_day_volume_fake)
                                   )}
                                 </p>
@@ -342,7 +342,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                               <div className="leaderboard__data-cell">
                                 <Image src={CryptoIcon} alt="Crypto Icon" />
                                 <p className="typography__display--2">
-                                  {kFormatter(
+                                  {numFormatter(
                                     DecimalFormatter(total_day_volume_loan)
                                   )}
                                 </p>
@@ -390,7 +390,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                               <div className="leaderboard__data-cell">
                                 <Image src={CryptoIcon} alt="Crypto Icon" />
                                 <p className="typography__display--2">
-                                  {kFormatter(
+                                  {numFormatter(
                                     DecimalFormatter(total_day_total_royalty)
                                   )}
                                 </p>

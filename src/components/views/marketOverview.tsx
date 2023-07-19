@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import CryptoIcon from "@assets/icons/crypto.svg";
 
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
@@ -17,6 +19,7 @@ import {
   PointElement,
   Tooltip,
 } from "chart.js";
+import { numFormatter } from "@/utils/numFormatter";
 
 // Types
 import type {
@@ -34,7 +37,7 @@ import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
-import Traders from "../traders/traders";
+import Traders, { TradersTimeframeTypes } from "../traders/traders";
 import TimeframeAsString from "@/utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 
@@ -98,6 +101,10 @@ interface VolumeChartProps {
     onlySoldMovingAverage: number[];
     boughtAndSold: number[];
     boughtAndSoldMovingAverage: number[];
+    activeWallets: TradersTimeframeTypes;
+    newWallets: TradersTimeframeTypes;
+    trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
   };
 }
 const MarketOverview: React.FC<VolumeChartProps> = ({
@@ -292,6 +299,56 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     }
   };
 
+  const [totalVolumeTimeframeSummaryData, setTotalVolumeTimeframeSummaryData] =
+    useState(traders.totalVolumeTimeframeSummaryData.oneDay);
+  const [trueVolumeTimeframeSummaryData, setTrueVolumeTimeframeSummaryData] =
+    useState(traders.trueVolumeTimeframeSummaryData.oneDay);
+
+  useEffect(() => {
+    if (timeframe === 90) {
+      setTrueVolumeTimeframeSummaryData(
+        traders.trueVolumeTimeframeSummaryData.ninetyDay
+      );
+      setTotalVolumeTimeframeSummaryData(
+        traders.totalVolumeTimeframeSummaryData.ninetyDay
+      );
+    }
+
+    if (timeframe === 30) {
+      setTrueVolumeTimeframeSummaryData(
+        traders.trueVolumeTimeframeSummaryData.thirtyDay
+      );
+      setTotalVolumeTimeframeSummaryData(
+        traders.totalVolumeTimeframeSummaryData.thirtyDay
+      );
+    }
+    if (timeframe === 7) {
+      setTrueVolumeTimeframeSummaryData(
+        traders.trueVolumeTimeframeSummaryData.sevenDay
+      );
+      setTotalVolumeTimeframeSummaryData(
+        traders.totalVolumeTimeframeSummaryData.sevenDay
+      );
+    }
+
+    if (timeframe === 1) {
+      setTrueVolumeTimeframeSummaryData(
+        traders.trueVolumeTimeframeSummaryData.oneDay
+      );
+      setTotalVolumeTimeframeSummaryData(
+        traders.totalVolumeTimeframeSummaryData.oneDay
+      );
+    }
+
+    if (timeframe === 0) {
+      setTrueVolumeTimeframeSummaryData(
+        traders.trueVolumeTimeframeSummaryData.all
+      );
+      setTotalVolumeTimeframeSummaryData(
+        traders.totalVolumeTimeframeSummaryData.all
+      );
+    }
+  }, [timeframe]);
   return (
     <>
       {/* TWO COLUMN GRID */}
@@ -395,10 +452,15 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         fake_volume={dailyFakeVolumeDataArray}
                       />
                       <div>
-                        <DynamicVolumeNumber
+                        {/* Add deltas  eg: -5% */}
+                        <p className="typography__label--2">
+                          <Image src={CryptoIcon} alt="Crypto Icon" />
+                          {numFormatter(trueVolumeTimeframeSummaryData)}
+                        </p>
+                        {/* <DynamicVolumeNumber
                           timeframe={timeframe}
                           volumes={realPercentDifference}
-                        />
+                        /> */}
                         <h3 className="typography__subtitle--2">True Volume</h3>
                         <p className="typography__paragraph--1">
                           Excludes fake/artificial volume such as loans, points
@@ -426,10 +488,10 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                 >
                   <div className="grid__col-container-body">
                     <div>
-                      <DynamicVolumeNumber
-                        timeframe={timeframe}
-                        volumes={realPercentDifference}
-                      />
+                      <p className="typography__label--2">
+                        <Image src={CryptoIcon} alt="Crypto Icon" />
+                        {numFormatter(totalVolumeTimeframeSummaryData)}
+                      </p>
                       <h3 className="typography__subtitle--2">Total Volume</h3>
                       <p className="typography__paragraph--1">
                         NFT trading volume across all transaction types
@@ -544,6 +606,8 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
         onlySoldMovingAverage={traders.onlySoldMovingAverage}
         boughtAndSold={traders.boughtAndSold}
         boughtAndSoldMovingAverage={traders.boughtAndSoldMovingAverage}
+        activeWallets={traders.activeWallets}
+        newWallets={traders.newWallets}
       />
     </>
   );

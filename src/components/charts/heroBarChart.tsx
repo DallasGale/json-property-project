@@ -1,5 +1,5 @@
 import { Bar } from "react-chartjs-2";
-import { kFormatter } from "@utils/kFormatter";
+import { numFormatter } from "@utils/numFormatter";
 import Legend from "@components/dataViz/legend/legend";
 import { BarChartDatasetsType, LegendLabelTypes } from "@app/types";
 
@@ -32,8 +32,6 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
             datasets: datasets,
           }}
           options={{
-            // animation: false,
-
             interaction: {
               mode: "x",
             },
@@ -64,7 +62,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
                 stacked: true,
                 ticks: {
                   callback: function (value: any) {
-                    return kFormatter(value);
+                    return numFormatter(value);
                   },
                 },
               },

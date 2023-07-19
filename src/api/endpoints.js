@@ -9,7 +9,13 @@ const endpoints = {
     all: "https://data.databeast.xyz/nft_ethereum_collection_summary_all.json",
   },
   nft_ethereum_daily_summary:
-    "https://data.databeast.xyz/nft_ethereum_summary_daily.json",
+    "https://data.databeast.xyz/nft_ethereum_daily_stats.json",
+  nft_ethereum_timeframe_summary:
+    "https://data.databeast.xyz/nft_ethereum_timeframe_summary.json",
+  nft_ethereum_timeframe_wallet_summary:
+    "https://data.databeast.xyz/nft_ethereum_timeframe_wallet_summary.json",
+  nft_ethereum_timeframe_volume_summary:
+    "https://data.databeast.xyz/nft_ethereum_timeframe_volume_summary.json",
 };
 
 export default endpoints;
