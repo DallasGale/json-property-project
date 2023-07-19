@@ -78,19 +78,15 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   // Daily True
   const [trueVolumeDataArray, setTrueVolumeDataArray] = useState<any[]>(
     leaderboardData.trueVolume.thirtyDay
-    // []
   );
   const [loanVolumeDataArray, setLoanVolumeDataArray] = useState<any[]>(
     leaderboardData.loanVolume.thirtyDay
-    // []
   );
   const [fakeVolumeDataArray, setFakeVolumeDataArray] = useState<any[]>(
     leaderboardData.fakeVolume.thirtyDay
-    // []
   );
   const [revenueDataArray, setRevenueVolumeDataArray] = useState<any[]>(
     leaderboardData.royalty.thirtyDay
-    // []
   );
 
   const [timeframe, setTimeframe] = useState(90);
