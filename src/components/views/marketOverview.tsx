@@ -219,7 +219,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     fakeVolume.slice(fakeVolume.length - 90)
   );
 
-  const [dailyTimeframe, setDailyTimeframe] = useState(1);
+  const [dailyTimeframe, setDailyTimeframe] = useState(90);
   useEffect(() => {
     if (dailyTimeframe === 0) {
       setDailyFakeVolumeDataArray(fakeVolume);
