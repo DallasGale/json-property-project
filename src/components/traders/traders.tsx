@@ -262,8 +262,8 @@ const Traders: React.FC<TradersTypes> = ({
 
   useEffect(() => {
     if (timeframe === 0) {
-      setNewWalletsDate(newWallets.all);
-      setuUniqueTotalBuyerSellerData(activeWallets.all);
+      setNewWalletsDate(newWallets.all[0]);
+      setuUniqueTotalBuyerSellerData(activeWallets.all[0]);
 
       setActiveWalletOnlyBoughtDataArray(onlyBought);
       setActiveWalletOnlySoldDataArray(onlySold);
@@ -271,8 +271,8 @@ const Traders: React.FC<TradersTypes> = ({
       setActiveWalletTradersLabels(labels);
     }
     if (timeframe === 1) {
-      setNewWalletsDate(newWallets.oneDay);
-      setuUniqueTotalBuyerSellerData(activeWallets.oneDay);
+      setNewWalletsDate(newWallets.oneDay[0]);
+      setuUniqueTotalBuyerSellerData(activeWallets.oneDay[0]);
 
       setActiveWalletOnlyBoughtDataArray(
         onlyBought.slice(onlyBought.length - 1)
@@ -287,8 +287,8 @@ const Traders: React.FC<TradersTypes> = ({
     }
 
     if (timeframe === 7) {
-      setNewWalletsDate(newWallets.sevenDay);
-      setuUniqueTotalBuyerSellerData(activeWallets.sevenDay);
+      setNewWalletsDate(newWallets.sevenDay[0]);
+      setuUniqueTotalBuyerSellerData(activeWallets.sevenDay[0]);
 
       setActiveWalletOnlyBoughtDataArray(
         onlyBought.slice(onlyBought.length - 7)
@@ -302,8 +302,8 @@ const Traders: React.FC<TradersTypes> = ({
       );
     }
     if (timeframe === 30) {
-      setNewWalletsDate(newWallets.thirtyDay);
-      setuUniqueTotalBuyerSellerData(activeWallets.thirtyDay);
+      setNewWalletsDate(newWallets.thirtyDay[0]);
+      setuUniqueTotalBuyerSellerData(activeWallets.thirtyDay[0]);
 
       setActiveWalletOnlyBoughtDataArray(
         onlyBought.slice(onlyBought.length - 30)
@@ -317,8 +317,8 @@ const Traders: React.FC<TradersTypes> = ({
       );
     }
     if (timeframe === 90) {
-      setNewWalletsDate(newWallets.ninetyDay);
-      setuUniqueTotalBuyerSellerData(activeWallets.ninetyDay);
+      setNewWalletsDate(newWallets.ninetyDay[0]);
+      setuUniqueTotalBuyerSellerData(activeWallets.ninetyDay[0]);
 
       setActiveWalletOnlyBoughtDataArray(
         onlyBought.slice(onlyBought.length - 90)
