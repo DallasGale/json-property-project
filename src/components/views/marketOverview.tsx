@@ -32,7 +32,6 @@ import type {
 // Components
 import TrendLineChart from "@components/charts/trendLineChart";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
-import DynamicVolumeNumber from "@components/dataViz/dynamicVolumeNumber/dynamicVolumeNumber";
 import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import HeroBarChart from "@components/charts/heroBarChart";
@@ -40,6 +39,8 @@ import ProgressRing from "@components/charts/progressRing";
 import Traders, { TradersTimeframeTypes } from "../traders/traders";
 import TimeframeAsString from "@/utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
+import DecimalFormatter from "@/utils/decimalFormatter";
+import PercentChangeColors from "@/utils/percentChangeColors";
 
 ChartJS.register(
   CategoryScale,
@@ -53,6 +54,13 @@ ChartJS.register(
   annotationPlugin,
   chartTrendline
 );
+
+export type PercentChangeTimeframeTypes = {
+  oneDay: number[];
+  sevenDay: number[];
+  thirtyDay: number[];
+  ninetyDay: number[];
+};
 interface VolumeChartProps {
   labels: string[];
   trueVolume: any[];
@@ -105,12 +113,14 @@ interface VolumeChartProps {
     newWallets: TradersTimeframeTypes;
     trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
     totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    totalPercentChangeTimeframeData: PercentChangeTimeframeTypes;
+    truePercentChangeTimeframeData: PercentChangeTimeframeTypes;
   };
 }
+
 const MarketOverview: React.FC<VolumeChartProps> = ({
   labels,
   trueVolume,
-  realPercentDifference,
   totalVolume,
   loanVolume,
   fakeVolume,
@@ -207,22 +217,20 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     fakeVolume.slice(fakeVolume.length - 90)
   );
 
-  const [dailyTimeframe, setDailyTimeframe] = useState(90);
+  const [dailyTimeframe, setDailyTimeframe] = useState(1);
   useEffect(() => {
-    if (dailyTimeframe === 90) {
-      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 90));
-      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 90));
-      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 90));
-      setDailyTrueVolumeLabels(
-        labels.slice(labels.length - 90).map((data: any) => data)
-      );
+    if (dailyTimeframe === 0) {
+      setDailyFakeVolumeDataArray(fakeVolume);
+      setDailyLoanVolumeDataArray(loanVolume);
+      setDailyTrueVolumeDataArray(trueVolume);
+      setDailyTrueVolumeLabels(labels);
     }
-    if (dailyTimeframe === 30) {
-      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
-      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
-      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
+    if (dailyTimeframe === 1) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
       setDailyTrueVolumeLabels(
-        labels.slice(labels.length - 30).map((data: any) => data)
+        labels.slice(labels.length - 1).map((data: any) => data)
       );
     }
     if (dailyTimeframe === 7) {
@@ -233,21 +241,22 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
         labels.slice(labels.length - 7).map((data: any) => data)
       );
     }
-
-    if (dailyTimeframe === 1) {
-      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 1));
-      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 1));
-      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 1));
+    if (dailyTimeframe === 30) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 30));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 30));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 30));
       setDailyTrueVolumeLabels(
-        labels.slice(labels.length - 1).map((data: any) => data)
+        labels.slice(labels.length - 30).map((data: any) => data)
       );
     }
 
-    if (dailyTimeframe === 0) {
-      setDailyFakeVolumeDataArray(fakeVolume);
-      setDailyLoanVolumeDataArray(loanVolume);
-      setDailyTrueVolumeDataArray(trueVolume);
-      setDailyTrueVolumeLabels(labels);
+    if (dailyTimeframe === 90) {
+      setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 90));
+      setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 90));
+      setDailyTrueVolumeDataArray(trueVolume.slice(trueVolume.length - 90));
+      setDailyTrueVolumeLabels(
+        labels.slice(labels.length - 90).map((data: any) => data)
+      );
     }
   }, [dailyTimeframe]);
 
@@ -304,22 +313,34 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
   const [trueVolumeTimeframeSummaryData, setTrueVolumeTimeframeSummaryData] =
     useState(traders.trueVolumeTimeframeSummaryData.oneDay);
 
+  const [totalPercentChangeTimeframe, setTotalPercentChangeTimeframe] =
+    useState(traders.totalPercentChangeTimeframeData.oneDay);
+
+  const [truePercentChangeTimeframe, setTruePercentChangeTimeframe] = useState(
+    traders.truePercentChangeTimeframeData.oneDay
+  );
+
   useEffect(() => {
-    if (timeframe === 90) {
+    if (timeframe === 0) {
       setTrueVolumeTimeframeSummaryData(
-        traders.trueVolumeTimeframeSummaryData.ninetyDay
+        traders.trueVolumeTimeframeSummaryData.all
       );
       setTotalVolumeTimeframeSummaryData(
-        traders.totalVolumeTimeframeSummaryData.ninetyDay
+        traders.totalVolumeTimeframeSummaryData.all
       );
     }
-
-    if (timeframe === 30) {
+    if (timeframe === 1) {
       setTrueVolumeTimeframeSummaryData(
-        traders.trueVolumeTimeframeSummaryData.thirtyDay
+        traders.trueVolumeTimeframeSummaryData.oneDay
       );
       setTotalVolumeTimeframeSummaryData(
-        traders.totalVolumeTimeframeSummaryData.thirtyDay
+        traders.totalVolumeTimeframeSummaryData.oneDay
+      );
+      setTotalPercentChangeTimeframe(
+        traders.totalPercentChangeTimeframeData.oneDay
+      );
+      setTruePercentChangeTimeframe(
+        traders.truePercentChangeTimeframeData.oneDay
       );
     }
     if (timeframe === 7) {
@@ -329,26 +350,43 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       setTotalVolumeTimeframeSummaryData(
         traders.totalVolumeTimeframeSummaryData.sevenDay
       );
-    }
-
-    if (timeframe === 1) {
-      setTrueVolumeTimeframeSummaryData(
-        traders.trueVolumeTimeframeSummaryData.oneDay
+      setTotalPercentChangeTimeframe(
+        traders.totalPercentChangeTimeframeData.sevenDay
       );
-      setTotalVolumeTimeframeSummaryData(
-        traders.totalVolumeTimeframeSummaryData.oneDay
+      setTruePercentChangeTimeframe(
+        traders.truePercentChangeTimeframeData.sevenDay
       );
     }
-
-    if (timeframe === 0) {
+    if (timeframe === 30) {
       setTrueVolumeTimeframeSummaryData(
-        traders.trueVolumeTimeframeSummaryData.all
+        traders.trueVolumeTimeframeSummaryData.thirtyDay
       );
       setTotalVolumeTimeframeSummaryData(
-        traders.totalVolumeTimeframeSummaryData.all
+        traders.totalVolumeTimeframeSummaryData.thirtyDay
+      );
+      setTotalPercentChangeTimeframe(
+        traders.totalPercentChangeTimeframeData.thirtyDay
+      );
+      setTruePercentChangeTimeframe(
+        traders.truePercentChangeTimeframeData.thirtyDay
+      );
+    }
+    if (timeframe === 90) {
+      setTrueVolumeTimeframeSummaryData(
+        traders.trueVolumeTimeframeSummaryData.ninetyDay
+      );
+      setTotalVolumeTimeframeSummaryData(
+        traders.totalVolumeTimeframeSummaryData.ninetyDay
+      );
+      setTotalPercentChangeTimeframe(
+        traders.totalPercentChangeTimeframeData.ninetyDay
+      );
+      setTruePercentChangeTimeframe(
+        traders.truePercentChangeTimeframeData.ninetyDay
       );
     }
   }, [timeframe]);
+
   return (
     <>
       {/* TWO COLUMN GRID */}
@@ -452,15 +490,27 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         fake_volume={dailyFakeVolumeDataArray}
                       />
                       <div>
-                        {/* Add deltas  eg: -5% */}
-                        <p className="typography__label--2">
-                          <Image src={CryptoIcon} alt="Crypto Icon" />
-                          {numFormatter(trueVolumeTimeframeSummaryData)}
-                        </p>
-                        {/* <DynamicVolumeNumber
-                          timeframe={timeframe}
-                          volumes={realPercentDifference}
-                        /> */}
+                        <div className="chart__value-percent-lockup">
+                          <p className="typography__label--2">
+                            <Image src={CryptoIcon} alt="Crypto Icon" />
+                            {numFormatter(trueVolumeTimeframeSummaryData)}
+                          </p>
+                          {/* Percent Change */}
+                          {timeframe !== 0 && (
+                            <p
+                              className="typography__display--4"
+                              style={{
+                                color: PercentChangeColors(
+                                  truePercentChangeTimeframe[0]
+                                ),
+                              }}
+                            >
+                              {truePercentChangeTimeframe[0] > 0 && "+"}
+                              {DecimalFormatter(truePercentChangeTimeframe[0])}%
+                            </p>
+                          )}
+                        </div>
+
                         <h3 className="typography__subtitle--2">True Volume</h3>
                         <p className="typography__paragraph--1">
                           Excludes fake/artificial volume such as loans, points
@@ -488,10 +538,26 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                 >
                   <div className="grid__col-container-body">
                     <div>
-                      <p className="typography__label--2">
-                        <Image src={CryptoIcon} alt="Crypto Icon" />
-                        {numFormatter(totalVolumeTimeframeSummaryData)}
-                      </p>
+                      <div className="chart__value-percent-lockup">
+                        <p className="typography__label--2">
+                          <Image src={CryptoIcon} alt="Crypto Icon" />
+                          {numFormatter(totalVolumeTimeframeSummaryData)}
+                        </p>
+                        {/* Percent Change */}
+                        {/* {timeframe !== 0 && (
+                          <p
+                            className="typography__display--4"
+                            style={{
+                              color: PercentChangeColors(
+                                totalPercentChangeTimeframe[0]
+                              ),
+                            }}
+                          >
+                            {totalPercentChangeTimeframe[0] > 0 && "+"}
+                            {DecimalFormatter(totalPercentChangeTimeframe[0])}%
+                          </p>
+                        )} */}
+                      </div>
                       <h3 className="typography__subtitle--2">Total Volume</h3>
                       <p className="typography__paragraph--1">
                         NFT trading volume across all transaction types
