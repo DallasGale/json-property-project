@@ -112,6 +112,8 @@ interface VolumeChartProps {
     activeWallets: TradersTimeframeTypes;
     newWallets: TradersTimeframeTypes;
     trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
     totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
     totalPercentChangeTimeframeData: PercentChangeTimeframeTypes;
     truePercentChangeTimeframeData: PercentChangeTimeframeTypes;
@@ -320,6 +322,14 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     traders.truePercentChangeTimeframeData.oneDay
   );
 
+  // Doughnut
+  const [trueVolumeDoughnutSummararyData, setTrueVolumeDoughnutSummararyData] =
+    useState(traders.trueVolumeTimeframeSummaryData.oneDay);
+  const [fakeVolumeDoughnutSummararyData, setFakeVolumeDoughnutSummararyData] =
+    useState(traders.fakeVolumeTimeframeSummaryData.oneDay);
+  const [loanVolumeDoughnutSummararyData, setLoanVolumeDoughnutSummararyData] =
+    useState(traders.loanVolumeTimeframeSummaryData.oneDay);
+
   useEffect(() => {
     if (timeframe === 0) {
       setTrueVolumeTimeframeSummaryData(
@@ -327,6 +337,15 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       );
       setTotalVolumeTimeframeSummaryData(
         traders.totalVolumeTimeframeSummaryData.all
+      );
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.all
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.all
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.all
       );
     }
     if (timeframe === 1) {
@@ -342,6 +361,15 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       setTruePercentChangeTimeframe(
         traders.truePercentChangeTimeframeData.oneDay
       );
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.oneDay
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.oneDay
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.oneDay
+      );
     }
     if (timeframe === 7) {
       setTrueVolumeTimeframeSummaryData(
@@ -355,6 +383,16 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       );
       setTruePercentChangeTimeframe(
         traders.truePercentChangeTimeframeData.sevenDay
+      );
+
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.sevenDay
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.sevenDay
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.sevenDay
       );
     }
     if (timeframe === 30) {
@@ -370,6 +408,16 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       setTruePercentChangeTimeframe(
         traders.truePercentChangeTimeframeData.thirtyDay
       );
+
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.thirtyDay
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.thirtyDay
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.thirtyDay
+      );
     }
     if (timeframe === 90) {
       setTrueVolumeTimeframeSummaryData(
@@ -383,6 +431,16 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       );
       setTruePercentChangeTimeframe(
         traders.truePercentChangeTimeframeData.ninetyDay
+      );
+
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.ninetyDay
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.ninetyDay
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.ninetyDay
       );
     }
   }, [timeframe]);
@@ -484,10 +542,14 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                   <div className="grid__col-container-body">
                     <div className="chart__info">
                       <ProgressRing
-                        timeframe={timeframe}
-                        true_volume={dailyTrueVolumeDataArray}
-                        loan_volume={dailyLoanVolumeDataArray}
-                        fake_volume={dailyFakeVolumeDataArray}
+                        trueVolume={trueVolumeDoughnutSummararyData}
+                        loanVolume={loanVolumeDoughnutSummararyData}
+                        fakeVolume={fakeVolumeDoughnutSummararyData}
+                        percentage={DecimalFormatter(
+                          (trueVolumeDoughnutSummararyData[0] /
+                            totalVolumeTimeframeSummaryData[0]) *
+                            100
+                        )}
                       />
                       <div>
                         <div className="chart__value-percent-lockup">

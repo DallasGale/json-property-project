@@ -116,6 +116,7 @@ export default async function Home() {
   const loanVolum30DayMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_loan_30_day_moving_average"
   );
+  // Fake
   const fakeVolume = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_fake"
   );
@@ -235,6 +236,46 @@ export default async function Home() {
 
   const totalVolumeSummaryAll = volumeSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_all_time"
+  );
+
+  // Fake
+  const fakeVolumeSummary1Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_fake_1d"
+  );
+
+  const fakeVolumeSummary7Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_fake_7d"
+  );
+  const fakeVolumeSummary30Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_fake_30d"
+  );
+
+  const fakeVolumeSummary90Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_fake_90d"
+  );
+
+  const fakeVolumeSummaryAll = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_fake_all_time"
+  );
+
+  // Loan
+  const loanVolumeSummary1Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_loan_1d"
+  );
+
+  const loanVolumeSummary7Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_loan_7d"
+  );
+  const loanVolumeSummary30Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_loan_30d"
+  );
+
+  const loanVolumeSummary90Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_loan_90d"
+  );
+
+  const loanVolumeSummaryAll = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_loan_all_time"
   );
 
   // Percent Change > Total
@@ -472,6 +513,20 @@ export default async function Home() {
             sevenDay: truePctChange7Day[0].data,
             thirtyDay: truePctChange30Day[0].data,
             ninetyDay: truePctChange90Day[0].data,
+          },
+          fakeVolumeTimeframeSummaryData: {
+            oneDay: fakeVolumeSummary1Day[0].data,
+            sevenDay: fakeVolumeSummary7Day[0].data,
+            thirtyDay: fakeVolumeSummary30Day[0].data,
+            ninetyDay: fakeVolumeSummary90Day[0].data,
+            all: fakeVolumeSummaryAll[0].data,
+          },
+          loanVolumeTimeframeSummaryData: {
+            oneDay: loanVolumeSummary1Day[0].data,
+            sevenDay: loanVolumeSummary7Day[0].data,
+            thirtyDay: loanVolumeSummary30Day[0].data,
+            ninetyDay: loanVolumeSummary90Day[0].data,
+            all: loanVolumeSummaryAll[0].data,
           },
         }}
       />

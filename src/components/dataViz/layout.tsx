@@ -79,6 +79,8 @@ interface DataVizLayoutTypes {
     totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
     totalPercentChangeTimeframeData: PercentChangeTimeframeTypes;
     truePercentChangeTimeframeData: PercentChangeTimeframeTypes;
+    fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
   };
 }
 
@@ -164,6 +166,10 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                     traders.totalPercentChangeTimeframeData,
                   truePercentChangeTimeframeData:
                     traders.truePercentChangeTimeframeData,
+                  fakeVolumeTimeframeSummaryData:
+                    traders.fakeVolumeTimeframeSummaryData,
+                  loanVolumeTimeframeSummaryData:
+                    traders.loanVolumeTimeframeSummaryData,
                 }}
               />
             )}
