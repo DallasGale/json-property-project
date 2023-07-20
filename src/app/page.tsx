@@ -237,6 +237,40 @@ export default async function Home() {
     ({ label }: DatasetsType) => label === "volume_total_all_time"
   );
 
+  // Percent Change > Total
+  const totalPctChange1Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_pct_change_1d"
+  );
+
+  const totalPctChange7Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_pct_change_7d"
+  );
+
+  const totalPctChange30Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_pct_change_30d"
+  );
+
+  const totalPctChange90Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_pct_change_90d"
+  );
+
+  // Percent Change > True
+  const truePctChange1Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_pct_change_1d"
+  );
+
+  const truePctChange7Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_pct_change_7d"
+  );
+
+  const truePctChange30Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_pct_change_30d"
+  );
+
+  const truePctChange90Day = volumeSummararyData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real_pct_change_90d"
+  );
+
   return (
     <main className="main-container">
       <DataVizLayout
@@ -426,6 +460,18 @@ export default async function Home() {
             thirtyDay: totalVolumeSummary30Day[0].data,
             ninetyDay: totalVolumeSummary90Day[0].data,
             all: totalVolumeSummaryAll[0].data,
+          },
+          totalPercentChangeTimeframeData: {
+            oneDay: totalPctChange1Day[0].data,
+            sevenDay: totalPctChange7Day[0].data,
+            thirtyDay: totalPctChange30Day[0].data,
+            ninetyDay: totalPctChange90Day[0].data,
+          },
+          truePercentChangeTimeframeData: {
+            oneDay: truePctChange1Day[0].data,
+            sevenDay: truePctChange7Day[0].data,
+            thirtyDay: truePctChange30Day[0].data,
+            ninetyDay: truePctChange90Day[0].data,
           },
         }}
       />

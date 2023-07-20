@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-// import Marketplaces from "@views/marketplaces";
-import MarketOverview from "@views/marketOverview";
+import MarketOverview, {
+  PercentChangeTimeframeTypes,
+} from "@views/marketOverview";
 
 // Types
 import type {
-  DatasetsType,
   TrueVolumeTypes,
   FakeVolumeTypes,
   LoanVolumeTypes,
@@ -15,8 +15,6 @@ import type {
 
 // Components
 import Header from "@/components/header/header";
-// import navigation from "@/constants/navigation";
-// import Interesting from "../views/interesting";
 import Leaderboards from "../views/leaderboards";
 import type { TradersTimeframeTypes } from "../traders/traders";
 
@@ -79,6 +77,8 @@ interface DataVizLayoutTypes {
     newWallets: TradersTimeframeTypes;
     trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
     totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    totalPercentChangeTimeframeData: PercentChangeTimeframeTypes;
+    truePercentChangeTimeframeData: PercentChangeTimeframeTypes;
   };
 }
 
@@ -160,29 +160,13 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                     traders.trueVolumeTimeframeSummaryData,
                   totalVolumeTimeframeSummaryData:
                     traders.totalVolumeTimeframeSummaryData,
+                  totalPercentChangeTimeframeData:
+                    traders.totalPercentChangeTimeframeData,
+                  truePercentChangeTimeframeData:
+                    traders.truePercentChangeTimeframeData,
                 }}
               />
             )}
-            {/* {activeTab == "marketplaces" && (
-              <Marketplaces
-                labels={labels}
-                trueVolume={trueVolume}
-                totalVolume={totalVolume}
-                fakeVolume={fakeVolume}
-                realPercentDifference={realPercentDifference}
-                loanVolume={loanVolume}
-                loanVolumeMovingAverage={loanVolumeMovingAverage}
-                fakeVolumeMovingAverage={fakeVolumeMovingAverage}
-                totalVolumeMovingAverage={totalVolumeMovingAverage}
-                trueVolumeMovingAverage={trueVolumeMovingAverage}
-                leaderboard={{
-                  true_volume: leaderboard.trueVolume.thirtyDay,
-                  fake_volume: leaderboard.fakeVolume.thirtyDay,
-                  loan_volume: leaderboard.loanVolume.thirtyDay,
-                  royalty: leaderboard.royalty.thirtyDay,
-                }}
-              />
-            )} */}
             {activeTab == "leaderboards" && (
               <Leaderboards
                 leaderboard={{
