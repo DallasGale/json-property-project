@@ -32,19 +32,14 @@ import type {
 // Components
 import TrendLineChart from "@components/charts/trendLineChart";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
-import DynamicVolumeNumber from "@components/dataViz/dynamicVolumeNumber/dynamicVolumeNumber";
 import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
-import Traders, {
-  PercentChangeTimeframeTypes,
-  TradersTimeframeTypes,
-} from "../traders/traders";
+import Traders, { TradersTimeframeTypes } from "../traders/traders";
 import TimeframeAsString from "@/utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import DecimalFormatter from "@/utils/decimalFormatter";
-import GoodToBadColors from "@/utils/goodToBadColors";
 import PercentChangeColors from "@/utils/percentChangeColors";
 
 ChartJS.register(
