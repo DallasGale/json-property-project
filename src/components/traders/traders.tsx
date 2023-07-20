@@ -24,6 +24,7 @@ export type TradersTimeframeTypes = {
   ninetyDay: number;
   all: number;
 };
+
 interface TradersTypes {
   labels: string[];
   realPercentDifference: number[];
@@ -150,7 +151,7 @@ const Traders: React.FC<TradersTypes> = ({
   const [boughtAndSoldDataArray, setBoughtAndSoldDataArray] = useState(
     onlySold.slice(onlySold.length - 90)
   );
-  const [tradersTimeframe, setTradersTimeframe] = useState(90);
+  const [tradersTimeframe, setTradersTimeframe] = useState(1);
   useEffect(() => {
     if (tradersTimeframe === 0) {
       setOnlyBoughtDataArray(onlyBought);
@@ -247,7 +248,7 @@ const Traders: React.FC<TradersTypes> = ({
     activeWalletBoughtAndSoldDataArray,
     setActiveWalletBoughtAndSoldDataArray,
   ] = useState(onlySold.slice(onlySold.length - 90));
-  const [timeframe, setTimeframe] = useState<number>(90);
+  const [timeframe, setTimeframe] = useState<number>(1);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimeframe(value);
@@ -257,7 +258,7 @@ const Traders: React.FC<TradersTypes> = ({
     useState(0);
 
   // New Wallets
-  const [newWalletsData, setNewWalletsDate] = useState<number>(0);
+  const [newWalletsData, setNewWalletsDate] = useState<number>(1);
 
   useEffect(() => {
     if (timeframe === 0) {
@@ -332,8 +333,6 @@ const Traders: React.FC<TradersTypes> = ({
     }
   }, [timeframe]);
 
-  const [totalUniqueWallets] = useState(2032);
-  const [accumulatedUniqueWallets] = useState(2032);
   return (
     <>
       <TwoColumnGrid
