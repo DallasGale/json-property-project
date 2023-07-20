@@ -56,10 +56,10 @@ ChartJS.register(
 );
 
 export type PercentChangeTimeframeTypes = {
-  oneDay: number;
-  sevenDay: number;
-  thirtyDay: number;
-  ninetyDay: number;
+  oneDay: number[];
+  sevenDay: number[];
+  thirtyDay: number[];
+  ninetyDay: number[];
 };
 interface VolumeChartProps {
   labels: string[];
@@ -117,10 +117,10 @@ interface VolumeChartProps {
     truePercentChangeTimeframeData: PercentChangeTimeframeTypes;
   };
 }
+
 const MarketOverview: React.FC<VolumeChartProps> = ({
   labels,
   trueVolume,
-  realPercentDifference,
   totalVolume,
   loanVolume,
   fakeVolume,
@@ -544,7 +544,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                           {numFormatter(totalVolumeTimeframeSummaryData)}
                         </p>
                         {/* Percent Change */}
-                        {timeframe !== 0 && (
+                        {/* {timeframe !== 0 && (
                           <p
                             className="typography__display--4"
                             style={{
@@ -556,7 +556,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                             {totalPercentChangeTimeframe[0] > 0 && "+"}
                             {DecimalFormatter(totalPercentChangeTimeframe[0])}%
                           </p>
-                        )}
+                        )} */}
                       </div>
                       <h3 className="typography__subtitle--2">Total Volume</h3>
                       <p className="typography__paragraph--1">
