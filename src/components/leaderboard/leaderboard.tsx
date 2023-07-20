@@ -89,7 +89,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
     leaderboardData.royalty.thirtyDay
   );
 
-  const [timeframe, setTimeframe] = useState(90);
+  const [timeframe, setTimeframe] = useState(1);
   useEffect(() => {
     if (timeframe === 90) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.ninetyDay);

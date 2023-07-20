@@ -133,7 +133,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
     },
   });
 
-  const [timeframe, setTimeframe] = useState(90);
+  const [timeframe, setTimeframe] = useState(1);
   const [top100Data, setTop100Data] = useState(tableBodyData.thirtyDayTop100);
 
   useEffect(() => {
@@ -192,7 +192,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
               tableHead.map(({ name, id, hasChevronDown }) => (
                 <td
                   id={id}
-                  onClick={(e) => handleSorting(e.currentTarget.id)}
+                  // onClick={(e) => handleSorting(e.currentTarget.id)}
                   key={id}
                   className={`data-table__cell data-table__cell--${name.toLowerCase()}`}
                 >
