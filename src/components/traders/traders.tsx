@@ -248,7 +248,8 @@ const Traders: React.FC<TradersTypes> = ({
     activeWalletBoughtAndSoldDataArray,
     setActiveWalletBoughtAndSoldDataArray,
   ] = useState(onlySold.slice(onlySold.length - 90));
-  const [timeframe, setTimeframe] = useState<number>(1);
+
+  const [timeframe, setTimeframe] = useState<number>(7);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimeframe(value);
@@ -418,10 +419,6 @@ const Traders: React.FC<TradersTypes> = ({
                     legendLabels={...activeWalletLegendLabels}
                     legendFormat="vertical"
                     datasets={[
-                      /* 
-                    total_unique_wallets
-                    accumulated_unique_wallets
-                  */
                       {
                         label: "Only Bought",
                         data: activeWalletOnlyBoughtDisabled
@@ -483,6 +480,44 @@ const Traders: React.FC<TradersTypes> = ({
                     <p className="typography__paragraph--1">
                       Wallets that have been created within the last 24 hours.
                     </p>
+                    {/* <TrendLineChart
+                      legendOnClick={newWalletOnClick}
+                      labels={activeWalletTradersLabels}
+                      legendLabels={...activeWalletLegendLabels}
+                      legendFormat="vertical"
+                      datasets={[
+                        {
+                          label: "Only Bought",
+                          data: activeWalletOnlyBoughtDisabled
+                            ? []
+                            : activeWalletOnlyBoughtDataArray,
+                          borderColor: "rgba(95, 61, 196, 1)",
+                          backgroundColor: "rgba(95, 61, 196, 1)",
+                          pointRadius: 0,
+                          borderWidth: 3,
+                        },
+                        {
+                          label: "Only Sold",
+                          data: activeWalletOnlySoldDisabled
+                            ? []
+                            : activeWalletOnlySoldDataArray,
+                          borderColor: "rgba(250, 82, 82, 1)",
+                          backgroundColor: "rgba(250, 82, 82, 1)",
+                          pointRadius: 0,
+                          borderWidth: 3,
+                        },
+                        {
+                          label: "Bought and Sold",
+                          data: activeWalletBoughtAndSoldDisabled
+                            ? []
+                            : activeWalletBoughtAndSoldDataArray,
+                          borderColor: "rgba(64, 192, 87, 1)",
+                          backgroundColor: "rgba(64, 192, 87, 1)",
+                          pointRadius: 0,
+                          borderWidth: 3,
+                        },
+                      ]}
+                    /> */}
                   </div>
 
                   {/* Daily Summary Endpoint */}
