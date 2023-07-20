@@ -170,8 +170,6 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                     traders.fakeVolumeTimeframeSummaryData,
                   loanVolumeTimeframeSummaryData:
                     traders.loanVolumeTimeframeSummaryData,
-                  totalVolumeTimeframeSummaryData:
-                    traders.totalVolumeTimeframeSummaryData,
                 }}
               />
             )}
