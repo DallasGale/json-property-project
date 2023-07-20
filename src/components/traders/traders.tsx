@@ -151,7 +151,7 @@ const Traders: React.FC<TradersTypes> = ({
   const [boughtAndSoldDataArray, setBoughtAndSoldDataArray] = useState(
     onlySold.slice(onlySold.length - 90)
   );
-  const [tradersTimeframe, setTradersTimeframe] = useState(1);
+  const [tradersTimeframe, setTradersTimeframe] = useState(90);
   useEffect(() => {
     if (tradersTimeframe === 0) {
       setOnlyBoughtDataArray(onlyBought);
