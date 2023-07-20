@@ -18,11 +18,11 @@ import TwoColumnGrid from "@/grids/twoColumnGrid";
 import CryptoIcon from "@assets/icons/crypto.svg";
 
 export type TradersTimeframeTypes = {
-  oneDay: number;
-  sevenDay: number;
-  thirtyDay: number;
-  ninetyDay: number;
-  all: number;
+  oneDay: number[];
+  sevenDay: number[];
+  thirtyDay: number[];
+  ninetyDay: number[];
+  all: number[];
 };
 
 interface TradersTypes {
