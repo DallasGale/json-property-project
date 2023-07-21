@@ -17,6 +17,7 @@ import TwoColumnGrid from "@/grids/twoColumnGrid";
 import CryptoIcon from "@assets/icons/crypto.svg";
 import { TradersTimeframeTypes } from "./types";
 import NewWallets, { NewWalletsTypes } from "./wallets/newWallets";
+import ActiveWallets from "./wallets/activeWallets";
 
 interface TradersTypes {
   labels: string[];
@@ -32,7 +33,7 @@ const Traders: React.FC<TradersTypes> = ({
   activeWalletsOnlyBought,
   activeWalletsOnlySold,
   activeWalletsBoughtAndSold,
-  activeWallets,
+  activeWallets: activeWalletsTotal,
   newWallets,
 }) => {
   // Animations
@@ -208,60 +209,10 @@ const Traders: React.FC<TradersTypes> = ({
     setActiveWalletBoughtAndSoldDisabled,
   ] = useState(false);
 
-  const activeWalletOnClick = (e: string) => {
-    if (document) {
-      const domEls = document?.getElementsByTagName("input");
-      for (let i = 0; i < domEls.length; i++) {
-        if (domEls[i].id === e) {
-          if (domEls[i].id === "active-wallet-only-bought") {
-            setActiveWalletOnlyBoughtDisabled(!activeWalletOnlyBoughtDisabled);
-          }
-          if (domEls[i].id === "active-wallet-only-sold") {
-            setActiveWalletOnlySoldDisabled(!activeWalletOnlySoldDisabled);
-          }
-          if (domEls[i].id === "active-wallet-bought-and-sold") {
-            setActiveWalletBoughtAndSoldDisabled(
-              !activeWalletBoughtAndSoldDisabled
-            );
-          }
-        }
-      }
-    }
-  };
-  const activeWalletLegendLabels = [
-    {
-      color: "accent-purple",
-      name: "Only Bought",
-      id: "active-wallet-only-bought",
-    },
-    {
-      color: "accent-red",
-      name: "Only Sold",
-      id: "active-wallet-only-sold",
-    },
-    {
-      color: "accent-green",
-      name: "Bought and Sold",
-      id: "active-wallet-bought-and-sold",
-    },
-  ];
-
   // Active Wallets / New Wallets Timeframe
   const [activeWalletTradersLabels, setActiveWalletTradersLabels] = useState(
     labels.slice(labels.length - 90).map((data: any) => data)
   );
-
-  const [activeWalletOnlyBoughtDataArray, setActiveWalletOnlyBoughtDataArray] =
-    useState(
-      activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 90)
-    );
-
-  const [activeWalletOnlySoldDataArray, setActiveWalletOnlySoldDataArray] =
-    useState(activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90));
-  const [
-    activeWalletBoughtAndSoldDataArray,
-    setActiveWalletBoughtAndSoldDataArray,
-  ] = useState(activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90));
 
   const [timeframe, setTimeframe] = useState<number>(7);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
@@ -274,79 +225,35 @@ const Traders: React.FC<TradersTypes> = ({
 
   useEffect(() => {
     if (timeframe === 0) {
-      setuUniqueTotalBuyerSellerData(activeWallets.all[0]);
+      setuUniqueTotalBuyerSellerData(activeWalletsTotal.all[0]);
 
-      // Active
-      setActiveWalletOnlyBoughtDataArray(activeWalletsOnlyBought);
-      setActiveWalletOnlySoldDataArray(activeWalletsOnlySold);
-      setActiveWalletBoughtAndSoldDataArray(activeWalletsBoughtAndSold);
       setActiveWalletTradersLabels(labels);
     }
     if (timeframe === 1) {
-      setuUniqueTotalBuyerSellerData(activeWallets.oneDay[0]);
+      setuUniqueTotalBuyerSellerData(activeWalletsTotal.oneDay[0]);
 
-      // Active
-      setActiveWalletOnlyBoughtDataArray(
-        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 1)
-      );
-      setActiveWalletOnlySoldDataArray(
-        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 1)
-      );
-      setActiveWalletBoughtAndSoldDataArray(
-        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 1)
-      );
       setActiveWalletTradersLabels(
         labels.slice(labels.length - 1).map((data: any) => data)
       );
     }
 
     if (timeframe === 7) {
-      setuUniqueTotalBuyerSellerData(activeWallets.sevenDay[0]);
+      setuUniqueTotalBuyerSellerData(activeWalletsTotal.sevenDay[0]);
 
-      // Active
-      setActiveWalletOnlyBoughtDataArray(
-        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 7)
-      );
-      setActiveWalletOnlySoldDataArray(
-        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 7)
-      );
-      setActiveWalletBoughtAndSoldDataArray(
-        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 7)
-      );
       setActiveWalletTradersLabels(
         labels.slice(labels.length - 7).map((data: any) => data)
       );
     }
     if (timeframe === 30) {
-      setuUniqueTotalBuyerSellerData(activeWallets.thirtyDay[0]);
+      setuUniqueTotalBuyerSellerData(activeWalletsTotal.thirtyDay[0]);
 
-      // Active
-      setActiveWalletOnlyBoughtDataArray(
-        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 30)
-      );
-      setActiveWalletOnlySoldDataArray(
-        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 30)
-      );
-      setActiveWalletBoughtAndSoldDataArray(
-        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 30)
-      );
       setActiveWalletTradersLabels(
         labels.slice(labels.length - 30).map((data: any) => data)
       );
     }
     if (timeframe === 90) {
-      setuUniqueTotalBuyerSellerData(activeWallets.ninetyDay[0]);
+      setuUniqueTotalBuyerSellerData(activeWalletsTotal.ninetyDay[0]);
 
-      // Active
-      setActiveWalletOnlyBoughtDataArray(
-        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 90)
-      );
-      setActiveWalletOnlySoldDataArray(
-        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90)
-      );
-      setActiveWalletBoughtAndSoldDataArray(
-        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 90)
-      );
       setActiveWalletTradersLabels(
         labels.slice(labels.length - 90).map((data: any) => data)
       );
@@ -416,7 +323,7 @@ const Traders: React.FC<TradersTypes> = ({
           ),
           content: (
             <div className="grid grid__two-col">
-              <animated.div
+              {/* <animated.div
                 style={{ ...springs3 }}
                 className="grid__col-content"
               >
@@ -471,7 +378,17 @@ const Traders: React.FC<TradersTypes> = ({
                     ]}
                   />
                 </div>
-              </animated.div>
+              </animated.div> */}
+              <ActiveWallets
+                timeframe={timeframe}
+                labels={labels}
+                activeWalletsTotal={activeWalletsTotal}
+                activeWallets={{
+                  onlyBought: activeWalletsOnlyBought,
+                  onlySold: activeWalletsOnlySold,
+                  boughtAndSold: activeWalletsBoughtAndSold,
+                }}
+              />
 
               {/* New Wallets */}
               <NewWallets

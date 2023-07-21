@@ -67,10 +67,10 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
       const domEls = document?.getElementsByTagName("input");
       for (let i = 0; i < domEls.length; i++) {
         if (domEls[i].id === e) {
-          if (domEls[i].id === "new-wallets-daily-stats") {
+          if (domEls[i].id === legendLabels.newWallets[0].id) {
             setNewWalletsDisabled(!newWalletsDisabled);
           }
-          if (domEls[i].id === "new-wallets-daily-stats-total-created") {
+          if (domEls[i].id === legendLabels.newWallets[1].id) {
             setTotalCreatedDisabled(!totalCreatedDisabled);
           }
         }
@@ -167,20 +167,20 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
             legendFormat="vertical"
             datasets={[
               {
-                label: "Only Sold",
+                label: legendLabels.newWallets[0].name,
                 data: totalCreatedDisabled
                   ? []
                   : newWalletsDailyStatsTotalCreatedDataArray,
-                borderColor: "rgba(250, 82, 82, 1)",
-                backgroundColor: "rgba(250, 82, 82, 1)",
+                borderColor: legendLabels.newWallets[0].rgba,
+                backgroundColor: legendLabels.newWallets[0].rgba,
                 pointRadius: 0,
                 borderWidth: 3,
               },
               {
-                label: "Only Bought",
+                label: legendLabels.newWallets[1].name,
                 data: newWalletsDisabled ? [] : newWalletsDailyStats,
-                borderColor: "rgba(95, 61, 196, 1)",
-                backgroundColor: "rgba(95, 61, 196, 1)",
+                borderColor: legendLabels.newWallets[1].rgba,
+                backgroundColor: legendLabels.newWallets[1].rgba,
                 pointRadius: 0,
                 borderWidth: 3,
               },
