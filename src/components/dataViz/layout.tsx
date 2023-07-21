@@ -16,7 +16,7 @@ import type {
 // Components
 import Header from "@/components/header/header";
 import Leaderboards from "../views/leaderboards";
-import type { TradersTimeframeTypes } from "../traders/traders";
+import type { TradersTimeframeTypes, NewWalletTypes } from "../traders/traders";
 
 interface DataVizLayoutTypes {
   labels: string[];
@@ -67,14 +67,11 @@ interface DataVizLayoutTypes {
     };
   };
   traders: {
-    onlyBought: number[];
-    onlyBoughtMovingAverage: number[];
-    onlySold: number[];
-    onlySoldMovingAverage: number[];
-    boughtAndSold: number[];
-    boughtAndSoldMovingAverage: number[];
+    activeWalletOnlyBought: number[];
+    activeWalletOnlySold: number[];
+    activeWalletBoughtAndSold: number[];
     activeWallets: TradersTimeframeTypes;
-    newWallets: TradersTimeframeTypes;
+    newWallets: NewWalletTypes;
     trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
     totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
     totalPercentChangeTimeframeData: PercentChangeTimeframeTypes;
@@ -98,7 +95,6 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   leaderboard,
   traders,
 }) => {
-  console.log({ leaderboard });
   const [activeTab, setActiveTab] = useState("market-overview");
   return (
     <>
@@ -149,13 +145,10 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
                   },
                 }}
                 traders={{
-                  onlyBought: traders.onlyBought,
-                  onlyBoughtMovingAverage: traders.onlyBoughtMovingAverage,
-                  onlySold: traders.onlySold,
-                  onlySoldMovingAverage: traders.onlySoldMovingAverage,
-                  boughtAndSold: traders.boughtAndSold,
-                  boughtAndSoldMovingAverage:
-                    traders.boughtAndSoldMovingAverage,
+                  activeWalletOnlyBought: traders.activeWalletOnlyBought,
+                  activeWalletOnlySold: traders.activeWalletOnlySold,
+                  activeWalletBoughtAndSold: traders.activeWalletBoughtAndSold,
+
                   activeWallets: traders.activeWallets,
                   newWallets: traders.newWallets,
                   trueVolumeTimeframeSummaryData:

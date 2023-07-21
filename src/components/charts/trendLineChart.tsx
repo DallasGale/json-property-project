@@ -40,6 +40,16 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
             datasets: datasets,
           }}
           options={{
+            scales: {
+              x: {
+                display: false,
+                stacked: false,
+              },
+              y: {
+                display: false,
+                stacked: false,
+              },
+            },
             elements: {
               line: {
                 tension: 0,
@@ -51,7 +61,7 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
               },
             },
             interaction: {
-              intersect: false,
+              mode: "x",
             },
             maintainAspectRatio: false,
             plugins: {
@@ -65,16 +75,6 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
 
               legend: {
                 display: false,
-              },
-            },
-            scales: {
-              x: {
-                display: false,
-                stacked: false,
-              },
-              y: {
-                display: false,
-                stacked: false,
               },
             },
           }}
