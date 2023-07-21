@@ -36,14 +36,13 @@ import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
-import Traders, {
-  NewWalletTypes,
-  TradersTimeframeTypes,
-} from "../traders/traders";
+import Traders from "../traders/traders";
 import TimeframeAsString from "@/utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import DecimalFormatter from "@/utils/decimalFormatter";
 import PercentChangeColors from "@/utils/percentChangeColors";
+import { TradersTimeframeTypes } from "../traders/types";
+import { NewWalletsTypes } from "../traders/wallets/newWallets";
 
 ChartJS.register(
   CategoryScale,
@@ -110,7 +109,7 @@ interface VolumeChartProps {
     activeWalletOnlySold: number[];
     activeWalletBoughtAndSold: number[];
     activeWallets: TradersTimeframeTypes;
-    newWallets: NewWalletTypes;
+    newWallets: NewWalletsTypes;
     trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
     loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
     fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
