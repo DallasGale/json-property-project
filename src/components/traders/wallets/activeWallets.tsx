@@ -80,7 +80,7 @@ const ActiveWallets: React.FC<Props> = ({
             setOnlySoldDisabled(!onlySoldDisabled);
           }
           if (domEls[i].id === legendLabels.activeWallets[2].id) {
-            setOnlyBoughtDisabled(!boughtAndSoldDisabled);
+            setBoughtAndSoldDisabled(!boughtAndSoldDisabled);
           }
         }
       }
@@ -100,6 +100,8 @@ const ActiveWallets: React.FC<Props> = ({
       setActiveWalletTradersLabels(labels);
     }
     if (timeframe === 1) {
+      setActiveWalletsData(activeWalletsTotal.oneDay[0]);
+
       setOnlyBoughtDataArray(
         activeWallets.onlyBought.slice(activeWallets.onlyBought.length - 1)
       );
