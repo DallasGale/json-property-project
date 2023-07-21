@@ -16,8 +16,9 @@ import type {
 // Components
 import Header from "@/components/header/header";
 import Leaderboards from "../views/leaderboards";
-import type { TradersTimeframeTypes, NewWalletTypes } from "../traders/traders";
 import HeroBanner from "../heroBanner/heroBanner";
+import { TradersTimeframeTypes } from "../traders/types";
+import { NewWalletsTypes } from "../traders/wallets/newWallets";
 
 interface DataVizLayoutTypes {
   labels: string[];
@@ -72,7 +73,7 @@ interface DataVizLayoutTypes {
     activeWalletOnlySold: number[];
     activeWalletBoughtAndSold: number[];
     activeWallets: TradersTimeframeTypes;
-    newWallets: NewWalletTypes;
+    newWallets: NewWalletsTypes;
     trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
     totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
     totalPercentChangeTimeframeData: PercentChangeTimeframeTypes;
