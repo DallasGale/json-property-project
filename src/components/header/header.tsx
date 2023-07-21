@@ -1,6 +1,6 @@
 // Components
 import Image from "next/image";
-import Logo from "@assets/DataBeast.svg";
+import Logo from "@assets/DataBeastBeta.svg";
 import Navigation from "@components/navigation/navigation";
 
 interface HeaderProps {
@@ -10,14 +10,15 @@ const Header: React.FC<HeaderProps> = ({ handleTabClick }) => {
   return (
     <header className="header">
       <div className="header__row">
+        {/* <div> */}
         <Image src={Logo} alt="Databeast" />
-        <p className="typography__display--3 typography__color--highlight">
-          Analytics
-        </p>
       </div>
-      <div className="header__row">
-        <Navigation handleTabClick={handleTabClick} />
-      </div>
+      {/* </div>
+      <div> */}
+      {/* <div className="header__row"> */}
+      <Navigation handleTabClick={handleTabClick} />
+      {/* </div> */}
+      {/* </div> */}
     </header>
   );
 };

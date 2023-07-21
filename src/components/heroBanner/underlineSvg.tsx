@@ -18,9 +18,6 @@ const UnderlineSvg = () => {
       style={{
         width: 237,
         height: 60,
-        // display: "flex",
-        // alignItems: "center",
-        // justifyContent: "center",
         position: "absolute",
         top: 62,
         right: 0,
@@ -37,7 +34,6 @@ const UnderlineSvg = () => {
         <path
           strokeDasharray={0}
           pathLength={0}
-          // style={{ ...springs1 }}
           d="M1 17C17 9 165 -3.00002 237 4.99999"
           stroke="#D5F415"
           stroke-width="3"
