@@ -17,6 +17,7 @@ import type {
 import Header from "@/components/header/header";
 import Leaderboards from "../views/leaderboards";
 import type { TradersTimeframeTypes, NewWalletTypes } from "../traders/traders";
+import HeroBanner from "../heroBanner/heroBanner";
 
 interface DataVizLayoutTypes {
   labels: string[];
@@ -102,6 +103,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
       <div className="content">
         <section className="wrapper">
           <>
+            <HeroBanner />
             {activeTab == "market-overview" && (
               <MarketOverview
                 labels={labels}

@@ -66,7 +66,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 0,
+    delay: 750,
     config: {
       tension: 90,
       friction: 16,

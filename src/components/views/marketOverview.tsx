@@ -135,7 +135,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 0,
+    delay: 300,
     config: {
       tension: 90,
       friction: 16,
@@ -146,7 +146,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
   const springs2 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 150,
+    delay: 450,
     config: {
       tension: 90,
       friction: 16,
@@ -157,7 +157,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
   const springs3 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 300,
+    delay: 600,
     config: {
       tension: 90,
       friction: 16,
@@ -452,7 +452,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
         column1={{
           header: (
             <animated.div
-              style={{ ...springs1 }}
+              style={{ ...springs2 }}
               className="chart__grid chart__grid--one-col"
             >
               <div className="chart__chart-actions-lockup">
@@ -518,7 +518,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
         column2={{
           header: (
             <animated.div
-              style={{ ...springs1 }}
+              style={{ ...springs2 }}
               className="grid grid--one-col"
             >
               <div className="chart__chart-actions-lockup">
@@ -536,7 +536,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
             <>
               <div className="grid grid__two-col">
                 <animated.div
-                  style={{ ...springs2 }}
+                  style={{ ...springs1 }}
                   className="grid__col-content"
                 >
                   <div className="grid__col-container-body">
@@ -595,7 +595,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                 </animated.div>
 
                 <animated.div
-                  style={{ ...springs3 }}
+                  style={{ ...springs1 }}
                   className="grid__col-content"
                 >
                   <div className="grid__col-container-body">

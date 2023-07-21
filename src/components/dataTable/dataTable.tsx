@@ -113,7 +113,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
   const springs1 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 0,
+    delay: 900,
     config: {
       tension: 90,
       friction: 16,
@@ -124,7 +124,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
   const springs2 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 150,
+    delay: 1150,
     config: {
       tension: 90,
       friction: 16,
