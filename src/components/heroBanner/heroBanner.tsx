@@ -37,6 +37,18 @@ const HeroBanner = () => {
     },
   });
 
+  const springs4 = useSpring({
+    from: { y: -100, opacity: 0 },
+    to: { x: 0, opacity: 1 },
+    delay: 800,
+    config: {
+      tension: 30,
+      friction: 3,
+      duration: 450,
+      easing: easings.easeInOutCubic,
+    },
+  });
+
   return (
     <section className="hero-banner">
       <div className="hero-banner__content-grid">
@@ -61,8 +73,11 @@ const HeroBanner = () => {
             style={{ ...springs3 }}
             className="hero-banner__did-you-know"
           >
-            <h4 className="typography__display--1 typography__color--highlight">
-              Did you know?
+            <h4
+              className="typography__display--1 typography__color--highlight"
+              style={{ position: "relative" }}
+            >
+              💡 Did you know?
             </h4>
             <p className="typography__paragraph--2">
               Other marketplaces have been reporting Blur Loans + Wash Trading

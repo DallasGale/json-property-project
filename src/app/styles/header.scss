@@ -1,12 +1,13 @@
-$headerHeight: 103px;
+$headerHeight: 64px;
 
 .header {
   background-color: $dark-bg-1;
   position: fixed;
   top: 0;
   left: 0;
+  gap: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
   color: $white;
   z-index: 5;
