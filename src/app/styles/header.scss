@@ -1,3 +1,5 @@
+$headerHeight: 103px;
+
 .header {
   background-color: $dark-bg-1;
   position: fixed;
@@ -8,6 +10,7 @@
   width: 100%;
   color: $white;
   z-index: 5;
+  height: $headerHeight;
 }
 
 .header__row {
@@ -17,5 +20,4 @@
   align-items: center;
   gap: 30px;
   border-bottom: 1px solid $dark-bg-2;
-  // justify-content: space-evenly;
 }

@@ -1,0 +1,22 @@
+.hero-banner {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  color: $white;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+.hero-banner__content-grid {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: auto 444px;
+  width: 100%;
+}
+
+.hero-banner__did-you-know {
+  border-radius: 8px;
+  border: 2px solid $dark-bg-2;
+  padding: 12px 20px;
+}
