@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 // Components
 import HeroBarChart from "@components/charts/heroBarChart";
@@ -8,13 +7,10 @@ import ChartDataToggles from "@components/toggles/chart_data";
 
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
-import { numFormatter } from "@/utils/numFormatter";
 
 // Assets
 import TimeframeAsString from "@/utils/timeframeAsString";
-import TrendLineChart from "../charts/trendLineChart";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
-import CryptoIcon from "@assets/icons/crypto.svg";
 import { TradersTimeframeTypes } from "./types";
 import NewWallets, { NewWalletsTypes } from "./wallets/newWallets";
 import ActiveWallets from "./wallets/activeWallets";
@@ -197,68 +193,11 @@ const Traders: React.FC<TradersTypes> = ({
     },
   ];
 
-  // ----------------------------
-  // Active Wallets
-  // ----------------------------
-  const [activeWalletOnlyBoughtDisabled, setActiveWalletOnlyBoughtDisabled] =
-    useState(false);
-  const [activeWalletOnlySoldDisabled, setActiveWalletOnlySoldDisabled] =
-    useState(false);
-  const [
-    activeWalletBoughtAndSoldDisabled,
-    setActiveWalletBoughtAndSoldDisabled,
-  ] = useState(false);
-
-  // Active Wallets / New Wallets Timeframe
-  const [activeWalletTradersLabels, setActiveWalletTradersLabels] = useState(
-    labels.slice(labels.length - 90).map((data: any) => data)
-  );
-
   const [timeframe, setTimeframe] = useState<number>(7);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimeframe(value);
   }
-  // Active Wallets
-  const [uniqueTotalBuyerSellerData, setuUniqueTotalBuyerSellerData] =
-    useState(0);
-
-  useEffect(() => {
-    if (timeframe === 0) {
-      setuUniqueTotalBuyerSellerData(activeWalletsTotal.all[0]);
-
-      setActiveWalletTradersLabels(labels);
-    }
-    if (timeframe === 1) {
-      setuUniqueTotalBuyerSellerData(activeWalletsTotal.oneDay[0]);
-
-      setActiveWalletTradersLabels(
-        labels.slice(labels.length - 1).map((data: any) => data)
-      );
-    }
-
-    if (timeframe === 7) {
-      setuUniqueTotalBuyerSellerData(activeWalletsTotal.sevenDay[0]);
-
-      setActiveWalletTradersLabels(
-        labels.slice(labels.length - 7).map((data: any) => data)
-      );
-    }
-    if (timeframe === 30) {
-      setuUniqueTotalBuyerSellerData(activeWalletsTotal.thirtyDay[0]);
-
-      setActiveWalletTradersLabels(
-        labels.slice(labels.length - 30).map((data: any) => data)
-      );
-    }
-    if (timeframe === 90) {
-      setuUniqueTotalBuyerSellerData(activeWalletsTotal.ninetyDay[0]);
-
-      setActiveWalletTradersLabels(
-        labels.slice(labels.length - 90).map((data: any) => data)
-      );
-    }
-  }, [timeframe]);
 
   return (
     <>
@@ -323,62 +262,7 @@ const Traders: React.FC<TradersTypes> = ({
           ),
           content: (
             <div className="grid grid__two-col">
-              {/* <animated.div
-                style={{ ...springs3 }}
-                className="grid__col-content"
-              >
-                <div className="grid__col-container-body">
-                  <div>
-                    <p className="typography__label--2">
-                      <Image src={CryptoIcon} alt="Crypto Icon" />
-                      {numFormatter(uniqueTotalBuyerSellerData)}
-                    </p>
-                    <h3 className="typography__subtitle--2">Active Wallets</h3>
-                    <p className="typography__paragraph--1">
-                      Wallets that have bought/sold within the last 24 hours.
-                    </p>
-                  </div>
-
-                  <TrendLineChart
-                    legendOnClick={activeWalletOnClick}
-                    labels={activeWalletTradersLabels}
-                    legendLabels={...activeWalletLegendLabels}
-                    legendFormat="vertical"
-                    datasets={[
-                      {
-                        label: "Only Bought",
-                        data: activeWalletOnlyBoughtDisabled
-                          ? []
-                          : activeWalletOnlyBoughtDataArray,
-                        borderColor: "rgba(95, 61, 196, 1)",
-                        backgroundColor: "rgba(95, 61, 196, 1)",
-                        pointRadius: 0,
-                        borderWidth: 3,
-                      },
-                      {
-                        label: "Only Sold",
-                        data: activeWalletOnlySoldDisabled
-                          ? []
-                          : activeWalletOnlySoldDataArray,
-                        borderColor: "rgba(250, 82, 82, 1)",
-                        backgroundColor: "rgba(250, 82, 82, 1)",
-                        pointRadius: 0,
-                        borderWidth: 3,
-                      },
-                      {
-                        label: "Bought and Sold",
-                        data: activeWalletBoughtAndSoldDisabled
-                          ? []
-                          : activeWalletBoughtAndSoldDataArray,
-                        borderColor: "rgba(64, 192, 87, 1)",
-                        backgroundColor: "rgba(64, 192, 87, 1)",
-                        pointRadius: 0,
-                        borderWidth: 3,
-                      },
-                    ]}
-                  />
-                </div>
-              </animated.div> */}
+              {/* Active Wallets */}
               <ActiveWallets
                 timeframe={timeframe}
                 labels={labels}
