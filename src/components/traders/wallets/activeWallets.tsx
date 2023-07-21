@@ -8,7 +8,6 @@ import { numFormatter } from "@/utils/numFormatter";
 
 // Assets
 import TrendLineChart from "@components/charts/trendLineChart";
-import CryptoIcon from "@assets/icons/crypto.svg";
 
 // Constants
 import { legendLabels } from "./legendLabels";
@@ -178,12 +177,11 @@ const ActiveWallets: React.FC<Props> = ({
       <div className="grid__col-container-body">
         <div>
           <p className="typography__label--2">
-            <Image src={CryptoIcon} alt="Crypto Icon" />
             {numFormatter(activeWalletsData)}
           </p>
           <h3 className="typography__subtitle--2">Active Wallets</h3>
           <p className="typography__paragraph--1">
-            Wallets that have bought/sold within the last 24 hours.
+            Wallets that have traded on an NFT marketplace.
           </p>
         </div>
 

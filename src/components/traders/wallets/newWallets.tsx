@@ -8,7 +8,6 @@ import { numFormatter } from "@/utils/numFormatter";
 
 // Assets
 import TrendLineChart from "@components/charts/trendLineChart";
-import CryptoIcon from "@assets/icons/crypto.svg";
 
 // Constants
 import { legendLabels } from "./legendLabels";
@@ -152,13 +151,10 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
     <animated.div style={{ ...animate }} className="grid__col-content">
       <div className="grid__col-container-body">
         <div>
-          <p className="typography__label--2">
-            <Image src={CryptoIcon} alt="Crypto Icon" />
-            {numFormatter(newWalletsData)}
-          </p>
+          <p className="typography__label--2">{numFormatter(newWalletsData)}</p>
           <h3 className="typography__subtitle--2">New Wallets</h3>
           <p className="typography__paragraph--1">
-            Wallets that have been created within the last 24 hours.
+            Wallets that have been created.
           </p>
           <TrendLineChart
             legendOnClick={legendOnClick}
