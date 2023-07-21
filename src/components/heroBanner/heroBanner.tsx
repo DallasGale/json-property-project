@@ -1,5 +1,5 @@
 import { useSpring, animated, easings } from "@react-spring/web";
-
+import UnderlineSvg from "./underlineSvg";
 const HeroBanner = () => {
   // Animations
   const springs1 = useSpring({
@@ -42,10 +42,11 @@ const HeroBanner = () => {
       <div className="hero-banner__content-grid">
         <div className="hero-banner__content-grid-cell">
           <animated.h2
-            style={{ ...springs1 }}
+            style={{ ...springs1, position: "relative" }}
             className="typography__display--7 typography__color--highlight"
           >
             Get the real story
+            <UnderlineSvg />
           </animated.h2>
           <animated.h3
             style={{ ...springs2 }}
