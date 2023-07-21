@@ -80,9 +80,11 @@ const HeroBanner = () => {
               💡 Did you know?
             </h4>
             <p className="typography__paragraph--2">
-              Other marketplaces have been reporting Blur Loans + Wash Trading
-              as actual volume! At DataBeast we show you an unbiased look at the
-              NFT Market so you can see what’s actually gaining traction.
+              Many NFT marketplaces and analytics platforms have been reporting
+              Blur Loans + Wash Trading as sales volume!
+              <br></br>
+              At DataBeast we give you an unbiased view of the NFT Market, so
+              you can see what’s actually gaining traction.
             </p>
           </animated.div>
         </div>
