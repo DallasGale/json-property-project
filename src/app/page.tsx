@@ -134,24 +134,16 @@ export default async function Home() {
   );
 
   // Traders
-  const onlyBought = await dailySummaryData?.datasets.filter(
+  const activeWalletOnlyBought = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_buyer_wallets"
   );
-  const onlyBoughtMovingAverage = await dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "volume_real_30_day_moving_average" // to be updated with the correct moving average data
-  );
 
-  const onlySold = await dailySummaryData?.datasets.filter(
+  const activeWalletOnlySold = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_seller_wallets"
   );
-  const onlySoldMovingAverage = await dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "volume_fake_30_day_moving_average"
-  );
-  const boughtAndSold = await dailySummaryData?.datasets.filter(
+
+  const activeWalletBoughtAndSold = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_seller_and_buyer_wallets"
-  );
-  const boughtAndSoldMovingAverage = await dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
   );
 
   // Timeframe Summary
@@ -195,6 +187,14 @@ export default async function Home() {
 
   const newWalletAll = walletSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "new_wallet_all"
+  );
+
+  const newWalletsDailyStats = dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "new_wallets"
+  );
+
+  const totalNewWalletsCreatedDailyStats = dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "backward_accumulated_new_wallets"
   );
 
   // Volume
@@ -468,12 +468,9 @@ export default async function Home() {
           },
         }}
         traders={{
-          onlyBought: onlyBought[0].data,
-          onlyBoughtMovingAverage: onlyBoughtMovingAverage[0].data,
-          onlySold: onlySold[0].data,
-          onlySoldMovingAverage: onlySoldMovingAverage[0].data,
-          boughtAndSold: boughtAndSold[0].data,
-          boughtAndSoldMovingAverage: boughtAndSoldMovingAverage[0].data,
+          activeWalletOnlyBought: activeWalletOnlyBought[0].data,
+          activeWalletOnlySold: activeWalletOnlySold[0].data,
+          activeWalletBoughtAndSold: activeWalletBoughtAndSold[0].data,
           activeWallets: {
             oneDay: activeWallet1Day[0].data,
             sevenDay: activeWallet7Day[0].data,
@@ -482,6 +479,10 @@ export default async function Home() {
             all: activeWalletAll[0].data,
           },
           newWallets: {
+            dailyStats: {
+              new: newWalletsDailyStats[0].data,
+              totalCreated: totalNewWalletsCreatedDailyStats[0].data,
+            },
             oneDay: newWallet1Day[0].data,
             sevenDay: newWallet7Day[0].data,
             thirtyDay: newWallet30Day[0].data,

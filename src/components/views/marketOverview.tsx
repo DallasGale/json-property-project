@@ -36,7 +36,10 @@ import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
-import Traders, { TradersTimeframeTypes } from "../traders/traders";
+import Traders, {
+  NewWalletTypes,
+  TradersTimeframeTypes,
+} from "../traders/traders";
 import TimeframeAsString from "@/utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import DecimalFormatter from "@/utils/decimalFormatter";
@@ -103,14 +106,11 @@ interface VolumeChartProps {
     };
   };
   traders: {
-    onlyBought: number[];
-    onlyBoughtMovingAverage: number[];
-    onlySold: number[];
-    onlySoldMovingAverage: number[];
-    boughtAndSold: number[];
-    boughtAndSoldMovingAverage: number[];
+    activeWalletOnlyBought: number[];
+    activeWalletOnlySold: number[];
+    activeWalletBoughtAndSold: number[];
     activeWallets: TradersTimeframeTypes;
-    newWallets: TradersTimeframeTypes;
+    newWallets: NewWalletTypes;
     trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
     loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
     fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
@@ -727,13 +727,9 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
       {/* Traders row */}
       <Traders
         labels={labels}
-        realPercentDifference={[32.4]} // to be updated
-        onlyBought={traders.onlyBought}
-        onlyBoughtMovingAverage={traders.onlyBoughtMovingAverage}
-        onlySold={traders.onlySold}
-        onlySoldMovingAverage={traders.onlySoldMovingAverage}
-        boughtAndSold={traders.boughtAndSold}
-        boughtAndSoldMovingAverage={traders.boughtAndSoldMovingAverage}
+        activeWalletsOnlyBought={traders.activeWalletOnlyBought}
+        activeWalletsOnlySold={traders.activeWalletOnlySold}
+        activeWalletsBoughtAndSold={traders.activeWalletBoughtAndSold}
         activeWallets={traders.activeWallets}
         newWallets={traders.newWallets}
       />
