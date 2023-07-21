@@ -15,21 +15,8 @@ import TimeframeAsString from "@/utils/timeframeAsString";
 import TrendLineChart from "../charts/trendLineChart";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import CryptoIcon from "@assets/icons/crypto.svg";
-
-export type TradersTimeframeTypes = {
-  oneDay: number[];
-  sevenDay: number[];
-  thirtyDay: number[];
-  ninetyDay: number[];
-  all: number[];
-};
-
-export interface NewWalletTypes extends TradersTimeframeTypes {
-  dailyStats: {
-    new: number[];
-    totalCreated: number[];
-  };
-}
+import { TradersTimeframeTypes } from "./types";
+import NewWallets, { NewWalletsTypes } from "./wallets/newWallets";
 
 interface TradersTypes {
   labels: string[];
@@ -37,7 +24,7 @@ interface TradersTypes {
   activeWalletsOnlySold: number[];
   activeWalletsBoughtAndSold: number[];
   activeWallets: TradersTimeframeTypes;
-  newWallets: NewWalletTypes;
+  newWallets: NewWalletsTypes;
 }
 
 const Traders: React.FC<TradersTypes> = ({
@@ -71,10 +58,11 @@ const Traders: React.FC<TradersTypes> = ({
       easing: easings.easeInOutCubic,
     },
   });
+
   const springs3 = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: 300,
+    delay: 150,
     config: {
       tension: 90,
       friction: 16,
@@ -284,67 +272,8 @@ const Traders: React.FC<TradersTypes> = ({
   const [uniqueTotalBuyerSellerData, setuUniqueTotalBuyerSellerData] =
     useState(0);
 
-  // ----------------------------
-  // New Wallets
-  // ----------------------------
-  const [newWalletTradersLabels, setNewWalletTradersLabels] = useState(
-    labels.slice(labels.length - 90).map((data: any) => data)
-  );
-
-  const [newWalletsDailyStats, setNewWalletsDailyStatsDataArray] = useState(
-    newWallets.dailyStats.new.slice(newWallets.dailyStats.new.length - 90)
-  );
-
-  const [
-    newWalletsDailyStatsTotalCreatedDataArray,
-    setNewWalletsDailyStatsTotalCreatedDataArray,
-  ] = useState(
-    newWallets.dailyStats.totalCreated.slice(
-      newWallets.dailyStats.totalCreated.length - 90
-    )
-  );
-
-  const [newWalletDailyStatsDisabled, setNewWalletsDailyStatsDisabled] =
-    useState(false);
-  const [
-    newWalletsDailyStatsTotalCreatedDisabled,
-    setNewWalletsDailyStatsTotalCreatedDisabled,
-  ] = useState(false);
-
-  const newWalletOnClick = (e: string) => {
-    if (document) {
-      const domEls = document?.getElementsByTagName("input");
-      for (let i = 0; i < domEls.length; i++) {
-        if (domEls[i].id === e) {
-          if (domEls[i].id === "new-wallets-daily-stats") {
-            setNewWalletsDailyStatsDisabled(!newWalletDailyStatsDisabled);
-          }
-          if (domEls[i].id === "new-wallets-daily-stats-total-created") {
-            setNewWalletsDailyStatsTotalCreatedDisabled(
-              !newWalletsDailyStatsTotalCreatedDisabled
-            );
-          }
-        }
-      }
-    }
-  };
-  const newWalletLegendLabels = [
-    {
-      color: "accent-purple",
-      name: "New Walletst",
-      id: "new-wallets-daily-stats",
-    },
-    {
-      color: "accent-red",
-      name: "Total Wallets Created",
-      id: "new-wallets-daily-stats-total-created",
-    },
-  ];
-  const [newWalletsData, setNewWalletsDate] = useState<number>(1);
-
   useEffect(() => {
     if (timeframe === 0) {
-      setNewWalletsDate(newWallets.all[0]);
       setuUniqueTotalBuyerSellerData(activeWallets.all[0]);
 
       // Active
@@ -352,16 +281,8 @@ const Traders: React.FC<TradersTypes> = ({
       setActiveWalletOnlySoldDataArray(activeWalletsOnlySold);
       setActiveWalletBoughtAndSoldDataArray(activeWalletsBoughtAndSold);
       setActiveWalletTradersLabels(labels);
-
-      // New
-      setNewWalletsDailyStatsDataArray(newWallets.dailyStats.new);
-      setNewWalletsDailyStatsTotalCreatedDataArray(
-        newWallets.dailyStats.totalCreated
-      );
-      setNewWalletTradersLabels(labels);
     }
     if (timeframe === 1) {
-      setNewWalletsDate(newWallets.oneDay[0]);
       setuUniqueTotalBuyerSellerData(activeWallets.oneDay[0]);
 
       // Active
@@ -377,23 +298,9 @@ const Traders: React.FC<TradersTypes> = ({
       setActiveWalletTradersLabels(
         labels.slice(labels.length - 1).map((data: any) => data)
       );
-
-      // New
-      setNewWalletsDailyStatsDataArray(
-        newWallets.dailyStats.new.slice(newWallets.dailyStats.new.length - 1)
-      );
-      setNewWalletsDailyStatsTotalCreatedDataArray(
-        newWallets.dailyStats.totalCreated.slice(
-          newWallets.dailyStats.totalCreated.length - 1
-        )
-      );
-      setNewWalletTradersLabels(
-        labels.slice(labels.length - 1).map((data: any) => data)
-      );
     }
 
     if (timeframe === 7) {
-      setNewWalletsDate(newWallets.sevenDay[0]);
       setuUniqueTotalBuyerSellerData(activeWallets.sevenDay[0]);
 
       // Active
@@ -409,25 +316,8 @@ const Traders: React.FC<TradersTypes> = ({
       setActiveWalletTradersLabels(
         labels.slice(labels.length - 7).map((data: any) => data)
       );
-      setNewWalletTradersLabels(
-        labels.slice(labels.length - 7).map((data: any) => data)
-      );
-
-      // New
-      setNewWalletsDailyStatsDataArray(
-        newWallets.dailyStats.new.slice(newWallets.dailyStats.new.length - 7)
-      );
-      setNewWalletsDailyStatsTotalCreatedDataArray(
-        newWallets.dailyStats.totalCreated.slice(
-          newWallets.dailyStats.totalCreated.length - 7
-        )
-      );
-      setNewWalletTradersLabels(
-        labels.slice(labels.length - 7).map((data: any) => data)
-      );
     }
     if (timeframe === 30) {
-      setNewWalletsDate(newWallets.thirtyDay[0]);
       setuUniqueTotalBuyerSellerData(activeWallets.thirtyDay[0]);
 
       // Active
@@ -443,25 +333,8 @@ const Traders: React.FC<TradersTypes> = ({
       setActiveWalletTradersLabels(
         labels.slice(labels.length - 30).map((data: any) => data)
       );
-      setNewWalletTradersLabels(
-        labels.slice(labels.length - 30).map((data: any) => data)
-      );
-
-      // New
-      setNewWalletsDailyStatsDataArray(
-        newWallets.dailyStats.new.slice(newWallets.dailyStats.new.length - 30)
-      );
-      setNewWalletsDailyStatsTotalCreatedDataArray(
-        newWallets.dailyStats.totalCreated.slice(
-          newWallets.dailyStats.totalCreated.length - 30
-        )
-      );
-      setNewWalletTradersLabels(
-        labels.slice(labels.length - 30).map((data: any) => data)
-      );
     }
     if (timeframe === 90) {
-      setNewWalletsDate(newWallets.ninetyDay[0]);
       setuUniqueTotalBuyerSellerData(activeWallets.ninetyDay[0]);
 
       // Active
@@ -475,22 +348,6 @@ const Traders: React.FC<TradersTypes> = ({
         activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 90)
       );
       setActiveWalletTradersLabels(
-        labels.slice(labels.length - 90).map((data: any) => data)
-      );
-      setNewWalletTradersLabels(
-        labels.slice(labels.length - 90).map((data: any) => data)
-      );
-
-      // New
-      setNewWalletsDailyStatsDataArray(
-        newWallets.dailyStats.new.slice(newWallets.dailyStats.new.length - 90)
-      );
-      setNewWalletsDailyStatsTotalCreatedDataArray(
-        newWallets.dailyStats.totalCreated.slice(
-          newWallets.dailyStats.totalCreated.length - 90
-        )
-      );
-      setNewWalletTradersLabels(
         labels.slice(labels.length - 90).map((data: any) => data)
       );
     }
@@ -615,51 +472,13 @@ const Traders: React.FC<TradersTypes> = ({
                   />
                 </div>
               </animated.div>
-              <animated.div
-                style={{ ...springs3 }}
-                className="grid__col-content"
-              >
-                <div className="grid__col-container-body">
-                  <div>
-                    <p className="typography__label--2">
-                      <Image src={CryptoIcon} alt="Crypto Icon" />
-                      {numFormatter(newWalletsData)}
-                    </p>
-                    <h3 className="typography__subtitle--2">New Wallets</h3>
-                    <p className="typography__paragraph--1">
-                      Wallets that have been created within the last 24 hours.
-                    </p>
-                    <TrendLineChart
-                      legendOnClick={newWalletOnClick}
-                      labels={newWalletTradersLabels}
-                      legendLabels={...newWalletLegendLabels}
-                      legendFormat="vertical"
-                      datasets={[
-                        {
-                          label: "Only Sold",
-                          data: newWalletsDailyStatsTotalCreatedDisabled
-                            ? []
-                            : newWalletsDailyStatsTotalCreatedDataArray,
-                          borderColor: "rgba(250, 82, 82, 1)",
-                          backgroundColor: "rgba(250, 82, 82, 1)",
-                          pointRadius: 0,
-                          borderWidth: 3,
-                        },
-                        {
-                          label: "Only Bought",
-                          data: newWalletDailyStatsDisabled
-                            ? []
-                            : newWalletsDailyStats,
-                          borderColor: "rgba(95, 61, 196, 1)",
-                          backgroundColor: "rgba(95, 61, 196, 1)",
-                          pointRadius: 0,
-                          borderWidth: 3,
-                        },
-                      ]}
-                    />
-                  </div>
-                </div>
-              </animated.div>
+
+              {/* New Wallets */}
+              <NewWallets
+                timeframe={timeframe}
+                labels={labels}
+                newWallets={newWallets}
+              />
             </div>
           ),
         }}
