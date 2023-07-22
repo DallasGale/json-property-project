@@ -9,10 +9,16 @@
 }
 
 .hero-banner__content-grid {
-  display: grid;
-  justify-content: space-between;
-  grid-template-columns: auto 444px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   width: 100%;
+  @include respond-to(desktop-up) {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: auto auto;
+    grid-template-columns: auto 444px;
+  }
 }
 
 .hero-banner__did-you-know {
