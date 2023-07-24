@@ -26,3 +26,21 @@
   border: 2px solid $dark-bg-2;
   padding: 12px 20px;
 }
+
+.hero-banner__underline {
+  width: 237px;
+  height: 60px;
+  position: absolute;
+  top: 95px;
+  left: 0px;
+  overflow: hidden;
+  @include respond-to(desktop-up) {
+    width: 237px;
+    height: 60px;
+    position: absolute;
+    left: auto;
+    top: 62px;
+    right: 0;
+    overflow: hidden;
+  }
+}
