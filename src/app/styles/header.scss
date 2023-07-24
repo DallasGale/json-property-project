@@ -1,24 +1,37 @@
 $headerHeight: 64px;
+$headerHeightMobile: 136px;
 
 .header {
   background-color: $dark-bg-1;
   position: fixed;
   top: 0;
   left: 0;
-  gap: 20px;
+  gap: 10px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   color: $white;
   z-index: 5;
-  height: $headerHeight;
+  justify-content: flex-start;
+  height: $headerHeightMobile;
+  border-bottom: 1px solid $dark-bg-2;
+  @include respond-to(tablet-up) {
+    border-bottom: none;
+    height: $headerHeight;
+    flex-direction: row;
+    gap: 20px;
+  }
 }
 
-.header__row {
+.header__cell {
   padding: 16px 16px 16px 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 30px;
-  border-bottom: 1px solid $dark-bg-2;
+  justify-content: space-around;
+  @include respond-to(tablet-up) {
+    justify-content: flex-start;
+    border-bottom: 1px solid $dark-bg-2;
+  }
 }

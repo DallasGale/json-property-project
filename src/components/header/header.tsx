@@ -9,15 +9,15 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ handleTabClick }) => {
   return (
     <header className="header">
-      <div className="header__row">
+      <div className="header__cell">
         {/* <div> */}
         <Image src={Logo} alt="Databeast" />
       </div>
       {/* </div>
       <div> */}
-      {/* <div className="header__row"> */}
-      <Navigation handleTabClick={handleTabClick} />
-      {/* </div> */}
+      <div className="header__cell">
+        <Navigation handleTabClick={handleTabClick} />
+      </div>
       {/* </div> */}
     </header>
   );

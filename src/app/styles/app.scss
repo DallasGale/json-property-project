@@ -27,7 +27,10 @@ body {
 .wrapper {
   flex-direction: column;
   margin: auto;
-  margin-top: $headerHeight;
+  margin-top: $headerHeightMobile;
   width: 100%;
   display: flex;
+  @include respond-to(tablet-up) {
+    margin-top: $headerHeight;
+  }
 }
