@@ -1,0 +1,28 @@
+.status-bar {
+  align-items: center;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: space-between;
+  border-top: 1px solid $dark-bg-2;
+  flex-direction: column;
+  border-bottom: 1px solid $dark-bg-2;
+  padding: 10px 0;
+
+  @include respond-to(tablet-up) {
+    flex-direction: row;
+  }
+}
+
+.status-bar__cell {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-bar__daily-report {
+  background: $white;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
