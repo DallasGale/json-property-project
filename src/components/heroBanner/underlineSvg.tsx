@@ -14,16 +14,7 @@ const UnderlineSvg = () => {
     },
   });
   return (
-    <div
-      style={{
-        width: 237,
-        height: 60,
-        position: "absolute",
-        top: 62,
-        right: 0,
-        overflow: "hidden",
-      }}
-    >
+    <div className="hero-banner__underline">
       <svg
         width="238"
         height="19"
