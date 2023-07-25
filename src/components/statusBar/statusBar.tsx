@@ -1,13 +1,11 @@
-import { useSpring, animated, easings } from "@react-spring/web";
+import { useSpring, animated } from "@react-spring/web";
+import Moment from "react-moment";
+import "moment-timezone";
 
 import TimeIcon from "@assets/icons/time.svg";
 import { config, toFrom } from "@/constants/animationSettings";
 
-interface StatusBarProps {
-  date: string;
-}
-
-const StatusBar: React.FC<StatusBarProps> = ({ date }) => {
+const StatusBar: React.FC = () => {
   const today = new Date();
   // Animations
   const animation = useSpring({
@@ -23,14 +21,18 @@ const StatusBar: React.FC<StatusBarProps> = ({ date }) => {
           Daily Report
         </p>
         <p className="typography__display--6 typography__color--white">
-          {today.toDateString()}
+          <Moment
+            format="dddd, MMMM Do YYYY"
+            subtract={{ days: 1, hours: 0 }}
+            date={today.toDateString()}
+          />
         </p>
       </div>
 
       <div className="status-bar__cell">
         <img src={TimeIcon.src} />
         <p className="typography__display--2 typography__color--dark-medium-emphasis">
-          Updates daily at 10:00AM AEST
+          Updates daily at 10:30AM AEST
         </p>
       </div>
     </animated.section>
