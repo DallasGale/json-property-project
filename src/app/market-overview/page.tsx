@@ -66,12 +66,7 @@ async function getVolumeTimeframeSummary() {
   }
   return res.json();
 }
-const MarketOverviewPage: React.FC<DataVizLayoutTypes> = async ({
-  leaderboard,
-  traders,
-}) => {
-  // Data
-
+const MarketOverviewPage: React.FC = async () => {
   // Daily
   const dailySummaryData = await getDailySummaryData();
   // Leaderboard
