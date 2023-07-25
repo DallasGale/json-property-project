@@ -28,9 +28,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <HeroBanner />
-        <StatusBar />
-        {children}
+        <main className="main-container">
+          <div className="content">
+            <section className="wrapper">
+              <HeroBanner />
+              <StatusBar />
+              {children}
+            </section>
+          </div>
+        </main>
       </body>
     </html>
   );
