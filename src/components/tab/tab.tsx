@@ -4,12 +4,9 @@ export interface TabProps {
   id: string;
 }
 
-const Tab: React.FC<TabProps> = ({ active, name, id }) => {
+const Tab: React.FC<TabProps> = ({ name, id }) => {
   return (
-    <Link
-      href={id}
-      className={`typography__display--4 tab ${active === id ? "active" : ""}`}
-    >
+    <Link href={id} className="typography__display--4 tab">
       {name}
     </Link>
   );
