@@ -27,6 +27,7 @@
     "chartjs": "0.3.24",
     "chartjs-plugin-annotation": "^3.0.1",
     "chartjs-plugin-trendline": "^2.0.3",
+    "classnames": "^2.3.2",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "lodash.merge": "^4.6.2",

@@ -1,25 +1,20 @@
 export type NavigationTypes = {
   name: string;
   id: string;
+  link: string;
 };
 
 const navigation: NavigationTypes[] = [
   {
     name: "Market Overview",
     id: "market-overview",
+    link: "/",
   },
-  // {
-  //   name: "Marketplaces",
-  //   id: "marketplaces",
-  // },
   {
     name: "Leaderboards",
     id: "leaderboards",
+    link: "/leaderboards",
   },
-  // {
-  //   name: "Interesting",
-  //   id: "interesting",
-  // },
 ];
 
 export default navigation;

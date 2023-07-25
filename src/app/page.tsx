@@ -1,26 +1,11 @@
-// Components
-import DataVizLayout from "@components/dataViz/layout";
-
-// Constants
-import months from "@constants/months";
-
-// API
-import endpoints from "@api/endpoints";
-
-// Types
-import type { DatasetsType } from "@app/types";
-
-// Helpers
+import endpoints from "@/api/endpoints";
+import { DataVizLayoutTypes } from "@/components/dataViz/types";
+import months from "@/constants/months";
+import MarketOverview from "@views/marketOverview";
+import { DatasetsType } from "./types";
 import orderBy from "lodash.orderby";
 
-async function getDailySummaryData() {
-  const res = await fetch(endpoints.nft_ethereum_daily_summary);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
-
+// Fetching
 async function getLeaderBoard1dData() {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["1d"]);
   if (!res.ok) {
@@ -29,6 +14,13 @@ async function getLeaderBoard1dData() {
   return res.json();
 }
 
+async function getDailySummaryData() {
+  const res = await fetch(endpoints.nft_ethereum_daily_summary);
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
 async function getLeaderBoard7dData() {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["7d"]);
   if (!res.ok) {
@@ -74,14 +66,16 @@ async function getVolumeTimeframeSummary() {
   }
   return res.json();
 }
-
-export default async function Home() {
+const MarketOverviewPage: React.FC = async () => {
+  // Daily
   const dailySummaryData = await getDailySummaryData();
+  // Leaderboard
   const leaderBoard1dData = await getLeaderBoard1dData();
   const leaderBoard7dData = await getLeaderBoard7dData();
   const leaderBoard30dData = await getLeaderBoard30dData();
   const leaderBoard90dData = await getLeaderBoard90dData();
   const leaderBoardAllData = await getLeaderBoardAllData();
+  // Wallet
   const walletSummararyData = await getWalletTimeframeSummary();
   const volumeSummararyData = await getVolumeTimeframeSummary();
 
@@ -100,54 +94,46 @@ export default async function Home() {
     return newDates;
   };
 
-  // Labels
+  // Datasets  - Volumes
   const labels = await dateFormatter();
-
-  // Datasets
-  const totalVolume = await dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "volume_total"
-  );
-  const totalVolume30DayMovingAverage = await dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
+  const trueVolume = await dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_real"
   );
   const loanVolume = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_loan"
   );
-  const loanVolum30DayMovingAverage = await dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "volume_loan_30_day_moving_average"
-  );
-  // Fake
   const fakeVolume = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_fake"
-  );
-  const fakeVolume30DayMovingAverage = await dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "volume_fake_30_day_moving_average"
   );
   const realPercentDifference = dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "real_percent_difference"
   );
-  const trueVolume = await dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "volume_real"
+  const totalVolume = await dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total"
+  );
+  const loanVolum30DayMovingAverage = await dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_loan_30_day_moving_average"
+  );
+  const fakeVolume30DayMovingAverage = await dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_fake_30_day_moving_average"
+  );
+  const totalVolume30DayMovingAverage = await dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_total_30_day_moving_average"
   );
   const trueVolume30DayMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real_30_day_moving_average"
   );
 
-  // Traders
+  // Datasets - Traders
   const activeWalletOnlyBought = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_buyer_wallets"
   );
-
   const activeWalletOnlySold = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_seller_wallets"
   );
-
   const activeWalletBoughtAndSold = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_seller_and_buyer_wallets"
   );
-
-  // Timeframe Summary
-  // Active Wallet
   const activeWallet1Day = walletSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "unique_total_buyer_seller_24h"
   );
@@ -196,9 +182,6 @@ export default async function Home() {
   const totalNewWalletsCreatedDailyStats = dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "backward_accumulated_new_wallets"
   );
-
-  // Volume
-  // True
   const trueVolumeSummary1Day = volumeSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real_1d"
   );
@@ -277,7 +260,6 @@ export default async function Home() {
   const loanVolumeSummaryAll = volumeSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_loan_all_time"
   );
-
   // Percent Change > Total
   const totalPctChange1Day = volumeSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_pct_change_1d"
@@ -313,224 +295,192 @@ export default async function Home() {
   );
 
   return (
-    <main className="main-container">
-      <DataVizLayout
-        labels={labels}
-        fakeVolume={fakeVolume[0].data}
-        trueVolume={trueVolume[0].data}
-        loanVolume={loanVolume[0].data}
-        totalVolume={totalVolume[0].data}
-        realPercentDifference={realPercentDifference[0].data}
-        loanVolumeMovingAverage={loanVolum30DayMovingAverage[0].data}
-        fakeVolumeMovingAverage={fakeVolume30DayMovingAverage[0].data}
-        totalVolumeMovingAverage={totalVolume30DayMovingAverage[0].data}
-        trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
-        leaderboard={{
-          top100: {
-            oneDayTop100: orderBy(
-              leaderBoard1dData,
-              ["total_real_day_volume"],
-              "desc"
-            ).slice(0, 100),
-            sevenDayTop100: orderBy(
-              leaderBoard7dData,
-              ["total_real_day_volume"],
-              "desc"
-            ).slice(0, 100),
-            thirtyDayTop100: orderBy(
-              leaderBoard30dData,
-              ["total_real_day_volume"],
-              "desc"
-            ).slice(0, 100),
-            ninetyDayTop100: orderBy(
-              leaderBoard90dData,
-              ["total_real_day_volume"],
-              "desc"
-            ).slice(0, 100),
-            // allTop100: [],
-            allTop100: orderBy(
-              leaderBoardAllData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 100),
+    <MarketOverview
+      labels={labels}
+      trueVolume={trueVolume[0].data}
+      totalVolume={totalVolume[0].data}
+      fakeVolume={fakeVolume[0].data}
+      realPercentDifference={realPercentDifference[0].data}
+      loanVolume={loanVolume[0].data}
+      loanVolumeMovingAverage={loanVolum30DayMovingAverage[0].data}
+      fakeVolumeMovingAverage={fakeVolume30DayMovingAverage[0].data}
+      totalVolumeMovingAverage={totalVolume30DayMovingAverage[0].data}
+      trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
+      leaderboard={{
+        trueVolume: {
+          oneDay: orderBy(
+            leaderBoard1dData,
+            ["total_real_day_volume"],
+            "desc"
+          ).slice(0, 5),
+          sevenDay: orderBy(
+            leaderBoard7dData,
+            ["total_real_day_volume"],
+            "desc"
+          ).slice(0, 5),
+          thirtyDay: orderBy(
+            leaderBoard30dData,
+            ["total_real_day_volume"],
+            "desc"
+          ).slice(0, 5),
+          ninetyDay: orderBy(
+            leaderBoard90dData,
+            ["total_real_day_volume"],
+            "desc"
+          ).slice(0, 5),
+          all: orderBy(
+            leaderBoardAllData,
+            ["total_raw_day_volume"],
+            "desc"
+          ).slice(0, 5),
+        },
+        fakeVolume: {
+          oneDay: orderBy(
+            leaderBoard1dData,
+            ["total_day_volume_fake"],
+            "desc"
+          ).slice(0, 5),
+          sevenDay: orderBy(
+            leaderBoard7dData,
+            ["total_day_volume_fake"],
+            "desc"
+          ).slice(0, 5),
+          thirtyDay: orderBy(
+            leaderBoard30dData,
+            ["total_day_volume_fake"],
+            "desc"
+          ).slice(0, 5),
+          ninetyDay: orderBy(
+            leaderBoard90dData,
+            ["total_day_volume_fake"],
+            "desc"
+          ).slice(0, 5),
+          all: orderBy(
+            leaderBoardAllData,
+            ["total_day_volume_fake"],
+            "desc"
+          ).slice(0, 5),
+        },
+        loanVolume: {
+          oneDay: orderBy(
+            leaderBoard1dData,
+            ["total_day_volume_loan"],
+            "desc"
+          ).slice(0, 5),
+          sevenDay: orderBy(
+            leaderBoard7dData,
+            ["total_day_volume_loan"],
+            "desc"
+          ).slice(0, 5),
+          thirtyDay: orderBy(
+            leaderBoard30dData,
+            ["total_day_volume_loan"],
+            "desc"
+          ).slice(0, 5),
+          ninetyDay: orderBy(
+            leaderBoard30dData,
+            ["total_day_volume_loan"],
+            "desc"
+          ).slice(0, 5),
+          all: orderBy(
+            leaderBoardAllData,
+            ["total_day_volume_loan"],
+            "desc"
+          ).slice(0, 5),
+        },
+        royalty: {
+          oneDay: orderBy(
+            leaderBoard1dData,
+            ["total_day_total_royalty"],
+            "desc"
+          ).slice(0, 5),
+          sevenDay: orderBy(
+            leaderBoard7dData,
+            ["total_day_total_royalty"],
+            "desc"
+          ).slice(0, 5),
+          thirtyDay: orderBy(
+            leaderBoard30dData,
+            ["total_day_total_royalty"],
+            "desc"
+          ).slice(0, 5),
+          ninetyDay: orderBy(
+            leaderBoard90dData,
+            ["total_day_total_royalty"],
+            "desc"
+          ).slice(0, 5),
+          all: orderBy(
+            leaderBoardAllData,
+            ["total_day_total_royalty"],
+            "desc"
+          ).slice(0, 5),
+        },
+      }}
+      traders={{
+        activeWalletOnlyBought: activeWalletOnlyBought[0].data,
+        activeWalletOnlySold: activeWalletOnlySold[0].data,
+        activeWalletBoughtAndSold: activeWalletBoughtAndSold[0].data,
+        activeWallets: {
+          oneDay: activeWallet1Day[0].data,
+          sevenDay: activeWallet7Day[0].data,
+          thirtyDay: activeWallet30Day[0].data,
+          ninetyDay: activeWallet90Day[0].data,
+          all: activeWalletAll[0].data,
+        },
+        newWallets: {
+          dailyStats: {
+            new: newWalletsDailyStats[0].data,
+            totalCreated: totalNewWalletsCreatedDailyStats[0].data,
           },
-          trueVolume: {
-            oneDay: orderBy(
-              leaderBoard1dData,
-              ["total_real_day_volume"],
-              "desc"
-            ).slice(0, 5),
-            sevenDay: orderBy(
-              leaderBoard7dData,
-              ["total_real_day_volume"],
-              "desc"
-            ).slice(0, 5),
-            thirtyDay: orderBy(
-              leaderBoard30dData,
-              ["total_real_day_volume"],
-              "desc"
-            ).slice(0, 5),
-            ninetyDay: orderBy(
-              leaderBoard90dData,
-              ["total_real_day_volume"],
-              "desc"
-            ).slice(0, 5),
-            // all: [],
-            all: orderBy(
-              leaderBoardAllData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 5),
-          },
-          fakeVolume: {
-            oneDay: orderBy(
-              leaderBoard1dData,
-              ["total_day_volume_fake"],
-              "desc"
-            ).slice(0, 5),
-            sevenDay: orderBy(
-              leaderBoard7dData,
-              ["total_day_volume_fake"],
-              "desc"
-            ).slice(0, 5),
-            thirtyDay: orderBy(
-              leaderBoard30dData,
-              ["total_day_volume_fake"],
-              "desc"
-            ).slice(0, 5),
-            ninetyDay: orderBy(
-              leaderBoard90dData,
-              ["total_day_volume_fake"],
-              "desc"
-            ).slice(0, 5),
-            // all: [],
-            all: orderBy(
-              leaderBoardAllData,
-              ["total_day_volume_fake"],
-              "desc"
-            ).slice(0, 5),
-          },
-          loanVolume: {
-            oneDay: orderBy(
-              leaderBoard1dData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 5),
-            sevenDay: orderBy(
-              leaderBoard7dData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 5),
-            thirtyDay: orderBy(
-              leaderBoard30dData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 5),
-            ninetyDay: orderBy(
-              leaderBoard30dData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 5),
-            // all: [],
-            all: orderBy(
-              leaderBoardAllData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 5),
-          },
-          royalty: {
-            oneDay: orderBy(
-              leaderBoard1dData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 5),
-            sevenDay: orderBy(
-              leaderBoard7dData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 5),
-            thirtyDay: orderBy(
-              leaderBoard30dData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 5),
-            ninetyDay: orderBy(
-              leaderBoard90dData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 5),
-            // all: [],
-            all: orderBy(
-              leaderBoardAllData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 5),
-          },
-        }}
-        traders={{
-          activeWalletOnlyBought: activeWalletOnlyBought[0].data,
-          activeWalletOnlySold: activeWalletOnlySold[0].data,
-          activeWalletBoughtAndSold: activeWalletBoughtAndSold[0].data,
-          activeWallets: {
-            oneDay: activeWallet1Day[0].data,
-            sevenDay: activeWallet7Day[0].data,
-            thirtyDay: activeWallet30Day[0].data,
-            ninetyDay: activeWallet90Day[0].data,
-            all: activeWalletAll[0].data,
-          },
-          newWallets: {
-            dailyStats: {
-              new: newWalletsDailyStats[0].data,
-              totalCreated: totalNewWalletsCreatedDailyStats[0].data,
-            },
-            oneDay: newWallet1Day[0].data,
-            sevenDay: newWallet7Day[0].data,
-            thirtyDay: newWallet30Day[0].data,
-            ninetyDay: newWallet90Day[0].data,
-            all: newWalletAll[0].data,
-          },
-          trueVolumeTimeframeSummaryData: {
-            oneDay: trueVolumeSummary1Day[0].data,
-            sevenDay: trueVolumeSummary7Day[0].data,
-            thirtyDay: trueVolumeSummary30Day[0].data,
-            ninetyDay: trueVolumeSummary90Day[0].data,
-            all: trueVolumeSummaryAll[0].data,
-          },
-          totalVolumeTimeframeSummaryData: {
-            oneDay: totalVolumeSummary1Day[0].data,
-            sevenDay: totalVolumeSummary7Day[0].data,
-            thirtyDay: totalVolumeSummary30Day[0].data,
-            ninetyDay: totalVolumeSummary90Day[0].data,
-            all: totalVolumeSummaryAll[0].data,
-          },
-          totalPercentChangeTimeframeData: {
-            oneDay: totalPctChange1Day[0].data,
-            sevenDay: totalPctChange7Day[0].data,
-            thirtyDay: totalPctChange30Day[0].data,
-            ninetyDay: totalPctChange90Day[0].data,
-          },
-          truePercentChangeTimeframeData: {
-            oneDay: truePctChange1Day[0].data,
-            sevenDay: truePctChange7Day[0].data,
-            thirtyDay: truePctChange30Day[0].data,
-            ninetyDay: truePctChange90Day[0].data,
-          },
-          fakeVolumeTimeframeSummaryData: {
-            oneDay: fakeVolumeSummary1Day[0].data,
-            sevenDay: fakeVolumeSummary7Day[0].data,
-            thirtyDay: fakeVolumeSummary30Day[0].data,
-            ninetyDay: fakeVolumeSummary90Day[0].data,
-            all: fakeVolumeSummaryAll[0].data,
-          },
-          loanVolumeTimeframeSummaryData: {
-            oneDay: loanVolumeSummary1Day[0].data,
-            sevenDay: loanVolumeSummary7Day[0].data,
-            thirtyDay: loanVolumeSummary30Day[0].data,
-            ninetyDay: loanVolumeSummary90Day[0].data,
-            all: loanVolumeSummaryAll[0].data,
-          },
-        }}
-      />
-    </main>
+          oneDay: newWallet1Day[0].data,
+          sevenDay: newWallet7Day[0].data,
+          thirtyDay: newWallet30Day[0].data,
+          ninetyDay: newWallet90Day[0].data,
+          all: newWalletAll[0].data,
+        },
+        trueVolumeTimeframeSummaryData: {
+          oneDay: trueVolumeSummary1Day[0].data,
+          sevenDay: trueVolumeSummary7Day[0].data,
+          thirtyDay: trueVolumeSummary30Day[0].data,
+          ninetyDay: trueVolumeSummary90Day[0].data,
+          all: trueVolumeSummaryAll[0].data,
+        },
+        totalVolumeTimeframeSummaryData: {
+          oneDay: totalVolumeSummary1Day[0].data,
+          sevenDay: totalVolumeSummary7Day[0].data,
+          thirtyDay: totalVolumeSummary30Day[0].data,
+          ninetyDay: totalVolumeSummary90Day[0].data,
+          all: totalVolumeSummaryAll[0].data,
+        },
+        totalPercentChangeTimeframeData: {
+          oneDay: totalPctChange1Day[0].data,
+          sevenDay: totalPctChange7Day[0].data,
+          thirtyDay: totalPctChange30Day[0].data,
+          ninetyDay: totalPctChange90Day[0].data,
+        },
+        truePercentChangeTimeframeData: {
+          oneDay: truePctChange1Day[0].data,
+          sevenDay: truePctChange7Day[0].data,
+          thirtyDay: truePctChange30Day[0].data,
+          ninetyDay: truePctChange90Day[0].data,
+        },
+        fakeVolumeTimeframeSummaryData: {
+          oneDay: fakeVolumeSummary1Day[0].data,
+          sevenDay: fakeVolumeSummary7Day[0].data,
+          thirtyDay: fakeVolumeSummary30Day[0].data,
+          ninetyDay: fakeVolumeSummary90Day[0].data,
+          all: fakeVolumeSummaryAll[0].data,
+        },
+        loanVolumeTimeframeSummaryData: {
+          oneDay: loanVolumeSummary1Day[0].data,
+          sevenDay: loanVolumeSummary7Day[0].data,
+          thirtyDay: loanVolumeSummary30Day[0].data,
+          ninetyDay: loanVolumeSummary90Day[0].data,
+          all: loanVolumeSummaryAll[0].data,
+        },
+      }}
+    />
   );
-}
+};
+
+export default MarketOverviewPage;

@@ -1,11 +1,23 @@
-import Tab from "@components/tab/tab";
+"use client";
+import { usePathname } from "next/navigation";
+import NavLink from "./navLink";
 import navigation from "@/constants/navigation";
 
 const Navigation: React.FC = () => {
+  const activePathname = usePathname();
+
   return (
     <>
       {navigation.map((nav) => {
-        return <Tab key={nav.id} {...nav} />;
+        return (
+          <NavLink
+            id={nav.id}
+            link={nav.link}
+            key={nav.id}
+            name={nav.name}
+            activeClassName={nav.link === activePathname}
+          />
+        );
       })}
     </>
   );
