@@ -1,9 +1,12 @@
+"use client";
+
+import Image from "next/image";
 import { useSpring, animated } from "@react-spring/web";
 import Moment from "react-moment";
 import "moment-timezone";
 
 import TimeIcon from "@assets/icons/time.svg";
-import { config, toFrom } from "@/constants/animationSettings";
+import { config } from "@constants/animationSettings";
 
 const StatusBar: React.FC = () => {
   // Animations
@@ -34,7 +37,7 @@ const StatusBar: React.FC = () => {
       </div>
 
       <div className="status-bar__cell">
-        <img src={TimeIcon.src} />
+        <Image src={TimeIcon.src} alt="" width={15} height={15} />
         <p className="typography__display--2 typography__color--dark-medium-emphasis">
           Updates daily at <Moment format="hh:mma" date={date} />{" "}
           {clientsTimeZone}

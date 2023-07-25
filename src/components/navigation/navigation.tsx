@@ -1,24 +1,21 @@
 "use client";
-
-import { useState } from "react";
-import Tab from "@components/tab/tab";
+import { usePathname } from "next/navigation";
+import NavLink from "./navLink";
 import navigation from "@/constants/navigation";
 
-interface NavigationProps {
-  handleTabClick: (e: string) => void;
-}
+const Navigation: React.FC = () => {
+  const activePathname = usePathname();
 
-const Navigation: React.FC<NavigationProps> = ({ handleTabClick }) => {
-  const [activeTab, setActiveTab] = useState("market-overview");
   return (
     <>
       {navigation.map((nav) => {
         return (
-          <Tab
-            active={activeTab}
+          <NavLink
+            id={nav.id}
+            link={nav.link}
             key={nav.id}
-            {...nav}
-            onClick={(e) => (setActiveTab(e), handleTabClick(e))}
+            name={nav.name}
+            activeClassName={nav.link === activePathname}
           />
         );
       })}

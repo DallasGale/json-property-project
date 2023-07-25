@@ -2,7 +2,7 @@ import endpoints from "@/api/endpoints";
 import { DataVizLayoutTypes } from "@/components/dataViz/types";
 import months from "@/constants/months";
 import MarketOverview from "@views/marketOverview";
-import { DatasetsType } from "./types";
+import { DatasetsType } from "../types";
 import orderBy from "lodash.orderby";
 
 // Fetching
