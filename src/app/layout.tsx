@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         <HeroBanner />
-        <StatusBar date="Thursday 20, July 2023" />
+        <StatusBar />
         {children}
       </body>
     </html>
