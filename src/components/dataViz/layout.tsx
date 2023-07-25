@@ -19,7 +19,7 @@ import Leaderboards from "../views/leaderboards";
 import HeroBanner from "../heroBanner/heroBanner";
 import { TradersTimeframeTypes } from "../traders/types";
 import { NewWalletsTypes } from "../traders/wallets/newWallets";
-import StatusBar from "../statusBar/statusBat";
+import StatusBar from "../statusBar/statusBar";
 
 interface DataVizLayoutTypes {
   labels: string[];
@@ -106,7 +106,7 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
         <section className="wrapper">
           <>
             <HeroBanner />
-            <StatusBar date="Thursday 20, July 2023" />
+            <StatusBar />
             {activeTab == "market-overview" && (
               <MarketOverview
                 labels={labels}
