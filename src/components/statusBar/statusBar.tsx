@@ -1,12 +1,14 @@
 "use client";
+
 import Image from "next/image";
 import { useSpring, animated } from "@react-spring/web";
+import Moment from "react-moment";
+import "moment-timezone";
+
 import TimeIcon from "@assets/icons/time.svg";
 import { config } from "@constants/animationSettings";
 
 const StatusBar: React.FC = () => {
-  const today = new Date();
-
   // Animations
   const animation = useSpring({
     from: { opacity: 0 },
@@ -14,6 +16,11 @@ const StatusBar: React.FC = () => {
     config: config,
     delay: 1200,
   });
+
+  const today = new Date();
+  const date = new Date("1976-04-19T00:30-0000");
+  const clientsTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   return (
     <animated.section style={{ ...animation }} className="status-bar">
       <div className="status-bar__cell">
@@ -21,14 +28,19 @@ const StatusBar: React.FC = () => {
           Daily Report
         </p>
         <p className="typography__display--6 typography__color--white">
-          {today.toDateString()}
+          <Moment
+            format="dddd, MMMM Do YYYY"
+            subtract={{ days: 1, hours: 0 }}
+            date={today.toDateString()}
+          />
         </p>
       </div>
 
       <div className="status-bar__cell">
         <Image src={TimeIcon.src} alt="" width={15} height={15} />
         <p className="typography__display--2 typography__color--dark-medium-emphasis">
-          Updates daily at 10:00AM AEST
+          Updates daily at <Moment format="hh:mma" date={date} />{" "}
+          {clientsTimeZone}
         </p>
       </div>
     </animated.section>
