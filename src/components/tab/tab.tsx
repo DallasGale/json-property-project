@@ -1,20 +1,17 @@
+import Link from "next/link";
 export interface TabProps {
-  active: string;
   name: string;
   id: string;
-  onClick: (e: string) => void;
 }
 
-const Tab: React.FC<TabProps> = ({ active, name, id, onClick }) => {
+const Tab: React.FC<TabProps> = ({ active, name, id }) => {
   return (
-    <button
-      key={id}
-      id={id}
-      onClick={(e) => onClick(e.currentTarget.id)}
+    <Link
+      href={id}
       className={`typography__display--4 tab ${active === id ? "active" : ""}`}
     >
       {name}
-    </button>
+    </Link>
   );
 };
 

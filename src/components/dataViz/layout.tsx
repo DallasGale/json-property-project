@@ -4,6 +4,11 @@ import MarketOverview, {
   PercentChangeTimeframeTypes,
 } from "@views/marketOverview";
 
+// Components
+import Leaderboards from "../views/leaderboards";
+import { TradersTimeframeTypes } from "../traders/types";
+import { NewWalletsTypes } from "../traders/wallets/newWallets";
+
 // Types
 import type {
   TrueVolumeTypes,
@@ -12,14 +17,6 @@ import type {
   RoyaltyTypes,
   CollectionTypes,
 } from "@/app/types";
-
-// Components
-import Header from "@/components/header/header";
-import Leaderboards from "../views/leaderboards";
-import HeroBanner from "../heroBanner/heroBanner";
-import { TradersTimeframeTypes } from "../traders/types";
-import { NewWalletsTypes } from "../traders/wallets/newWallets";
-import StatusBar from "../statusBar/statusBat";
 
 interface DataVizLayoutTypes {
   labels: string[];
@@ -101,121 +98,121 @@ const DataVizLayout: React.FC<DataVizLayoutTypes> = ({
   const [activeTab, setActiveTab] = useState("market-overview");
   return (
     <>
-      <Header handleTabClick={(e) => setActiveTab(e)} />
+      {/* <Header handleTabClick={(e) => setActiveTab(e)} />
       <div className="content">
         <section className="wrapper">
           <>
             <HeroBanner />
-            <StatusBar date="Thursday 20, July 2023" />
-            {activeTab == "market-overview" && (
-              <MarketOverview
-                labels={labels}
-                trueVolume={trueVolume}
-                totalVolume={totalVolume}
-                fakeVolume={fakeVolume}
-                realPercentDifference={realPercentDifference}
-                loanVolume={loanVolume}
-                loanVolumeMovingAverage={loanVolumeMovingAverage}
-                fakeVolumeMovingAverage={fakeVolumeMovingAverage}
-                totalVolumeMovingAverage={totalVolumeMovingAverage}
-                trueVolumeMovingAverage={trueVolumeMovingAverage}
-                leaderboard={{
-                  trueVolume: {
-                    oneDay: leaderboard.trueVolume.oneDay,
-                    sevenDay: leaderboard.trueVolume.sevenDay,
-                    thirtyDay: leaderboard.trueVolume.thirtyDay,
-                    ninetyDay: leaderboard.trueVolume.ninetyDay,
-                    all: leaderboard.trueVolume.all,
-                  },
-                  fakeVolume: {
-                    oneDay: leaderboard.fakeVolume.oneDay,
-                    sevenDay: leaderboard.fakeVolume.sevenDay,
-                    thirtyDay: leaderboard.fakeVolume.thirtyDay,
-                    ninetyDay: leaderboard.fakeVolume.ninetyDay,
-                    all: leaderboard.fakeVolume.all,
-                  },
-                  loanVolume: {
-                    oneDay: leaderboard.loanVolume.oneDay,
-                    sevenDay: leaderboard.loanVolume.sevenDay,
-                    thirtyDay: leaderboard.loanVolume.thirtyDay,
-                    ninetyDay: leaderboard.loanVolume.ninetyDay,
-                    all: leaderboard.loanVolume.all,
-                  },
-                  royalty: {
-                    oneDay: leaderboard.royalty.oneDay,
-                    sevenDay: leaderboard.royalty.sevenDay,
-                    thirtyDay: leaderboard.royalty.thirtyDay,
-                    ninetyDay: leaderboard.royalty.ninetyDay,
-                    all: leaderboard.royalty.all,
-                  },
-                }}
-                traders={{
-                  activeWalletOnlyBought: traders.activeWalletOnlyBought,
-                  activeWalletOnlySold: traders.activeWalletOnlySold,
-                  activeWalletBoughtAndSold: traders.activeWalletBoughtAndSold,
+            <StatusBar date="Thursday 20, July 2023" /> */}
+      {activeTab == "market-overview" && (
+        <MarketOverview
+          labels={labels}
+          trueVolume={trueVolume}
+          totalVolume={totalVolume}
+          fakeVolume={fakeVolume}
+          realPercentDifference={realPercentDifference}
+          loanVolume={loanVolume}
+          loanVolumeMovingAverage={loanVolumeMovingAverage}
+          fakeVolumeMovingAverage={fakeVolumeMovingAverage}
+          totalVolumeMovingAverage={totalVolumeMovingAverage}
+          trueVolumeMovingAverage={trueVolumeMovingAverage}
+          leaderboard={{
+            trueVolume: {
+              oneDay: leaderboard.trueVolume.oneDay,
+              sevenDay: leaderboard.trueVolume.sevenDay,
+              thirtyDay: leaderboard.trueVolume.thirtyDay,
+              ninetyDay: leaderboard.trueVolume.ninetyDay,
+              all: leaderboard.trueVolume.all,
+            },
+            fakeVolume: {
+              oneDay: leaderboard.fakeVolume.oneDay,
+              sevenDay: leaderboard.fakeVolume.sevenDay,
+              thirtyDay: leaderboard.fakeVolume.thirtyDay,
+              ninetyDay: leaderboard.fakeVolume.ninetyDay,
+              all: leaderboard.fakeVolume.all,
+            },
+            loanVolume: {
+              oneDay: leaderboard.loanVolume.oneDay,
+              sevenDay: leaderboard.loanVolume.sevenDay,
+              thirtyDay: leaderboard.loanVolume.thirtyDay,
+              ninetyDay: leaderboard.loanVolume.ninetyDay,
+              all: leaderboard.loanVolume.all,
+            },
+            royalty: {
+              oneDay: leaderboard.royalty.oneDay,
+              sevenDay: leaderboard.royalty.sevenDay,
+              thirtyDay: leaderboard.royalty.thirtyDay,
+              ninetyDay: leaderboard.royalty.ninetyDay,
+              all: leaderboard.royalty.all,
+            },
+          }}
+          traders={{
+            activeWalletOnlyBought: traders.activeWalletOnlyBought,
+            activeWalletOnlySold: traders.activeWalletOnlySold,
+            activeWalletBoughtAndSold: traders.activeWalletBoughtAndSold,
 
-                  activeWallets: traders.activeWallets,
-                  newWallets: traders.newWallets,
-                  trueVolumeTimeframeSummaryData:
-                    traders.trueVolumeTimeframeSummaryData,
-                  totalVolumeTimeframeSummaryData:
-                    traders.totalVolumeTimeframeSummaryData,
-                  totalPercentChangeTimeframeData:
-                    traders.totalPercentChangeTimeframeData,
-                  truePercentChangeTimeframeData:
-                    traders.truePercentChangeTimeframeData,
-                  fakeVolumeTimeframeSummaryData:
-                    traders.fakeVolumeTimeframeSummaryData,
-                  loanVolumeTimeframeSummaryData:
-                    traders.loanVolumeTimeframeSummaryData,
-                }}
-              />
-            )}
-            {activeTab == "leaderboards" && (
-              <Leaderboards
-                leaderboard={{
-                  top100: {
-                    oneDayTop100: leaderboard.top100.oneDayTop100,
-                    sevenDayTop100: leaderboard.top100.sevenDayTop100,
-                    thirtyDayTop100: leaderboard.top100.thirtyDayTop100,
-                    ninetyDayTop100: leaderboard.top100.ninetyDayTop100,
-                    allTop100: leaderboard.top100.allTop100,
-                  },
-                  trueVolume: {
-                    oneDay: leaderboard.trueVolume.oneDay,
-                    sevenDay: leaderboard.trueVolume.sevenDay,
-                    thirtyDay: leaderboard.trueVolume.thirtyDay,
-                    ninetyDay: leaderboard.trueVolume.ninetyDay,
-                    all: leaderboard.trueVolume.all,
-                  },
-                  fakeVolume: {
-                    oneDay: leaderboard.fakeVolume.oneDay,
-                    sevenDay: leaderboard.fakeVolume.sevenDay,
-                    thirtyDay: leaderboard.fakeVolume.thirtyDay,
-                    ninetyDay: leaderboard.fakeVolume.ninetyDay,
-                    all: leaderboard.fakeVolume.all,
-                  },
-                  loanVolume: {
-                    oneDay: leaderboard.loanVolume.oneDay,
-                    sevenDay: leaderboard.loanVolume.sevenDay,
-                    thirtyDay: leaderboard.loanVolume.thirtyDay,
-                    ninetyDay: leaderboard.loanVolume.ninetyDay,
-                    all: leaderboard.loanVolume.all,
-                  },
-                  royalty: {
-                    oneDay: leaderboard.royalty.oneDay,
-                    sevenDay: leaderboard.royalty.sevenDay,
-                    thirtyDay: leaderboard.royalty.thirtyDay,
-                    ninetyDay: leaderboard.royalty.ninetyDay,
-                    all: leaderboard.royalty.all,
-                  },
-                }}
-              />
-            )}
-          </>
-        </section>
-      </div>
+            activeWallets: traders.activeWallets,
+            newWallets: traders.newWallets,
+            trueVolumeTimeframeSummaryData:
+              traders.trueVolumeTimeframeSummaryData,
+            totalVolumeTimeframeSummaryData:
+              traders.totalVolumeTimeframeSummaryData,
+            totalPercentChangeTimeframeData:
+              traders.totalPercentChangeTimeframeData,
+            truePercentChangeTimeframeData:
+              traders.truePercentChangeTimeframeData,
+            fakeVolumeTimeframeSummaryData:
+              traders.fakeVolumeTimeframeSummaryData,
+            loanVolumeTimeframeSummaryData:
+              traders.loanVolumeTimeframeSummaryData,
+          }}
+        />
+      )}
+      {activeTab == "leaderboards" && (
+        <Leaderboards
+          leaderboard={{
+            top100: {
+              oneDayTop100: leaderboard.top100.oneDayTop100,
+              sevenDayTop100: leaderboard.top100.sevenDayTop100,
+              thirtyDayTop100: leaderboard.top100.thirtyDayTop100,
+              ninetyDayTop100: leaderboard.top100.ninetyDayTop100,
+              allTop100: leaderboard.top100.allTop100,
+            },
+            trueVolume: {
+              oneDay: leaderboard.trueVolume.oneDay,
+              sevenDay: leaderboard.trueVolume.sevenDay,
+              thirtyDay: leaderboard.trueVolume.thirtyDay,
+              ninetyDay: leaderboard.trueVolume.ninetyDay,
+              all: leaderboard.trueVolume.all,
+            },
+            fakeVolume: {
+              oneDay: leaderboard.fakeVolume.oneDay,
+              sevenDay: leaderboard.fakeVolume.sevenDay,
+              thirtyDay: leaderboard.fakeVolume.thirtyDay,
+              ninetyDay: leaderboard.fakeVolume.ninetyDay,
+              all: leaderboard.fakeVolume.all,
+            },
+            loanVolume: {
+              oneDay: leaderboard.loanVolume.oneDay,
+              sevenDay: leaderboard.loanVolume.sevenDay,
+              thirtyDay: leaderboard.loanVolume.thirtyDay,
+              ninetyDay: leaderboard.loanVolume.ninetyDay,
+              all: leaderboard.loanVolume.all,
+            },
+            royalty: {
+              oneDay: leaderboard.royalty.oneDay,
+              sevenDay: leaderboard.royalty.sevenDay,
+              thirtyDay: leaderboard.royalty.thirtyDay,
+              ninetyDay: leaderboard.royalty.ninetyDay,
+              all: leaderboard.royalty.all,
+            },
+          }}
+        />
+      )}
     </>
+    //   </section>
+    // </div>
+    // </>
   );
 };
 export default DataVizLayout;

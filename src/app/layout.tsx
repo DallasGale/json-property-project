@@ -1,9 +1,16 @@
+// Components
+import Header from "@components/header/header";
+import HeroBanner from "@components/heroBanner/heroBanner";
+import StatusBar from "@components/statusBar/statusBar";
+
+// Fonts
 import "@fontsource/roboto";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-
-import "./styles/app.scss";
 import { Inter } from "next/font/google";
+
+// CSS
+import "./styles/app.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +26,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Header />
+        <HeroBanner />
+        <StatusBar date="Thursday 20, July 2023" />
+        {children}
+      </body>
     </html>
   );
 }

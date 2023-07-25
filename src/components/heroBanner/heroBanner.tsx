@@ -1,5 +1,7 @@
+"use client";
 import { useSpring, animated, easings } from "@react-spring/web";
 import UnderlineSvg from "./underlineSvg";
+
 const HeroBanner = () => {
   // Animations
   const springs1 = useSpring({
@@ -29,18 +31,6 @@ const HeroBanner = () => {
     from: { x: 0, opacity: 0 },
     to: { x: 0, opacity: 1 },
     delay: 300,
-    config: {
-      tension: 30,
-      friction: 3,
-      duration: 450,
-      easing: easings.easeInOutCubic,
-    },
-  });
-
-  const springs4 = useSpring({
-    from: { y: -100, opacity: 0 },
-    to: { x: 0, opacity: 1 },
-    delay: 800,
     config: {
       tension: 30,
       friction: 3,

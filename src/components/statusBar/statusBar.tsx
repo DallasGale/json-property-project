@@ -1,14 +1,12 @@
-import { useSpring, animated, easings } from "@react-spring/web";
-
+"use client";
+import Image from "next/image";
+import { useSpring, animated } from "@react-spring/web";
 import TimeIcon from "@assets/icons/time.svg";
-import { config, toFrom } from "@/constants/animationSettings";
+import { config } from "@constants/animationSettings";
 
-interface StatusBarProps {
-  date: string;
-}
-
-const StatusBar: React.FC<StatusBarProps> = ({ date }) => {
+const StatusBar: React.FC = () => {
   const today = new Date();
+
   // Animations
   const animation = useSpring({
     from: { opacity: 0 },
@@ -28,7 +26,7 @@ const StatusBar: React.FC<StatusBarProps> = ({ date }) => {
       </div>
 
       <div className="status-bar__cell">
-        <img src={TimeIcon.src} />
+        <Image src={TimeIcon.src} alt="" width={15} height={15} />
         <p className="typography__display--2 typography__color--dark-medium-emphasis">
           Updates daily at 10:00AM AEST
         </p>
