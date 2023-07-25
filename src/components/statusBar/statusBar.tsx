@@ -6,7 +6,6 @@ import TimeIcon from "@assets/icons/time.svg";
 import { config, toFrom } from "@/constants/animationSettings";
 
 const StatusBar: React.FC = () => {
-  const today = new Date();
   // Animations
   const animation = useSpring({
     from: { opacity: 0 },
@@ -14,6 +13,11 @@ const StatusBar: React.FC = () => {
     config: config,
     delay: 1200,
   });
+
+  const today = new Date();
+  const date = new Date("1976-04-19T00:30-0000");
+  const clientsTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   return (
     <animated.section style={{ ...animation }} className="status-bar">
       <div className="status-bar__cell">
@@ -32,7 +36,8 @@ const StatusBar: React.FC = () => {
       <div className="status-bar__cell">
         <img src={TimeIcon.src} />
         <p className="typography__display--2 typography__color--dark-medium-emphasis">
-          Updates daily at 10:30AM AEST
+          Updates daily at <Moment format="hh:mma" date={date} />{" "}
+          {clientsTimeZone}
         </p>
       </div>
     </animated.section>
