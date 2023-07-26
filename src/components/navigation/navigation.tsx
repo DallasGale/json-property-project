@@ -1,8 +1,7 @@
 "use client";
-
 import { usePathname } from "next/navigation";
 import NavLink from "./navLink";
-import navigation from "@/constants/navigation";
+import navigation from "@constants/navigation";
 
 const Navigation: React.FC = () => {
   const activePathname = usePathname();
