@@ -1,5 +1,4 @@
 import endpoints from "@/api/endpoints";
-import { DataVizLayoutTypes } from "@/components/dataViz/types";
 import months from "@/constants/months";
 import MarketOverview from "@views/marketOverview";
 import { DatasetsType } from "./types";
@@ -66,6 +65,11 @@ async function getVolumeTimeframeSummary() {
   }
   return res.json();
 }
+
+export const metadata = {
+  title: "🧌 DataBeast 🧌 - Powered by NFTdb",
+  description: "Powered by NFTdb",
+};
 const MarketOverviewPage: React.FC = async () => {
   // Daily
   const dailySummaryData = await getDailySummaryData();

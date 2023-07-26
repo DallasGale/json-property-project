@@ -34,9 +34,11 @@
   height: 50px;
   display: flex;
   color: $white;
-  padding: 12px 15px;
+  padding-right: 14px;
+  box-sizing: border-box;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
   border: 1px solid $accent-blue;
   width: 100%;
   opacity: 1;
