@@ -1,3 +1,8 @@
+"use client";
+
+// Hooks
+import { usePathname } from "next/navigation";
+
 // Components
 import Header from "@components/header/header";
 import HeroBanner from "@components/heroBanner/heroBanner";
@@ -14,16 +19,17 @@ import "./styles/app.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "🧌 DataBeast 🧌 - Powered by NFTdb",
-  description: "Powered by NFTdb",
-};
+// export const metadata = {
+//   title: "🧌 DataBeast 🧌 - Powered by NFTdb",
+//   description: "Powered by NFTdb",
+// };
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const activePathname = usePathname();
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -31,8 +37,12 @@ export default function RootLayout({
         <main className="main-container">
           <div className="content">
             <section className="wrapper">
-              <HeroBanner />
-              <StatusBar />
+              {activePathname !== "/about-us" && (
+                <>
+                  <HeroBanner />
+                  <StatusBar />
+                </>
+              )}
               {children}
             </section>
           </div>

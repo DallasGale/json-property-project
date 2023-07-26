@@ -27,8 +27,8 @@ interface DataTableProps {
 const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
   // Animations
   const springs1 = useSpring({
-    from: { y: 100, opacity: 0 },
-    to: { y: 0, opacity: 1 },
+    from: { opacity: 0 },
+    to: { opacity: 1 },
     delay: 900,
     config: {
       tension: 90,
@@ -38,8 +38,8 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
     },
   });
   const springs2 = useSpring({
-    from: { y: 100, opacity: 0 },
-    to: { y: 0, opacity: 1 },
+    from: { opacity: 0 },
+    to: { opacity: 1 },
     delay: 1150,
     config: {
       tension: 90,
