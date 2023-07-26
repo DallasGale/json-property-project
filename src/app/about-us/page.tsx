@@ -2,8 +2,22 @@
 import TwitterIcon from "@assets/icons/twitter.svg";
 import Link from "next/link";
 
-import { useSpring, animated, easings } from "@react-spring/web";
+import { useSpring, animated } from "@react-spring/web";
 import { config, toFrom } from "@constants/animationSettings";
+import Avatar from "@components/avatar/avatar";
+
+const people = [
+  {
+    avatar: "",
+    name: "Alida Tomaszewski",
+    position: "CCO / Co-Founder",
+  },
+  {
+    avatar: "",
+    name: "Daniel Bertram",
+    position: "CEO / Co-Founder",
+  },
+];
 
 const AboutPage = () => {
   // Animations
@@ -58,6 +72,14 @@ const AboutPage = () => {
     from: toFrom.from,
     to: toFrom.to,
     delay: 1050,
+    config: {
+      ...config,
+    },
+  });
+  const animation9 = useSpring({
+    from: toFrom.from,
+    to: toFrom.to,
+    delay: 1200,
     config: {
       ...config,
     },
@@ -118,6 +140,28 @@ const AboutPage = () => {
         Together we are able to help investors, collectors and traders perform
         their due diligence, discover opportunities and stay safe.
       </animated.p>
+
+      <div className="about__people">
+        <ol className="about__people-list">
+          {people.map((person) => {
+            return (
+              <animated.li
+                style={{ ...animation9 }}
+                key={person.name}
+                className="about__people-list-item"
+              >
+                <Avatar />
+                <p className="typography__display--5 typography__color--white">
+                  {person.name}
+                </p>
+                <p className="typography__display--6 typography__color--dark-high-emphasis typography__weight--300">
+                  {person.position}
+                </p>
+              </animated.li>
+            );
+          })}
+        </ol>
+      </div>
     </section>
   );
 };
