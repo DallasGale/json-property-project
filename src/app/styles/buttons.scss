@@ -27,3 +27,34 @@
   justify-content: flex-end;
   position: relative;
 }
+
+.button__twitter {
+  font-size: 20px;
+  font-weight: 700;
+  height: 50px;
+  display: flex;
+  color: $white;
+  padding: 12px 15px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $accent-blue;
+  width: 100%;
+  opacity: 1;
+  border-radius: 8px;
+  background-color: $accent-blue;
+  box-shadow: 0px 9px 46px 8px rgba(0, 0, 0, 0.06),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.1), 0px 12px 15px 0px rgba(0, 0, 0, 0.14);
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: left 16px top 14px;
+  &:hover {
+    background-color: $dark-bg-1;
+    color: $highlight;
+    border-color: $highlight;
+  }
+
+  @include respond-to(tablet-up) {
+    justify-content: flex-end;
+    width: 200px;
+  }
+}

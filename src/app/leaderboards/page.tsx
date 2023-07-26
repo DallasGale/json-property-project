@@ -11,13 +11,6 @@ async function getLeaderBoard1dData() {
   return res.json();
 }
 
-async function getDailySummaryData() {
-  const res = await fetch(endpoints.nft_ethereum_daily_summary);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
 async function getLeaderBoard7dData() {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["7d"]);
   if (!res.ok) {
@@ -49,20 +42,6 @@ async function getLeaderBoardAllData() {
   return res.json();
 }
 
-async function getWalletTimeframeSummary() {
-  const res = await fetch(endpoints.nft_ethereum_timeframe_wallet_summary);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
-async function getVolumeTimeframeSummary() {
-  const res = await fetch(endpoints.nft_ethereum_timeframe_volume_summary);
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
 const LeaderboardsPage: React.FC = async () => {
   // Leaderboard
   const leaderBoard1dData = await getLeaderBoard1dData();

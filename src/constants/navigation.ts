@@ -15,6 +15,11 @@ const navigation: NavigationTypes[] = [
     id: "leaderboards",
     link: "/leaderboards",
   },
+  {
+    name: "About Us",
+    id: "about-us",
+    link: "/about-us",
+  },
 ];
 
 export default navigation;
