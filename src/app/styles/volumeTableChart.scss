@@ -1,0 +1,20 @@
+.volume-table-chart {
+}
+
+.volume-table-chart__title {
+  border: 1px solid grey;
+  padding: 2px 8px;
+  border-radius: 5px;
+  width: auto;
+  &.green {
+    border-color: $accent-green;
+  }
+
+  &.red {
+    border-color: $accent-red;
+  }
+
+  &.yellow {
+    border-color: $accent-yellow;
+  }
+}

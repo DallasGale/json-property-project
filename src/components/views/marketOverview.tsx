@@ -489,7 +489,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       label: "Fake Volume (Inorganic)",
                       data: fakeVolumeDisabled ? [] : dailyFakeVolumeDataArray,
                       borderColor: "white",
-                      backgroundColor: "rgba(253, 126, 20, 1)",
+                      backgroundColor: "rgba(250, 82, 82, 1)",
                     },
                   ]}
                   legendLabels={[
@@ -504,7 +504,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       id: "loan-volume",
                     },
                     {
-                      color: "accent-orange",
+                      color: "accent-red",
                       name: "Fake Volume",
                       id: "fake-volume",
                     },
