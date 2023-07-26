@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import Header from "@components/header/header";
 import HeroBanner from "@components/heroBanner/heroBanner";
 import StatusBar from "@components/statusBar/statusBar";
+import Footer from "@components/footer/footer";
 
 // Fonts
 import "@fontsource/roboto";
@@ -18,11 +19,6 @@ import { Inter } from "next/font/google";
 import "./styles/app.scss";
 
 const inter = Inter({ subsets: ["latin"] });
-
-// export const metadata = {
-//   title: "🧌 DataBeast 🧌 - Powered by NFTdb",
-//   description: "Powered by NFTdb",
-// };
 
 export default function RootLayout({
   children,
@@ -47,6 +43,7 @@ export default function RootLayout({
             </section>
           </div>
         </main>
+        <Footer />
       </body>
     </html>
   );

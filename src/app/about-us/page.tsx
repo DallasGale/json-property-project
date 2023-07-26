@@ -1,4 +1,5 @@
 import TwitterIcon from "@assets/icons/twitter.svg";
+import Link from "next/link";
 const AboutPage = () => {
   return (
     <section className="about-page">
@@ -23,12 +24,13 @@ const AboutPage = () => {
           investment landscape, and we’ve gone to great lengths to ensure
           maximum accuracy of information.
         </p>
-        <button
+        <Link
+          href="https://twitter.com/nftdb_ai"
           className="button button__twitter"
           style={{ backgroundImage: `url(${TwitterIcon.src})` }}
         >
           Stay Informed
-        </button>
+        </Link>
       </div>
       <p className="typography__display--9 typography__color--highlight">
         We are engineers, creatives and problem solvers.
