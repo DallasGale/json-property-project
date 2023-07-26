@@ -12,6 +12,7 @@ import Body from "./body";
 
 // Constants
 import { ColumnLabels } from "@constants/top100table";
+import { config } from "@constants/animationSettings";
 
 interface DataTableProps {
   tableTitle?: string;
@@ -26,27 +27,17 @@ interface DataTableProps {
 
 const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
   // Animations
-  const springs1 = useSpring({
+  const animation1 = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
     delay: 900,
-    config: {
-      tension: 90,
-      friction: 16,
-      duration: 750,
-      easing: easings.easeInOutCubic,
-    },
+    config,
   });
-  const springs2 = useSpring({
+  const animation2 = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
     delay: 1150,
-    config: {
-      tension: 90,
-      friction: 16,
-      duration: 750,
-      easing: easings.easeInOutCubic,
-    },
+    config,
   });
 
   const [timeframe, setTimeframe] = useState(1);
@@ -85,7 +76,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
   return (
     <div className="data-table">
       <animated.div
-        style={{ ...springs1 }}
+        style={{ ...animation1 }}
         className="chart__grid chart__grid--one-col"
       >
         <div className="chart__chart-actions-lockup">
@@ -97,7 +88,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
         </div>
       </animated.div>
       <animated.table
-        style={{ ...springs2 }}
+        style={{ ...animation2 }}
         cellPadding={6}
         cellSpacing={0}
         width="100%"
