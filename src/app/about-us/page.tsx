@@ -28,6 +28,7 @@ const AboutPage = () => {
           href="https://twitter.com/nftdb_ai"
           className="button button__twitter"
           style={{ backgroundImage: `url(${TwitterIcon.src})` }}
+          target="_blank"
         >
           Stay Informed
         </Link>
