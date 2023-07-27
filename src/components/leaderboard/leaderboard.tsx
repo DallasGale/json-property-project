@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { truncateString } from "@utils/truncateString";
 import { useSpring, animated, easings } from "@react-spring/web";
-
 // Assets
 import CryptoGreenIcon from "@assets/icons/cryptoGreen.svg";
 import CryptoRedIcon from "@assets/icons/cryptoRed.svg";
@@ -22,11 +21,12 @@ import type {
 import DecimalFormatter from "@/utils/decimalFormatter";
 
 // Components
+import { HoverCard, Text, Group } from "@mantine/core";
 import FourColumnGrid from "@/grids/fourColumnGrid";
 import ChartDataToggles from "@components/toggles/chart_data";
 import { numFormatter } from "@/utils/numFormatter";
-import GoodToBadColors from "@/utils/goodToBadColors";
 import VolumeTableChart from "../charts/volumeTableChart";
+import Moment from "react-moment";
 
 interface LeaderBoardTypes {
   showTimeframeToggles?: boolean;
@@ -133,6 +133,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
     e.preventDefault();
     setTimeframe(value);
   }
+  const today = new Date();
 
   return (
     <>
@@ -158,17 +159,68 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
               title="True Volume"
               valueTitle="% Of Total"
               color="accent-green"
-              col1data={trueVolumeDataArray.map(({ name }) => {
-                return (
-                  <tr key={name}>
-                    <td height="30" valign="top">
-                      <p className="typography__display--2">
-                        {truncateString(name, 20)}
-                      </p>
-                    </td>
-                  </tr>
-                );
-              })}
+              col1data={trueVolumeDataArray.map(
+                ({
+                  name,
+                  total_real_day_volume,
+                  total_day_volume_fake,
+                  total_day_volume_loan,
+                  total_real_day_volume_percentage,
+                }) => {
+                  return (
+                    <tr key={name}>
+                      <td height="30" valign="top">
+                        <Group position="left">
+                          <HoverCard width={280} shadow="md">
+                            <HoverCard.Target>
+                              <p className="typography__display--2">
+                                {truncateString(name, 20)}
+                              </p>
+                              <Moment
+                                format="dddd, MMMM Do YYYY"
+                                subtract={{ days: 1, hours: 0 }}
+                                date={today.toDateString()}
+                              />
+                            </HoverCard.Target>
+                            <HoverCard.Dropdown className="dropdown">
+                              <div>
+                                <div className="dropdown__header">
+                                  <p className="typography__display--6 typography__color--white">
+                                    {name}
+                                  </p>
+                                </div>
+
+                                <div className="dropdown__body">
+                                  <p className="typography__display--2 typography__color--accent-green">
+                                    {numFormatter(
+                                      DecimalFormatter(total_real_day_volume)
+                                    )}
+                                  </p>
+                                  <p className="typography__display--2 typography__color--accent-red">
+                                    {numFormatter(
+                                      DecimalFormatter(total_day_volume_fake)
+                                    )}
+                                  </p>
+                                  <p className="typography__display--2 typography__color--accent-yellow">
+                                    {numFormatter(
+                                      DecimalFormatter(total_day_volume_fake)
+                                    )}
+                                  </p>
+                                  <p className="typography__display--2 typography__color--light-grey-1">
+                                    {numFormatter(
+                                      DecimalFormatter(total_day_volume_loan)
+                                    )}
+                                  </p>
+                                </div>
+                              </div>
+                            </HoverCard.Dropdown>
+                          </HoverCard>
+                        </Group>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
               col2data={trueVolumeDataArray.map(
                 ({ total_real_day_volume }, index) => {
                   return (
