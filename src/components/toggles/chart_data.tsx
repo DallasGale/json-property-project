@@ -19,7 +19,7 @@ const ChartDataToggles: React.FC<ChartDataTogglesProps> = ({
           }`}
           onClick={(e) => onClick(e, 1)}
         >
-          24H
+          1D
         </button>
         <button
           className={`button typography__label--1 ${
