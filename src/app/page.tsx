@@ -1,3 +1,4 @@
+import { cache } from "react";
 import endpoints from "@/api/endpoints";
 import months from "@/constants/months";
 import MarketOverview from "@views/marketOverview";
@@ -5,66 +6,67 @@ import { DatasetsType } from "./types";
 import orderBy from "lodash.orderby";
 
 // Fetching
-async function getLeaderBoard1dData() {
+export const getLeaderBoard1dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["1d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-}
+});
 
-async function getDailySummaryData() {
+export const getDailySummaryData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_daily_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-}
-async function getLeaderBoard7dData() {
+});
+
+export const getLeaderBoard7dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["7d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-}
-async function getLeaderBoard30dData() {
+});
+export const getLeaderBoard30dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-}
+});
 
-async function getLeaderBoard90dData() {
+export const getLeaderBoard90dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["90d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-}
+});
 
-async function getLeaderBoardAllData() {
+export const getLeaderBoardAllData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["all"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-}
+});
 
-async function getWalletTimeframeSummary() {
+export const getWalletTimeframeSummary = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_timeframe_wallet_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-}
-async function getVolumeTimeframeSummary() {
+});
+export const getVolumeTimeframeSummary = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_timeframe_volume_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-}
+});
 
 export const metadata = {
   title: "🧌 DataBeast 🧌 - Powered by NFTdb",

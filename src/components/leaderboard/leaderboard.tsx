@@ -7,7 +7,10 @@ import { truncateString } from "@utils/truncateString";
 import { useSpring, animated, easings } from "@react-spring/web";
 
 // Assets
-import CryptoIcon from "@assets/icons/crypto.svg";
+import CryptoGreenIcon from "@assets/icons/cryptoGreen.svg";
+import CryptoRedIcon from "@assets/icons/cryptoRed.svg";
+import CryptoYellowIcon from "@assets/icons/cryptoYellow.svg";
+import CryptoGreyIcon from "@assets/icons/cryptoGrey.svg";
 
 // Types
 import type {
@@ -23,6 +26,7 @@ import FourColumnGrid from "@/grids/fourColumnGrid";
 import ChartDataToggles from "@components/toggles/chart_data";
 import { numFormatter } from "@/utils/numFormatter";
 import GoodToBadColors from "@/utils/goodToBadColors";
+import VolumeTableChart from "../charts/volumeTableChart";
 
 interface LeaderBoardTypes {
   showTimeframeToggles?: boolean;
@@ -150,260 +154,194 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         gridHeading={!showTimeframeToggles ? "Leaderboards" : ""}
         column1={{
           content: (
-            <>
-              <p className="typography__label--4">True Volume</p>
-              <div
-                style={{ display: "flex", flexDirection: "row", width: "100%" }}
-              >
-                <div style={{ flex: "1", minWidth: "60%", maxWidth: "60%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {trueVolumeDataArray.map(({ name }) => {
-                      return (
-                        <tr key={name}>
-                          <td height="30" valign="top">
-                            <p className="typography__display--2 ">
-                              {truncateString(name, 20)}
-                            </p>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </table>
-                </div>
-                <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {trueVolumeDataArray.map(
-                      ({ total_real_day_volume }, index) => {
-                        return (
-                          <tr key={index + total_real_day_volume}>
-                            <td height="30" valign="top" align="right">
-                              <div className="leaderboard__data-cell">
-                                <Image src={CryptoIcon} alt="Crypto Icon" />
-                                <p className="typography__display--2">
-                                  {numFormatter(
-                                    DecimalFormatter(total_real_day_volume)
-                                  )}
-                                </p>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      }
-                    )}
-                  </table>
-                </div>
-                <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {trueVolumeDataArray.map(
-                      ({ total_real_day_volume_percentage }, index: number) => {
-                        return (
-                          <tr key={index + total_real_day_volume_percentage}>
-                            <td height="30" valign="top" align="right">
-                              {total_real_day_volume_percentage ? (
-                                <p
-                                  className="typography__display--2"
-                                  style={{
-                                    color: GoodToBadColors(
-                                      total_real_day_volume_percentage
-                                    ),
-                                  }}
-                                >
-                                  {DecimalFormatter(
-                                    total_real_day_volume_percentage
-                                  )}
-                                  %
-                                </p>
-                              ) : (
-                                <p className="typography__display--2 typography__color--grey">
-                                  --
-                                </p>
-                              )}
-                            </td>
-                          </tr>
-                        );
-                      }
-                    )}
-                  </table>
-                </div>
-              </div>
-            </>
+            <VolumeTableChart
+              title="True Volume"
+              valueTitle="True Vol."
+              color="accent-green"
+              col1data={trueVolumeDataArray.map(({ name }) => {
+                return (
+                  <tr key={name}>
+                    <td height="30" valign="top">
+                      <p className="typography__display--2">
+                        {truncateString(name, 20)}
+                      </p>
+                    </td>
+                  </tr>
+                );
+              })}
+              col2data={trueVolumeDataArray.map(
+                ({ total_real_day_volume }, index) => {
+                  return (
+                    <tr key={index + total_real_day_volume}>
+                      <td height="30" valign="top" align="right">
+                        <div className="leaderboard__data-cell">
+                          <Image src={CryptoGreenIcon} alt="Crypto Icon" />
+                          <p className="typography__display--2 typography__color--accent-green">
+                            {numFormatter(
+                              DecimalFormatter(total_real_day_volume)
+                            )}
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+              col3data={trueVolumeDataArray.map(
+                ({ total_real_day_volume_percentage }, index: number) => {
+                  return (
+                    <tr key={index + total_real_day_volume_percentage}>
+                      <td height="30" valign="top" align="right">
+                        {total_real_day_volume_percentage ? (
+                          <p className="typography__display--2">
+                            {DecimalFormatter(total_real_day_volume_percentage)}
+                            %
+                          </p>
+                        ) : (
+                          <p className="typography__display--2 typography__color--grey">
+                            --
+                          </p>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+            />
           ),
         }}
         column2={{
           content: (
-            <>
-              <p className="typography__label--4">Fake Volume</p>
-              <div
-                style={{ display: "flex", flexDirection: "row", width: "100%" }}
-              >
-                <div style={{ flex: "1", minWidth: "60%", maxWidth: "60%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {fakeVolumeDataArray.map(({ name }) => {
-                      return (
-                        <tr key={name}>
-                          <td height="30" valign="top">
-                            <p className="typography__display--2">
-                              {truncateString(name, 20)}
-                            </p>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </table>
-                </div>
-                <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {fakeVolumeDataArray.map(
-                      ({ total_day_volume_fake }, index: number) => {
-                        return (
-                          <tr key={index + total_day_volume_fake}>
-                            <td height="30" valign="top" align="right">
-                              <div className="leaderboard__data-cell">
-                                <Image src={CryptoIcon} alt="Crypto Icon" />
-                                <p className="typography__display--2">
-                                  {numFormatter(
-                                    DecimalFormatter(total_day_volume_fake)
-                                  )}
-                                </p>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      }
-                    )}
-                  </table>
-                </div>
-                <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {fakeVolumeDataArray.map(
-                      ({ total_fake_day_volume_percentage }, index: number) => {
-                        return (
-                          <tr key={index + total_fake_day_volume_percentage}>
-                            <td height="30" valign="top" align="right">
-                              {total_fake_day_volume_percentage ? (
-                                <p
-                                  className="typography__display--2"
-                                  style={{
-                                    color: GoodToBadColors(
-                                      total_fake_day_volume_percentage
-                                    ),
-                                  }}
-                                >
-                                  {DecimalFormatter(
-                                    total_fake_day_volume_percentage
-                                  )}
-                                  %
-                                </p>
-                              ) : (
-                                <p className="typography__display--2 typography__color--grey">
-                                  --
-                                </p>
-                              )}
-                            </td>
-                          </tr>
-                        );
-                      }
-                    )}
-                  </table>
-                </div>
-              </div>
-            </>
+            <VolumeTableChart
+              title="Fake Volume"
+              valueTitle="Fake Vol."
+              color="accent-red"
+              col1data={fakeVolumeDataArray.map(({ name }) => {
+                return (
+                  <tr key={name}>
+                    <td height="30" valign="top">
+                      <p className="typography__display--2">
+                        {truncateString(name, 20)}
+                      </p>
+                    </td>
+                  </tr>
+                );
+              })}
+              col2data={fakeVolumeDataArray.map(
+                ({ total_day_volume_fake }, index: number) => {
+                  return (
+                    <tr key={index + total_day_volume_fake}>
+                      <td height="30" valign="top" align="right">
+                        <div className="leaderboard__data-cell">
+                          <Image src={CryptoRedIcon} alt="Crypto Icon" />
+                          <p className="typography__display--2 typography__color--accent-red">
+                            {numFormatter(
+                              DecimalFormatter(total_day_volume_fake)
+                            )}
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+              col3data={fakeVolumeDataArray.map(
+                ({ total_fake_day_volume_percentage }, index: number) => {
+                  return (
+                    <tr key={index + total_fake_day_volume_percentage}>
+                      <td height="30" valign="top" align="right">
+                        {total_fake_day_volume_percentage ? (
+                          <p className="typography__display--2">
+                            {DecimalFormatter(total_fake_day_volume_percentage)}
+                            %
+                          </p>
+                        ) : (
+                          <p className="typography__display--2 typography__color--grey">
+                            --
+                          </p>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+            />
           ),
         }}
         column3={{
           content: (
-            <>
-              <p className="typography__label--4">Loans</p>
-              <div
-                style={{ display: "flex", flexDirection: "row", width: "100%" }}
-              >
-                <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {loanVolumeDataArray.map(({ name }) => {
-                      return (
-                        <tr key={name}>
-                          <td height="30" valign="top">
-                            <p className="typography__display--2">
-                              {truncateString(name, 20)}
-                            </p>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </table>
-                </div>
-                <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {loanVolumeDataArray.map(
-                      ({ total_day_volume_loan }, index: number) => {
-                        return (
-                          <tr key={index + total_day_volume_loan}>
-                            <td height="30" valign="top" align="right">
-                              <div className="leaderboard__data-cell">
-                                <Image src={CryptoIcon} alt="Crypto Icon" />
-                                <p className="typography__display--2">
-                                  {numFormatter(
-                                    DecimalFormatter(total_day_volume_loan)
-                                  )}
-                                </p>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      }
-                    )}
-                  </table>
-                </div>
-              </div>
-            </>
+            <VolumeTableChart
+              title="Loan Volume"
+              valueTitle="New Loans"
+              color="accent-yellow"
+              col1data={loanVolumeDataArray.map(({ name }) => {
+                return (
+                  <tr key={name}>
+                    <td height="30" valign="top">
+                      <p className="typography__display--2">
+                        {truncateString(name, 20)}
+                      </p>
+                    </td>
+                  </tr>
+                );
+              })}
+              col2data={loanVolumeDataArray.map(
+                ({ total_day_volume_loan }, index: number) => {
+                  return (
+                    <tr key={index + total_day_volume_loan}>
+                      <td height="30" valign="top" align="right">
+                        <div className="leaderboard__data-cell">
+                          <Image src={CryptoYellowIcon} alt="Crypto Icon" />
+                          <p className="typography__display--2 typography__color--accent-yellow">
+                            {numFormatter(
+                              DecimalFormatter(total_day_volume_loan)
+                            )}
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+            />
           ),
         }}
         column4={{
           content: (
-            <>
-              <p className="typography__label--4">Revenue</p>
-              <div
-                style={{ display: "flex", flexDirection: "row", width: "100%" }}
-              >
-                <div style={{ flex: "1", minWidth: "75%", maxWidth: "75%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {revenueDataArray.map(({ name }) => {
-                      return (
-                        <tr key={name}>
-                          <td height="30" valign="top">
-                            <p className="typography__display--2">
-                              {truncateString(name, 40)}
-                            </p>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </table>
-                </div>
-                <div style={{ flex: "1", minWidth: "25%", maxWidth: "25%" }}>
-                  <table cellPadding={0} cellSpacing={0} width="100%">
-                    {revenueDataArray.map(
-                      ({ total_day_total_royalty }, index: number) => {
-                        return (
-                          <tr key={index + total_day_total_royalty}>
-                            <td height="30" valign="top" align="right">
-                              <div className="leaderboard__data-cell">
-                                <Image src={CryptoIcon} alt="Crypto Icon" />
-                                <p className="typography__display--2">
-                                  {numFormatter(
-                                    DecimalFormatter(total_day_total_royalty)
-                                  )}
-                                </p>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      }
-                    )}
-                  </table>
-                </div>
-              </div>
-            </>
+            <VolumeTableChart
+              title="Revenue Volume"
+              valueTitle="Earnings"
+              color="light-grey-1"
+              col1data={revenueDataArray.map(({ name }) => {
+                return (
+                  <tr key={name}>
+                    <td height="30" valign="top">
+                      <p className="typography__display--2">
+                        {truncateString(name, 25)}
+                      </p>
+                    </td>
+                  </tr>
+                );
+              })}
+              col2data={revenueDataArray.map(
+                ({ total_day_total_royalty }, index: number) => {
+                  return (
+                    <tr key={index + total_day_total_royalty}>
+                      <td height="30" valign="top" align="right">
+                        <div className="leaderboard__data-cell">
+                          <Image src={CryptoGreyIcon} alt="Crypto Icon" />
+                          <p className="typography__display--2">
+                            {numFormatter(
+                              DecimalFormatter(total_day_total_royalty)
+                            )}
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+            />
           ),
         }}
       />
