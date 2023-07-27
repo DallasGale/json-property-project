@@ -6,7 +6,7 @@ import { DatasetsType } from "./types";
 import orderBy from "lodash.orderby";
 
 // Fetching
-export const getLeaderBoard1dData = cache(async () => {
+const getLeaderBoard1dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["1d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -14,7 +14,7 @@ export const getLeaderBoard1dData = cache(async () => {
   return res.json();
 });
 
-export const getDailySummaryData = cache(async () => {
+const getDailySummaryData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_daily_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -22,14 +22,14 @@ export const getDailySummaryData = cache(async () => {
   return res.json();
 });
 
-export const getLeaderBoard7dData = cache(async () => {
+const getLeaderBoard7dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["7d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
 });
-export const getLeaderBoard30dData = cache(async () => {
+const getLeaderBoard30dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -37,7 +37,7 @@ export const getLeaderBoard30dData = cache(async () => {
   return res.json();
 });
 
-export const getLeaderBoard90dData = cache(async () => {
+const getLeaderBoard90dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["90d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -45,7 +45,7 @@ export const getLeaderBoard90dData = cache(async () => {
   return res.json();
 });
 
-export const getLeaderBoardAllData = cache(async () => {
+const getLeaderBoardAllData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["all"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -53,14 +53,14 @@ export const getLeaderBoardAllData = cache(async () => {
   return res.json();
 });
 
-export const getWalletTimeframeSummary = cache(async () => {
+const getWalletTimeframeSummary = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_timeframe_wallet_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
 });
-export const getVolumeTimeframeSummary = cache(async () => {
+const getVolumeTimeframeSummary = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_timeframe_volume_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");

@@ -4,7 +4,7 @@ import orderBy from "lodash.orderby";
 import Leaderboards from "@components/views/leaderboards";
 
 // Fetching
-export const getLeaderBoard1dData = cache(async () => {
+const getLeaderBoard1dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["1d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -12,7 +12,7 @@ export const getLeaderBoard1dData = cache(async () => {
   return res.json();
 });
 
-export const getLeaderBoard7dData = cache(async () => {
+const getLeaderBoard7dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["7d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -20,7 +20,7 @@ export const getLeaderBoard7dData = cache(async () => {
   return res.json();
 });
 
-export const getLeaderBoard30dData = cache(async () => {
+const getLeaderBoard30dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -28,7 +28,7 @@ export const getLeaderBoard30dData = cache(async () => {
   return res.json();
 });
 
-export const getLeaderBoard90dData = cache(async () => {
+const getLeaderBoard90dData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["90d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -36,7 +36,7 @@ export const getLeaderBoard90dData = cache(async () => {
   return res.json();
 });
 
-export const getLeaderBoardAllData = cache(async () => {
+const getLeaderBoardAllData = cache(async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["all"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
