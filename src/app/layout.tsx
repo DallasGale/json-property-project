@@ -1,12 +1,5 @@
-"use client";
-
-// Hooks
-import { usePathname } from "next/navigation";
-
 // Components
 import Header from "@components/header/header";
-import HeroBanner from "@components/heroBanner/heroBanner";
-import StatusBar from "@components/statusBar/statusBar";
 import Footer from "@components/footer/footer";
 
 // Fonts
@@ -25,22 +18,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const activePathname = usePathname();
   return (
     <html lang="en">
       <body className={inter.className}>
         <Header />
         <main className="main-container">
           <div className="content">
-            <section className="wrapper">
-              {activePathname !== "/about-us" && (
-                <>
-                  <HeroBanner />
-                  <StatusBar />
-                </>
-              )}
-              {children}
-            </section>
+            <section className="wrapper">{children}</section>
           </div>
         </main>
         <Footer />
