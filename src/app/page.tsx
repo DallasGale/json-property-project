@@ -70,10 +70,6 @@ const getVolumeTimeframeSummary = cache(async () => {
   return res.json();
 });
 
-export const metadata = {
-  title: "🧌 DataBeast 🧌 - Powered by NFTdb",
-  description: "Powered by NFTdb",
-};
 const MarketOverviewPage: React.FC = async () => {
   // Daily
   const dailySummaryData = await getDailySummaryData();

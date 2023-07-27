@@ -12,7 +12,10 @@ import { Inter } from "next/font/google";
 import "./styles/app.scss";
 
 const inter = Inter({ subsets: ["latin"] });
-
+export const metadata = {
+  title: "🧌 DataBeast 🧌 - Powered by NFTdb",
+  description: "Powered by NFTdb",
+};
 export default function RootLayout({
   children,
 }: {
