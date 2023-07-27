@@ -156,7 +156,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               title="True Volume"
-              valueTitle="True Vol."
+              valueTitle="% Of Total"
               color="accent-green"
               col1data={trueVolumeDataArray.map(({ name }) => {
                 return (
@@ -214,7 +214,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               title="Fake Volume"
-              valueTitle="Fake Vol."
+              valueTitle="% Of Total"
               color="accent-red"
               col1data={fakeVolumeDataArray.map(({ name }) => {
                 return (
