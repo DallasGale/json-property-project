@@ -23,11 +23,11 @@ const Head: React.FC<HeadProps> = ({ labels, active }) => {
           >
             {hasChevronDown ? (
               <div className="data-table__cell-content">
-                <Image
+                {/* <Image
                   src={ChevronDown}
                   alt="Crypto Icon"
                   className="data-table__icon data-table__icon--chevron"
-                />
+                /> */}
                 <p
                   className={`typography__display--2 ${
                     active === id
