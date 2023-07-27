@@ -34,7 +34,7 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({
               backgroundColor: [
                 "rgba(64, 192, 87, 1)",
                 "rgba(250, 176, 5, 1)",
-                "rgba(253, 126, 20, 1)",
+                "rgba(250, 82, 82, 1)",
               ],
 
               borderColor: "transparent",

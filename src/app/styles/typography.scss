@@ -184,7 +184,7 @@ h4 {
 .typography__color--black {
   color: $black;
 }
-.typography__color--green {
+.typography__color--accent-green {
   color: $accent-green;
 }
 
@@ -192,14 +192,20 @@ h4 {
   color: white;
 }
 
-.typography__color--red {
+.typography__color--accent-red {
   color: $accent-red;
+}
+.typography__color--accent-yellow {
+  color: $accent-yellow;
 }
 
 .typography__color--highlight {
   color: $highlight;
 }
 
+.typography__color--light-grey-1 {
+  color: $light-grey-1;
+}
 .typography__color--dark-bg-2 {
   color: $dark-bg-2;
 }

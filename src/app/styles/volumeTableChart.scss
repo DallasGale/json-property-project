@@ -1,20 +1,31 @@
 .volume-table-chart {
 }
+.volume-table-chart__header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
 .volume-table-chart__title {
   border: 1px solid grey;
-  padding: 2px 8px;
+  padding: 4px 8px;
   border-radius: 5px;
   width: auto;
-  &.green {
+  display: inline-flex;
+  &.accent-green {
     border-color: $accent-green;
   }
 
-  &.red {
+  &.accent-red {
     border-color: $accent-red;
   }
 
-  &.yellow {
+  &.accent-yellow {
     border-color: $accent-yellow;
+  }
+  &.light-grey-1 {
+    border-color: $light-grey-1;
   }
 }

@@ -7,7 +7,10 @@ import { truncateString } from "@utils/truncateString";
 import { useSpring, animated, easings } from "@react-spring/web";
 
 // Assets
-import CryptoIcon from "@assets/icons/crypto.svg";
+import CryptoGreenIcon from "@assets/icons/cryptoGreen.svg";
+import CryptoRedIcon from "@assets/icons/cryptoRed.svg";
+import CryptoYellowIcon from "@assets/icons/cryptoYellow.svg";
+import CryptoGreyIcon from "@assets/icons/cryptoGrey.svg";
 
 // Types
 import type {
@@ -153,7 +156,8 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               title="True Volume"
-              pillTheme="green"
+              valueTitle="True Vol."
+              color="accent-green"
               col1data={trueVolumeDataArray.map(({ name }) => {
                 return (
                   <tr key={name}>
@@ -171,8 +175,8 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                     <tr key={index + total_real_day_volume}>
                       <td height="30" valign="top" align="right">
                         <div className="leaderboard__data-cell">
-                          <Image src={CryptoIcon} alt="Crypto Icon" />
-                          <p className="typography__display--2">
+                          <Image src={CryptoGreenIcon} alt="Crypto Icon" />
+                          <p className="typography__display--2 typography__color--accent-green">
                             {numFormatter(
                               DecimalFormatter(total_real_day_volume)
                             )}
@@ -189,14 +193,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                     <tr key={index + total_real_day_volume_percentage}>
                       <td height="30" valign="top" align="right">
                         {total_real_day_volume_percentage ? (
-                          <p
-                            className="typography__display--2"
-                            style={{
-                              color: GoodToBadColors(
-                                total_real_day_volume_percentage
-                              ),
-                            }}
-                          >
+                          <p className="typography__display--2">
                             {DecimalFormatter(total_real_day_volume_percentage)}
                             %
                           </p>
@@ -217,7 +214,8 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               title="Fake Volume"
-              pillTheme="red"
+              valueTitle="Fake Vol."
+              color="accent-red"
               col1data={fakeVolumeDataArray.map(({ name }) => {
                 return (
                   <tr key={name}>
@@ -235,8 +233,8 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                     <tr key={index + total_day_volume_fake}>
                       <td height="30" valign="top" align="right">
                         <div className="leaderboard__data-cell">
-                          <Image src={CryptoIcon} alt="Crypto Icon" />
-                          <p className="typography__display--2">
+                          <Image src={CryptoRedIcon} alt="Crypto Icon" />
+                          <p className="typography__display--2 typography__color--accent-red">
                             {numFormatter(
                               DecimalFormatter(total_day_volume_fake)
                             )}
@@ -253,14 +251,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                     <tr key={index + total_fake_day_volume_percentage}>
                       <td height="30" valign="top" align="right">
                         {total_fake_day_volume_percentage ? (
-                          <p
-                            className="typography__display--2"
-                            style={{
-                              color: GoodToBadColors(
-                                total_fake_day_volume_percentage
-                              ),
-                            }}
-                          >
+                          <p className="typography__display--2">
                             {DecimalFormatter(total_fake_day_volume_percentage)}
                             %
                           </p>
@@ -281,7 +272,8 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               title="Loan Volume"
-              pillTheme="yellow"
+              valueTitle="New Loans"
+              color="accent-yellow"
               col1data={loanVolumeDataArray.map(({ name }) => {
                 return (
                   <tr key={name}>
@@ -299,8 +291,8 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                     <tr key={index + total_day_volume_loan}>
                       <td height="30" valign="top" align="right">
                         <div className="leaderboard__data-cell">
-                          <Image src={CryptoIcon} alt="Crypto Icon" />
-                          <p className="typography__display--2">
+                          <Image src={CryptoYellowIcon} alt="Crypto Icon" />
+                          <p className="typography__display--2 typography__color--accent-yellow">
                             {numFormatter(
                               DecimalFormatter(total_day_volume_loan)
                             )}
@@ -318,13 +310,14 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               title="Revenue Volume"
-              pillTheme="grey"
+              valueTitle="Earnings"
+              color="light-grey-1"
               col1data={revenueDataArray.map(({ name }) => {
                 return (
                   <tr key={name}>
                     <td height="30" valign="top">
                       <p className="typography__display--2">
-                        {truncateString(name, 40)}
+                        {truncateString(name, 25)}
                       </p>
                     </td>
                   </tr>
@@ -336,7 +329,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                     <tr key={index + total_day_total_royalty}>
                       <td height="30" valign="top" align="right">
                         <div className="leaderboard__data-cell">
-                          <Image src={CryptoIcon} alt="Crypto Icon" />
+                          <Image src={CryptoGreyIcon} alt="Crypto Icon" />
                           <p className="typography__display--2">
                             {numFormatter(
                               DecimalFormatter(total_day_total_royalty)

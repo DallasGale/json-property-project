@@ -1,6 +1,7 @@
 interface TableChartProps {
   title: string;
-  pillTheme: string;
+  valueTitle: string;
+  color: string;
   col1data: React.ReactNode;
   col2data: React.ReactNode;
   col3data?: React.ReactNode;
@@ -8,29 +9,48 @@ interface TableChartProps {
 
 const VolumeTableChart: React.FC<TableChartProps> = ({
   title,
-  pillTheme,
+  valueTitle,
+  color,
   col1data,
   col2data,
   col3data,
 }) => {
   return (
     <div className="volume-table-chart">
-      <div className={`volume-table-chart__title ${pillTheme}`}>
-        <p className="typography__label--4 typography__weight--700">{title}</p>
+      <div className="volume-table-chart__header">
+        <div className={`volume-table-chart__title ${color}`}>
+          <p
+            className={`typography__display--4 typography__weight--700 typography__color--${color}`}
+          >
+            {title}
+          </p>
+        </div>
+        <div className="volume-table-chart__value-title">
+          <p className="typography__label--4 typography__color--dark-medium-emphasis typography__weight--300">
+            {valueTitle}
+          </p>
+        </div>
       </div>
-      <div style={{ display: "flex", flexDirection: "row", width: "100%" }}>
-        <div style={{ flex: "1", minWidth: "60%", maxWidth: "60%" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ flex: "1", minWidth: "66%", maxWidth: "66%" }}>
           <table cellPadding={0} cellSpacing={0} width="100%">
             {col1data}
           </table>
         </div>
-        <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
+        <div style={{ flex: "1", minWidth: "18%", maxWidth: "18%" }}>
           <table cellPadding={0} cellSpacing={0} width="100%">
             {col2data}
           </table>
         </div>
         {col3data && (
-          <div style={{ flex: "1", minWidth: "20%", maxWidth: "20%" }}>
+          <div style={{ flex: "1", minWidth: "18%", maxWidth: "18%" }}>
             <table cellPadding={0} cellSpacing={0} width="100%">
               {col3data}
             </table>

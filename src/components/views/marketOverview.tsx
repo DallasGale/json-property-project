@@ -635,7 +635,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                           id: "loan-volume-trend",
                         },
                         {
-                          color: "accent-orange",
+                          color: "accent-red",
                           name: "Fake Volume Trend",
                           id: "fake-volume-trend",
                         },
@@ -665,11 +665,11 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                                 fakeVolumeMovingAverage.length - 90
                               ),
                           borderColor: fakeVolumeDisabled
-                            ? "rgba(253, 126, 20, 0)"
-                            : "rgba(253, 126, 20, 1)",
+                            ? "rgba(250, 82, 82, 0)"
+                            : "rgba(250, 82, 82, 1)",
                           backgroundColor: fakeVolumeDisabled
-                            ? "rgba(253, 126, 20, 0)"
-                            : "rgba(253, 126, 20, 1)",
+                            ? "rgba(250, 82, 82, 0)"
+                            : "rgba(250, 82, 82, 1)",
                           pointRadius: 0,
                           borderWidth: 3,
                         },
