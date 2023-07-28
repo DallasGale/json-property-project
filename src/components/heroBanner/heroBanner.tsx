@@ -52,7 +52,7 @@ const HeroBanner = () => {
           </animated.h2>
           <animated.h3
             style={{ ...springs2 }}
-            className="typography__display--1"
+            className="typography__display--1 hero-banner__h3"
           >
             Understand the Ethereum NFT Market, without the manipulation.
           </animated.h3>

@@ -32,13 +32,9 @@ const UnderlineSvg = () => {
         />
       </svg>
       <animated.div
+        className="hero-banner__underline-cloak"
         style={{
           ...springs1,
-          backgroundColor: "rgb(20, 21, 23)",
-          top: 21,
-          width: "100%",
-          position: "absolute",
-          height: 30,
         }}
       />
     </div>
