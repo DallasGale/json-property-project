@@ -27,8 +27,16 @@ import ChartDataToggles from "@components/toggles/chart_data";
 import { numFormatter } from "@/utils/numFormatter";
 import VolumeTableChart from "../charts/volumeTableChart";
 import Moment from "react-moment";
+import Legend from "@components/dataViz/legend/legend";
+import ProgressRing from "../charts/progressRing";
+import { TradersTimeframeTypes } from "../traders/types";
 
 interface LeaderBoardTypes {
+  traders: {
+    trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  };
   showTimeframeToggles?: boolean;
   leaderboardData: {
     trueVolume: {
@@ -135,6 +143,14 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   }
   const today = new Date();
 
+  // Doughnut
+  const [trueVolumeDoughnutSummararyData, setTrueVolumeDoughnutSummararyData] =
+    useState(traders.trueVolumeTimeframeSummaryData.oneDay);
+  const [fakeVolumeDoughnutSummararyData, setFakeVolumeDoughnutSummararyData] =
+    useState(traders.fakeVolumeTimeframeSummaryData.oneDay);
+  const [loanVolumeDoughnutSummararyData, setLoanVolumeDoughnutSummararyData] =
+    useState(traders.loanVolumeTimeframeSummaryData.oneDay);
+
   return (
     <>
       {showTimeframeToggles && (
@@ -165,22 +181,21 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                   total_real_day_volume,
                   total_day_volume_fake,
                   total_day_volume_loan,
-                  total_real_day_volume_percentage,
                 }) => {
                   return (
                     <tr key={name}>
                       <td height="30" valign="top">
                         <Group position="left">
-                          <HoverCard width={280} shadow="md">
+                          <HoverCard
+                            width={320}
+                            shadow="md"
+                            openDelay={300}
+                            position="top"
+                          >
                             <HoverCard.Target>
                               <p className="typography__display--2">
                                 {truncateString(name, 20)}
                               </p>
-                              <Moment
-                                format="dddd, MMMM Do YYYY"
-                                subtract={{ days: 1, hours: 0 }}
-                                date={today.toDateString()}
-                              />
                             </HoverCard.Target>
                             <HoverCard.Dropdown className="dropdown">
                               <div>
@@ -188,29 +203,79 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                                   <p className="typography__display--6 typography__color--white">
                                     {name}
                                   </p>
+                                  <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                                    <Moment
+                                      format="ddd, MMMM Do"
+                                      subtract={{ days: 1, hours: 0 }}
+                                      date={today.toDateString()}
+                                    />
+                                  </p>
                                 </div>
 
                                 <div className="dropdown__body">
-                                  <p className="typography__display--2 typography__color--accent-green">
-                                    {numFormatter(
-                                      DecimalFormatter(total_real_day_volume)
-                                    )}
-                                  </p>
-                                  <p className="typography__display--2 typography__color--accent-red">
-                                    {numFormatter(
-                                      DecimalFormatter(total_day_volume_fake)
-                                    )}
-                                  </p>
-                                  <p className="typography__display--2 typography__color--accent-yellow">
-                                    {numFormatter(
-                                      DecimalFormatter(total_day_volume_fake)
-                                    )}
-                                  </p>
-                                  <p className="typography__display--2 typography__color--light-grey-1">
-                                    {numFormatter(
-                                      DecimalFormatter(total_day_volume_loan)
-                                    )}
-                                  </p>
+                                  <div className="dropdown__body-data">
+                                    <div>
+                                      <ProgressRing
+                                        trueVolume={
+                                          trueVolumeDoughnutSummararyData
+                                        }
+                                        fakeVolume={
+                                          fakeVolumeDoughnutSummararyData
+                                        }
+                                        loanVolume={
+                                          loanVolumeDoughnutSummararyData
+                                        }
+                                        percentage="50%"
+                                      />
+                                    </div>
+                                    <Legend
+                                      legendFormat="vertical"
+                                      onClick={() => false}
+                                      labels={[
+                                        {
+                                          color: "accent-green",
+                                          name: "True Volume",
+                                          id: "",
+                                          value: 0,
+                                        },
+                                        {
+                                          color: "accent-red",
+                                          name: "Fake Volume",
+                                          id: "",
+                                          value: 0,
+                                        },
+                                        {
+                                          color: "accent-yellow",
+                                          name: "Loans",
+                                          id: "",
+                                          value: 0,
+                                        },
+                                      ]}
+                                    />
+                                    <div>
+                                      <p className="typography__display--2 typography__color--accent-green">
+                                        {numFormatter(
+                                          DecimalFormatter(
+                                            total_real_day_volume
+                                          )
+                                        )}
+                                      </p>
+                                      <p className="typography__display--2 typography__color--accent-red">
+                                        {numFormatter(
+                                          DecimalFormatter(
+                                            total_day_volume_fake
+                                          )
+                                        )}
+                                      </p>
+                                      <p className="typography__display--2 typography__color--accent-yellow">
+                                        {numFormatter(
+                                          DecimalFormatter(
+                                            total_day_volume_fake
+                                          )
+                                        )}
+                                      </p>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </HoverCard.Dropdown>

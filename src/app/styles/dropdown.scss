@@ -3,3 +3,21 @@
   border-color: $dark-bg-3;
   border-radius: 8px;
 }
+
+.dropdown__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown__body {
+  width: 100%;
+  display: flex;
+}
+.dropdown__body-data {
+  display: grid;
+  flex-direction: row;
+  min-width: 100%;
+  grid-template-columns: 20% 40% 40%;
+}
