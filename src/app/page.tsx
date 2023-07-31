@@ -4,8 +4,8 @@ import months from "@/constants/months";
 import MarketOverview from "@views/marketOverview";
 import { DatasetsType } from "./types";
 import orderBy from "lodash.orderby";
-import HeroBanner from "@/components/heroBanner/heroBanner";
-import StatusBar from "@/components/statusBar/statusBar";
+import HeroBanner from "@components/heroBanner/heroBanner";
+import StatusBar from "@components/statusBar/statusBar";
 
 // Fetching
 const getLeaderBoard1dData = cache(async () => {

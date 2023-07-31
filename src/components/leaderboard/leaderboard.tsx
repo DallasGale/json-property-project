@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { truncateString } from "@utils/truncateString";
 import { useSpring, animated, easings } from "@react-spring/web";
+import { numFormatter } from "@utils/numFormatter";
+import DecimalFormatter from "@utils/decimalFormatter";
+
 // Assets
 import CryptoGreenIcon from "@assets/icons/cryptoGreen.svg";
 import CryptoRedIcon from "@assets/icons/cryptoRed.svg";
@@ -18,18 +21,14 @@ import type {
   LoanVolumeTypes,
   RoyaltyTypes,
 } from "@app/types";
-import DecimalFormatter from "@/utils/decimalFormatter";
+import { TradersTimeframeTypes } from "../traders/types";
 
 // Components
-import { HoverCard, Text, Group } from "@mantine/core";
-import FourColumnGrid from "@/grids/fourColumnGrid";
 import ChartDataToggles from "@components/toggles/chart_data";
-import { numFormatter } from "@/utils/numFormatter";
-import VolumeTableChart from "../charts/volumeTableChart";
-import Moment from "react-moment";
-import Legend from "@components/dataViz/legend/legend";
-import ProgressRing from "../charts/progressRing";
-import { TradersTimeframeTypes } from "../traders/types";
+import { HoverCard, Group } from "@mantine/core";
+import FourColumnGrid from "@/grids/fourColumnGrid";
+import VolumeTableChart from "@components/charts/volumeTableChart";
+import TooltipBody from "@components/leaderboard/tooltipBody/tooltipBody";
 
 interface LeaderBoardTypes {
   traders: {
@@ -73,6 +72,7 @@ interface LeaderBoardTypes {
 const Leaderboard: React.FC<LeaderBoardTypes> = ({
   showTimeframeToggles = false,
   leaderboardData,
+  traders,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -178,9 +178,14 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
               col1data={trueVolumeDataArray.map(
                 ({
                   name,
+                  total_raw_day_volume,
                   total_real_day_volume,
                   total_day_volume_fake,
                   total_day_volume_loan,
+                  total_real_day_volume_percentage,
+                  total_fake_day_volume_percentage,
+                  total_loan_day_volume_percentage,
+                  total_day_total_royalty,
                 }) => {
                   return (
                     <tr key={name}>
@@ -198,86 +203,27 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                               </p>
                             </HoverCard.Target>
                             <HoverCard.Dropdown className="dropdown">
-                              <div>
-                                <div className="dropdown__header">
-                                  <p className="typography__display--6 typography__color--white">
-                                    {name}
-                                  </p>
-                                  <p className="typography__display--2 typography__color--dark-medium-emphasis">
-                                    <Moment
-                                      format="ddd, MMMM Do"
-                                      subtract={{ days: 1, hours: 0 }}
-                                      date={today.toDateString()}
-                                    />
-                                  </p>
-                                </div>
-
-                                <div className="dropdown__body">
-                                  <div className="dropdown__body-data">
-                                    <div>
-                                      <ProgressRing
-                                        trueVolume={
-                                          trueVolumeDoughnutSummararyData
-                                        }
-                                        fakeVolume={
-                                          fakeVolumeDoughnutSummararyData
-                                        }
-                                        loanVolume={
-                                          loanVolumeDoughnutSummararyData
-                                        }
-                                        percentage="50%"
-                                      />
-                                    </div>
-                                    <Legend
-                                      legendFormat="vertical"
-                                      onClick={() => false}
-                                      labels={[
-                                        {
-                                          color: "accent-green",
-                                          name: "True Volume",
-                                          id: "",
-                                          value: 0,
-                                        },
-                                        {
-                                          color: "accent-red",
-                                          name: "Fake Volume",
-                                          id: "",
-                                          value: 0,
-                                        },
-                                        {
-                                          color: "accent-yellow",
-                                          name: "Loans",
-                                          id: "",
-                                          value: 0,
-                                        },
-                                      ]}
-                                    />
-                                    <div>
-                                      <p className="typography__display--2 typography__color--accent-green">
-                                        {numFormatter(
-                                          DecimalFormatter(
-                                            total_real_day_volume
-                                          )
-                                        )}
-                                      </p>
-                                      <p className="typography__display--2 typography__color--accent-red">
-                                        {numFormatter(
-                                          DecimalFormatter(
-                                            total_day_volume_fake
-                                          )
-                                        )}
-                                      </p>
-                                      <p className="typography__display--2 typography__color--accent-yellow">
-                                        {numFormatter(
-                                          DecimalFormatter(
-                                            total_day_volume_fake
-                                          )
-                                        )}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                              <TooltipBody
+                                name={name}
+                                today={today.toDateString()}
+                                trueVolume={trueVolumeDoughnutSummararyData}
+                                fakeVolume={fakeVolumeDoughnutSummararyData}
+                                loanVolume={loanVolumeDoughnutSummararyData}
+                                totalVolume={total_raw_day_volume}
+                                totalRevenue={total_day_total_royalty}
+                                totalRealDayVolume={total_real_day_volume}
+                                totalFakeVolume={total_day_volume_fake}
+                                totalLoanVolume={total_day_volume_loan}
+                                totalRealDayVolumePercentage={
+                                  total_real_day_volume_percentage
+                                }
+                                totalFakeVolumePercentage={
+                                  total_fake_day_volume_percentage
+                                }
+                                totalLoanVolumePercentage={
+                                  total_loan_day_volume_percentage
+                                }
+                              />
                             </HoverCard.Dropdown>
                           </HoverCard>
                         </Group>

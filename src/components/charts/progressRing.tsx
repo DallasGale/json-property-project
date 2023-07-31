@@ -1,20 +1,22 @@
 import { Doughnut } from "react-chartjs-2";
-// import goodToBadColors from "@/utils/goodToBadColors";
+// import goodToBadColors from "@utils/goodToBadColors";
 
 interface ProgressRingTypes {
   trueVolume: number[];
   loanVolume: number[];
   fakeVolume: number[];
-  percentage: string;
+  percentage?: string;
+  modiferClass?: string;
 }
 const ProgressRing: React.FC<ProgressRingTypes> = ({
   trueVolume,
   loanVolume,
   fakeVolume,
   percentage,
+  modiferClass = "",
 }) => {
   return (
-    <div className="chart__progress-ring">
+    <div className={`chart__progress-ring ${modiferClass}`}>
       <Doughnut
         options={{
           cutout: "88%",
@@ -46,7 +48,7 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({
         }}
       />
 
-      <p className="typography__label--2">{percentage}</p>
+      {percentage && <p className="typography__label--2">{percentage}</p>}
     </div>
   );
 };

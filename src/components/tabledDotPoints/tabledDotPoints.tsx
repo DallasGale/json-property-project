@@ -1,4 +1,4 @@
-import DecimalFormatter from "@/utils/decimalFormatter";
+import DecimalFormatter from "@utils/decimalFormatter";
 
 interface DotPointProps {
   dotpoints: DotPointTypes[];

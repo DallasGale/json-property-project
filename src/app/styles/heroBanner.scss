@@ -28,19 +28,41 @@
 }
 
 .hero-banner__underline {
-  width: 237px;
+  width: 200px;
   height: 60px;
   position: absolute;
-  top: 95px;
+  top: 80px;
   left: 0px;
   overflow: hidden;
   @include respond-to(desktop-up) {
     width: 237px;
-    height: 60px;
-    position: absolute;
+    top: 95px;
+  }
+  @include respond-to(widescreen-up) {
     left: auto;
     top: 62px;
     right: 0;
-    overflow: hidden;
+    width: 237px;
+  }
+}
+
+.hero-banner__underline-cloak {
+  background-color: rgb(20, 21, 23);
+  top: 10px;
+  width: 100%;
+  position: absolute;
+  height: 30px;
+  @include respond-to(desktop-up) {
+    top: 20px;
+  }
+  @include respond-to(widescreen-up) {
+    top: 21px;
+  }
+}
+
+.hero-banner__h3 {
+  width: 350px;
+  @include respond-to(widescreen-up) {
+    width: 100%;
   }
 }

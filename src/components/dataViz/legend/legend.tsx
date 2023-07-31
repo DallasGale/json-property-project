@@ -1,6 +1,11 @@
 import { LegendFormatTypes } from "@/app/types";
 import TabledDotPoints from "@components/tabledDotPoints/tabledDotPoints";
+import Image from "next/image";
 
+// Assets
+import LegendIconGreen from "@assets/icons/legendIconGreen.svg";
+import LegendIconRed from "@assets/icons/legendIconRed.svg";
+import LegendIconYellow from "@assets/icons/legendIconYellow.svg";
 interface LegendProps {
   labels: LabelTypes[];
   modifierClass?: string;
@@ -27,9 +32,18 @@ const Legend: React.FC<LegendProps> = ({
       <form className={`legend__format legend__format--${legendFormat}`}>
         {labels.map(({ name, color, id }) => {
           return (
-            <div key={id}>
+            <div key={id} className="chart__legend-icon-label">
+              {color === "accent-green" && (
+                <Image src={LegendIconGreen} alt="Legend Icon" />
+              )}
+              {color === "accent-red" && (
+                <Image src={LegendIconRed} alt="Legend Icon" />
+              )}
+              {color === "accent-yellow" && (
+                <Image src={LegendIconYellow} alt="Legend Icon" />
+              )}
               <input
-                className={`chart__legend-item  chart__legend-item--${color}`}
+                className="chart__legend-item"
                 type="checkbox"
                 id={id}
                 name="legend"

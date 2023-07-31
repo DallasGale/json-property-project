@@ -9,7 +9,7 @@ import ChartDataToggles from "@components/toggles/chart_data";
 import { useSpring, animated, easings } from "@react-spring/web";
 
 // Assets
-import TimeframeAsString from "@/utils/timeframeAsString";
+import TimeframeAsString from "@utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import { TradersTimeframeTypes } from "./types";
 import NewWallets, { NewWalletsTypes } from "./wallets/newWallets";

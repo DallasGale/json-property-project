@@ -27,18 +27,14 @@ const UnderlineSvg = () => {
           pathLength={0}
           d="M1 17C17 9 165 -3.00002 237 4.99999"
           stroke="#D5F415"
-          stroke-width="3"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinejoin="round"
         />
       </svg>
       <animated.div
+        className="hero-banner__underline-cloak"
         style={{
           ...springs1,
-          backgroundColor: "rgb(20, 21, 23)",
-          top: 21,
-          width: "100%",
-          position: "absolute",
-          height: 30,
         }}
       />
     </div>

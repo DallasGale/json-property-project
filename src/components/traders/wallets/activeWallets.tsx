@@ -4,7 +4,7 @@ import Image from "next/image";
 
 // Utils
 import { useSpring, animated } from "@react-spring/web";
-import { numFormatter } from "@/utils/numFormatter";
+import { numFormatter } from "@utils/numFormatter";
 
 // Assets
 import TrendLineChart from "@components/charts/trendLineChart";

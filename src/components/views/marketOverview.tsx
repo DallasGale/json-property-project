@@ -19,7 +19,7 @@ import {
   PointElement,
   Tooltip,
 } from "chart.js";
-import { numFormatter } from "@/utils/numFormatter";
+import { numFormatter } from "@utils/numFormatter";
 
 // Types
 import type {
@@ -37,10 +37,10 @@ import ChartDataToggles from "@components/toggles/chart_data";
 import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
 import Traders from "../traders/traders";
-import TimeframeAsString from "@/utils/timeframeAsString";
+import TimeframeAsString from "@utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
-import DecimalFormatter from "@/utils/decimalFormatter";
-import PercentChangeColors from "@/utils/percentChangeColors";
+import DecimalFormatter from "@utils/decimalFormatter";
+import PercentChangeColors from "@utils/percentChangeColors";
 import { TradersTimeframeTypes } from "../traders/types";
 import { NewWalletsTypes } from "../traders/wallets/newWallets";
 
@@ -721,6 +721,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
             all: leaderboard.royalty.all,
           },
         }}
+        traders={traders}
       />
 
       {/* Traders row */}

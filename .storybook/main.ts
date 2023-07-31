@@ -1,6 +1,7 @@
-import type { StorybookConfig } from "@storybook/nextjs";
+// import type { StorybookConfig } from "@storybook/nextjs";
 
-const config: StorybookConfig = {
+const path = require("path");
+const config = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
@@ -11,6 +12,24 @@ const config: StorybookConfig = {
   framework: {
     name: "@storybook/nextjs",
     options: {},
+  },
+  core: {
+    builder: "@storybook/builder-webpack5",
+  },
+  webpackFinal: async (config, { configType }) => {
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: "javascript/auto",
+    });
+    (config.resolve.modules = [path.resolve(__dirname, ".."), "node_modules"]),
+      (config.resolve.alias = {
+        ...config.resolve.alias,
+        "@components": path.resolve(__dirname, "../src/components"),
+        "@utils": path.resolve(__dirname, "../src/utils"),
+      });
+
+    return config;
   },
   docs: {
     autodocs: "tag",
