@@ -13,6 +13,7 @@ import TrendLineChart from "@components/charts/trendLineChart";
 import { legendLabels } from "./legendLabels";
 import { toFrom, config } from "@constants/animationSettings";
 import { TradersTimeframeTypes } from "../types";
+import ChartHeader from "@/components/charts/chartHeader";
 
 // Types
 export type ActiveWalletsTypes = {
@@ -178,16 +179,11 @@ const ActiveWallets: React.FC<Props> = ({
       className="grid__col-content grid__col-content--chart"
     >
       <div className="grid__col-container-body">
-        <div>
-          <p className="typography__label--2">
-            {VolumeFormatter(activeWalletsData)}
-          </p>
-          <h3 className="typography__subtitle--2">Active Wallets</h3>
-          <p className="typography__paragraph--1">
-            Wallets that have traded on an NFT marketplace.
-          </p>
-        </div>
-
+        <ChartHeader
+          value={`${VolumeFormatter(activeWalletsData)}`}
+          title="Active Wallets"
+          description=" Wallets that have traded on an NFT marketplace."
+        />
         <TrendLineChart
           legendOnClick={legendOnClick}
           labels={activeWalletTradersLabels}

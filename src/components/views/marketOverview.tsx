@@ -43,6 +43,7 @@ import DecimalFormatter from "@utils/decimalFormatter";
 import PercentChangeColors from "@utils/percentChangeColors";
 import { TradersTimeframeTypes } from "../traders/types";
 import { NewWalletsTypes } from "../traders/wallets/newWallets";
+import ChartHeader from "../charts/chartHeader";
 
 ChartJS.register(
   CategoryScale,
@@ -146,17 +147,6 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
     delay: 450,
-    config: {
-      tension: 90,
-      friction: 16,
-      duration: 750,
-      easing: easings.easeInOutCubic,
-    },
-  });
-  const springs3 = useSpring({
-    from: { y: 100, opacity: 0 },
-    to: { y: 0, opacity: 1 },
-    delay: 600,
     config: {
       tension: 90,
       friction: 16,
@@ -550,34 +540,16 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                             100
                         )}
                       />
-                      <div>
-                        <div className="chart__value-percent-lockup">
-                          <p className="typography__label--2">
-                            <Image src={CryptoIcon} alt="Crypto Icon" />
-                            {VolumeFormatter(trueVolumeTimeframeSummaryData)}
-                          </p>
-                          {/* Percent Change */}
-                          {timeframe !== 0 && (
-                            <p
-                              className="typography__display--4"
-                              style={{
-                                color: PercentChangeColors(
-                                  truePercentChangeTimeframe[0]
-                                ),
-                              }}
-                            >
-                              {truePercentChangeTimeframe[0] > 0 && "+"}
-                              {DecimalFormatter(truePercentChangeTimeframe[0])}%
-                            </p>
-                          )}
-                        </div>
-
-                        <h3 className="typography__subtitle--2">True Volume</h3>
-                        <p className="typography__paragraph--1">
-                          Excludes fake/artificial volume such as loans, points
-                          farming and wash trading.
-                        </p>
-                      </div>
+                      <ChartHeader
+                        value={`${VolumeFormatter(
+                          trueVolumeTimeframeSummaryData
+                        )}`}
+                        withCryptoIcon={true}
+                        valueDiff={truePercentChangeTimeframe[0]}
+                        title="True Volume"
+                        description="Excludes fake/artificial volume such as loans, points
+                          farming and wash trading."
+                      />
                     </div>
 
                     <TrueVolumeBarChart
@@ -598,36 +570,20 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                   className="grid__col-content grid__col-content--chart"
                 >
                   <div className="grid__col-container-body">
-                    <div>
-                      <div className="chart__value-percent-lockup">
-                        <p className="typography__label--2">
-                          <Image src={CryptoIcon} alt="Crypto Icon" />
-                          {VolumeFormatter(totalVolumeTimeframeSummaryData)}
-                        </p>
-                        {/* Percent Change */}
-                        {timeframe !== 0 && (
-                          <p
-                            className="typography__display--4"
-                            style={{
-                              color: PercentChangeColors(
-                                totalPercentChangeTimeframe[0]
-                              ),
-                            }}
-                          >
-                            {totalPercentChangeTimeframe[0] > 0 && "+"}
-                            {DecimalFormatter(totalPercentChangeTimeframe[0])}%
-                          </p>
-                        )}
-                      </div>
-                      <h3 className="typography__subtitle--2">Total Volume</h3>
-                      <p className="typography__paragraph--1">
-                        NFT trading volume across all transaction types
-                      </p>
-                    </div>
+                    <ChartHeader
+                      value={`${VolumeFormatter(
+                        totalVolumeTimeframeSummaryData
+                      )}`}
+                      withCryptoIcon={true}
+                      valueDiff={totalPercentChangeTimeframe[0]}
+                      title="Total Volume"
+                      description="NFT trading volume across all transaction types"
+                    />
 
                     <TrendLineChart
                       legendOnClick={(e: string) => trendlineLegendOnClick(e)}
                       labels={trendlineVolumeLabels}
+                      legendFormat="vertical"
                       legendLabels={[
                         {
                           color: "accent-yellow",

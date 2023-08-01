@@ -13,6 +13,7 @@ import TrendLineChart from "@components/charts/trendLineChart";
 import { legendLabels } from "./legendLabels";
 import { TradersTimeframeTypes } from "../types";
 import { toFrom, config } from "@constants/animationSettings";
+import ChartHeader from "@/components/charts/chartHeader";
 
 // Types
 export interface NewWalletsTypes extends TradersTimeframeTypes {
@@ -153,41 +154,38 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
       className="grid__col-content grid__col-content--chart"
     >
       <div className="grid__col-container-body">
-        <div>
-          <p className="typography__label--2">
-            {VolumeFormatter(newWalletsData)}
-          </p>
-          <h3 className="typography__subtitle--2">New Wallets</h3>
-          <p className="typography__paragraph--1">
-            Wallets that have been created.
-          </p>
-          <TrendLineChart
-            legendOnClick={legendOnClick}
-            labels={newWalletTradersLabels}
-            legendLabels={...legendLabels.newWallets}
-            legendFormat="vertical"
-            datasets={[
-              {
-                label: legendLabels.newWallets[0].name,
-                data: totalCreatedDisabled
-                  ? []
-                  : newWalletsDailyStatsTotalCreatedDataArray,
-                borderColor: legendLabels.newWallets[0].rgba,
-                backgroundColor: legendLabels.newWallets[0].rgba,
-                pointRadius: 0,
-                borderWidth: 3,
-              },
-              {
-                label: legendLabels.newWallets[1].name,
-                data: newWalletsDisabled ? [] : newWalletsDailyStats,
-                borderColor: legendLabels.newWallets[1].rgba,
-                backgroundColor: legendLabels.newWallets[1].rgba,
-                pointRadius: 0,
-                borderWidth: 3,
-              },
-            ]}
-          />
-        </div>
+        <ChartHeader
+          value={`${VolumeFormatter(newWalletsData)}`}
+          title="New Wallets"
+          description="Wallets that have been created."
+        />
+
+        <TrendLineChart
+          legendOnClick={legendOnClick}
+          labels={newWalletTradersLabels}
+          legendLabels={...legendLabels.newWallets}
+          legendFormat="vertical"
+          datasets={[
+            {
+              label: legendLabels.newWallets[0].name,
+              data: totalCreatedDisabled
+                ? []
+                : newWalletsDailyStatsTotalCreatedDataArray,
+              borderColor: legendLabels.newWallets[0].rgba,
+              backgroundColor: legendLabels.newWallets[0].rgba,
+              pointRadius: 0,
+              borderWidth: 3,
+            },
+            {
+              label: legendLabels.newWallets[1].name,
+              data: newWalletsDisabled ? [] : newWalletsDailyStats,
+              borderColor: legendLabels.newWallets[1].rgba,
+              backgroundColor: legendLabels.newWallets[1].rgba,
+              pointRadius: 0,
+              borderWidth: 3,
+            },
+          ]}
+        />
       </div>
     </animated.div>
   );

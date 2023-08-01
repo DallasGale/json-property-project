@@ -27,7 +27,8 @@
       "@constants/*": ["./src/constants/*"],
       "@api/*": ["./src/api/*"],
       "@utils/*": ["./src/utils/*"],
-      "@views/*": ["./src/components/views/*"]
+      "@views/*": ["./src/components/views/*"],
+      "@fixtures/*": ["./_fixtures_/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

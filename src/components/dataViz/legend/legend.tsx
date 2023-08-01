@@ -6,6 +6,8 @@ import Image from "next/image";
 import LegendIconGreen from "@assets/icons/legendIconGreen.svg";
 import LegendIconRed from "@assets/icons/legendIconRed.svg";
 import LegendIconYellow from "@assets/icons/legendIconYellow.svg";
+import LegendIconPurple from "@assets/icons/legendIconPurple.svg";
+
 interface LegendProps {
   labels: LabelTypes[];
   modifierClass?: string;
@@ -26,7 +28,7 @@ const Legend: React.FC<LegendProps> = ({
   legendFormat = "horizontal",
 }) => {
   return legendFormat === "tabled" ? (
-    <TabledDotPoints dotpoints={...labels} onClick={onClick} />
+    <TabledDotPoints dotpoints={labels} onClick={onClick} />
   ) : (
     <div className={`chart__legend ${modifierClass}`}>
       <form className={`legend__format legend__format--${legendFormat}`}>
@@ -42,6 +44,9 @@ const Legend: React.FC<LegendProps> = ({
               {color === "accent-yellow" && (
                 <Image src={LegendIconYellow} alt="Legend Icon" />
               )}
+              {color === "accent-purple" && (
+                <Image src={LegendIconPurple} alt="Legend Icon" />
+              )}
               <input
                 className="chart__legend-item"
                 type="checkbox"
@@ -50,7 +55,7 @@ const Legend: React.FC<LegendProps> = ({
                 value={name}
                 onChange={(e) => onClick(e.currentTarget.id)}
               />
-              <label htmlFor={id} className="typography__label--1">
+              <label htmlFor={id} className="typography__label--5">
                 {name}
               </label>
             </div>

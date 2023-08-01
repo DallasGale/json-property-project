@@ -177,7 +177,7 @@ const Traders: React.FC<TradersTypes> = ({
 
   const legendLabels = [
     {
-      color: "accent-purple",
+      color: "accent-green",
       name: "Only Bought",
       id: "only-bought",
     },
@@ -187,7 +187,7 @@ const Traders: React.FC<TradersTypes> = ({
       id: "only-sold",
     },
     {
-      color: "accent-green",
+      color: "accent-purple",
       name: "Bought and Sold",
       id: "bought-and-sold",
     },
@@ -226,7 +226,7 @@ const Traders: React.FC<TradersTypes> = ({
                       label: "Only Bought",
                       data: onlyBoughtDisabled ? [] : onlyBoughtDataArray,
                       borderColor: "white",
-                      backgroundColor: "rgba(95, 61, 196, 1)",
+                      backgroundColor: "rgba(64, 192, 87, 1)",
                     },
                     {
                       label: "Only Sold",
@@ -238,7 +238,7 @@ const Traders: React.FC<TradersTypes> = ({
                       label: "Bought and Sold",
                       data: boughtAndSoldDisabled ? [] : boughtAndSoldDataArray,
                       borderColor: "white",
-                      backgroundColor: "rgba(64, 192, 87, 1)",
+                      backgroundColor: "rgba(95, 61, 196, 1)",
                     },
                   ]}
                 />
