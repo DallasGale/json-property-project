@@ -16,8 +16,8 @@ export const legendLabels = {
   ],
   activeWallets: [
     {
-      color: "accent-purple",
-      rgba: "rgba(95, 61, 196, 1)",
+      color: "accent-green",
+      rgba: "rgba(64, 192, 87, 1)",
       name: "Only Bought",
       id: "active-wallet-only-bought",
     },
@@ -28,8 +28,8 @@ export const legendLabels = {
       id: "active-wallet-only-sold",
     },
     {
-      color: "accent-green",
-      rgba: "rgba(64, 192, 87, 1)",
+      color: "accent-purple",
+      rgba: "rgba(95, 61, 196, 1)",
       name: "Bought and Sold",
       id: "active-wallet-bought-and-sold",
     },
