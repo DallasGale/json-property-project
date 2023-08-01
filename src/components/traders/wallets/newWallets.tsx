@@ -4,7 +4,7 @@ import Image from "next/image";
 
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
-import { numFormatter } from "@utils/numFormatter";
+import { VolumeFormatter } from "@utils/volumeFormatter";
 
 // Assets
 import TrendLineChart from "@components/charts/trendLineChart";
@@ -151,7 +151,9 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
     <animated.div style={{ ...animate }} className="grid__col-content">
       <div className="grid__col-container-body">
         <div>
-          <p className="typography__label--2">{numFormatter(newWalletsData)}</p>
+          <p className="typography__label--2">
+            {VolumeFormatter(newWalletsData)}
+          </p>
           <h3 className="typography__subtitle--2">New Wallets</h3>
           <p className="typography__paragraph--1">
             Wallets that have been created.

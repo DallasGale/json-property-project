@@ -4,7 +4,7 @@ import Image from "next/image";
 
 // Utils
 import { useSpring, animated } from "@react-spring/web";
-import { numFormatter } from "@utils/numFormatter";
+import { VolumeFormatter } from "@utils/volumeFormatter";
 
 // Assets
 import TrendLineChart from "@components/charts/trendLineChart";
@@ -177,7 +177,7 @@ const ActiveWallets: React.FC<Props> = ({
       <div className="grid__col-container-body">
         <div>
           <p className="typography__label--2">
-            {numFormatter(activeWalletsData)}
+            {VolumeFormatter(activeWalletsData)}
           </p>
           <h3 className="typography__subtitle--2">Active Wallets</h3>
           <p className="typography__paragraph--1">

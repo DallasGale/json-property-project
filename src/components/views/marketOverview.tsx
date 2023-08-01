@@ -19,7 +19,7 @@ import {
   PointElement,
   Tooltip,
 } from "chart.js";
-import { numFormatter } from "@utils/numFormatter";
+import { VolumeFormatter } from "@utils/volumeFormatter";
 
 // Types
 import type {
@@ -554,7 +554,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         <div className="chart__value-percent-lockup">
                           <p className="typography__label--2">
                             <Image src={CryptoIcon} alt="Crypto Icon" />
-                            {numFormatter(trueVolumeTimeframeSummaryData)}
+                            {VolumeFormatter(trueVolumeTimeframeSummaryData)}
                           </p>
                           {/* Percent Change */}
                           {timeframe !== 0 && (
@@ -602,7 +602,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       <div className="chart__value-percent-lockup">
                         <p className="typography__label--2">
                           <Image src={CryptoIcon} alt="Crypto Icon" />
-                          {numFormatter(totalVolumeTimeframeSummaryData)}
+                          {VolumeFormatter(totalVolumeTimeframeSummaryData)}
                         </p>
                         {/* Percent Change */}
                         {timeframe !== 0 && (

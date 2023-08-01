@@ -1,5 +1,5 @@
 import { Bar } from "react-chartjs-2";
-import { numFormatter } from "@utils/numFormatter";
+import { VolumeFormatter } from "@utils/volumeFormatter";
 import Legend from "@components/dataViz/legend/legend";
 import { BarChartDatasetsType, LegendLabelTypes } from "@app/types";
 
@@ -62,7 +62,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
                 stacked: true,
                 ticks: {
                   callback: function (value: any) {
-                    return numFormatter(value);
+                    return VolumeFormatter(value);
                   },
                 },
               },

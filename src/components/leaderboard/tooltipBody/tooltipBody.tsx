@@ -1,6 +1,6 @@
 // Utils
 import Moment from "react-moment";
-import { numFormatter } from "@utils/numFormatter";
+import { VolumeFormatter } from "@utils/volumeFormatter";
 import DecimalFormatter from "@utils/decimalFormatter";
 
 // Components
@@ -16,6 +16,7 @@ import LegendIconGreen from "@assets/icons/legendIconGreen.svg";
 import LegendIconRed from "@assets/icons/legendIconRed.svg";
 import LegendIconYellow from "@assets/icons/legendIconYellow.svg";
 import TimeIcon from "@assets/icons/time.svg";
+import PercentFormatter from "@/utils/percentFormatter";
 
 interface TooltipBodyProps {
   name: string;
@@ -107,15 +108,15 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                       className="tooltip-body__icon tooltip-body__icon--crypto"
                     />
                     <p className="typography__label--1 typography__color--accent-green">
-                      {numFormatter(DecimalFormatter(totalRealDayVolume))}
+                      {VolumeFormatter(DecimalFormatter(totalRealDayVolume))}
                     </p>
                   </div>
                 </td>
                 <td width="30%" align="right">
                   <div className="tooltip_body__table--value-col u-justifyEnd">
                     <p className="typography__label--3">
-                      {numFormatter(
-                        DecimalFormatter(totalRealDayVolumePercentage)
+                      {VolumeFormatter(
+                        PercentFormatter(totalRealDayVolumePercentage)
                       )}
                       %
                     </p>
@@ -137,14 +138,14 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                       className="tooltip-body__icon tooltip-body__icon--crypto"
                     />
                     <p className="typography__label--1 typography__color--accent-red">
-                      {numFormatter(DecimalFormatter(totalFakeVolume))}
+                      {VolumeFormatter(DecimalFormatter(totalFakeVolume))}
                     </p>
                   </div>
                 </td>
                 <td width="30%" align="right">
                   <div className="tooltip_body__table--value-col u-justifyEnd">
                     <p className="typography__label--3">
-                      {numFormatter(
+                      {VolumeFormatter(
                         DecimalFormatter(totalFakeVolumePercentage)
                       )}
                       %
@@ -167,17 +168,14 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                       className="tooltip-body__icon tooltip-body__icon--crypto"
                     />
                     <p className="typography__label--1 typography__color--accent-yellow">
-                      {numFormatter(DecimalFormatter(totalLoanVolume))}
+                      {VolumeFormatter(DecimalFormatter(totalLoanVolume))}
                     </p>
                   </div>
                 </td>
                 <td width="30%" align="right">
                   <div className="tooltip_body__table--value-col u-justifyEnd">
                     <p className="typography__label--3">
-                      {numFormatter(
-                        DecimalFormatter(totalLoanVolumePercentage)
-                      )}
-                      %
+                      {PercentFormatter(totalLoanVolumePercentage)}%
                     </p>
                   </div>
                 </td>
@@ -202,7 +200,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                       className="tooltip-body__icon tooltip-body__icon--crypto"
                     />
                     <p className="typography__label--3 typography__color--white">
-                      {numFormatter(DecimalFormatter(totalVolume))}
+                      {VolumeFormatter(DecimalFormatter(totalVolume))}
                     </p>
                   </div>
                 </td>
@@ -219,7 +217,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                       className="tooltip-body__icon tooltip-body__icon--crypto"
                     />
                     <p className="typography__label--3 typography__color--white">
-                      {numFormatter(DecimalFormatter(totalRevenue))}
+                      {VolumeFormatter(DecimalFormatter(totalRevenue))}
                     </p>
                   </div>
                 </td>

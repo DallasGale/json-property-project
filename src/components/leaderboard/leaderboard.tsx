@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { truncateString } from "@utils/truncateString";
 import { useSpring, animated, easings } from "@react-spring/web";
-import { numFormatter } from "@utils/numFormatter";
+import { VolumeFormatter } from "@utils/volumeFormatter";
 import DecimalFormatter from "@utils/decimalFormatter";
 
 // Assets
@@ -29,6 +29,7 @@ import { HoverCard, Group } from "@mantine/core";
 import FourColumnGrid from "@/grids/fourColumnGrid";
 import VolumeTableChart from "@components/charts/volumeTableChart";
 import TooltipBody from "@components/leaderboard/tooltipBody/tooltipBody";
+import PercentFormatter from "@/utils/percentFormatter";
 
 interface LeaderBoardTypes {
   traders: {
@@ -282,7 +283,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                         <div className="leaderboard__data-cell">
                           <Image src={CryptoGreenIcon} alt="Crypto Icon" />
                           <p className="typography__display--2 typography__color--accent-green">
-                            {numFormatter(
+                            {VolumeFormatter(
                               DecimalFormatter(total_real_day_volume)
                             )}
                           </p>
@@ -299,7 +300,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <td height="30" valign="top" align="right">
                         {total_real_day_volume_percentage ? (
                           <p className="typography__display--2">
-                            {DecimalFormatter(total_real_day_volume_percentage)}
+                            {PercentFormatter(total_real_day_volume_percentage)}
                             %
                           </p>
                         ) : (
@@ -384,7 +385,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                         <div className="leaderboard__data-cell">
                           <Image src={CryptoRedIcon} alt="Crypto Icon" />
                           <p className="typography__display--2 typography__color--accent-red">
-                            {numFormatter(
+                            {VolumeFormatter(
                               DecimalFormatter(total_day_volume_fake)
                             )}
                           </p>
@@ -401,7 +402,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <td height="30" valign="top" align="right">
                         {total_fake_day_volume_percentage ? (
                           <p className="typography__display--2">
-                            {DecimalFormatter(total_fake_day_volume_percentage)}
+                            {PercentFormatter(total_fake_day_volume_percentage)}
                             %
                           </p>
                         ) : (
@@ -486,7 +487,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                         <div className="leaderboard__data-cell">
                           <Image src={CryptoYellowIcon} alt="Crypto Icon" />
                           <p className="typography__display--2 typography__color--accent-yellow">
-                            {numFormatter(
+                            {VolumeFormatter(
                               DecimalFormatter(total_day_volume_loan)
                             )}
                           </p>
@@ -568,7 +569,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                         <div className="leaderboard__data-cell">
                           <Image src={CryptoGreyIcon} alt="Crypto Icon" />
                           <p className="typography__display--2">
-                            {numFormatter(
+                            {VolumeFormatter(
                               DecimalFormatter(total_day_total_royalty)
                             )}
                           </p>

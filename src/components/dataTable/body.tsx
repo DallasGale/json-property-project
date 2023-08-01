@@ -7,7 +7,7 @@ import CryptoIcon from "@assets/icons/crypto.svg";
 // Utils
 import GoodToBadColors from "@utils/goodToBadColors";
 import DecimalFormatter from "@utils/decimalFormatter";
-import { numFormatter } from "@utils/numFormatter";
+import { VolumeFormatter } from "@utils/volumeFormatter";
 import { CollectionTypes } from "@/app/types";
 
 interface BodyProps {
@@ -57,7 +57,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                         : "typography__color--dark-medium-emphasis"
                     }`}
                   >
-                    {numFormatter(DecimalFormatter(total_real_day_volume))}
+                    {VolumeFormatter(DecimalFormatter(total_real_day_volume))}
                   </p>
                 </div>
               </td>
@@ -94,7 +94,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                         : "typography__color--dark-medium-emphasis"
                     }`}
                   >
-                    {numFormatter(DecimalFormatter(total_raw_day_volume))}
+                    {VolumeFormatter(DecimalFormatter(total_raw_day_volume))}
                   </p>
                 </div>
               </td>
@@ -107,7 +107,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                       : "typography__color--dark-medium-emphasis"
                   }`}
                 >
-                  {numFormatter(total_real_day_trade_num)}
+                  {VolumeFormatter(total_real_day_trade_num)}
                 </p>
               </td>
 
@@ -126,7 +126,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                         : "typography__color--dark-medium-emphasis"
                     }`}
                   >
-                    {numFormatter(DecimalFormatter(total_day_volume_loan))}
+                    {VolumeFormatter(DecimalFormatter(total_day_volume_loan))}
                   </p>
                 </div>
               </td>
@@ -146,7 +146,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                         : "typography__color--dark-medium-emphasis"
                     }`}
                   >
-                    {numFormatter(DecimalFormatter(total_day_total_royalty))}
+                    {VolumeFormatter(DecimalFormatter(total_day_total_royalty))}
                   </p>
                 </div>
               </td>
@@ -165,7 +165,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                         : "typography__color--dark-medium-emphasis"
                     }`}
                   >
-                    {numFormatter(DecimalFormatter(total_day_volume_fake))}
+                    {VolumeFormatter(DecimalFormatter(total_day_volume_fake))}
                   </p>
                 </div>
               </td>
@@ -184,7 +184,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                         : "typography__color--dark-medium-emphasis"
                     }`}
                   >
-                    {numFormatter(DecimalFormatter(total_day_trade_num))}
+                    {VolumeFormatter(DecimalFormatter(total_day_trade_num))}
                   </p>
                 </div>
               </td>
