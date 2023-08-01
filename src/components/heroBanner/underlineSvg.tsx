@@ -27,8 +27,8 @@ const UnderlineSvg = () => {
           pathLength={0}
           d="M1 17C17 9 165 -3.00002 237 4.99999"
           stroke="#D5F415"
-          stroke-width="3"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinejoin="round"
         />
       </svg>
       <animated.div

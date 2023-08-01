@@ -8,9 +8,16 @@ import {
 } from "@/app/types";
 import Leaderboard from "@components/leaderboard/leaderboard";
 import DataTable from "../dataTable/dataTable";
+import { TradersTimeframeTypes } from "../traders/types";
 
 // Types
 interface LeaderboardsTypes {
+  traders: {
+    trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  };
   leaderboard: {
     top100: {
       oneDayTop100: CollectionTypes[];
@@ -49,10 +56,17 @@ interface LeaderboardsTypes {
     };
   };
 }
-const Leaderboards: React.FC<LeaderboardsTypes> = ({ leaderboard }) => {
+const Leaderboards: React.FC<LeaderboardsTypes> = ({
+  leaderboard,
+  traders,
+}) => {
   return (
     <>
-      <Leaderboard showTimeframeToggles={true} leaderboardData={leaderboard} />
+      <Leaderboard
+        showTimeframeToggles={true}
+        leaderboardData={leaderboard}
+        traders={traders}
+      />
 
       <DataTable
         tableTitle="Top 100 Collections"
