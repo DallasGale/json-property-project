@@ -25,11 +25,11 @@ import { TradersTimeframeTypes } from "../traders/types";
 
 // Components
 import ChartDataToggles from "@components/toggles/chart_data";
-import { HoverCard, Group } from "@mantine/core";
+import { HoverCard } from "@mantine/core";
 import FourColumnGrid from "@/grids/fourColumnGrid";
 import VolumeTableChart from "@components/charts/volumeTableChart";
 import TooltipBody from "@components/leaderboard/tooltipBody/tooltipBody";
-import PercentFormatter from "@/utils/percentFormatter";
+import PercentFormatter from "@utils/percentFormatter";
 
 interface LeaderBoardTypes {
   traders: {
@@ -104,89 +104,36 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
 
   const [timeframe, setTimeframe] = useState(1);
 
-  // Doughnut
-  const [trueVolumeDoughnutSummararyData, setTrueVolumeDoughnutSummararyData] =
-    useState(traders.trueVolumeTimeframeSummaryData.oneDay);
-  const [fakeVolumeDoughnutSummararyData, setFakeVolumeDoughnutSummararyData] =
-    useState(traders.fakeVolumeTimeframeSummaryData.oneDay);
-  const [loanVolumeDoughnutSummararyData, setLoanVolumeDoughnutSummararyData] =
-    useState(traders.loanVolumeTimeframeSummaryData.oneDay);
-
   useEffect(() => {
     if (timeframe === 0) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.all);
       setLoanVolumeDataArray(leaderboardData.loanVolume.all);
       setFakeVolumeDataArray(leaderboardData.fakeVolume.all);
       setRevenueVolumeDataArray(leaderboardData.royalty.all);
-      setTrueVolumeDoughnutSummararyData(
-        traders.trueVolumeTimeframeSummaryData.all
-      );
-      setFakeVolumeDoughnutSummararyData(
-        traders.fakeVolumeTimeframeSummaryData.all
-      );
-      setLoanVolumeDoughnutSummararyData(
-        traders.loanVolumeTimeframeSummaryData.all
-      );
     }
     if (timeframe === 1) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.oneDay);
       setLoanVolumeDataArray(leaderboardData.loanVolume.oneDay);
       setFakeVolumeDataArray(leaderboardData.fakeVolume.oneDay);
       setRevenueVolumeDataArray(leaderboardData.royalty.oneDay);
-      setTrueVolumeDoughnutSummararyData(
-        traders.trueVolumeTimeframeSummaryData.oneDay
-      );
-      setFakeVolumeDoughnutSummararyData(
-        traders.fakeVolumeTimeframeSummaryData.oneDay
-      );
-      setLoanVolumeDoughnutSummararyData(
-        traders.loanVolumeTimeframeSummaryData.oneDay
-      );
     }
     if (timeframe === 7) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.sevenDay);
       setLoanVolumeDataArray(leaderboardData.loanVolume.sevenDay);
       setFakeVolumeDataArray(leaderboardData.fakeVolume.sevenDay);
       setRevenueVolumeDataArray(leaderboardData.royalty.sevenDay);
-      setTrueVolumeDoughnutSummararyData(
-        traders.trueVolumeTimeframeSummaryData.sevenDay
-      );
-      setFakeVolumeDoughnutSummararyData(
-        traders.fakeVolumeTimeframeSummaryData.sevenDay
-      );
-      setLoanVolumeDoughnutSummararyData(
-        traders.loanVolumeTimeframeSummaryData.sevenDay
-      );
     }
     if (timeframe === 30) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.thirtyDay);
       setLoanVolumeDataArray(leaderboardData.loanVolume.thirtyDay);
       setFakeVolumeDataArray(leaderboardData.fakeVolume.thirtyDay);
       setRevenueVolumeDataArray(leaderboardData.royalty.thirtyDay);
-      setTrueVolumeDoughnutSummararyData(
-        traders.trueVolumeTimeframeSummaryData.thirtyDay
-      );
-      setFakeVolumeDoughnutSummararyData(
-        traders.fakeVolumeTimeframeSummaryData.thirtyDay
-      );
-      setLoanVolumeDoughnutSummararyData(
-        traders.loanVolumeTimeframeSummaryData.thirtyDay
-      );
     }
     if (timeframe === 90) {
       setTrueVolumeDataArray(leaderboardData.trueVolume.ninetyDay);
       setLoanVolumeDataArray(leaderboardData.loanVolume.ninetyDay);
       setFakeVolumeDataArray(leaderboardData.fakeVolume.ninetyDay);
       setRevenueVolumeDataArray(leaderboardData.royalty.ninetyDay);
-      setTrueVolumeDoughnutSummararyData(
-        traders.trueVolumeTimeframeSummaryData.ninetyDay
-      );
-      setFakeVolumeDoughnutSummararyData(
-        traders.fakeVolumeTimeframeSummaryData.ninetyDay
-      );
-      setLoanVolumeDoughnutSummararyData(
-        traders.loanVolumeTimeframeSummaryData.ninetyDay
-      );
     }
   }, [timeframe]);
 
@@ -242,7 +189,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           position="top"
                         >
                           <HoverCard.Target>
-                            <p className="typography__display--2 leaderboard__name">
+                            <p className="typography__display--2 u-cursor-pointer">
                               {truncateString(name, 20)}
                             </p>
                           </HoverCard.Target>

@@ -1,5 +1,7 @@
 // Components
 import Image from "next/image";
+import { HoverCard } from "@mantine/core";
+import TooltipBody from "@components/leaderboard/tooltipBody/tooltipBody";
 
 // Assets
 import CryptoIcon from "@assets/icons/crypto.svg";
@@ -16,6 +18,7 @@ interface BodyProps {
 }
 
 const Body: React.FC<BodyProps> = ({ data, active }) => {
+  const today = new Date();
   return (
     <tbody>
       {data.map(
@@ -31,17 +34,53 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
             total_real_day_trade_num,
             total_real_day_volume,
             total_real_day_volume_percentage,
+            total_fake_day_volume_percentage,
+            total_loan_day_volume_percentage,
           },
           index
         ) => {
           let count = index + 1;
           return (
-            <tr key={contract_address}>
+            <tr key={contract_address} className="data-table__row">
               <td width="50">
                 <p className="typography__display--2">{count}</p>
               </td>
               <td>
-                <p className="typography__display--6">{name}</p>
+                <HoverCard
+                  width={320}
+                  shadow="md"
+                  openDelay={300}
+                  position="top"
+                >
+                  <HoverCard.Target>
+                    <p className="typography__display--6 u-cursor-pointer">
+                      {name}
+                    </p>
+                  </HoverCard.Target>
+                  <HoverCard.Dropdown className="dropdown">
+                    <TooltipBody
+                      name={name}
+                      today={today.toDateString()}
+                      trueVolume={total_real_day_volume}
+                      fakeVolume={total_day_volume_fake}
+                      loanVolume={total_day_volume_loan}
+                      totalVolume={total_raw_day_volume}
+                      totalRevenue={total_day_total_royalty}
+                      totalRealDayVolume={total_real_day_volume}
+                      totalFakeVolume={total_day_volume_fake}
+                      totalLoanVolume={total_day_volume_loan}
+                      totalRealDayVolumePercentage={
+                        total_real_day_volume_percentage
+                      }
+                      totalFakeVolumePercentage={
+                        total_fake_day_volume_percentage
+                      }
+                      totalLoanVolumePercentage={
+                        total_loan_day_volume_percentage
+                      }
+                    />
+                  </HoverCard.Dropdown>
+                </HoverCard>
               </td>
               <td width="120">
                 <div className="data-table__cell-content">
