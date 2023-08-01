@@ -115,10 +115,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                 <td width="30%" align="right">
                   <div className="tooltip_body__table--value-col u-justifyEnd">
                     <p className="typography__label--3">
-                      {VolumeFormatter(
-                        PercentFormatter(totalRealDayVolumePercentage)
-                      )}
-                      %
+                      {PercentFormatter(totalRealDayVolumePercentage)}%
                     </p>
                   </div>
                 </td>
@@ -145,10 +142,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                 <td width="30%" align="right">
                   <div className="tooltip_body__table--value-col u-justifyEnd">
                     <p className="typography__label--3">
-                      {VolumeFormatter(
-                        DecimalFormatter(totalFakeVolumePercentage)
-                      )}
-                      %
+                      {PercentFormatter(totalFakeVolumePercentage)}%
                     </p>
                   </div>
                 </td>
