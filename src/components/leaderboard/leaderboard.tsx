@@ -291,7 +291,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           position="top"
                         >
                           <HoverCard.Target>
-                            <p className="typography__display--2 leaderboard__name">
+                            <p className="typography__display--2 u-cursor-pointer">
                               {truncateString(name, 20)}
                             </p>
                           </HoverCard.Target>
@@ -393,7 +393,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           position="top"
                         >
                           <HoverCard.Target>
-                            <p className="typography__display--2 leaderboard__name">
+                            <p className="typography__display--2 u-cursor-pointer">
                               {truncateString(name, 20)}
                             </p>
                           </HoverCard.Target>
@@ -475,7 +475,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           position="top"
                         >
                           <HoverCard.Target>
-                            <p className="typography__display--2 leaderboard__name">
+                            <p className="typography__display--2 u-cursor-pointer">
                               {truncateString(name, 25)}
                             </p>
                           </HoverCard.Target>
