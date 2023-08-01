@@ -48,7 +48,6 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
   totalFakeVolumePercentage,
   totalLoanVolumePercentage,
 }) => {
-  console.log({ trueVolume, fakeVolume, loanVolume });
   return (
     <div className="tooltip-body">
       <div className="tooltip-body__header">

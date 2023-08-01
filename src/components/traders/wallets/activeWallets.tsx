@@ -173,7 +173,10 @@ const ActiveWallets: React.FC<Props> = ({
   }, [timeframe]);
 
   return (
-    <animated.div style={{ ...animate }} className="grid__col-content">
+    <animated.div
+      style={{ ...animate }}
+      className="grid__col-content grid__col-content--chart"
+    >
       <div className="grid__col-container-body">
         <div>
           <p className="typography__label--2">

@@ -25,7 +25,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
         labels={...legendLabels}
         legendFormat="horizontal"
       />
-      <div className="chart__bar-wrapper">
+      <div className="chart__bar-wrapper" style={{ height: 310 }}>
         <Bar
           data={{
             labels: labels,
