@@ -21,17 +21,17 @@ import PercentFormatter from "@/utils/percentFormatter";
 interface TooltipBodyProps {
   name: string;
   today: string;
-  trueVolume: number;
-  fakeVolume: number;
-  loanVolume: number;
+  trueVolume: number | number[];
+  fakeVolume: number | number[];
+  loanVolume: number | number[];
   totalVolume: number;
   totalRevenue: number;
   totalRealDayVolume: number;
   totalFakeVolume: number;
   totalLoanVolume: number;
-  totalRealDayVolumePercentage: number | null;
-  totalFakeVolumePercentage: number | null;
-  totalLoanVolumePercentage: number | null;
+  totalRealDayVolumePercentage: number;
+  totalFakeVolumePercentage: number;
+  totalLoanVolumePercentage: number;
 }
 const TooltipBody: React.FC<TooltipBodyProps> = ({
   name,

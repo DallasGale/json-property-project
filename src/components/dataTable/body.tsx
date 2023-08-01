@@ -70,13 +70,13 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                       totalFakeVolume={total_day_volume_fake}
                       totalLoanVolume={total_day_volume_loan}
                       totalRealDayVolumePercentage={
-                        total_real_day_volume_percentage
+                        total_real_day_volume_percentage || 0
                       }
                       totalFakeVolumePercentage={
-                        total_fake_day_volume_percentage
+                        total_fake_day_volume_percentage || 0
                       }
                       totalLoanVolumePercentage={
-                        total_loan_day_volume_percentage
+                        total_loan_day_volume_percentage || 0
                       }
                     />
                   </HoverCard.Dropdown>
