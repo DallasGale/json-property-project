@@ -47,6 +47,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
   totalFakeVolumePercentage,
   totalLoanVolumePercentage,
 }) => {
+  console.log({ trueVolume, fakeVolume, loanVolume });
   return (
     <div className="tooltip-body">
       <div className="tooltip-body__header">
@@ -60,7 +61,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
             flexDirection: "row",
             alignItems: "center",
             gap: 10,
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
           }}
         >
           <Image src={TimeIcon.src} alt="" width={15} height={15} />

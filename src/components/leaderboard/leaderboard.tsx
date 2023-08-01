@@ -102,46 +102,6 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
   );
 
   const [timeframe, setTimeframe] = useState(1);
-  useEffect(() => {
-    if (timeframe === 90) {
-      setTrueVolumeDataArray(leaderboardData.trueVolume.ninetyDay);
-      setLoanVolumeDataArray(leaderboardData.loanVolume.ninetyDay);
-      setFakeVolumeDataArray(leaderboardData.fakeVolume.ninetyDay);
-      setRevenueVolumeDataArray(leaderboardData.royalty.ninetyDay);
-    }
-    if (timeframe === 30) {
-      setTrueVolumeDataArray(leaderboardData.trueVolume.thirtyDay);
-      setLoanVolumeDataArray(leaderboardData.loanVolume.thirtyDay);
-      setFakeVolumeDataArray(leaderboardData.fakeVolume.thirtyDay);
-      setRevenueVolumeDataArray(leaderboardData.royalty.thirtyDay);
-    }
-    if (timeframe === 7) {
-      setTrueVolumeDataArray(leaderboardData.trueVolume.sevenDay);
-      setLoanVolumeDataArray(leaderboardData.loanVolume.sevenDay);
-      setFakeVolumeDataArray(leaderboardData.fakeVolume.sevenDay);
-      setRevenueVolumeDataArray(leaderboardData.royalty.sevenDay);
-    }
-
-    if (timeframe === 1) {
-      setTrueVolumeDataArray(leaderboardData.trueVolume.oneDay);
-      setLoanVolumeDataArray(leaderboardData.loanVolume.oneDay);
-      setFakeVolumeDataArray(leaderboardData.fakeVolume.oneDay);
-      setRevenueVolumeDataArray(leaderboardData.royalty.oneDay);
-    }
-
-    if (timeframe === 0) {
-      setTrueVolumeDataArray(leaderboardData.trueVolume.all);
-      setLoanVolumeDataArray(leaderboardData.loanVolume.all);
-      setFakeVolumeDataArray(leaderboardData.fakeVolume.all);
-      setRevenueVolumeDataArray(leaderboardData.royalty.all);
-    }
-  }, [timeframe]);
-
-  function handleDailyTimeferame(e: React.MouseEvent, value: any) {
-    e.preventDefault();
-    setTimeframe(value);
-  }
-  const today = new Date();
 
   // Doughnut
   const [trueVolumeDoughnutSummararyData, setTrueVolumeDoughnutSummararyData] =
@@ -150,6 +110,90 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
     useState(traders.fakeVolumeTimeframeSummaryData.oneDay);
   const [loanVolumeDoughnutSummararyData, setLoanVolumeDoughnutSummararyData] =
     useState(traders.loanVolumeTimeframeSummaryData.oneDay);
+
+  useEffect(() => {
+    if (timeframe === 0) {
+      setTrueVolumeDataArray(leaderboardData.trueVolume.all);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.all);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.all);
+      setRevenueVolumeDataArray(leaderboardData.royalty.all);
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.all
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.all
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.all
+      );
+    }
+    if (timeframe === 1) {
+      setTrueVolumeDataArray(leaderboardData.trueVolume.oneDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.oneDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.oneDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.oneDay);
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.oneDay
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.oneDay
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.oneDay
+      );
+    }
+    if (timeframe === 7) {
+      setTrueVolumeDataArray(leaderboardData.trueVolume.sevenDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.sevenDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.sevenDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.sevenDay);
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.sevenDay
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.sevenDay
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.sevenDay
+      );
+    }
+    if (timeframe === 30) {
+      setTrueVolumeDataArray(leaderboardData.trueVolume.thirtyDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.thirtyDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.thirtyDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.thirtyDay);
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.thirtyDay
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.thirtyDay
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.thirtyDay
+      );
+    }
+    if (timeframe === 90) {
+      setTrueVolumeDataArray(leaderboardData.trueVolume.ninetyDay);
+      setLoanVolumeDataArray(leaderboardData.loanVolume.ninetyDay);
+      setFakeVolumeDataArray(leaderboardData.fakeVolume.ninetyDay);
+      setRevenueVolumeDataArray(leaderboardData.royalty.ninetyDay);
+      setTrueVolumeDoughnutSummararyData(
+        traders.trueVolumeTimeframeSummaryData.ninetyDay
+      );
+      setFakeVolumeDoughnutSummararyData(
+        traders.fakeVolumeTimeframeSummaryData.ninetyDay
+      );
+      setLoanVolumeDoughnutSummararyData(
+        traders.loanVolumeTimeframeSummaryData.ninetyDay
+      );
+    }
+  }, [timeframe]);
+
+  function handleDailyTimeferame(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setTimeframe(value);
+  }
+  const today = new Date();
 
   return (
     <>
@@ -190,43 +234,41 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                   return (
                     <tr key={name}>
                       <td height="30" valign="top">
-                        <Group position="left">
-                          <HoverCard
-                            width={320}
-                            shadow="md"
-                            openDelay={300}
-                            position="top"
-                          >
-                            <HoverCard.Target>
-                              <p className="typography__display--2">
-                                {truncateString(name, 20)}
-                              </p>
-                            </HoverCard.Target>
-                            <HoverCard.Dropdown className="dropdown">
-                              <TooltipBody
-                                name={name}
-                                today={today.toDateString()}
-                                trueVolume={trueVolumeDoughnutSummararyData}
-                                fakeVolume={fakeVolumeDoughnutSummararyData}
-                                loanVolume={loanVolumeDoughnutSummararyData}
-                                totalVolume={total_raw_day_volume}
-                                totalRevenue={total_day_total_royalty}
-                                totalRealDayVolume={total_real_day_volume}
-                                totalFakeVolume={total_day_volume_fake}
-                                totalLoanVolume={total_day_volume_loan}
-                                totalRealDayVolumePercentage={
-                                  total_real_day_volume_percentage
-                                }
-                                totalFakeVolumePercentage={
-                                  total_fake_day_volume_percentage
-                                }
-                                totalLoanVolumePercentage={
-                                  total_loan_day_volume_percentage
-                                }
-                              />
-                            </HoverCard.Dropdown>
-                          </HoverCard>
-                        </Group>
+                        <HoverCard
+                          width={320}
+                          shadow="md"
+                          openDelay={300}
+                          position="top"
+                        >
+                          <HoverCard.Target>
+                            <p className="typography__display--2 leaderboard__name">
+                              {truncateString(name, 20)}
+                            </p>
+                          </HoverCard.Target>
+                          <HoverCard.Dropdown className="dropdown">
+                            <TooltipBody
+                              name={name}
+                              today={today.toDateString()}
+                              trueVolume={trueVolumeDoughnutSummararyData}
+                              fakeVolume={fakeVolumeDoughnutSummararyData}
+                              loanVolume={loanVolumeDoughnutSummararyData}
+                              totalVolume={total_raw_day_volume}
+                              totalRevenue={total_day_total_royalty}
+                              totalRealDayVolume={total_real_day_volume}
+                              totalFakeVolume={total_day_volume_fake}
+                              totalLoanVolume={total_day_volume_loan}
+                              totalRealDayVolumePercentage={
+                                total_real_day_volume_percentage
+                              }
+                              totalFakeVolumePercentage={
+                                total_fake_day_volume_percentage
+                              }
+                              totalLoanVolumePercentage={
+                                total_loan_day_volume_percentage
+                              }
+                            />
+                          </HoverCard.Dropdown>
+                        </HoverCard>
                       </td>
                     </tr>
                   );
@@ -279,17 +321,61 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
               title="Fake Volume"
               valueTitle="% Of Total"
               color="accent-red"
-              col1data={fakeVolumeDataArray.map(({ name }) => {
-                return (
-                  <tr key={name}>
-                    <td height="30" valign="top">
-                      <p className="typography__display--2">
-                        {truncateString(name, 20)}
-                      </p>
-                    </td>
-                  </tr>
-                );
-              })}
+              col1data={fakeVolumeDataArray.map(
+                ({
+                  name,
+                  total_raw_day_volume,
+                  total_real_day_volume,
+                  total_day_volume_fake,
+                  total_day_volume_loan,
+                  total_real_day_volume_percentage,
+                  total_fake_day_volume_percentage,
+                  total_loan_day_volume_percentage,
+                  total_day_total_royalty,
+                }) => {
+                  return (
+                    <tr key={name}>
+                      <td height="30" valign="top">
+                        <HoverCard
+                          width={320}
+                          shadow="md"
+                          openDelay={300}
+                          position="top"
+                        >
+                          <HoverCard.Target>
+                            <p className="typography__display--2">
+                              {truncateString(name, 20)}
+                            </p>
+                          </HoverCard.Target>
+                          <HoverCard.Dropdown className="dropdown">
+                            <TooltipBody
+                              name={name}
+                              today={today.toDateString()}
+                              trueVolume={trueVolumeDoughnutSummararyData}
+                              fakeVolume={fakeVolumeDoughnutSummararyData}
+                              loanVolume={loanVolumeDoughnutSummararyData}
+                              totalVolume={total_raw_day_volume}
+                              totalRevenue={total_day_total_royalty}
+                              totalRealDayVolume={total_real_day_volume}
+                              totalFakeVolume={total_day_volume_fake}
+                              totalLoanVolume={total_day_volume_loan}
+                              totalRealDayVolumePercentage={
+                                total_real_day_volume_percentage
+                              }
+                              totalFakeVolumePercentage={
+                                total_fake_day_volume_percentage
+                              }
+                              totalLoanVolumePercentage={
+                                total_loan_day_volume_percentage
+                              }
+                            />
+                          </HoverCard.Dropdown>
+                        </HoverCard>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
               col2data={fakeVolumeDataArray.map(
                 ({ total_day_volume_fake }, index: number) => {
                   return (
@@ -337,17 +423,61 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
               title="Loan Volume"
               valueTitle="New Loans"
               color="accent-yellow"
-              col1data={loanVolumeDataArray.map(({ name }) => {
-                return (
-                  <tr key={name}>
-                    <td height="30" valign="top">
-                      <p className="typography__display--2">
-                        {truncateString(name, 20)}
-                      </p>
-                    </td>
-                  </tr>
-                );
-              })}
+              col1data={loanVolumeDataArray.map(
+                ({
+                  name,
+                  total_raw_day_volume,
+                  total_real_day_volume,
+                  total_day_volume_fake,
+                  total_day_volume_loan,
+                  total_real_day_volume_percentage,
+                  total_fake_day_volume_percentage,
+                  total_loan_day_volume_percentage,
+                  total_day_total_royalty,
+                }) => {
+                  return (
+                    <tr key={name}>
+                      <td height="30" valign="top">
+                        <HoverCard
+                          width={320}
+                          shadow="md"
+                          openDelay={300}
+                          position="top"
+                        >
+                          <HoverCard.Target>
+                            <p className="typography__display--2">
+                              {truncateString(name, 20)}
+                            </p>
+                          </HoverCard.Target>
+                          <HoverCard.Dropdown className="dropdown">
+                            <TooltipBody
+                              name={name}
+                              today={today.toDateString()}
+                              trueVolume={trueVolumeDoughnutSummararyData}
+                              fakeVolume={fakeVolumeDoughnutSummararyData}
+                              loanVolume={loanVolumeDoughnutSummararyData}
+                              totalVolume={total_raw_day_volume}
+                              totalRevenue={total_day_total_royalty}
+                              totalRealDayVolume={total_real_day_volume}
+                              totalFakeVolume={total_day_volume_fake}
+                              totalLoanVolume={total_day_volume_loan}
+                              totalRealDayVolumePercentage={
+                                total_real_day_volume_percentage
+                              }
+                              totalFakeVolumePercentage={
+                                total_fake_day_volume_percentage
+                              }
+                              totalLoanVolumePercentage={
+                                total_loan_day_volume_percentage
+                              }
+                            />
+                          </HoverCard.Dropdown>
+                        </HoverCard>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
               col2data={loanVolumeDataArray.map(
                 ({ total_day_volume_loan }, index: number) => {
                   return (
@@ -375,17 +505,61 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
               title="Revenue Volume"
               valueTitle="Earnings"
               color="light-grey-1"
-              col1data={revenueDataArray.map(({ name }) => {
-                return (
-                  <tr key={name}>
-                    <td height="30" valign="top">
-                      <p className="typography__display--2">
-                        {truncateString(name, 25)}
-                      </p>
-                    </td>
-                  </tr>
-                );
-              })}
+              col1data={revenueDataArray.map(
+                ({
+                  name,
+                  total_raw_day_volume,
+                  total_real_day_volume,
+                  total_day_volume_fake,
+                  total_day_volume_loan,
+                  total_real_day_volume_percentage,
+                  total_fake_day_volume_percentage,
+                  total_loan_day_volume_percentage,
+                  total_day_total_royalty,
+                }) => {
+                  return (
+                    <tr key={name}>
+                      <td height="30" valign="top">
+                        <HoverCard
+                          width={320}
+                          shadow="md"
+                          openDelay={300}
+                          position="top"
+                        >
+                          <HoverCard.Target>
+                            <p className="typography__display--2">
+                              {truncateString(name, 25)}
+                            </p>
+                          </HoverCard.Target>
+                          <HoverCard.Dropdown className="dropdown">
+                            <TooltipBody
+                              name={name}
+                              today={today.toDateString()}
+                              trueVolume={trueVolumeDoughnutSummararyData}
+                              fakeVolume={fakeVolumeDoughnutSummararyData}
+                              loanVolume={loanVolumeDoughnutSummararyData}
+                              totalVolume={total_raw_day_volume}
+                              totalRevenue={total_day_total_royalty}
+                              totalRealDayVolume={total_real_day_volume}
+                              totalFakeVolume={total_day_volume_fake}
+                              totalLoanVolume={total_day_volume_loan}
+                              totalRealDayVolumePercentage={
+                                total_real_day_volume_percentage
+                              }
+                              totalFakeVolumePercentage={
+                                total_fake_day_volume_percentage
+                              }
+                              totalLoanVolumePercentage={
+                                total_loan_day_volume_percentage
+                              }
+                            />
+                          </HoverCard.Dropdown>
+                        </HoverCard>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
               col2data={revenueDataArray.map(
                 ({ total_day_total_royalty }, index: number) => {
                   return (
