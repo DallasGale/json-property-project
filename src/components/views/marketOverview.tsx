@@ -536,7 +536,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
               <div className="grid grid__two-col">
                 <animated.div
                   style={{ ...springs1 }}
-                  className="grid__col-content"
+                  className="grid__col-content grid__col-content--chart"
                 >
                   <div className="grid__col-container-body">
                     <div className="chart__info">
@@ -595,7 +595,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
 
                 <animated.div
                   style={{ ...springs1 }}
-                  className="grid__col-content"
+                  className="grid__col-content grid__col-content--chart"
                 >
                   <div className="grid__col-container-body">
                     <div>

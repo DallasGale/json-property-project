@@ -9,10 +9,9 @@ interface TrueVolumeChartTypes {
 const TrueVolumeBarChart: React.FC<TrueVolumeChartTypes> = ({
   labels,
   data: { true_volume },
-  trend_timespan,
 }) => {
   return (
-    <div className="chart__bar-wrapper" style={{ height: 197 }}>
+    <div className="chart__bar-wrapper" style={{ height: 190 }}>
       <Bar
         data={{
           labels: labels,

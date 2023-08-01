@@ -60,6 +60,10 @@
   width: 100%;
   border-radius: 8px;
   padding: 16px;
+
+  &--chart {
+    min-height: 342px;
+  }
 }
 
 .grid__col-container-body {
