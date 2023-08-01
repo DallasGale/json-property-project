@@ -2,9 +2,9 @@ import { Doughnut } from "react-chartjs-2";
 // import goodToBadColors from "@utils/goodToBadColors";
 
 interface ProgressRingTypes {
-  trueVolume: number[];
-  loanVolume: number[];
-  fakeVolume: number[];
+  trueVolume: number | number[];
+  loanVolume: number | number[];
+  fakeVolume: number | number[];
   percentage?: string;
   modiferClass?: string;
 }

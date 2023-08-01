@@ -21,9 +21,9 @@ import PercentFormatter from "@/utils/percentFormatter";
 interface TooltipBodyProps {
   name: string;
   today: string;
-  trueVolume: number[];
-  fakeVolume: number[];
-  loanVolume: number[];
+  trueVolume: number | number[];
+  fakeVolume: number | number[];
+  loanVolume: number | number[];
   totalVolume: number;
   totalRevenue: number;
   totalRealDayVolume: number;
