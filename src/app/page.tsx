@@ -300,7 +300,6 @@ const MarketOverviewPage: React.FC = async () => {
 
   return (
     <>
-      {" "}
       <HeroBanner />
       <StatusBar />
       <MarketOverview
@@ -316,33 +315,31 @@ const MarketOverviewPage: React.FC = async () => {
         trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
         leaderboard={{
           trueVolume: {
-            col1: {
-              oneDay: orderBy(
-                leaderBoard1dData,
-                ["total_real_day_volume"],
-                "desc"
-              ).slice(0, 5),
-              sevenDay: orderBy(
-                leaderBoard7dData,
-                ["total_real_day_volume"],
-                "desc"
-              ).slice(0, 5),
-              thirtyDay: orderBy(
-                leaderBoard30dData,
-                ["total_real_day_volume"],
-                "desc"
-              ).slice(0, 5),
-              ninetyDay: orderBy(
-                leaderBoard90dData,
-                ["total_real_day_volume"],
-                "desc"
-              ).slice(0, 5),
-              all: orderBy(
-                leaderBoardAllData,
-                ["total_raw_day_volume"],
-                "desc"
-              ).slice(0, 5),
-            },
+            oneDay: orderBy(
+              leaderBoard1dData,
+              ["total_real_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            sevenDay: orderBy(
+              leaderBoard7dData,
+              ["total_real_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_real_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            ninetyDay: orderBy(
+              leaderBoard90dData,
+              ["total_real_day_volume"],
+              "desc"
+            ).slice(0, 5),
+            all: orderBy(
+              leaderBoardAllData,
+              ["total_raw_day_volume"],
+              "desc"
+            ).slice(0, 5),
           },
           fakeVolume: {
             oneDay: orderBy(

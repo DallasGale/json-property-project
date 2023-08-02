@@ -171,6 +171,7 @@ const LeaderboardsPage: React.FC = async () => {
       }}
       leaderboard={{
         top100: {
+          sortedByTotalVol: {
           oneDayTop100: orderBy(
             leaderBoard1dData,
             ["total_real_day_volume"],
@@ -195,7 +196,37 @@ const LeaderboardsPage: React.FC = async () => {
             leaderBoardAllData,
             ["total_raw_day_volume"],
             "desc"
-          ).slice(0, 100),
+          ).slice(0, 100)
+          },
+
+          sortedByTrueVolPct: {
+            oneDayTop100: orderBy(
+              leaderBoard1dData,
+              ["total_real_day_volume_percentage"],
+              "desc"
+            ).slice(0, 100),
+            sevenDayTop100: orderBy(
+              leaderBoard7dData,
+              ["total_real_day_volume_percentage"],
+              "desc"
+            ).slice(0, 100),
+            thirtyDayTop100: orderBy(
+              leaderBoard30dData,
+              ["total_real_day_volume_percentage"],
+              "desc"
+            ).slice(0, 100),
+            ninetyDayTop100: orderBy(
+              leaderBoard90dData,
+              ["total_real_day_volume_percentage"],
+              "desc"
+            ).slice(0, 100),
+            allTop100: orderBy(
+              leaderBoardAllData,
+              ["total_real_day_volume_percentage"],
+              "desc"
+            ).slice(0, 100)
+            },
+          }
         },
         trueVolume: {
           oneDay: orderBy(
