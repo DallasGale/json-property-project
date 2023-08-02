@@ -20,11 +20,55 @@ interface LeaderboardsTypes {
   };
   leaderboard: {
     top100: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
+      sortedByTrueVol: {
+        oneDayTop100: CollectionTypes[];
+        sevenDayTop100: CollectionTypes[];
+        thirtyDayTop100: CollectionTypes[];
+        ninetyDayTop100: CollectionTypes[];
+        allTop100: CollectionTypes[];
+      };
+      sortedByTrueVolPct: {
+        oneDayTop100: CollectionTypes[];
+        sevenDayTop100: CollectionTypes[];
+        thirtyDayTop100: CollectionTypes[];
+        ninetyDayTop100: CollectionTypes[];
+        allTop100: CollectionTypes[];
+      };
+      sortedByTotalVol: {
+        oneDayTop100: CollectionTypes[];
+        sevenDayTop100: CollectionTypes[];
+        thirtyDayTop100: CollectionTypes[];
+        ninetyDayTop100: CollectionTypes[];
+        allTop100: CollectionTypes[];
+      };
+      sortedByTrueSales: {
+        oneDayTop100: CollectionTypes[];
+        sevenDayTop100: CollectionTypes[];
+        thirtyDayTop100: CollectionTypes[];
+        ninetyDayTop100: CollectionTypes[];
+        allTop100: CollectionTypes[];
+      };
+      sortedByLoans: {
+        oneDayTop100: CollectionTypes[];
+        sevenDayTop100: CollectionTypes[];
+        thirtyDayTop100: CollectionTypes[];
+        ninetyDayTop100: CollectionTypes[];
+        allTop100: CollectionTypes[];
+      };
+      sortedByRevenue: {
+        oneDayTop100: CollectionTypes[];
+        sevenDayTop100: CollectionTypes[];
+        thirtyDayTop100: CollectionTypes[];
+        ninetyDayTop100: CollectionTypes[];
+        allTop100: CollectionTypes[];
+      };
+      sortedByFake: {
+        oneDayTop100: CollectionTypes[];
+        sevenDayTop100: CollectionTypes[];
+        thirtyDayTop100: CollectionTypes[];
+        ninetyDayTop100: CollectionTypes[];
+        allTop100: CollectionTypes[];
+      };
     };
     trueVolume: {
       oneDay: TrueVolumeTypes[];

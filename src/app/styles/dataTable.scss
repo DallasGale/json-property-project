@@ -45,8 +45,19 @@
 
 .data-table__row {
   transition: all 0.5s ease-in-out;
+  opacity: 1;
   &:hover {
     background: rgba(255, 255, 255, 0.05);
-    transition: all 0.25s ease-in-out;
+    transition: all 0.125s ease-in-out;
   }
+
+  // &.sorting-started {
+  //   opacity: 0;
+  //   transition: all 0.125s ease-in-out;
+  // }
+
+  // &.sorting-finished {
+  //   opacity: 1;
+  //   transition: all 0.05 ease-in-out;
+  // }
 }

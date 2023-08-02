@@ -300,7 +300,6 @@ const MarketOverviewPage: React.FC = async () => {
 
   return (
     <>
-      {" "}
       <HeroBanner />
       <StatusBar />
       <MarketOverview
