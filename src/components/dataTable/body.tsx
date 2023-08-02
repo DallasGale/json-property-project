@@ -19,6 +19,7 @@ interface BodyProps {
 
 const Body: React.FC<BodyProps> = ({ data, active }) => {
   const today = new Date();
+
   return (
     <tbody>
       {data.map(
@@ -101,22 +102,18 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                 </div>
               </td>
               <td width="70" align="right" className="data-table__td">
-                {total_real_day_volume_percentage ? (
-                  <p
-                    style={{
-                      color: GoodToBadColors(total_real_day_volume_percentage),
-                    }}
-                    className={`typography__display--2 ${
-                      active === "true-volume-percentage"
-                        ? "typography__weight--700"
-                        : "typography__weight--300"
-                    }`}
-                  >
-                    {DecimalFormatter(total_real_day_volume_percentage)}%
-                  </p>
-                ) : (
-                  <p className="typography__display--2">--</p>
-                )}
+                <p
+                  style={{
+                    color: GoodToBadColors(total_real_day_volume_percentage),
+                  }}
+                  className={`typography__display--2 ${
+                    active === "true-volume-percentage"
+                      ? "typography__weight--700"
+                      : "typography__weight--300"
+                  }`}
+                >
+                  {DecimalFormatter(total_real_day_volume_percentage)}%
+                </p>
               </td>
 
               <td width="100" align="right" className="data-table__td">

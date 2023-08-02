@@ -17,11 +17,55 @@ import { config } from "@constants/animationSettings";
 interface DataTableProps {
   tableTitle?: string;
   tableBodyData: {
-    oneDayTop100: CollectionTypes[];
-    sevenDayTop100: CollectionTypes[];
-    thirtyDayTop100: CollectionTypes[];
-    ninetyDayTop100: CollectionTypes[];
-    allTop100: CollectionTypes[];
+    sortedByTrueVol: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByTrueVolPct: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByTotalVol: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByTrueSales: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByLoans: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByRevenue: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByFake: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
   };
 }
 
@@ -40,38 +84,164 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
     config,
   });
 
+  const [sortedBy, setSortedBy] = useState(ColumnLabels[2].id);
   const [timeframe, setTimeframe] = useState(1);
-  const [top100Data, setTop100Data] = useState(tableBodyData.thirtyDayTop100);
+  const [top100Data, setTop100Data] = useState(
+    tableBodyData.sortedByTrueVol.thirtyDayTop100
+  );
+  const [activeColumn, setActiveColumn] = useState(ColumnLabels[2].id);
+  const handleSorting = (id: string) => {
+    setSortedBy(id);
+    setActiveColumn(id);
+  };
 
   useEffect(() => {
-    if (timeframe === 90) {
-      setTop100Data(tableBodyData.ninetyDayTop100);
-    }
-    if (timeframe === 30) {
-      setTop100Data(tableBodyData.thirtyDayTop100);
-    }
-    if (timeframe === 7) {
-      setTop100Data(tableBodyData.sevenDayTop100);
-    }
+    // True Volume
+    if (sortedBy === ColumnLabels[2].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedByTrueVol.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedByTrueVol.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedByTrueVol.sevenDayTop100);
+      }
 
-    if (timeframe === 1) {
-      setTop100Data(tableBodyData.oneDayTop100);
-    }
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedByTrueVol.oneDayTop100);
+      }
 
-    if (timeframe === 0) {
-      setTop100Data(tableBodyData.allTop100);
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedByTrueVol.allTop100);
+      }
     }
-  }, [timeframe]);
+    // True Volume Percentage
+    if (sortedBy === ColumnLabels[3].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedByTrueVolPct.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedByTrueVolPct.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedByTrueVolPct.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedByTrueVolPct.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedByTrueVolPct.allTop100);
+      }
+    }
+    //  Total Volume
+    if (sortedBy === ColumnLabels[4].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedByTotalVol.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedByTotalVol.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedByTotalVol.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedByTotalVol.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedByTotalVol.allTop100);
+      }
+    }
+    // True Sales
+    if (sortedBy === ColumnLabels[5].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedByTrueSales.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedByTrueSales.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedByTrueSales.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedByTrueSales.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedByTrueSales.allTop100);
+      }
+    }
+    // Loans
+    if (sortedBy === ColumnLabels[6].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedByLoans.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedByLoans.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedByLoans.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedByLoans.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedByLoans.allTop100);
+      }
+    }
+    // Revenue
+    if (sortedBy === ColumnLabels[7].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedByRevenue.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedByRevenue.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedByRevenue.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedByRevenue.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedByRevenue.allTop100);
+      }
+    }
+    // Fake
+    if (sortedBy === ColumnLabels[8].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedByFake.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedByFake.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedByFake.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedByFake.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedByFake.allTop100);
+      }
+    }
+  }, [timeframe, sortedBy]);
 
   function handleDailyTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimeframe(value);
   }
-
-  const [activeColumn, setActiveColumn] = useState("true-volume");
-  const handleSorting = (id: string) => {
-    setActiveColumn(id);
-  };
 
   return (
     <div className="data-table">
@@ -93,7 +263,11 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
         cellSpacing={0}
         width="100%"
       >
-        <Head labels={ColumnLabels} active={activeColumn} />
+        <Head
+          labels={ColumnLabels}
+          active={activeColumn}
+          handleSortByClick={(e) => handleSorting(e)}
+        />
         <Body active={activeColumn} data={top100Data} />
       </animated.table>
     </div>
