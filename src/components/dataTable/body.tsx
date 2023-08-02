@@ -42,7 +42,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
           let count = index + 1;
           return (
             <tr key={contract_address} className="data-table__row">
-              <td width="50">
+              <td width="50" className="data-table__td">
                 <p className="typography__display--2">{count}</p>
               </td>
               <td className="data-table__td">
@@ -82,7 +82,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                   </HoverCard.Dropdown>
                 </HoverCard>
               </td>
-              <td width="120">
+              <td width="120" className="data-table__td">
                 <div className="data-table__cell-content">
                   <Image
                     src={CryptoIcon}
@@ -100,7 +100,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                   </p>
                 </div>
               </td>
-              <td width="70" align="right">
+              <td width="70" align="right" className="data-table__td">
                 {total_real_day_volume_percentage ? (
                   <p
                     style={{
@@ -119,7 +119,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                 )}
               </td>
 
-              <td width="100" align="right">
+              <td width="100" align="right" className="data-table__td">
                 <div className="data-table__cell-content">
                   <Image
                     src={CryptoIcon}
@@ -138,7 +138,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                 </div>
               </td>
 
-              <td width="90" align="right">
+              <td width="90" align="right" className="data-table__td">
                 <p
                   className={`typography__display--2 ${
                     active === "sales"
@@ -151,7 +151,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
               </td>
 
               {/* loans */}
-              <td width="70" align="right">
+              <td width="70" align="right" className="data-table__td">
                 <div className="leaderboard__data-cell">
                   <Image
                     src={CryptoIcon}
@@ -171,7 +171,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
               </td>
 
               {/* revenue */}
-              <td width="70" align="right">
+              <td width="70" align="right" className="data-table__td">
                 <div className="leaderboard__data-cell">
                   <Image
                     src={CryptoIcon}
@@ -190,7 +190,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                 </div>
               </td>
               {/* fake_volume */}
-              <td width="70" align="right">
+              <td width="70" align="right" className="data-table__td">
                 <div className="leaderboard__data-cell">
                   <Image
                     src={CryptoIcon}
@@ -209,7 +209,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                 </div>
               </td>
               {/* total sales count */}
-              <td width="120" align="right">
+              <td width="120" align="right" className="data-table__td">
                 <div className="leaderboard__data-cell">
                   <Image
                     src={CryptoIcon}
