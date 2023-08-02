@@ -4,7 +4,7 @@ export const legendLabels = {
     {
       color: "accent-purple",
       rgba: "rgba(250, 82, 82, 1)",
-      name: "New Walletst",
+      name: "New Wallets",
       id: "new-wallets-daily-stats",
     },
     {
