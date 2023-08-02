@@ -45,7 +45,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
               <td width="50">
                 <p className="typography__display--2">{count}</p>
               </td>
-              <td>
+              <td className="data-table__td">
                 <HoverCard
                   width={320}
                   shadow="md"

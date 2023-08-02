@@ -7,10 +7,9 @@
   @include respond-to(tablet-up) {
     overflow-x: hidden;
   }
-
-  td {
-    border-bottom: 1px solid $dark-bg-2;
-  }
+}
+.data-table__td {
+  border-bottom: 1px solid $dark-bg-2;
 }
 
 .data-table__cell-content {
