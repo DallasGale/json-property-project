@@ -16,14 +16,14 @@ import { toFrom, config } from "@constants/animationSettings";
 import ChartHeader from "@/components/charts/chartHeader";
 
 // Types
-export interface NewWalletsTypes extends TradersTimeframeTypes {
+export interface NewWalletsypes extends TradersTimeframeTypes {
   dailyStats: {
     new: number[];
     totalCreated: number[];
   };
 }
 interface Props {
-  newWallets: NewWalletsTypes;
+  newWallets: NewWalletsypes;
   timeframe: number;
   labels: string[];
 }
