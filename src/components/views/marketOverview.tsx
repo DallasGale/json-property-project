@@ -534,11 +534,11 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         trueVolume={trueVolumeDoughnutSummararyData}
                         loanVolume={loanVolumeDoughnutSummararyData}
                         fakeVolume={fakeVolumeDoughnutSummararyData}
-                        percentage={DecimalFormatter(
+                        percentage={`${DecimalFormatter(
                           (trueVolumeDoughnutSummararyData[0] /
                             totalVolumeTimeframeSummaryData[0]) *
                             100
-                        )}
+                        )}`}
                       />
                       <ChartHeader
                         value={`${VolumeFormatter(
