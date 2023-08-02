@@ -69,6 +69,13 @@ interface LeaderboardsTypes {
         ninetyDayTop100: CollectionTypes[];
         allTop100: CollectionTypes[];
       };
+      sortedByTotalSalesCount: {
+        oneDayTop100: CollectionTypes[];
+        sevenDayTop100: CollectionTypes[];
+        thirtyDayTop100: CollectionTypes[];
+        ninetyDayTop100: CollectionTypes[];
+        allTop100: CollectionTypes[];
+      };
     };
     trueVolume: {
       oneDay: TrueVolumeTypes[];

@@ -66,6 +66,13 @@ interface DataTableProps {
       ninetyDayTop100: CollectionTypes[];
       allTop100: CollectionTypes[];
     };
+    sortedByTotalSalesCount: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
   };
 }
 
@@ -234,6 +241,26 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
 
       if (timeframe === 0) {
         setTop100Data(tableBodyData.sortedByFake.allTop100);
+      }
+    }
+    // Total Sales Count
+    if (sortedBy === ColumnLabels[9].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedByTotalSalesCount.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedByTotalSalesCount.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedByTotalSalesCount.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedByTotalSalesCount.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedByTotalSalesCount.allTop100);
       }
     }
   }, [timeframe, sortedBy]);
