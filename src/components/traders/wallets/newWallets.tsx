@@ -1,9 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 // Utils
-import { useSpring, animated, easings } from "@react-spring/web";
+import { useSpring, animated } from "@react-spring/web";
 import { VolumeFormatter } from "@utils/volumeFormatter";
 
 // Assets
@@ -16,14 +15,14 @@ import { toFrom, config } from "@constants/animationSettings";
 import ChartHeader from "@/components/charts/chartHeader";
 
 // Types
-export interface NewWalletsypes extends TradersTimeframeTypes {
+export interface NewWalletsTypes extends TradersTimeframeTypes {
   dailyStats: {
     new: number[];
     totalCreated: number[];
   };
 }
 interface Props {
-  newWallets: NewWalletsypes;
+  newWallets: NewWalletsTypes;
   timeframe: number;
   labels: string[];
 }
