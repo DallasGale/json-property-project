@@ -2,7 +2,7 @@ import { cache } from "react";
 import endpoints from "@/api/endpoints";
 import orderBy from "lodash.orderby";
 import Leaderboards from "@components/views/leaderboards";
-import { DatasetsType } from "../types";
+import { CollectionTypes, DatasetsType } from "../types";
 
 // Fetching
 const getLeaderBoard1dData = cache(async () => {
@@ -61,6 +61,12 @@ const LeaderboardsPage: React.FC = async () => {
   const leaderBoard90dData = await getLeaderBoard90dData();
   const leaderBoardAllData = await getLeaderBoardAllData();
   const volumeSummararyData = await getVolumeTimeframeSummary();
+
+  // 1day percentage
+  const totalRealDayVolumePercentage1d = leaderBoard1dData.filter(
+    ({ total_real_day_volume_percentage }: CollectionTypes) =>
+      total_real_day_volume_percentage !== null
+  );
 
   const totalVolumeSummary7Day = volumeSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_7d"
@@ -137,6 +143,7 @@ const LeaderboardsPage: React.FC = async () => {
   const trueVolumeSummaryAll = volumeSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real_all_time"
   );
+
   return (
     <Leaderboards
       traders={{
@@ -200,7 +207,7 @@ const LeaderboardsPage: React.FC = async () => {
           },
           sortedByTrueVolPct: {
             oneDayTop100: orderBy(
-              leaderBoard1dData,
+              totalRealDayVolumePercentage1d,
               ["total_real_day_volume_percentage"],
               "desc"
             ).slice(0, 100),
@@ -357,6 +364,33 @@ const LeaderboardsPage: React.FC = async () => {
             allTop100: orderBy(
               leaderBoardAllData,
               ["total_day_volume_fake"],
+              "desc"
+            ).slice(0, 100),
+          },
+          sortedByTotalSalesCount: {
+            oneDayTop100: orderBy(
+              leaderBoard1dData,
+              ["total_day_trade_num"],
+              "desc"
+            ).slice(0, 100),
+            sevenDayTop100: orderBy(
+              leaderBoard7dData,
+              ["total_day_trade_num"],
+              "desc"
+            ).slice(0, 100),
+            thirtyDayTop100: orderBy(
+              leaderBoard30dData,
+              ["total_day_trade_num"],
+              "desc"
+            ).slice(0, 100),
+            ninetyDayTop100: orderBy(
+              leaderBoard90dData,
+              ["total_day_trade_num"],
+              "desc"
+            ).slice(0, 100),
+            allTop100: orderBy(
+              leaderBoardAllData,
+              ["total_day_trade_num"],
               "desc"
             ).slice(0, 100),
           },
