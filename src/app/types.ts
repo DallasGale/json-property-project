@@ -66,7 +66,7 @@ export type CollectionTypes = {
   total_day_volume_fake: number | number;
   total_day_total_royalty: number | number;
   total_day_total_platform: number | number;
-  total_real_day_volume_percentage: number;
+  total_real_day_volume_percentage: number | null;
   total_fake_day_volume_percentage: number | null;
   total_loan_day_volume_percentage: number | null;
 };
