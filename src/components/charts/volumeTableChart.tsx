@@ -1,3 +1,5 @@
+import { HoverCard, Button, Text, Group } from "@mantine/core";
+
 interface TableChartProps {
   title: string;
   valueTitle: string;
@@ -19,14 +21,12 @@ const VolumeTableChart: React.FC<TableChartProps> = ({
     <div className="volume-table-chart">
       <div className="volume-table-chart__header">
         <div className={`volume-table-chart__title ${color}`}>
-          <p
-            className={`typography__display--4 typography__weight--700 typography__color--${color}`}
-          >
+          <p className={`typography__body--small typography__color--${color}`}>
             {title}
           </p>
         </div>
         <div className="volume-table-chart__value-title">
-          <p className="typography__label--4 typography__color--dark-medium-emphasis typography__weight--300">
+          <p className="typography__label--medium typography__color--dark-medium-emphasis">
             {valueTitle}
           </p>
         </div>
