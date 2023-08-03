@@ -194,9 +194,14 @@ const Traders: React.FC<TradersTypes> = ({
   ];
 
   const [timeframe, setTimeframe] = useState<number>(7);
+  const [timeframeClicked, setTimeframeClicked] = useState(false);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
+    setTimeframeClicked(true);
     setTimeframe(value);
+    setTimeout(() => {
+      setTimeframeClicked(false);
+    }, 500);
   }
 
   return (
@@ -218,6 +223,7 @@ const Traders: React.FC<TradersTypes> = ({
             <animated.div style={{ ...springs2 }} className="grid__col-content">
               <div>
                 <HeroBarChart
+                  timeframeClicked={timeframeClicked}
                   timeframe={tradersTimeframe}
                   labels={tradersLabels}
                   legendOnClick={onClick}

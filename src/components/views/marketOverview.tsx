@@ -225,9 +225,14 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
     }
   }, [dailyTimeframe]);
 
+  const [timeframeClicked, setTimeframeClicked] = useState(false);
   function handleDailyTimeferame(e: React.MouseEvent, value: any) {
+    setTimeframeClicked(true);
     e.preventDefault();
     setDailyTimeframe(value);
+    setTimeout(() => {
+      setTimeframeClicked(false);
+    }, 500);
   }
 
   const [trueVolumeDisabled, setTrueVolumeDisabled] = useState(false);
@@ -434,6 +439,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                 className="grid__col-content"
               >
                 <HeroBarChart
+                  timeframeClicked={timeframeClicked}
                   timeframe={dailyTimeframe}
                   legendOnClick={(e: string) => onClick(e)}
                   labels={dailyTrueVolumeLabels}
