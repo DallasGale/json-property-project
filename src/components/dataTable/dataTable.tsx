@@ -14,6 +14,7 @@ import Body from "./body";
 import { ColumnLabels } from "@constants/top100table";
 import { config } from "@constants/animationSettings";
 
+const count = Array.from({ length: 100 });
 interface DataTableProps {
   tableTitle?: string;
   tableBodyData: {
@@ -284,19 +285,38 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
           />
         </div>
       </animated.div>
-      <animated.table
-        style={{ ...animation2 }}
-        cellPadding={6}
-        cellSpacing={0}
-        width="100%"
-      >
-        <Head
-          labels={ColumnLabels}
-          active={activeColumn}
-          handleSortByClick={(e) => handleSorting(e)}
-        />
-        <Body active={activeColumn} data={top100Data} />
-      </animated.table>
+      <div className="data-table__table-wrapper">
+        {/* <table
+          className="data-table__body-count"
+          cellPadding={6}
+          cellSpacing={0}
+        >
+          <tbody>
+            {count.map((_, index) => {
+              return (
+                <tr key={index} className="data-table__row">
+                  <td width="50" className="data-table__td">
+                    <p className="typography__display--6">{index + 1}</p>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table> */}
+        <animated.table
+          style={{ ...animation2 }}
+          cellPadding={6}
+          cellSpacing={0}
+          width="100%"
+        >
+          <Head
+            labels={ColumnLabels}
+            active={activeColumn}
+            handleSortByClick={(e) => handleSorting(e)}
+          />
+          <Body active={activeColumn} data={top100Data} />
+        </animated.table>
+      </div>
     </div>
   );
 };
