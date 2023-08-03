@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   overflow-x: scroll;
+  position: relative;
   @include respond-to(tablet-up) {
     overflow-x: hidden;
   }
@@ -50,14 +51,20 @@
     background: rgba(255, 255, 255, 0.05);
     transition: all 0.125s ease-in-out;
   }
+}
 
-  // &.sorting-started {
-  //   opacity: 0;
-  //   transition: all 0.125s ease-in-out;
-  // }
+.data-table__body-count {
+  position: absolute;
+  top: 0;
+  margin-top: 30px;
+  li {
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
 
-  // &.sorting-finished {
-  //   opacity: 1;
-  //   transition: all 0.05 ease-in-out;
-  // }
+.data-table__table-wrapper {
+  position: relative;
 }

@@ -36,3 +36,9 @@
 .u-cursor-pointer {
   cursor: pointer;
 }
+
+.u-hideMarker {
+  &::marker {
+    content: none;
+  }
+}

@@ -1,57 +1,56 @@
-import { cache } from "react";
 import endpoints from "@/api/endpoints";
 import orderBy from "lodash.orderby";
 import Leaderboards from "@components/views/leaderboards";
 import { CollectionTypes, DatasetsType } from "../types";
 
 // Fetching
-const getLeaderBoard1dData = cache(async () => {
+const getLeaderBoard1dData = async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["1d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-});
+};
 
-const getLeaderBoard7dData = cache(async () => {
+const getLeaderBoard7dData = async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["7d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-});
+};
 
-const getLeaderBoard30dData = cache(async () => {
+const getLeaderBoard30dData = async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["30d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-});
+};
 
-const getLeaderBoard90dData = cache(async () => {
+const getLeaderBoard90dData = async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["90d"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-});
+};
 
-const getLeaderBoardAllData = cache(async () => {
+const getLeaderBoardAllData = async () => {
   const res = await fetch(endpoints.nft_ethereum_collection_summary["all"]);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-});
+};
 
-const getVolumeTimeframeSummary = cache(async () => {
+const getVolumeTimeframeSummary = async () => {
   const res = await fetch(endpoints.nft_ethereum_timeframe_volume_summary);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
   return res.json();
-});
+};
 
 const LeaderboardsPage: React.FC = async () => {
   // Leaderboard
@@ -201,7 +200,7 @@ const LeaderboardsPage: React.FC = async () => {
             ).slice(0, 100),
             allTop100: orderBy(
               leaderBoardAllData,
-              ["total_raw_day_volume"],
+              ["total_real_day_volume"],
               "desc"
             ).slice(0, 100),
           },
