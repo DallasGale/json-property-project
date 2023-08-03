@@ -1,3 +1,5 @@
+import { HoverCard, Button, Text, Group } from "@mantine/core";
+
 interface TableChartProps {
   title: string;
   valueTitle: string;
