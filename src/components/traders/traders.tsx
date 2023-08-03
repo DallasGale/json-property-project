@@ -172,6 +172,10 @@ const Traders: React.FC<TradersTypes> = ({
 
   function handleDailyTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
+    setTimeframeClicked(true);
+    setTimeout(() => {
+      setTimeframeClicked(false);
+    }, 500);
     setTradersTimeframe(value);
   }
 
@@ -197,11 +201,7 @@ const Traders: React.FC<TradersTypes> = ({
   const [timeframeClicked, setTimeframeClicked] = useState(false);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
-    setTimeframeClicked(true);
     setTimeframe(value);
-    setTimeout(() => {
-      setTimeframeClicked(false);
-    }, 500);
   }
 
   return (
