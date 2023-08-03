@@ -1,0 +1,16 @@
+.link__more-cta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  img {
+    transition: all 0.25s ease-in-out;
+  }
+  &:hover {
+    transition: all 0.25s ease-in-out;
+    color: $white;
+    img {
+      transition: all 0.25s ease-in-out;
+      transform: translateX(2px);
+    }
+  }
+}

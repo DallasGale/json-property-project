@@ -1,4 +1,8 @@
-import { HoverCard, Button, Text, Group } from "@mantine/core";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import ChevronRightIcon from "@assets/icons/chevron-right.svg";
+import Image from "next/image";
 
 interface TableChartProps {
   title: string;
@@ -17,6 +21,7 @@ const VolumeTableChart: React.FC<TableChartProps> = ({
   col2data,
   col3data,
 }) => {
+  const route = usePathname();
   return (
     <div className="volume-table-chart">
       <div className="volume-table-chart__header">
@@ -57,6 +62,15 @@ const VolumeTableChart: React.FC<TableChartProps> = ({
           </div>
         )}
       </div>
+      {route === "/" && (
+        <Link
+          href="/leaderboards"
+          className="typography__label--5 typography__color--dark-medium-emphasis link__more-cta"
+        >
+          Show More
+          <Image src={ChevronRightIcon.src} alt="" width={15} height={15} />
+        </Link>
+      )}
     </div>
   );
 };
