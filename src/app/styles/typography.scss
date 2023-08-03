@@ -181,6 +181,33 @@ h4 {
   margin-bottom: 8px;
 }
 
+.typography__body--small {
+  color: $dark-high-emphasis;
+  font-family: Roboto;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  line-height: 16px;
+}
+
+.typography__label--medium {
+  color: $dark-high-emphasis;
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.typography__label--large {
+  color: $dark-high-emphasis;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.25px;
+  line-height: 16px;
+}
+
 .typography__color--black {
   color: $black;
 }
@@ -213,12 +240,16 @@ h4 {
   color: $dark-bg-3;
 }
 
+.typography__color--dark-high-emphasis {
+  color: $dark-high-emphasis;
+}
+
 .typography__color--dark-medium-emphasis {
   color: $dark-medium-emphasis;
 }
 
-.typography__color--dark-high-emphasis {
-  color: $dark-high-emphasis;
+.typography__color--dark-low-emphasis {
+  color: $dark-low-emphasis;
 }
 
 .typography__weight--300 {

@@ -189,7 +189,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           position="top"
                         >
                           <HoverCard.Target>
-                            <p className="typography__display--2 u-cursor-pointer">
+                            <p className="typography__body--small u-cursor-pointer">
                               {truncateString(name, 20)}
                             </p>
                           </HoverCard.Target>
@@ -229,7 +229,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <td height="30" valign="top" align="right">
                         <div className="leaderboard__data-cell">
                           <Image src={CryptoGreenIcon} alt="Crypto Icon" />
-                          <p className="typography__display--2 typography__color--accent-green">
+                          <p className="typography__label--large typography__color--accent-green">
                             {VolumeFormatter(
                               DecimalFormatter(total_real_day_volume)
                             )}
@@ -246,12 +246,12 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                     <tr key={index + total_real_day_volume_percentage}>
                       <td height="30" valign="top" align="right">
                         {total_real_day_volume_percentage ? (
-                          <p className="typography__display--2">
+                          <p className="typography__body--small typography__color--dark-medium-emphasis">
                             {PercentFormatter(total_real_day_volume_percentage)}
                             %
                           </p>
                         ) : (
-                          <p className="typography__display--2 typography__color--grey">
+                          <p className="typography__body--small typography__color--dark-low-emphasis">
                             --
                           </p>
                         )}
@@ -291,7 +291,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           position="top"
                         >
                           <HoverCard.Target>
-                            <p className="typography__display--2 u-cursor-pointer">
+                            <p className="typography__body--small u-cursor-pointer">
                               {truncateString(name, 20)}
                             </p>
                           </HoverCard.Target>
@@ -331,7 +331,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <td height="30" valign="top" align="right">
                         <div className="leaderboard__data-cell">
                           <Image src={CryptoRedIcon} alt="Crypto Icon" />
-                          <p className="typography__display--2 typography__color--accent-red">
+                          <p className="typography__label--large typography__color--accent-red">
                             {VolumeFormatter(
                               DecimalFormatter(total_day_volume_fake)
                             )}
@@ -348,12 +348,12 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                     <tr key={index + total_fake_day_volume_percentage}>
                       <td height="30" valign="top" align="right">
                         {total_fake_day_volume_percentage ? (
-                          <p className="typography__display--2">
+                          <p className="typography__body--small typography__color--dark-medium-emphasis">
                             {PercentFormatter(total_fake_day_volume_percentage)}
                             %
                           </p>
                         ) : (
-                          <p className="typography__display--2 typography__color--grey">
+                          <p className="typography__body--small typography__color--dark-low-emphasis">
                             --
                           </p>
                         )}
@@ -369,7 +369,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               title="Loan Volume"
-              valueTitle="New Loans"
+              valueTitle="Amount"
               color="accent-yellow"
               col1data={loanVolumeDataArray.map(
                 ({
@@ -393,7 +393,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           position="top"
                         >
                           <HoverCard.Target>
-                            <p className="typography__display--2 u-cursor-pointer">
+                            <p className="typography__body--small u-cursor-pointer">
                               {truncateString(name, 20)}
                             </p>
                           </HoverCard.Target>
@@ -433,7 +433,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <td height="30" valign="top" align="right">
                         <div className="leaderboard__data-cell">
                           <Image src={CryptoYellowIcon} alt="Crypto Icon" />
-                          <p className="typography__display--2 typography__color--accent-yellow">
+                          <p className="typography__label--large typography__color--accent-yellow">
                             {VolumeFormatter(
                               DecimalFormatter(total_day_volume_loan)
                             )}
@@ -450,7 +450,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column4={{
           content: (
             <VolumeTableChart
-              title="Revenue Volume"
+              title="Collection Revenue"
               valueTitle="Earnings"
               color="light-grey-1"
               col1data={revenueDataArray.map(
@@ -475,7 +475,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           position="top"
                         >
                           <HoverCard.Target>
-                            <p className="typography__display--2 u-cursor-pointer">
+                            <p className="typography__body--small u-cursor-pointer">
                               {truncateString(name, 25)}
                             </p>
                           </HoverCard.Target>
@@ -515,7 +515,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                       <td height="30" valign="top" align="right">
                         <div className="leaderboard__data-cell">
                           <Image src={CryptoGreyIcon} alt="Crypto Icon" />
-                          <p className="typography__display--2">
+                          <p className="typography__label--large">
                             {VolumeFormatter(
                               DecimalFormatter(total_day_total_royalty)
                             )}
