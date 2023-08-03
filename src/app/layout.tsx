@@ -13,8 +13,8 @@ import "./styles/app.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
-  title: "🧌 DataBeast 🧌 - Powered by NFTdb",
-  description: "Powered by NFTdb",
+  title: "🧌 DataBeast 🧌 - Powered by nftDb",
+  description: "Powered by nftDb",
 };
 export default function RootLayout({
   children,
