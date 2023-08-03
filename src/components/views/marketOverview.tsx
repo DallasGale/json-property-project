@@ -162,32 +162,6 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
 
   const trendlineTrueVolumeArray = trueVolume.slice(trueVolume.length - 90);
 
-  // Timeframe toggle
-  const renderTrueTotalPercentage = () => {
-    let out = "0";
-
-    if (timeframe === 0) {
-      const trueV: any = trueVolume;
-      const totalV: any = totalVolume;
-
-      const totatalledTrueVolume = trueV.reduce((a: any, b: any) => a + b, 0);
-      const totatalledTotalVolume = totalV.reduce((a: any, b: any) => a + b, 0);
-      out = ((totatalledTrueVolume / totatalledTotalVolume) * 100).toFixed(0);
-    } else if (timeframe === 1) {
-      const trueV: any = trueVolume[trueVolume.length - timeframe];
-      const totalV: any = totalVolume[totalVolume.length - timeframe];
-      out = ((trueV / totalV) * 100).toFixed(0);
-    } else {
-      const trueV: any = trueVolume.slice(trueVolume.length - timeframe);
-      const totalV: any = totalVolume.slice(totalVolume.length - timeframe);
-
-      const totatalledTrueVolume = trueV.reduce((a: any, b: any) => a + b, 0);
-      const totatalledTotalVolume = totalV.reduce((a: any, b: any) => a + b, 0);
-      out = ((totatalledTrueVolume / totatalledTotalVolume) * 100).toFixed(0);
-    }
-    return out;
-  };
-
   const [timeframe, setTimeframe] = useState<number>(1);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
@@ -460,6 +434,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                 className="grid__col-content"
               >
                 <HeroBarChart
+                  timeframe={dailyTimeframe}
                   legendOnClick={(e: string) => onClick(e)}
                   labels={dailyTrueVolumeLabels}
                   datasets={[

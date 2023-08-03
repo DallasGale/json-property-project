@@ -218,9 +218,10 @@ const Traders: React.FC<TradersTypes> = ({
             <animated.div style={{ ...springs2 }} className="grid__col-content">
               <div>
                 <HeroBarChart
+                  timeframe={tradersTimeframe}
                   labels={tradersLabels}
                   legendOnClick={onClick}
-                  legendLabels={...legendLabels}
+                  legendLabels={legendLabels}
                   datasets={[
                     {
                       label: "Only Bought",

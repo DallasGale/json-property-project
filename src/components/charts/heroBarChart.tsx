@@ -8,6 +8,7 @@ interface DailyTrueVolumeTypes {
   datasets: BarChartDatasetsType[];
   legendLabels: LegendLabelTypes[];
   legendModifierClass?: string;
+  timeframe: number;
   legendOnClick: (e: string) => void;
 }
 
@@ -16,6 +17,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
   legendLabels,
   legendOnClick,
   datasets,
+  timeframe,
 }) => {
   return (
     <>
@@ -38,10 +40,6 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-              title: {
-                display: false,
-                text: "Chart.js Bar Chart - Stacked",
-              },
               legend: {
                 position: "top",
                 align: "start",
@@ -57,6 +55,20 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
             scales: {
               x: {
                 stacked: true,
+                ticks: {
+                  callback: function (val: any, index) {
+                    // any
+                    if (timeframe === 0) {
+                      return val % 4 === 0 ? labels[val] : "";
+                    }
+                    if (timeframe === 90) {
+                      return val % 2 === 0 ? labels[val] : "";
+                    }
+                    if (timeframe === 30) {
+                      return val % 1.5 === 0 ? labels[val] : "";
+                    } else return labels[val];
+                  },
+                },
               },
               y: {
                 stacked: true,
