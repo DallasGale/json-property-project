@@ -271,7 +271,7 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
                 {/* total sales count */}
                 <td width="120" align="right" className="data-table__td">
                   <div className="leaderboard__data-cell">
-                    {total_day_volume_fake ? (
+                    {total_day_trade_num ? (
                       <>
                         <Image
                           src={CryptoIcon}
