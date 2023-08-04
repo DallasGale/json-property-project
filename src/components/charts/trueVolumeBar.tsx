@@ -1,4 +1,6 @@
 import { Bar } from "react-chartjs-2";
+import MatrixBg from "@assets/bg/matrix.svg";
+
 interface TrueVolumeChartTypes {
   labels: string[];
   data: {
@@ -11,7 +13,15 @@ const TrueVolumeBarChart: React.FC<TrueVolumeChartTypes> = ({
   data: { true_volume },
 }) => {
   return (
-    <div className="chart__bar-wrapper" style={{ height: 190 }}>
+    <div
+      className="chart__bar-wrapper"
+      style={{
+        height: 96,
+        background: `url(${MatrixBg.src}`,
+        paddingBottom: 0,
+        marginBottom: 30,
+      }}
+    >
       <Bar
         data={{
           labels: labels,

@@ -1,7 +1,9 @@
+import Head from "next/head";
 import endpoints from "@/api/endpoints";
 import orderBy from "lodash.orderby";
 import Leaderboards from "@components/views/leaderboards";
 import { CollectionTypes, DatasetsType } from "../types";
+import { Metadata } from "next";
 
 // Fetching
 const getLeaderBoard1dData = async () => {
@@ -50,6 +52,11 @@ const getVolumeTimeframeSummary = async () => {
     throw new Error("Failed to fetch data");
   }
   return res.json();
+};
+
+export const metadata: Metadata = {
+  title: "DataBeast - Powered by nftDb",
+  description: "Powered by nftDb",
 };
 
 const LeaderboardsPage: React.FC = async () => {
@@ -148,56 +155,278 @@ const LeaderboardsPage: React.FC = async () => {
   );
 
   return (
-    <Leaderboards
-      traders={{
-        totalVolumeTimeframeSummaryData: {
-          oneDay: totalVolumeSummary1Day[0].data,
-          sevenDay: totalVolumeSummary7Day[0].data,
-          thirtyDay: totalVolumeSummary30Day[0].data,
-          ninetyDay: totalVolumeSummary90Day[0].data,
-          all: totalVolumeSummaryAll[0].data,
-        },
-        fakeVolumeTimeframeSummaryData: {
-          oneDay: fakeVolumeSummary1Day[0].data,
-          sevenDay: fakeVolumeSummary7Day[0].data,
-          thirtyDay: fakeVolumeSummary30Day[0].data,
-          ninetyDay: fakeVolumeSummary90Day[0].data,
-          all: fakeVolumeSummaryAll[0].data,
-        },
-        loanVolumeTimeframeSummaryData: {
-          oneDay: loanVolumeSummary1Day[0].data,
-          sevenDay: loanVolumeSummary7Day[0].data,
-          thirtyDay: loanVolumeSummary30Day[0].data,
-          ninetyDay: loanVolumeSummary90Day[0].data,
-          all: loanVolumeSummaryAll[0].data,
-        },
-        trueVolumeTimeframeSummaryData: {
-          oneDay: trueVolumeSummary1Day[0].data,
-          sevenDay: trueVolumeSummary7Day[0].data,
-          thirtyDay: trueVolumeSummary30Day[0].data,
-          ninetyDay: trueVolumeSummary90Day[0].data,
-          all: trueVolumeSummaryAll[0].data,
-        },
-      }}
-      leaderboard={{
-        top100: {
-          sortedByTrueVol: {
-            oneDayTop100: orderBy(
+    <>
+      <Head>
+        <title>DataBeast - Powered by nftDb</title>
+        <meta name="description" content="Powered by nftDb" />
+      </Head>
+      <Leaderboards
+        traders={{
+          totalVolumeTimeframeSummaryData: {
+            oneDay: totalVolumeSummary1Day[0].data,
+            sevenDay: totalVolumeSummary7Day[0].data,
+            thirtyDay: totalVolumeSummary30Day[0].data,
+            ninetyDay: totalVolumeSummary90Day[0].data,
+            all: totalVolumeSummaryAll[0].data,
+          },
+          fakeVolumeTimeframeSummaryData: {
+            oneDay: fakeVolumeSummary1Day[0].data,
+            sevenDay: fakeVolumeSummary7Day[0].data,
+            thirtyDay: fakeVolumeSummary30Day[0].data,
+            ninetyDay: fakeVolumeSummary90Day[0].data,
+            all: fakeVolumeSummaryAll[0].data,
+          },
+          loanVolumeTimeframeSummaryData: {
+            oneDay: loanVolumeSummary1Day[0].data,
+            sevenDay: loanVolumeSummary7Day[0].data,
+            thirtyDay: loanVolumeSummary30Day[0].data,
+            ninetyDay: loanVolumeSummary90Day[0].data,
+            all: loanVolumeSummaryAll[0].data,
+          },
+          trueVolumeTimeframeSummaryData: {
+            oneDay: trueVolumeSummary1Day[0].data,
+            sevenDay: trueVolumeSummary7Day[0].data,
+            thirtyDay: trueVolumeSummary30Day[0].data,
+            ninetyDay: trueVolumeSummary90Day[0].data,
+            all: trueVolumeSummaryAll[0].data,
+          },
+        }}
+        leaderboard={{
+          top100: {
+            sortedByTrueVol: {
+              oneDayTop100: orderBy(
+                leaderBoard1dData,
+                ["total_real_day_volume"],
+                "desc"
+              ).slice(0, 100),
+              sevenDayTop100: orderBy(
+                leaderBoard7dData,
+                ["total_real_day_volume"],
+                "desc"
+              ).slice(0, 100),
+              thirtyDayTop100: orderBy(
+                leaderBoard30dData,
+                ["total_real_day_volume"],
+                "desc"
+              ).slice(0, 100),
+              ninetyDayTop100: orderBy(
+                leaderBoard90dData,
+                ["total_real_day_volume"],
+                "desc"
+              ).slice(0, 100),
+              allTop100: orderBy(
+                leaderBoardAllData,
+                ["total_real_day_volume"],
+                "desc"
+              ).slice(0, 100),
+            },
+            sortedByTrueVolPct: {
+              oneDayTop100: orderBy(
+                totalRealDayVolumePercentage1d,
+                ["total_real_day_volume_percentage"],
+                "desc"
+              ).slice(0, 100),
+              sevenDayTop100: orderBy(
+                leaderBoard7dData,
+                ["total_real_day_volume_percentage"],
+                "desc"
+              ).slice(0, 100),
+              thirtyDayTop100: orderBy(
+                leaderBoard30dData,
+                ["total_real_day_volume_percentage"],
+                "desc"
+              ).slice(0, 100),
+              ninetyDayTop100: orderBy(
+                leaderBoard90dData,
+                ["total_real_day_volume_percentage"],
+                "desc"
+              ).slice(0, 100),
+              allTop100: orderBy(
+                leaderBoardAllData,
+                ["total_real_day_volume_percentage"],
+                "desc"
+              ).slice(0, 100),
+            },
+            sortedByTotalVol: {
+              oneDayTop100: orderBy(
+                leaderBoard1dData,
+                ["total_raw_day_volume"],
+                "desc"
+              ).slice(0, 100),
+              sevenDayTop100: orderBy(
+                leaderBoard7dData,
+                ["total_raw_day_volume"],
+                "desc"
+              ).slice(0, 100),
+              thirtyDayTop100: orderBy(
+                leaderBoard30dData,
+                ["total_raw_day_volume"],
+                "desc"
+              ).slice(0, 100),
+              ninetyDayTop100: orderBy(
+                leaderBoard90dData,
+                ["total_raw_day_volume"],
+                "desc"
+              ).slice(0, 100),
+              allTop100: orderBy(
+                leaderBoardAllData,
+                ["total_raw_day_volume"],
+                "desc"
+              ).slice(0, 100),
+            },
+            sortedByTrueSales: {
+              oneDayTop100: orderBy(
+                leaderBoard1dData,
+                ["total_real_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+              sevenDayTop100: orderBy(
+                leaderBoard7dData,
+                ["total_real_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+              thirtyDayTop100: orderBy(
+                leaderBoard30dData,
+                ["total_real_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+              ninetyDayTop100: orderBy(
+                leaderBoard90dData,
+                ["total_real_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+              allTop100: orderBy(
+                leaderBoardAllData,
+                ["total_real_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+            },
+            sortedByLoans: {
+              oneDayTop100: orderBy(
+                leaderBoard1dData,
+                ["total_day_volume_loan"],
+                "desc"
+              ).slice(0, 100),
+              sevenDayTop100: orderBy(
+                leaderBoard7dData,
+                ["total_day_volume_loan"],
+                "desc"
+              ).slice(0, 100),
+              thirtyDayTop100: orderBy(
+                leaderBoard30dData,
+                ["total_day_volume_loan"],
+                "desc"
+              ).slice(0, 100),
+              ninetyDayTop100: orderBy(
+                leaderBoard90dData,
+                ["total_day_volume_loan"],
+                "desc"
+              ).slice(0, 100),
+              allTop100: orderBy(
+                leaderBoardAllData,
+                ["total_day_volume_loan"],
+                "desc"
+              ).slice(0, 100),
+            },
+            sortedByRevenue: {
+              oneDayTop100: orderBy(
+                leaderBoard1dData,
+                ["total_day_total_royalty"],
+                "desc"
+              ).slice(0, 100),
+              sevenDayTop100: orderBy(
+                leaderBoard7dData,
+                ["total_day_total_royalty"],
+                "desc"
+              ).slice(0, 100),
+              thirtyDayTop100: orderBy(
+                leaderBoard30dData,
+                ["total_day_total_royalty"],
+                "desc"
+              ).slice(0, 100),
+              ninetyDayTop100: orderBy(
+                leaderBoard90dData,
+                ["total_day_total_royalty"],
+                "desc"
+              ).slice(0, 100),
+              allTop100: orderBy(
+                leaderBoardAllData,
+                ["total_day_total_royalty"],
+                "desc"
+              ).slice(0, 100),
+            },
+            sortedByFake: {
+              oneDayTop100: orderBy(
+                leaderBoard1dData,
+                ["total_day_volume_fake"],
+                "desc"
+              ).slice(0, 100),
+              sevenDayTop100: orderBy(
+                leaderBoard7dData,
+                ["total_day_volume_fake"],
+                "desc"
+              ).slice(0, 100),
+              thirtyDayTop100: orderBy(
+                leaderBoard30dData,
+                ["total_day_volume_fake"],
+                "desc"
+              ).slice(0, 100),
+              ninetyDayTop100: orderBy(
+                leaderBoard90dData,
+                ["total_day_volume_fake"],
+                "desc"
+              ).slice(0, 100),
+              allTop100: orderBy(
+                leaderBoardAllData,
+                ["total_day_volume_fake"],
+                "desc"
+              ).slice(0, 100),
+            },
+            sortedByTotalSalesCount: {
+              oneDayTop100: orderBy(
+                leaderBoard1dData,
+                ["total_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+              sevenDayTop100: orderBy(
+                leaderBoard7dData,
+                ["total_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+              thirtyDayTop100: orderBy(
+                leaderBoard30dData,
+                ["total_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+              ninetyDayTop100: orderBy(
+                leaderBoard90dData,
+                ["total_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+              allTop100: orderBy(
+                leaderBoardAllData,
+                ["total_day_trade_num"],
+                "desc"
+              ).slice(0, 100),
+            },
+          },
+          trueVolume: {
+            oneDay: orderBy(
               leaderBoard1dData,
               ["total_real_day_volume"],
               "desc"
-            ).slice(0, 100),
-            sevenDayTop100: orderBy(
+            ).slice(0, 5),
+            sevenDay: orderBy(
               leaderBoard7dData,
               ["total_real_day_volume"],
               "desc"
-            ).slice(0, 100),
-            thirtyDayTop100: orderBy(
+            ).slice(0, 5),
+            thirtyDay: orderBy(
               leaderBoard30dData,
               ["total_real_day_volume"],
               "desc"
-            ).slice(0, 100),
-            ninetyDayTop100: orderBy(
+            ).slice(0, 5),
+            ninetyDay: orderBy(
               leaderBoard90dData,
               ["total_real_day_volume"],
               "desc"
@@ -260,254 +489,92 @@ const LeaderboardsPage: React.FC = async () => {
               leaderBoardAllData,
               ["total_raw_day_volume"],
               "desc"
-            ).slice(0, 100),
+            ).slice(0, 5),
           },
-          sortedByTrueSales: {
-            oneDayTop100: orderBy(
-              leaderBoard1dData,
-              ["total_real_day_trade_num"],
-              "desc"
-            ).slice(0, 100),
-            sevenDayTop100: orderBy(
-              leaderBoard7dData,
-              ["total_real_day_trade_num"],
-              "desc"
-            ).slice(0, 100),
-            thirtyDayTop100: orderBy(
-              leaderBoard30dData,
-              ["total_real_day_trade_num"],
-              "desc"
-            ).slice(0, 100),
-            ninetyDayTop100: orderBy(
-              leaderBoard90dData,
-              ["total_real_day_trade_num"],
-              "desc"
-            ).slice(0, 100),
-            allTop100: orderBy(
-              leaderBoardAllData,
-              ["total_real_day_trade_num"],
-              "desc"
-            ).slice(0, 100),
-          },
-          sortedByLoans: {
-            oneDayTop100: orderBy(
-              leaderBoard1dData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 100),
-            sevenDayTop100: orderBy(
-              leaderBoard7dData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 100),
-            thirtyDayTop100: orderBy(
-              leaderBoard30dData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 100),
-            ninetyDayTop100: orderBy(
-              leaderBoard90dData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 100),
-            allTop100: orderBy(
-              leaderBoardAllData,
-              ["total_day_volume_loan"],
-              "desc"
-            ).slice(0, 100),
-          },
-          sortedByRevenue: {
-            oneDayTop100: orderBy(
-              leaderBoard1dData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 100),
-            sevenDayTop100: orderBy(
-              leaderBoard7dData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 100),
-            thirtyDayTop100: orderBy(
-              leaderBoard30dData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 100),
-            ninetyDayTop100: orderBy(
-              leaderBoard90dData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 100),
-            allTop100: orderBy(
-              leaderBoardAllData,
-              ["total_day_total_royalty"],
-              "desc"
-            ).slice(0, 100),
-          },
-          sortedByFake: {
-            oneDayTop100: orderBy(
+          fakeVolume: {
+            oneDay: orderBy(
               leaderBoard1dData,
               ["total_day_volume_fake"],
               "desc"
-            ).slice(0, 100),
-            sevenDayTop100: orderBy(
+            ).slice(0, 5),
+            sevenDay: orderBy(
               leaderBoard7dData,
               ["total_day_volume_fake"],
               "desc"
-            ).slice(0, 100),
-            thirtyDayTop100: orderBy(
+            ).slice(0, 5),
+            thirtyDay: orderBy(
               leaderBoard30dData,
               ["total_day_volume_fake"],
               "desc"
-            ).slice(0, 100),
-            ninetyDayTop100: orderBy(
+            ).slice(0, 5),
+            ninetyDay: orderBy(
               leaderBoard90dData,
               ["total_day_volume_fake"],
               "desc"
-            ).slice(0, 100),
-            allTop100: orderBy(
+            ).slice(0, 5),
+            all: orderBy(
               leaderBoardAllData,
               ["total_day_volume_fake"],
               "desc"
-            ).slice(0, 100),
+            ).slice(0, 5),
           },
-          sortedByTotalSalesCount: {
-            oneDayTop100: orderBy(
+          loanVolume: {
+            oneDay: orderBy(
               leaderBoard1dData,
-              ["total_day_trade_num"],
+              ["total_day_volume_loan"],
               "desc"
-            ).slice(0, 100),
-            sevenDayTop100: orderBy(
+            ).slice(0, 5),
+            sevenDay: orderBy(
               leaderBoard7dData,
-              ["total_day_trade_num"],
+              ["total_day_volume_loan"],
               "desc"
-            ).slice(0, 100),
-            thirtyDayTop100: orderBy(
+            ).slice(0, 5),
+            thirtyDay: orderBy(
               leaderBoard30dData,
-              ["total_day_trade_num"],
+              ["total_day_volume_loan"],
               "desc"
-            ).slice(0, 100),
-            ninetyDayTop100: orderBy(
-              leaderBoard90dData,
-              ["total_day_trade_num"],
+            ).slice(0, 5),
+            ninetyDay: orderBy(
+              leaderBoard30dData,
+              ["total_day_volume_loan"],
               "desc"
-            ).slice(0, 100),
-            allTop100: orderBy(
+            ).slice(0, 5),
+            all: orderBy(
               leaderBoardAllData,
-              ["total_day_trade_num"],
+              ["total_day_volume_loan"],
               "desc"
-            ).slice(0, 100),
+            ).slice(0, 5),
           },
-        },
-        trueVolume: {
-          oneDay: orderBy(
-            leaderBoard1dData,
-            ["total_real_day_volume"],
-            "desc"
-          ).slice(0, 5),
-          sevenDay: orderBy(
-            leaderBoard7dData,
-            ["total_real_day_volume"],
-            "desc"
-          ).slice(0, 5),
-          thirtyDay: orderBy(
-            leaderBoard30dData,
-            ["total_real_day_volume"],
-            "desc"
-          ).slice(0, 5),
-          ninetyDay: orderBy(
-            leaderBoard90dData,
-            ["total_real_day_volume"],
-            "desc"
-          ).slice(0, 5),
-          all: orderBy(
-            leaderBoardAllData,
-            ["total_raw_day_volume"],
-            "desc"
-          ).slice(0, 5),
-        },
-        fakeVolume: {
-          oneDay: orderBy(
-            leaderBoard1dData,
-            ["total_day_volume_fake"],
-            "desc"
-          ).slice(0, 5),
-          sevenDay: orderBy(
-            leaderBoard7dData,
-            ["total_day_volume_fake"],
-            "desc"
-          ).slice(0, 5),
-          thirtyDay: orderBy(
-            leaderBoard30dData,
-            ["total_day_volume_fake"],
-            "desc"
-          ).slice(0, 5),
-          ninetyDay: orderBy(
-            leaderBoard90dData,
-            ["total_day_volume_fake"],
-            "desc"
-          ).slice(0, 5),
-          all: orderBy(
-            leaderBoardAllData,
-            ["total_day_volume_fake"],
-            "desc"
-          ).slice(0, 5),
-        },
-        loanVolume: {
-          oneDay: orderBy(
-            leaderBoard1dData,
-            ["total_day_volume_loan"],
-            "desc"
-          ).slice(0, 5),
-          sevenDay: orderBy(
-            leaderBoard7dData,
-            ["total_day_volume_loan"],
-            "desc"
-          ).slice(0, 5),
-          thirtyDay: orderBy(
-            leaderBoard30dData,
-            ["total_day_volume_loan"],
-            "desc"
-          ).slice(0, 5),
-          ninetyDay: orderBy(
-            leaderBoard30dData,
-            ["total_day_volume_loan"],
-            "desc"
-          ).slice(0, 5),
-          all: orderBy(
-            leaderBoardAllData,
-            ["total_day_volume_loan"],
-            "desc"
-          ).slice(0, 5),
-        },
-        royalty: {
-          oneDay: orderBy(
-            leaderBoard1dData,
-            ["total_day_total_royalty"],
-            "desc"
-          ).slice(0, 5),
-          sevenDay: orderBy(
-            leaderBoard7dData,
-            ["total_day_total_royalty"],
-            "desc"
-          ).slice(0, 5),
-          thirtyDay: orderBy(
-            leaderBoard30dData,
-            ["total_day_total_royalty"],
-            "desc"
-          ).slice(0, 5),
-          ninetyDay: orderBy(
-            leaderBoard90dData,
-            ["total_day_total_royalty"],
-            "desc"
-          ).slice(0, 5),
-          all: orderBy(
-            leaderBoardAllData,
-            ["total_day_total_royalty"],
-            "desc"
-          ).slice(0, 5),
-        },
-      }}
-    />
+          royalty: {
+            oneDay: orderBy(
+              leaderBoard1dData,
+              ["total_day_total_royalty"],
+              "desc"
+            ).slice(0, 5),
+            sevenDay: orderBy(
+              leaderBoard7dData,
+              ["total_day_total_royalty"],
+              "desc"
+            ).slice(0, 5),
+            thirtyDay: orderBy(
+              leaderBoard30dData,
+              ["total_day_total_royalty"],
+              "desc"
+            ).slice(0, 5),
+            ninetyDay: orderBy(
+              leaderBoard90dData,
+              ["total_day_total_royalty"],
+              "desc"
+            ).slice(0, 5),
+            all: orderBy(
+              leaderBoardAllData,
+              ["total_day_total_royalty"],
+              "desc"
+            ).slice(0, 5),
+          },
+        }}
+      />
+    </>
   );
 };
 

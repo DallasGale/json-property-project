@@ -33,7 +33,7 @@ const VolumeTableChart: React.FC<TableChartProps> = ({
           </p>
         </div>
         <div className="volume-table-chart__value-title">
-          <p className="typography__label--medium typography__color--dark-medium-emphasis">
+          <p className="typography__label--medium typography__transform--uppercase">
             {valueTitle}
           </p>
         </div>
@@ -70,7 +70,7 @@ const VolumeTableChart: React.FC<TableChartProps> = ({
           className="typography__label--5 typography__color--dark-medium-emphasis link__more-cta"
         >
           Show More
-          <Image src={ChevronRightIcon.src} alt="" width={15} height={15} />
+          <Image src={ChevronRightIcon.src} alt="" width={16} height={16} />
         </Link>
       )}
     </div>

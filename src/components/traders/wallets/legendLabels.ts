@@ -2,15 +2,15 @@
 export const legendLabels = {
   newWallets: [
     {
-      color: "accent-purple",
-      rgba: "rgba(250, 82, 82, 1)",
-      name: "New Wallets",
+      color: "accent-green",
+      rgba: "rgba(64, 192, 87, 1)",
+      name: "Bought",
       id: "new-wallets-daily-stats",
     },
     {
       color: "accent-red",
       rgba: "rgba(95, 61, 196, 1)",
-      name: "Total Wallets Created",
+      name: "Minted",
       id: "new-wallets-daily-stats-total-created",
     },
   ],

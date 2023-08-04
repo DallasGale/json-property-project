@@ -96,7 +96,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                 <td width="50%">
                   <div className="tooltip-body__legend-item">
                     <Image src={LegendIconGreen} alt="Legend Icon" />
-                    <p className="typography__label--3">True Volume</p>
+                    <p className="typography__caption--medium">True Volume</p>
                   </div>
                 </td>
                 <td width="20%" align="right">
@@ -113,7 +113,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                 </td>
                 <td width="30%" align="right">
                   <div className="tooltip_body__table--value-col u-justifyEnd">
-                    <p className="typography__label--3">
+                    <p className="typography__caption--medium">
                       {PercentFormatter(totalRealDayVolumePercentage)}%
                     </p>
                   </div>
@@ -123,7 +123,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                 <td width="50%">
                   <div className="tooltip-body__legend-item">
                     <Image src={LegendIconRed} alt="Legend Icon" />
-                    <p className="typography__label--3">Fake Volume</p>
+                    <p className="typography__caption--medium">Fake Volume</p>
                   </div>
                 </td>
                 <td width="20%" align="right">
@@ -140,7 +140,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                 </td>
                 <td width="30%" align="right">
                   <div className="tooltip_body__table--value-col u-justifyEnd">
-                    <p className="typography__label--3">
+                    <p className="typography__caption--medium">
                       {PercentFormatter(totalFakeVolumePercentage)}%
                     </p>
                   </div>
@@ -150,7 +150,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                 <td width="50%">
                   <div className="tooltip-body__legend-item">
                     <Image src={LegendIconYellow} alt="Legend Icon" />
-                    <p className="typography__label--3">Loans</p>
+                    <p className="typography__caption--medium">Loans</p>
                   </div>
                 </td>
                 <td width="20%" align="right">
@@ -167,7 +167,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                 </td>
                 <td width="30%" align="right">
                   <div className="tooltip_body__table--value-col u-justifyEnd">
-                    <p className="typography__label--3">
+                    <p className="typography__caption--medium">
                       {PercentFormatter(totalLoanVolumePercentage)}%
                     </p>
                   </div>
@@ -183,7 +183,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
             >
               <tr>
                 <td colSpan={2}>
-                  <p className="typography__label--3">Total Volume</p>
+                  <p className="typography__caption--medium">Total Volume</p>
                 </td>
                 <td>
                   <div className="tooltip_body__table--value-col u-justifyEnd">
@@ -192,7 +192,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                       alt="Crypto Icon"
                       className="tooltip-body__icon tooltip-body__icon--crypto"
                     />
-                    <p className="typography__label--3 typography__color--white">
+                    <p className="typography__caption--medium typography__color--white">
                       {VolumeFormatter(DecimalFormatter(totalVolume))}
                     </p>
                   </div>
@@ -200,7 +200,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
               </tr>
               <tr>
                 <td colSpan={2}>
-                  <p className="typography__label--3">Revenue</p>
+                  <p className="typography__caption--medium">Revenue</p>
                 </td>
                 <td>
                   <div className="tooltip_body__table--value-col u-justifyEnd">
@@ -209,7 +209,7 @@ const TooltipBody: React.FC<TooltipBodyProps> = ({
                       alt="Crypto Icon"
                       className="tooltip-body__icon tooltip-body__icon--crypto"
                     />
-                    <p className="typography__label--3 typography__color--white">
+                    <p className="typography__caption--medium typography__color--white">
                       {VolumeFormatter(DecimalFormatter(totalRevenue))}
                     </p>
                   </div>

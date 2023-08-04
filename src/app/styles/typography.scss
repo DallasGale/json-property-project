@@ -68,16 +68,6 @@ h4 {
   }
 }
 
-.typography__display--8 {
-  color: #757575;
-  font-size: 12px;
-  font-family: Roboto;
-  font-weight: 800;
-  line-height: 16px;
-  letter-spacing: 0.25px;
-  text-transform: uppercase;
-}
-
 .typography__display--9 {
   font-family: Roboto;
   font-size: 28px;
@@ -102,35 +92,6 @@ h4 {
   font-weight: 500;
   list-height: 1;
   margin-bottom: 0;
-}
-
-.typography__label--3 {
-  color: $light-grey-1;
-  font-size: 10px;
-  font-family: Roboto;
-  font-weight: 400;
-  list-height: 1;
-  margin-bottom: 0;
-}
-
-.typography__label--4 {
-  font-size: 10px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 600;
-  color: $dark-bg-3;
-  text-transform: uppercase;
-  line-height: 16px;
-  letter-spacing: 0.25px;
-}
-.typography__label--5 {
-  font-size: 12px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 400;
-  color: $light-grey-1;
-  line-height: 16px;
-  letter-spacing: 0.4px;
 }
 
 .typography__paragraph--1 {
@@ -161,24 +122,39 @@ h4 {
   }
 }
 
-.typography__subtitle--2 {
-  color: $dark-medium-emphasis;
-  font-size: 12px;
+.typography__title--small {
+  color: $dark-high-emphasis;
   font-family: Roboto;
-  font-weight: 700;
-  line-height: 16px;
-  letter-spacing: 0.4px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  line-height: 20px;
 }
 
-.typography__subtitle--module {
-  color: $dark-medium-emphasis;
-  font-size: 10px;
+.typography__title--large {
+  color: $white;
   font-family: Roboto;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 16px;
+  line-height: 26px;
+}
+
+.typography__label--medium {
+  color: $dark-medium-emphasis;
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: 700;
   letter-spacing: 0.25px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
+  line-height: 16px;
+}
+
+.typography__label--large {
+  color: $dark-high-emphasis;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.25px;
+  line-height: 16px;
 }
 
 .typography__body--small {
@@ -189,22 +165,10 @@ h4 {
   line-height: 16px;
 }
 
-.typography__label--medium {
-  color: $dark-high-emphasis;
+.typography__caption--medium {
+  color: $dark-medium-emphasis;
   font-family: Roboto;
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.25px;
-  line-height: 16px;
-  text-transform: uppercase;
-}
-
-.typography__label--large {
-  color: $dark-high-emphasis;
-  font-family: Roboto;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.25px;
   line-height: 16px;
 }
 
@@ -252,6 +216,10 @@ h4 {
   color: $dark-low-emphasis;
 }
 
+.typography__transform--uppercase {
+  text-transform: uppercase;
+}
+
 .typography__weight--300 {
   font-family: Roboto;
   font-weight: 300;
@@ -265,4 +233,8 @@ h4 {
 .typography__weight--700 {
   font-family: Roboto;
   font-weight: 700;
+}
+
+h3 + p {
+  margin-top: 2px;
 }

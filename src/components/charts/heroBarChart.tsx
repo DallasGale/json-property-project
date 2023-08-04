@@ -51,7 +51,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
         labels={legendLabels}
         legendFormat="horizontal"
       />
-      <div className="chart__bar-wrapper" style={{ height: 300 }}>
+      <div className="chart__bar-wrapper" style={{ height: 294 }}>
         <div className="chart__labels">
           <ol
             className={`chart__labels-list ${
@@ -63,7 +63,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
                 if (index % 160 === 0)
                   return (
                     <li
-                      className={`chart__labels-list-item typography__label--3 typography__color--dark-bg-3 ${
+                      className={`chart__labels-list-item typography__caption--medium ${
                         timeframeClicked ? "hidden" : "visible"
                       }`}
                       key={index}
@@ -75,7 +75,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
                 if (index % 16 === 0)
                   return (
                     <li
-                      className={`chart__labels-list-item typography__label--3 typography__color--dark-bg-3 ${
+                      className={`chart__labels-list-item typography__caption--medium ${
                         timeframeClicked ? "hidden" : "visible"
                       }`}
                       key={index}
@@ -87,7 +87,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
                 if (index % 5 === 0)
                   return (
                     <li
-                      className={`chart__labels-list-item typography__label--3 typography__color--dark-bg-3 ${
+                      className={`chart__labels-list-item typography__caption--medium ${
                         timeframeClicked ? "hidden" : "visible"
                       }`}
                       key={index}
@@ -98,7 +98,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
               } else {
                 return (
                   <li
-                    className={`chart__labels-list-item typography__label--3 typography__color--dark-bg-3 ${
+                    className={`chart__labels-list-item typography__caption--medium ${
                       timeframeClicked ? "hidden" : "visible"
                     }`}
                     key={index}

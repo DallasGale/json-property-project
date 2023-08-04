@@ -24,10 +24,10 @@ const StatusBar: React.FC = () => {
   return (
     <animated.section style={{ ...animation }} className="status-bar">
       <div className="status-bar__cell">
-        <p className="typography__display--8 typography__color--black status-bar__daily-report">
+        <p className="typography__label--large typography__color--black status-bar__daily-report">
           Daily Report
         </p>
-        <p className="typography__display--6 typography__color--white">
+        <p className="typography__title--small typography__color--white">
           <Moment
             format="dddd, MMMM Do YYYY"
             subtract={{ days: 1, hours: 0 }}
@@ -37,8 +37,8 @@ const StatusBar: React.FC = () => {
       </div>
 
       <div className="status-bar__cell">
-        <Image src={TimeIcon.src} alt="" width={15} height={15} />
-        <p className="typography__display--2 typography__color--dark-medium-emphasis">
+        <Image src={TimeIcon.src} alt="" width={16} height={16} />
+        <p className="typography__body--small typography__color--dark-medium-emphasis">
           Updates daily at <Moment format="hh:mma" date={date} />{" "}
           {clientsTimeZone}
         </p>
