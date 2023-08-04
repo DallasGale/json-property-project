@@ -66,7 +66,7 @@ const VolumeTableChart: React.FC<TableChartProps> = ({
       </div>
       {route === "/" && (
         <Link
-          href={`/leaderboards?${volumeCategory}`}
+          href={`/leaderboards?q=${volumeCategory}`}
           className="typography__body--small typography__color--dark-medium-emphasis link__more-cta"
         >
           Show More
