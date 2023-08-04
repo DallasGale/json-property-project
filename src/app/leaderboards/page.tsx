@@ -431,65 +431,11 @@ const LeaderboardsPage: React.FC = async () => {
               ["total_real_day_volume"],
               "desc"
             ).slice(0, 100),
-            allTop100: orderBy(
+            all: orderBy(
               leaderBoardAllData,
               ["total_real_day_volume"],
               "desc"
             ).slice(0, 100),
-          },
-          sortedByTrueVolPct: {
-            oneDayTop100: orderBy(
-              totalRealDayVolumePercentage1d,
-              ["total_real_day_volume_percentage"],
-              "desc"
-            ).slice(0, 100),
-            sevenDayTop100: orderBy(
-              totalRealDayVolumePercentage7d,
-              ["total_real_day_volume_percentage"],
-              "desc"
-            ).slice(0, 100),
-            thirtyDayTop100: orderBy(
-              leaderBoard30dData,
-              ["total_real_day_volume_percentage"],
-              "desc"
-            ).slice(0, 100),
-            ninetyDayTop100: orderBy(
-              leaderBoard90dData,
-              ["total_real_day_volume_percentage"],
-              "desc"
-            ).slice(0, 100),
-            allTop100: orderBy(
-              leaderBoardAllData,
-              ["total_real_day_volume_percentage"],
-              "desc"
-            ).slice(0, 100),
-          },
-          sortedByTotalVol: {
-            oneDayTop100: orderBy(
-              leaderBoard1dData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 100),
-            sevenDayTop100: orderBy(
-              leaderBoard7dData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 100),
-            thirtyDayTop100: orderBy(
-              leaderBoard30dData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 100),
-            ninetyDayTop100: orderBy(
-              leaderBoard90dData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 100),
-            allTop100: orderBy(
-              leaderBoardAllData,
-              ["total_raw_day_volume"],
-              "desc"
-            ).slice(0, 5),
           },
           fakeVolume: {
             oneDay: orderBy(
