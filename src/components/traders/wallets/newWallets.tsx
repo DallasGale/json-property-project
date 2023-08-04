@@ -13,6 +13,7 @@ import { legendLabels } from "./legendLabels";
 import { TradersTimeframeTypes } from "../types";
 import { toFrom, config } from "@constants/animationSettings";
 import ChartHeader from "@/components/charts/chartHeader";
+import DateRange from "@/components/dateRange/dateRange";
 
 // Types
 export interface NewWalletsTypes extends TradersTimeframeTypes {
@@ -190,7 +191,7 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
           <p className="typography__label--medium typography__transform--uppercase">
             90 Day Trend
           </p>
-          <p className="typography__caption--medium">5 May – Aug 2, 2023</p>
+          <DateRange timeframe={timeframe} />
         </div>
       </div>
     </animated.div>

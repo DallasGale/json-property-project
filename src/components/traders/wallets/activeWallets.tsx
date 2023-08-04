@@ -14,6 +14,7 @@ import { legendLabels } from "./legendLabels";
 import { toFrom, config } from "@constants/animationSettings";
 import { TradersTimeframeTypes } from "../types";
 import ChartHeader from "@/components/charts/chartHeader";
+import DateRange from "@/components/dateRange/dateRange";
 
 // Types
 export type ActiveWalletsTypes = {
@@ -222,7 +223,7 @@ const ActiveWallets: React.FC<Props> = ({
           <p className="typography__label--medium typography__transform--uppercase">
             90 Day Trend
           </p>
-          <p className="typography__caption--medium">5 May – Aug 2, 2023</p>
+          <DateRange timeframe={timeframe} />
         </div>
       </div>
     </animated.div>

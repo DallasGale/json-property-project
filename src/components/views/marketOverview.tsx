@@ -40,10 +40,11 @@ import Traders from "../traders/traders";
 import TimeframeAsString from "@utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import DecimalFormatter from "@utils/decimalFormatter";
-import PercentChangeColors from "@utils/percentChangeColors";
 import { TradersTimeframeTypes } from "../traders/types";
 import { NewWalletsTypes } from "../traders/wallets/newWallets";
 import ChartHeader from "../charts/chartHeader";
+import Moment from "react-moment";
+import DateRange from "../dateRange/dateRange";
 
 ChartJS.register(
   CategoryScale,
@@ -68,7 +69,6 @@ interface VolumeChartProps {
   labels: string[];
   trueVolume: any[];
   loanVolume: any[];
-  totalVolume: any[];
   fakeVolume: any[];
   realPercentDifference: number[];
   loanVolumeMovingAverage: number[];
@@ -123,7 +123,6 @@ interface VolumeChartProps {
 const MarketOverview: React.FC<VolumeChartProps> = ({
   labels,
   trueVolume,
-  totalVolume,
   loanVolume,
   fakeVolume,
   loanVolumeMovingAverage,
@@ -542,9 +541,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         <p className="typography__label--medium typography__transform--uppercase">
                           90 Day Trend
                         </p>
-                        <p className="typography__caption--medium">
-                          5 May – Aug 2, 2023
-                        </p>
+                        <DateRange timeframe={timeframe} />
                       </div>
                     </div>
                   </div>
@@ -621,9 +618,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       <p className="typography__label--medium typography__transform--uppercase">
                         90 Day Trend
                       </p>
-                      <p className="typography__caption--medium">
-                        5 May – Aug 2, 2023
-                      </p>
+                      <DateRange timeframe={timeframe} />
                     </div>
                   </div>
                 </animated.div>
