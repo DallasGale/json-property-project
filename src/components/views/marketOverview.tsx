@@ -531,19 +531,21 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         description="Excludes fake volume like loans, points farming and wash trading."
                       />
                     </div>
-
-                    <TrueVolumeBarChart
-                      labels={trendlineVolumeLabels}
-                      data={{ true_volume: trendlineTrueVolumeArray }}
-                      trend_timespan={-90}
-                    />
-                    <div className="chart__container-footer">
-                      <p className="typography__label--medium typography__transform--uppercase">
-                        90 Day Trend
-                      </p>
-                      <p className="typography__caption--medium">
-                        5 May – Aug 2, 2023
-                      </p>
+                    <div className="chart__seperator" />
+                    <div>
+                      <TrueVolumeBarChart
+                        labels={trendlineVolumeLabels}
+                        data={{ true_volume: trendlineTrueVolumeArray }}
+                        trend_timespan={-90}
+                      />
+                      <div className="chart__container-footer">
+                        <p className="typography__label--medium typography__transform--uppercase">
+                          90 Day Trend
+                        </p>
+                        <p className="typography__caption--medium">
+                          5 May – Aug 2, 2023
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </animated.div>
@@ -563,6 +565,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       description=""
                     />
 
+                    <div className="chart__seperator" />
                     <TrendLineChart
                       legendOnClick={(e: string) => trendlineLegendOnClick(e)}
                       labels={trendlineVolumeLabels}

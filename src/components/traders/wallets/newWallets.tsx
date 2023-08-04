@@ -159,6 +159,7 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
           description="And their first NFT transaction."
         />
 
+        <div className="chart__seperator" />
         <TrendLineChart
           legendOnClick={legendOnClick}
           labels={newWalletTradersLabels}

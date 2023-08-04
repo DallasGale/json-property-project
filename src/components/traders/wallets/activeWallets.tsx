@@ -184,6 +184,8 @@ const ActiveWallets: React.FC<Props> = ({
           title="Active Wallets"
           description="That have traded on an NFT Marketplace."
         />
+
+        <div className="chart__seperator" />
         <TrendLineChart
           legendOnClick={legendOnClick}
           labels={activeWalletTradersLabels}
