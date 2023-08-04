@@ -182,7 +182,7 @@ const ActiveWallets: React.FC<Props> = ({
         <ChartHeader
           value={`${VolumeFormatter(activeWalletsData)}`}
           title="Active Wallets"
-          description=" Wallets that have traded on an NFT marketplace."
+          description="That have traded on an NFT Marketplace."
         />
         <TrendLineChart
           legendOnClick={legendOnClick}
@@ -216,6 +216,12 @@ const ActiveWallets: React.FC<Props> = ({
             },
           ]}
         />
+        <div className="chart__container-footer">
+          <p className="typography__label--medium typography__transform--uppercase">
+            90 Day Trend
+          </p>
+          <p className="typography__caption--medium">5 May – Aug 2, 2023</p>
+        </div>
       </div>
     </animated.div>
   );

@@ -11,7 +11,7 @@ const TrueVolumeBarChart: React.FC<TrueVolumeChartTypes> = ({
   data: { true_volume },
 }) => {
   return (
-    <div className="chart__bar-wrapper" style={{ height: 190 }}>
+    <div className="chart__bar-wrapper" style={{ height: 96 }}>
       <Bar
         data={{
           labels: labels,

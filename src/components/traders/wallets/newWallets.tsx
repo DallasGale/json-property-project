@@ -156,7 +156,7 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
         <ChartHeader
           value={`${VolumeFormatter(newWalletsData)}`}
           title="New Wallets"
-          description="Wallets that have been created."
+          description="And their first NFT transaction."
         />
 
         <TrendLineChart
@@ -185,6 +185,12 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
             },
           ]}
         />
+        <div className="chart__container-footer">
+          <p className="typography__label--medium typography__transform--uppercase">
+            90 Day Trend
+          </p>
+          <p className="typography__caption--medium">5 May – Aug 2, 2023</p>
+        </div>
       </div>
     </animated.div>
   );

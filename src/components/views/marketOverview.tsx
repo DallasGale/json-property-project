@@ -528,8 +528,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         withCryptoIcon={true}
                         valueDiff={truePercentChangeTimeframe[0]}
                         title="True Volume"
-                        description="Excludes fake/artificial volume such as loans, points
-                          farming and wash trading."
+                        description="Excludes fake volume like loans, points farming and wash trading."
                       />
                     </div>
 
@@ -539,8 +538,11 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       trend_timespan={-90}
                     />
                     <div className="chart__container-footer">
-                      <p className="typography__label--3 typography__color--dark-bg-3">
+                      <p className="typography__label--medium typography__transform--uppercase">
                         90 Day Trend
+                      </p>
+                      <p className="typography__caption--medium">
+                        5 May – Aug 2, 2023
                       </p>
                     </div>
                   </div>
@@ -558,7 +560,7 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       withCryptoIcon={true}
                       valueDiff={totalPercentChangeTimeframe[0]}
                       title="Total Volume"
-                      description="NFT trading volume across all transaction types"
+                      description=""
                     />
 
                     <TrendLineChart
@@ -613,8 +615,11 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       ]}
                     />
                     <div className="chart__container-footer">
-                      <p className="typography__label--3  typography__color--dark-bg-3">
+                      <p className="typography__label--medium typography__transform--uppercase">
                         90 Day Trend
+                      </p>
+                      <p className="typography__caption--medium">
+                        5 May – Aug 2, 2023
                       </p>
                     </div>
                   </div>

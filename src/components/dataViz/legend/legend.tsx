@@ -55,7 +55,7 @@ const Legend: React.FC<LegendProps> = ({
                 value={name}
                 onChange={(e) => onClick(e.currentTarget.id)}
               />
-              <label htmlFor={id} className="typography__label--5">
+              <label htmlFor={id} className="typography__body--small">
                 {name}
               </label>
             </div>

@@ -22,7 +22,7 @@ const Footer = () => {
         </li> */}
       </ul>
 
-      <p className="typography__label--3 typography__color--dark-bg-3">
+      <p className="typography__caption--medium typography__color--dark-bg-3">
         Copyright © 2023 DataBeast. All Rights Reserved
       </p>
 
