@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import CryptoIcon from "@assets/icons/crypto.svg";
 
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
@@ -43,6 +41,7 @@ import DecimalFormatter from "@utils/decimalFormatter";
 import { TradersTimeframeTypes } from "../traders/types";
 import { NewWalletsTypes } from "../traders/wallets/newWallets";
 import ChartHeader from "../charts/chartHeader";
+import DateRange from "../dateRange/dateRange";
 
 ChartJS.register(
   CategoryScale,
@@ -67,7 +66,6 @@ interface VolumeChartProps {
   labels: string[];
   trueVolume: any[];
   loanVolume: any[];
-  totalVolume: any[];
   fakeVolume: any[];
   realPercentDifference: number[];
   loanVolumeMovingAverage: number[];
@@ -122,7 +120,6 @@ interface VolumeChartProps {
 const MarketOverview: React.FC<VolumeChartProps> = ({
   labels,
   trueVolume,
-  totalVolume,
   loanVolume,
   fakeVolume,
   loanVolumeMovingAverage,
@@ -527,20 +524,22 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                         withCryptoIcon={true}
                         valueDiff={truePercentChangeTimeframe[0]}
                         title="True Volume"
-                        description="Excludes fake/artificial volume such as loans, points
-                          farming and wash trading."
+                        description="Excludes fake volume like loans, points farming and wash trading."
                       />
                     </div>
-
-                    <TrueVolumeBarChart
-                      labels={trendlineVolumeLabels}
-                      data={{ true_volume: trendlineTrueVolumeArray }}
-                      trend_timespan={-90}
-                    />
-                    <div className="chart__container-footer">
-                      <p className="typography__label--3 typography__color--dark-bg-3">
-                        90 Day Trend
-                      </p>
+                    <div className="chart__seperator" />
+                    <div>
+                      <TrueVolumeBarChart
+                        labels={trendlineVolumeLabels}
+                        data={{ true_volume: trendlineTrueVolumeArray }}
+                        trend_timespan={-90}
+                      />
+                      <div className="chart__container-footer">
+                        <p className="typography__label--medium typography__transform--uppercase">
+                          90 Day Trend
+                        </p>
+                        <DateRange />
+                      </div>
                     </div>
                   </div>
                 </animated.div>
@@ -557,9 +556,10 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       withCryptoIcon={true}
                       valueDiff={totalPercentChangeTimeframe[0]}
                       title="Total Volume"
-                      description="NFT trading volume across all transaction types"
+                      description=""
                     />
 
+                    <div className="chart__seperator" />
                     <TrendLineChart
                       legendOnClick={(e: string) => trendlineLegendOnClick(e)}
                       labels={trendlineVolumeLabels}
@@ -612,9 +612,10 @@ const MarketOverview: React.FC<VolumeChartProps> = ({
                       ]}
                     />
                     <div className="chart__container-footer">
-                      <p className="typography__label--3  typography__color--dark-bg-3">
+                      <p className="typography__label--medium typography__transform--uppercase">
                         90 Day Trend
                       </p>
+                      <DateRange />
                     </div>
                   </div>
                 </animated.div>

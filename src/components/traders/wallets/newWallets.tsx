@@ -13,6 +13,7 @@ import { legendLabels } from "./legendLabels";
 import { TradersTimeframeTypes } from "../types";
 import { toFrom, config } from "@constants/animationSettings";
 import ChartHeader from "@/components/charts/chartHeader";
+import DateRange from "@/components/dateRange/dateRange";
 
 // Types
 export interface NewWalletsTypes extends TradersTimeframeTypes {
@@ -156,9 +157,10 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
         <ChartHeader
           value={`${VolumeFormatter(newWalletsData)}`}
           title="New Wallets"
-          description="Wallets that have been created."
+          description="And their first NFT transaction."
         />
 
+        <div className="chart__seperator" />
         <TrendLineChart
           legendOnClick={legendOnClick}
           labels={newWalletTradersLabels}
@@ -185,6 +187,12 @@ const NewWallets: React.FC<Props> = ({ newWallets, timeframe, labels }) => {
             },
           ]}
         />
+        <div className="chart__container-footer">
+          <p className="typography__label--medium typography__transform--uppercase">
+            90 Day Trend
+          </p>
+          <DateRange />
+        </div>
       </div>
     </animated.div>
   );

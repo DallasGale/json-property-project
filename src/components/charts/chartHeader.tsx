@@ -22,14 +22,14 @@ const ChartHeader: React.FC<ChartHeaderProps> = ({
     <div className="chart__header">
       <div className="chart__value-percent-lockup">
         {value && (
-          <p className="typography__display--1">
+          <p className="typography__title--large">
             {withCryptoIcon && <Image src={CryptoIcon} alt="Crypto Icon" />}
             {value}
           </p>
         )}
         {valueDiff && (
           <p
-            className="typography__display--4"
+            className="typography__label--large"
             style={{
               color: PercentChangeColors(valueDiff),
             }}
@@ -39,8 +39,8 @@ const ChartHeader: React.FC<ChartHeaderProps> = ({
           </p>
         )}
       </div>
-      <h3 className="typography__display--2">{title}</h3>
-      <p className="typography__label--3 typography__color--dark-medium-emphasis">
+      <h3 className="typography__title--small">{title}</h3>
+      <p className="typography__body--small typography__color--dark-medium-emphasis">
         {description}
       </p>
     </div>

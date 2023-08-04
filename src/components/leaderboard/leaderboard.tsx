@@ -253,7 +253,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           </p>
                         ) : (
                           <p className="typography__body--small typography__color--dark-low-emphasis">
-                            --
+                            —
                           </p>
                         )}
                       </td>
@@ -356,7 +356,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           </p>
                         ) : (
                           <p className="typography__body--small typography__color--dark-low-emphasis">
-                            --
+                            —
                           </p>
                         )}
                       </td>

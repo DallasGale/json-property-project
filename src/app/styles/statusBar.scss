@@ -4,10 +4,10 @@
   width: 100%;
   margin: auto;
   justify-content: space-between;
-  border-top: 1px solid $dark-bg-2;
+  border-top: 1px solid $dark-divider;
   flex-direction: column;
-  border-bottom: 1px solid $dark-bg-2;
-  padding: 10px 0;
+  border-bottom: 1px solid $dark-divider;
+  padding: 12px 0;
 
   @include respond-to(tablet-up) {
     flex-direction: row;
@@ -18,11 +18,14 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .status-bar__daily-report {
   background: $white;
   padding: 2px 8px;
   border-radius: 4px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-right: 2px;
 }
