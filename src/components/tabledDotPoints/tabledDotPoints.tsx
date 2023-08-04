@@ -28,7 +28,7 @@ const TabledDotPoints: React.FC<DotPointProps> = ({ dotpoints, onClick }) => {
               className={`tabled-dot-point__list-item ${color}`}
               onClick={(e) => onClick(e.currentTarget.id)}
             >
-              <p className="tabled-dot-point__title typography__label--5">
+              <p className="tabled-dot-point__title typography__body-small">
                 {name}
               </p>
               {value && (

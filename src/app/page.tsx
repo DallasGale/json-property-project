@@ -1,3 +1,5 @@
+import Head from "next/head";
+import { Metadata } from "next";
 import { cache } from "react";
 import endpoints from "@/api/endpoints";
 import months from "@/constants/months";
@@ -70,6 +72,10 @@ const getVolumeTimeframeSummary = cache(async () => {
   return res.json();
 });
 
+export const metadata: Metadata = {
+  title: "DataBeast - Powered by nftDb",
+  description: "Powered by nftDb",
+};
 const MarketOverviewPage: React.FC = async () => {
   // Daily
   const dailySummaryData = await getDailySummaryData();
@@ -300,6 +306,10 @@ const MarketOverviewPage: React.FC = async () => {
 
   return (
     <>
+      <Head>
+        <title>DataBeast - Powered by nftDb</title>
+        <meta name="description" content="Powered by nftDb" />
+      </Head>
       <HeroBanner />
       <StatusBar />
       <MarketOverview

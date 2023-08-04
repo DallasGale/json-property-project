@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 // Utils
 import { useSpring, animated } from "@react-spring/web";
@@ -14,6 +13,7 @@ import { legendLabels } from "./legendLabels";
 import { toFrom, config } from "@constants/animationSettings";
 import { TradersTimeframeTypes } from "../types";
 import ChartHeader from "@/components/charts/chartHeader";
+import DateRange from "@/components/dateRange/dateRange";
 
 // Types
 export type ActiveWalletsTypes = {
@@ -182,8 +182,10 @@ const ActiveWallets: React.FC<Props> = ({
         <ChartHeader
           value={`${VolumeFormatter(activeWalletsData)}`}
           title="Active Wallets"
-          description=" Wallets that have traded on an NFT marketplace."
+          description="That have traded on an NFT Marketplace."
         />
+
+        <div className="chart__seperator" />
         <TrendLineChart
           legendOnClick={legendOnClick}
           labels={activeWalletTradersLabels}
@@ -216,6 +218,12 @@ const ActiveWallets: React.FC<Props> = ({
             },
           ]}
         />
+        <div className="chart__container-footer">
+          <p className="typography__label--medium typography__transform--uppercase">
+            90 Day Trend
+          </p>
+          <DateRange timeframe={timeframe} />
+        </div>
       </div>
     </animated.div>
   );
