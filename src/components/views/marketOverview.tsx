@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import CryptoIcon from "@assets/icons/crypto.svg";
 
 // Utils
 import { useSpring, animated, easings } from "@react-spring/web";
@@ -43,7 +41,6 @@ import DecimalFormatter from "@utils/decimalFormatter";
 import { TradersTimeframeTypes } from "../traders/types";
 import { NewWalletsTypes } from "../traders/wallets/newWallets";
 import ChartHeader from "../charts/chartHeader";
-import Moment from "react-moment";
 import DateRange from "../dateRange/dateRange";
 
 ChartJS.register(
