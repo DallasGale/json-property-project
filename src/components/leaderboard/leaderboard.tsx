@@ -164,6 +164,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column1={{
           content: (
             <VolumeTableChart
+              volumeCategory="true-volume"
               title="True Volume"
               valueTitle="% Of Total"
               color="accent-green"
@@ -266,6 +267,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column2={{
           content: (
             <VolumeTableChart
+              volumeCategory="fake-volume"
               title="Fake Volume"
               valueTitle="% Of Total"
               color="accent-red"
@@ -368,6 +370,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column3={{
           content: (
             <VolumeTableChart
+              volumeCategory="loan-volume"
               title="Loan Volume"
               valueTitle="% of total"
               color="accent-yellow"
@@ -470,6 +473,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column4={{
           content: (
             <VolumeTableChart
+              volumeCategory="revenue-volume"
               title="Collection Revenue"
               valueTitle="Earnings"
               color="light-grey-1"
