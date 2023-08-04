@@ -20,6 +20,7 @@ interface BodyProps {
 
 const Body: React.FC<BodyProps> = ({ data, active }) => {
   const today = new Date();
+
   return (
     <>
       <tbody>

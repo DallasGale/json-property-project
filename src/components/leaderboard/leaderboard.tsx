@@ -30,6 +30,7 @@ import FourColumnGrid from "@/grids/fourColumnGrid";
 import VolumeTableChart from "@components/charts/volumeTableChart";
 import TooltipBody from "@components/leaderboard/tooltipBody/tooltipBody";
 import PercentFormatter from "@utils/percentFormatter";
+import { ColumnLabels } from "@/constants/top100table";
 
 interface LeaderBoardTypes {
   traders: {
@@ -164,7 +165,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column1={{
           content: (
             <VolumeTableChart
-              volumeCategory="true-volume"
+              volumeCategory={ColumnLabels[2].id}
               title="True Volume"
               valueTitle="% Of Total"
               color="accent-green"
@@ -267,7 +268,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column2={{
           content: (
             <VolumeTableChart
-              volumeCategory="fake-volume"
+              volumeCategory={ColumnLabels[8].id}
               title="Fake Volume"
               valueTitle="% Of Total"
               color="accent-red"
@@ -370,7 +371,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column3={{
           content: (
             <VolumeTableChart
-              volumeCategory="loan-volume"
+              volumeCategory={ColumnLabels[6].id}
               title="Loan Volume"
               valueTitle="% of total"
               color="accent-yellow"
@@ -473,7 +474,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column4={{
           content: (
             <VolumeTableChart
-              volumeCategory="revenue-volume"
+              volumeCategory={ColumnLabels[7].id}
               title="Collection Revenue"
               valueTitle="Earnings"
               color="light-grey-1"

@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSpring, animated, easings } from "@react-spring/web";
+import { useSpring, animated } from "@react-spring/web";
 
 // Utils
+import { useSearchParams } from "next/navigation";
 import { CollectionTypes } from "@/app/types";
 
 // Components
@@ -14,7 +15,6 @@ import Body from "./body";
 import { ColumnLabels } from "@constants/top100table";
 import { config } from "@constants/animationSettings";
 
-const count = Array.from({ length: 100 });
 interface DataTableProps {
   tableTitle?: string;
   tableBodyData: {
@@ -78,6 +78,8 @@ interface DataTableProps {
 }
 
 const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
+  const searchParams = useSearchParams().get("q");
+
   // Animations
   const animation1 = useSpring({
     from: { opacity: 0 },
@@ -102,6 +104,13 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
     setSortedBy(id);
     setActiveColumn(id);
   };
+
+  useEffect(() => {
+    if (searchParams) {
+      setSortedBy(searchParams);
+      setActiveColumn(searchParams);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     // True Volume
@@ -286,23 +295,6 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
         </div>
       </animated.div>
       <div className="data-table__table-wrapper">
-        {/* <table
-          className="data-table__body-count"
-          cellPadding={6}
-          cellSpacing={0}
-        >
-          <tbody>
-            {count.map((_, index) => {
-              return (
-                <tr key={index} className="data-table__row">
-                  <td width="50" className="data-table__td">
-                    <p className="typography__display--6">{index + 1}</p>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table> */}
         <animated.table
           style={{ ...animation2 }}
           cellPadding={6}

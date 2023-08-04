@@ -7,12 +7,16 @@ import ChevronDown from "@assets/icons/chevron-down.svg";
 // Types
 import { ColumnLabelsTypes } from "@/constants/top100table";
 
+// Utils
+import { useSearchParams } from "next/navigation";
+
 interface HeadProps {
   labels: ColumnLabelsTypes[];
   active: string;
   handleSortByClick: (e: string) => void;
 }
 const Head: React.FC<HeadProps> = ({ labels, active, handleSortByClick }) => {
+  const searchParams = useSearchParams().get("q");
   return (
     <thead>
       <tr>
