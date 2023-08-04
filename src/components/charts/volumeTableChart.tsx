@@ -67,7 +67,7 @@ const VolumeTableChart: React.FC<TableChartProps> = ({
       {route === "/" && (
         <Link
           href={`/leaderboards?${volumeCategory}`}
-          className="typography__label--5 typography__color--dark-medium-emphasis link__more-cta"
+          className="typography__body--small typography__color--dark-medium-emphasis link__more-cta"
         >
           Show More
           <Image src={ChevronRightIcon.src} alt="" width={16} height={16} />
