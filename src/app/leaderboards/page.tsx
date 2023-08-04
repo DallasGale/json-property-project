@@ -430,12 +430,12 @@ const LeaderboardsPage: React.FC = async () => {
               leaderBoard90dData,
               ["total_real_day_volume"],
               "desc"
-            ).slice(0, 100),
+            ).slice(0, 5),
             all: orderBy(
               leaderBoardAllData,
               ["total_real_day_volume"],
               "desc"
-            ).slice(0, 100),
+            ).slice(0, 5),
           },
           fakeVolume: {
             oneDay: orderBy(
