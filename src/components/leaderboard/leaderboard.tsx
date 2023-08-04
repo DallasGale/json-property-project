@@ -369,7 +369,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               title="Loan Volume"
-              valueTitle="Amount"
+              valueTitle="% of total"
               color="accent-yellow"
               col1data={loanVolumeDataArray.map(
                 ({
@@ -439,6 +439,26 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                             )}
                           </p>
                         </div>
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+              col3data={loanVolumeDataArray.map(
+                ({ total_loan_day_volume_percentage }, index: number) => {
+                  return (
+                    <tr key={index + total_loan_day_volume_percentage}>
+                      <td height="30" valign="top" align="right">
+                        {total_loan_day_volume_percentage ? (
+                          <p className="typography__body--small typography__color--dark-medium-emphasis">
+                            {PercentFormatter(total_loan_day_volume_percentage)}
+                            %
+                          </p>
+                        ) : (
+                          <p className="typography__body--small typography__color--dark-low-emphasis">
+                            --
+                          </p>
+                        )}
                       </td>
                     </tr>
                   );

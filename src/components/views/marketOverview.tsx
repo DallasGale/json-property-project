@@ -40,7 +40,6 @@ import Traders from "../traders/traders";
 import TimeframeAsString from "@utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import DecimalFormatter from "@utils/decimalFormatter";
-import PercentChangeColors from "@utils/percentChangeColors";
 import { TradersTimeframeTypes } from "../traders/types";
 import { NewWalletsTypes } from "../traders/wallets/newWallets";
 import ChartHeader from "../charts/chartHeader";
