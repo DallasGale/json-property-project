@@ -222,7 +222,7 @@ const ActiveWallets: React.FC<Props> = ({
           <p className="typography__label--medium typography__transform--uppercase">
             90 Day Trend
           </p>
-          <DateRange timeframe={timeframe} />
+          <DateRange />
         </div>
       </div>
     </animated.div>
