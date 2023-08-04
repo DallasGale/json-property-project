@@ -7,5 +7,9 @@
   &--horizontal {
     flex-direction: row;
     gap: 12px;
+    padding-left: 50px;
+    @include respond-to(tablet-up) {
+      padding-left: 0;
+    }
   }
 }
