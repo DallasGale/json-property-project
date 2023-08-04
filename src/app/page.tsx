@@ -315,7 +315,6 @@ const MarketOverviewPage: React.FC = async () => {
       <MarketOverview
         labels={labels}
         trueVolume={trueVolume[0].data}
-        totalVolume={totalVolume[0].data}
         fakeVolume={fakeVolume[0].data}
         realPercentDifference={realPercentDifference[0].data}
         loanVolume={loanVolume[0].data}
