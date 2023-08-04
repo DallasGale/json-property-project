@@ -11,6 +11,7 @@ interface TableChartProps {
   col1data: React.ReactNode;
   col2data: React.ReactNode;
   col3data?: React.ReactNode;
+  volumeCategory: string;
 }
 
 const VolumeTableChart: React.FC<TableChartProps> = ({
@@ -20,6 +21,7 @@ const VolumeTableChart: React.FC<TableChartProps> = ({
   col1data,
   col2data,
   col3data,
+  volumeCategory,
 }) => {
   const route = usePathname();
   return (
@@ -64,8 +66,8 @@ const VolumeTableChart: React.FC<TableChartProps> = ({
       </div>
       {route === "/" && (
         <Link
-          href="/leaderboards"
-          className="typography__body--small typography__color--dark-medium-emphasis link__more-cta"
+          href={`/leaderboards?${volumeCategory}`}
+          className="typography__label--5 typography__color--dark-medium-emphasis link__more-cta"
         >
           Show More
           <Image src={ChevronRightIcon.src} alt="" width={16} height={16} />

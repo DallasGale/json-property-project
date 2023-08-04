@@ -74,6 +74,10 @@ const LeaderboardsPage: React.FC = async () => {
       total_real_day_volume_percentage !== null
   );
 
+  const totalRealDayVolumePercentage7d = leaderBoard7dData.filter(
+    ({ total_real_day_volume_percentage }: CollectionTypes) =>
+      total_real_day_volume_percentage !== null
+  );
   const totalVolumeSummary7Day = volumeSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_total_7d"
   );
@@ -426,8 +430,36 @@ const LeaderboardsPage: React.FC = async () => {
               leaderBoard90dData,
               ["total_real_day_volume"],
               "desc"
-            ).slice(0, 5),
-            all: orderBy(
+            ).slice(0, 100),
+            allTop100: orderBy(
+              leaderBoardAllData,
+              ["total_real_day_volume"],
+              "desc"
+            ).slice(0, 100),
+          },
+          sortedByTrueVolPct: {
+            oneDayTop100: orderBy(
+              totalRealDayVolumePercentage1d,
+              ["total_real_day_volume_percentage"],
+              "desc"
+            ).slice(0, 100),
+            sevenDayTop100: orderBy(
+              totalRealDayVolumePercentage7d,
+              ["total_real_day_volume_percentage"],
+              "desc"
+            ).slice(0, 100),
+            thirtyDayTop100: orderBy(
+              leaderBoard30dData,
+              ["total_real_day_volume_percentage"],
+              "desc"
+            ).slice(0, 100),
+            ninetyDayTop100: orderBy(
+              leaderBoard90dData,
+              ["total_real_day_volume_percentage"],
+              "desc"
+            ).slice(0, 100),
+            allTop100: orderBy(
+
               leaderBoardAllData,
               ["total_raw_day_volume"],
               "desc"
