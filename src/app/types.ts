@@ -10,9 +10,9 @@ export type PercentChangeTimeframeTypes = {
 // ------------------------------
 export interface IMarketOverviewProps {
   labels: string[];
-  trueVolume: any[];
-  loanVolume: any[];
-  fakeVolume: any[];
+  trueVolume: number[];
+  loanVolume: number[];
+  fakeVolume: number[];
   realPercentDifference: number[];
   loanVolumeMovingAverage: number[];
   fakeVolumeMovingAverage: number[];
@@ -84,13 +84,13 @@ export type LeaderboarCategoryTypes = {
 // Component Types - Leaderboard
 // ------------------------------
 export type LeaderboardTypes = {
+  showTimeframeToggles?: boolean;
+  leaderboardData: LeaderboarCategoryTypes;
   traders: {
     trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
     loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
     fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
   };
-  showTimeframeToggles?: boolean;
-  leaderboardData: LeaderboarCategoryTypes;
 };
 
 // ------------------------------
@@ -227,9 +227,9 @@ export interface INavLinkProps extends NavigationTypes {
 
 //
 export type ChartDataTogglesTypes = {
-  onClick: (arg1: React.MouseEvent, arg2: number | null) => void;
   title: string;
   active: number | null;
+  onClick: (arg1: React.MouseEvent, arg2: number | null) => void;
 };
 
 // ------------------------------
@@ -240,7 +240,7 @@ export type TabledDotPointsTypes = {
   onClick: (e: string) => void;
 };
 
-type DotPointTypes = {
+export type DotPointTypes = {
   name: string;
   value?: number;
   color: string;
@@ -393,3 +393,92 @@ export type CollectionTypes = {
   total_fake_day_volume_percentage: number | null;
   total_loan_day_volume_percentage: number | null;
 };
+
+export interface LeaderboardsTypes {
+  top100: {
+    sortedByTrueVol: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByTrueVolPct: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByTotalVol: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByTrueSales: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByLoans: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByRevenue: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByFake: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedByTotalSalesCount: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    trueVolume: {
+      oneDay: TrueVolumeTypes[];
+      sevenDay: TrueVolumeTypes[];
+      thirtyDay: TrueVolumeTypes[];
+      ninetyDay: TrueVolumeTypes[];
+      all: TrueVolumeTypes[];
+    };
+    fakeVolume: {
+      oneDay: FakeVolumeTypes[];
+      sevenDay: FakeVolumeTypes[];
+      thirtyDay: FakeVolumeTypes[];
+      ninetyDay: FakeVolumeTypes[];
+      all: FakeVolumeTypes[];
+    };
+    loanVolume: {
+      oneDay: LoanVolumeTypes[];
+      sevenDay: LoanVolumeTypes[];
+      thirtyDay: LoanVolumeTypes[];
+      ninetyDay: LoanVolumeTypes[];
+      all: LoanVolumeTypes[];
+    };
+    royalty: {
+      oneDay: RoyaltyTypes[];
+      sevenDay: RoyaltyTypes[];
+      thirtyDay: RoyaltyTypes[];
+      ninetyDay: RoyaltyTypes[];
+      all: RoyaltyTypes[];
+    };
+  };
+}

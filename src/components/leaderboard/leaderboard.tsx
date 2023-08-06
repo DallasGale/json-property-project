@@ -24,9 +24,14 @@ import PercentFormatter from "@utils/percentFormatter";
 import { ColumnLabels } from "@/constants/top100table";
 
 // Types
-import type { LeaderboardTypes } from "@app/types";
+import type { LeaderboarCategoryTypes } from "@app/types";
 
-const Leaderboard: React.FC<LeaderboardTypes> = ({
+interface LeaderBoardTypes {
+  showTimeframeToggles?: boolean;
+  leaderboardData: LeaderboarCategoryTypes;
+}
+
+const Leaderboard: React.FC<LeaderBoardTypes> = ({
   showTimeframeToggles = false,
   leaderboardData,
 }) => {
