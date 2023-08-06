@@ -1,4 +1,4 @@
-import { LegendFormatTypes } from "@/app/types";
+import { ILegendProps, LegendFormatTypes } from "@/app/types";
 import TabledDotPoints from "@components/tabledDotPoints/tabledDotPoints";
 import Image from "next/image";
 
@@ -8,20 +8,7 @@ import LegendIconRed from "@assets/icons/legendIconRed.svg";
 import LegendIconYellow from "@assets/icons/legendIconYellow.svg";
 import LegendIconPurple from "@assets/icons/legendIconPurple.svg";
 
-interface LegendProps {
-  labels: LabelTypes[];
-  modifierClass?: string;
-  legendFormat?: LegendFormatTypes;
-  onClick: (e: string) => void;
-}
-
-type LabelTypes = {
-  color: string;
-  name: string;
-  id: string;
-  value?: number;
-};
-const Legend: React.FC<LegendProps> = ({
+const Legend: React.FC<ILegendProps> = ({
   modifierClass,
   labels,
   onClick,

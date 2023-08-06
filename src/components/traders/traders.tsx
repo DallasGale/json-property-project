@@ -11,25 +11,16 @@ import { useSpring, animated, easings } from "@react-spring/web";
 // Assets
 import TimeframeAsString from "@utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
-import { TradersTimeframeTypes } from "./types";
-import NewWallets, { NewWalletsTypes } from "./wallets/newWallets";
+import NewWallets from "./wallets/newWallets";
 import ActiveWallets from "./wallets/activeWallets";
+import { ITradersTypes } from "@/app/types";
 
-interface TradersTypes {
-  labels: string[];
-  activeWalletsOnlyBought: number[];
-  activeWalletsOnlySold: number[];
-  activeWalletsBoughtAndSold: number[];
-  activeWallets: TradersTimeframeTypes;
-  newWallets: NewWalletsTypes;
-}
-
-const Traders: React.FC<TradersTypes> = ({
+const Traders: React.FC<ITradersTypes> = ({
   labels,
   activeWalletsOnlyBought,
   activeWalletsOnlySold,
   activeWalletsBoughtAndSold,
-  activeWallets: activeWalletsTotal,
+  activeWallets,
   newWallets,
 }) => {
   // Animations
@@ -273,7 +264,7 @@ const Traders: React.FC<TradersTypes> = ({
               <ActiveWallets
                 timeframe={timeframe}
                 labels={labels}
-                activeWalletsTotal={activeWalletsTotal}
+                activeWalletsTotal={activeWallets}
                 activeWallets={{
                   onlyBought: activeWalletsOnlyBought,
                   onlySold: activeWalletsOnlySold,

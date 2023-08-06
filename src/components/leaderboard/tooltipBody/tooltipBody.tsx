@@ -18,22 +18,10 @@ import LegendIconYellow from "@assets/icons/legendIconYellow.svg";
 import TimeIcon from "@assets/icons/time.svg";
 import PercentFormatter from "@/utils/percentFormatter";
 
-interface TooltipBodyProps {
-  name: string;
-  today: string;
-  trueVolume: number | number[];
-  fakeVolume: number | number[];
-  loanVolume: number | number[];
-  totalVolume: number;
-  totalRevenue: number;
-  totalRealDayVolume: number;
-  totalFakeVolume: number;
-  totalLoanVolume: number;
-  totalRealDayVolumePercentage: number;
-  totalFakeVolumePercentage: number;
-  totalLoanVolumePercentage: number;
-}
-const TooltipBody: React.FC<TooltipBodyProps> = ({
+// Types
+import { TooltipBodyTypes } from "@/app/types";
+
+const TooltipBody: React.FC<TooltipBodyTypes> = ({
   name,
   today,
   trueVolume,

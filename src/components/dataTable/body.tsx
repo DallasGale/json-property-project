@@ -10,15 +10,12 @@ import CryptoIcon from "@assets/icons/crypto.svg";
 import GoodToBadColors from "@utils/goodToBadColors";
 import DecimalFormatter from "@utils/decimalFormatter";
 import { VolumeFormatter } from "@utils/volumeFormatter";
-import { CollectionTypes } from "@/app/types";
 import { ColumnLabels } from "@/constants/top100table";
 
-interface BodyProps {
-  data: CollectionTypes[];
-  active: string;
-}
+// Types
+import { DataTableBodyTypes } from "@/app/types";
 
-const Body: React.FC<BodyProps> = ({ data, active }) => {
+const DataTableBody: React.FC<DataTableBodyTypes> = ({ data, active }) => {
   const today = new Date();
 
   return (
@@ -307,4 +304,4 @@ const Body: React.FC<BodyProps> = ({ data, active }) => {
   );
 };
 
-export default Body;
+export default DataTableBody;

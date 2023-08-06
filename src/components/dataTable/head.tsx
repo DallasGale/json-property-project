@@ -5,18 +5,13 @@ import Image from "next/image";
 import ChevronDown from "@assets/icons/chevron-down.svg";
 
 // Types
-import { ColumnLabelsTypes } from "@/constants/top100table";
+import { DataTableHeadTypes } from "@/app/types";
 
-// Utils
-import { useSearchParams } from "next/navigation";
-
-interface HeadProps {
-  labels: ColumnLabelsTypes[];
-  active: string;
-  handleSortByClick: (e: string) => void;
-}
-const Head: React.FC<HeadProps> = ({ labels, active, handleSortByClick }) => {
-  const searchParams = useSearchParams().get("q");
+const Head: React.FC<DataTableHeadTypes> = ({
+  labels,
+  active,
+  handleSortByClick,
+}) => {
   return (
     <thead>
       <tr>

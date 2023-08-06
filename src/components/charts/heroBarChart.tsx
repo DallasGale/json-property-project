@@ -1,20 +1,9 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { VolumeFormatter } from "@utils/volumeFormatter";
 import Legend from "@components/dataViz/legend/legend";
-import { BarChartDatasetsType, LegendLabelTypes } from "@app/types";
 
-interface DailyTrueVolumeTypes {
-  labels: string[];
-  datasets: BarChartDatasetsType[];
-  legendLabels: LegendLabelTypes[];
-  legendModifierClass?: string;
-  timeframe: number;
-  timeframeClicked: boolean;
-  legendOnClick: (e: string) => void;
-}
+// Types
+import { DailyTrueVolumeTypes } from "@app/types";
 
 const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
   labels,

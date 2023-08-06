@@ -1,13 +1,9 @@
 import { Bar } from "react-chartjs-2";
 import MatrixBg from "@assets/bg/matrix.svg";
 
-interface TrueVolumeChartTypes {
-  labels: string[];
-  data: {
-    true_volume: number[];
-  };
-  trend_timespan: number | null;
-}
+// Types
+import { TrueVolumeChartTypes } from "@/app/types";
+
 const TrueVolumeBarChart: React.FC<TrueVolumeChartTypes> = ({
   labels,
   data: { true_volume },

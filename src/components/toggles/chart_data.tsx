@@ -1,10 +1,6 @@
-interface ChartDataTogglesProps {
-  onClick: (arg1: React.MouseEvent, arg2: number | null) => void;
-  title: string;
-  active: number | null;
-}
+import { ChartDataTogglesTypes } from "@/app/types";
 
-const ChartDataToggles: React.FC<ChartDataTogglesProps> = ({
+const ChartDataToggles: React.FC<ChartDataTogglesTypes> = ({
   onClick,
   title,
   active,
