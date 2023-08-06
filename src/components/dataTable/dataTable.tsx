@@ -4,80 +4,20 @@ import { useSpring, animated } from "@react-spring/web";
 
 // Utils
 import { useSearchParams } from "next/navigation";
-import { CollectionTypes } from "@/app/types";
 
 // Components
 import ChartDataToggles from "@components/toggles/chart_data";
 import Head from "./head";
-import Body from "./body";
+import DataTableBody from "./body";
 
 // Constants
 import { ColumnLabels } from "@constants/top100table";
 import { config } from "@constants/animationSettings";
 
-interface DataTableProps {
-  tableTitle?: string;
-  tableBodyData: {
-    sortedByTrueVol: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByTrueVolPct: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByTotalVol: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByTrueSales: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByLoans: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByRevenue: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByFake: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByTotalSalesCount: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-  };
-}
+// Types
+import { DataTableTypes } from "@/app/types";
 
-const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
+const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
   const searchParams = useSearchParams().get("q");
 
   // Animations
@@ -306,7 +246,7 @@ const DataTable: React.FC<DataTableProps> = ({ tableBodyData }) => {
             active={activeColumn}
             handleSortByClick={(e) => handleSorting(e)}
           />
-          <Body active={activeColumn} data={top100Data} />
+          <DataTableBody active={activeColumn} data={top100Data} />
         </animated.table>
       </div>
     </div>

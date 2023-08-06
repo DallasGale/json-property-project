@@ -3,15 +3,10 @@ import PercentChangeColors from "@/utils/percentChangeColors";
 import Image from "next/image";
 import CryptoIcon from "@assets/icons/crypto.svg";
 
-interface ChartHeaderProps {
-  title: string;
-  description: string;
-  value?: string;
-  valueDiff?: number;
-  withCryptoIcon?: boolean;
-}
+// Types
+import { ChartHeaderTypes } from "@/app/types";
 
-const ChartHeader: React.FC<ChartHeaderProps> = ({
+const ChartHeader: React.FC<ChartHeaderTypes> = ({
   title,
   description,
   value,

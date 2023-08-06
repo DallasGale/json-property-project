@@ -8,7 +8,7 @@ import "moment-timezone";
 import TimeIcon from "@assets/icons/time.svg";
 import { config } from "@constants/animationSettings";
 
-const StatusBar: React.FC = () => {
+const StatusBar = () => {
   // Animations
   const animation = useSpring({
     from: { opacity: 0 },

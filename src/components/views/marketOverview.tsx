@@ -19,14 +19,6 @@ import {
 } from "chart.js";
 import { VolumeFormatter } from "@utils/volumeFormatter";
 
-// Types
-import type {
-  FakeVolumeTypes,
-  TrueVolumeTypes,
-  LoanVolumeTypes,
-  RoyaltyTypes,
-} from "@/app/types";
-
 // Components
 import TrendLineChart from "@components/charts/trendLineChart";
 import TrueVolumeBarChart from "@components/charts/trueVolumeBar";
@@ -38,10 +30,11 @@ import Traders from "../traders/traders";
 import TimeframeAsString from "@utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import DecimalFormatter from "@utils/decimalFormatter";
-import { TradersTimeframeTypes } from "../traders/types";
-import { NewWalletsTypes } from "../traders/wallets/newWallets";
 import ChartHeader from "../charts/chartHeader";
 import DateRange from "../dateRange/dateRange";
+
+// Types
+import type { IMarketOverviewProps } from "@/app/types";
 
 ChartJS.register(
   CategoryScale,
@@ -56,68 +49,7 @@ ChartJS.register(
   chartTrendline
 );
 
-export type PercentChangeTimeframeTypes = {
-  oneDay: number[];
-  sevenDay: number[];
-  thirtyDay: number[];
-  ninetyDay: number[];
-};
-interface VolumeChartProps {
-  labels: string[];
-  trueVolume: any[];
-  loanVolume: any[];
-  fakeVolume: any[];
-  realPercentDifference: number[];
-  loanVolumeMovingAverage: number[];
-  fakeVolumeMovingAverage: number[];
-  totalVolumeMovingAverage: number[];
-  trueVolumeMovingAverage: number[];
-  leaderboard: {
-    trueVolume: {
-      oneDay: TrueVolumeTypes[];
-      sevenDay: TrueVolumeTypes[];
-      thirtyDay: TrueVolumeTypes[];
-      ninetyDay: TrueVolumeTypes[];
-      all: TrueVolumeTypes[];
-    };
-    fakeVolume: {
-      oneDay: FakeVolumeTypes[];
-      sevenDay: FakeVolumeTypes[];
-      thirtyDay: FakeVolumeTypes[];
-      ninetyDay: FakeVolumeTypes[];
-      all: FakeVolumeTypes[];
-    };
-    loanVolume: {
-      oneDay: LoanVolumeTypes[];
-      sevenDay: LoanVolumeTypes[];
-      thirtyDay: LoanVolumeTypes[];
-      ninetyDay: LoanVolumeTypes[];
-      all: LoanVolumeTypes[];
-    };
-    royalty: {
-      oneDay: RoyaltyTypes[];
-      sevenDay: RoyaltyTypes[];
-      thirtyDay: RoyaltyTypes[];
-      ninetyDay: RoyaltyTypes[];
-      all: RoyaltyTypes[];
-    };
-  };
-  traders: {
-    activeWalletOnlyBought: number[];
-    activeWalletOnlySold: number[];
-    activeWalletBoughtAndSold: number[];
-    activeWallets: TradersTimeframeTypes;
-    newWallets: NewWalletsTypes;
-    trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
-    loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
-    fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
-    totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
-    totalPercentChangeTimeframeData: PercentChangeTimeframeTypes;
-    truePercentChangeTimeframeData: PercentChangeTimeframeTypes;
-  };
-}
-
-const MarketOverview: React.FC<VolumeChartProps> = ({
+const MarketOverview: React.FC<IMarketOverviewProps> = ({
   labels,
   trueVolume,
   loanVolume,

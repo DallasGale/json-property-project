@@ -1,8 +1,4 @@
-export type NavigationTypes = {
-  name: string;
-  id: string;
-  link: string;
-};
+import { NavigationTypes } from "@/app/types";
 
 const navigation: NavigationTypes[] = [
   {

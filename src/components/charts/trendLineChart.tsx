@@ -2,19 +2,8 @@ import { Line } from "react-chartjs-2";
 import Legend from "@components/dataViz/legend/legend";
 import MatrixBg from "@assets/bg/matrix.svg";
 
-import {
-  LegendFormatTypes,
-  LegendLabelTypes,
-  LineChartDatasetsType,
-} from "@app/types";
-
-interface TrendLineChartTypes {
-  labels: string[];
-  datasets: LineChartDatasetsType[];
-  legendLabels: LegendLabelTypes[];
-  legendFormat?: LegendFormatTypes;
-  legendOnClick: (e: string) => void;
-}
+// Types
+import { TrendLineChartTypes } from "@app/types";
 
 const TrendLineChart: React.FC<TrendLineChartTypes> = ({
   labels,

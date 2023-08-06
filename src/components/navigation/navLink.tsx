@@ -1,10 +1,7 @@
-import { NavigationTypes } from "@/constants/navigation";
 import Link from "next/link";
-
-interface NavLinkProps extends NavigationTypes {
-  activeClassName: boolean;
-}
-const NavLink: React.FC<NavLinkProps> = ({ name, link, activeClassName }) => {
+// Types
+import { INavLinkProps } from "@/app/types";
+const NavLink: React.FC<INavLinkProps> = ({ name, link, activeClassName }) => {
   return (
     <Link
       href={link}

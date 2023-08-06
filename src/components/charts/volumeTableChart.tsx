@@ -4,17 +4,10 @@ import { usePathname } from "next/navigation";
 import ChevronRightIcon from "@assets/icons/chevron-right.svg";
 import Image from "next/image";
 
-interface TableChartProps {
-  title: string;
-  valueTitle: string;
-  color: string;
-  col1data: React.ReactNode;
-  col2data: React.ReactNode;
-  col3data?: React.ReactNode;
-  volumeCategory: string;
-}
+// Types
+import { VolumeTableChartProps } from "@/app/types";
 
-const VolumeTableChart: React.FC<TableChartProps> = ({
+const VolumeTableChart: React.FC<VolumeTableChartProps> = ({
   title,
   valueTitle,
   color,

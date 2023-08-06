@@ -1,3 +1,326 @@
+export type PercentChangeTimeframeTypes = {
+  oneDay: number[];
+  sevenDay: number[];
+  thirtyDay: number[];
+  ninetyDay: number[];
+};
+
+// ------------------------------
+// Page Interfaces - MarketOverview
+// ------------------------------
+export interface IMarketOverviewProps {
+  labels: string[];
+  trueVolume: any[];
+  loanVolume: any[];
+  fakeVolume: any[];
+  realPercentDifference: number[];
+  loanVolumeMovingAverage: number[];
+  fakeVolumeMovingAverage: number[];
+  totalVolumeMovingAverage: number[];
+  trueVolumeMovingAverage: number[];
+  leaderboard: LeaderboarCategoryTypes;
+  traders: TradersTypes;
+}
+
+// ------------------------------
+// Component Types - Chart Header
+// ------------------------------
+export type ChartHeaderTypes = {
+  title: string;
+  description: string;
+  value?: string;
+  valueDiff?: number;
+  withCryptoIcon?: boolean;
+};
+
+// ------------------------------
+// Component Types - Hero Bar Chart
+// ------------------------------
+export type DailyTrueVolumeTypes = {
+  labels: string[];
+  datasets: BarChartDatasetsType[];
+  legendLabels: LegendLabelTypes[];
+  legendModifierClass?: string;
+  timeframe: number;
+  timeframeClicked: boolean;
+  legendOnClick: (e: string) => void;
+};
+
+// ------------------------------
+// Component Types - Leaderboard Categories
+// ------------------------------
+export type LeaderboarCategoryTypes = {
+  trueVolume: {
+    oneDay: TrueVolumeTypes[];
+    sevenDay: TrueVolumeTypes[];
+    thirtyDay: TrueVolumeTypes[];
+    ninetyDay: TrueVolumeTypes[];
+    all: TrueVolumeTypes[];
+  };
+  fakeVolume: {
+    oneDay: FakeVolumeTypes[];
+    sevenDay: FakeVolumeTypes[];
+    thirtyDay: FakeVolumeTypes[];
+    ninetyDay: FakeVolumeTypes[];
+    all: FakeVolumeTypes[];
+  };
+  loanVolume: {
+    oneDay: LoanVolumeTypes[];
+    sevenDay: LoanVolumeTypes[];
+    thirtyDay: LoanVolumeTypes[];
+    ninetyDay: LoanVolumeTypes[];
+    all: LoanVolumeTypes[];
+  };
+  royalty: {
+    oneDay: RoyaltyTypes[];
+    sevenDay: RoyaltyTypes[];
+    thirtyDay: RoyaltyTypes[];
+    ninetyDay: RoyaltyTypes[];
+    all: RoyaltyTypes[];
+  };
+};
+
+// ------------------------------
+// Component Types - Leaderboard
+// ------------------------------
+export type LeaderboardTypes = {
+  traders: {
+    trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
+    fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  };
+  showTimeframeToggles?: boolean;
+  leaderboardData: LeaderboarCategoryTypes;
+};
+
+// ------------------------------
+// Component Types - Legend
+// ------------------------------
+export interface ILegendProps {
+  labels: LabelTypes[];
+  modifierClass?: string;
+  legendFormat?: LegendFormatTypes;
+  onClick: (e: string) => void;
+}
+
+export type LabelTypes = {
+  color: string;
+  name: string;
+  id: string;
+  value?: number;
+};
+
+// ------------------------------
+// Component Types - Progress RIng
+// ------------------------------
+export type ProgressRingTypes = {
+  trueVolume: number | number[];
+  loanVolume: number | number[];
+  fakeVolume: number | number[];
+  percentage?: string;
+  modiferClass?: string;
+};
+
+// ------------------------------
+// Component Types - Trendline Chart
+// ------------------------------
+export type TrendLineChartTypes = {
+  labels: string[];
+  datasets: LineChartDatasetsType[];
+  legendLabels: LegendLabelTypes[];
+  legendFormat?: LegendFormatTypes;
+  legendOnClick: (e: string) => void;
+};
+
+// ------------------------------
+// Component Types - True Volume Chart
+// ------------------------------
+export type TrueVolumeChartTypes = {
+  labels: string[];
+  trend_timespan: number | null;
+  data: {
+    true_volume: number[];
+  };
+};
+
+// ------------------------------
+// Component Types -  Volume Table Chart
+// ------------------------------
+export type VolumeTableChartProps = {
+  title: string;
+  valueTitle: string;
+  color: string;
+  col1data: React.ReactNode;
+  col2data: React.ReactNode;
+  col3data?: React.ReactNode;
+  volumeCategory: string;
+};
+
+// ------------------------------
+// Component Types -  Data Table
+// ------------------------------
+export type DataTableTypes = {
+  tableTitle?: string;
+  tableBodyData: {
+    sortedByTrueVol: DataTableTop100Types;
+    sortedByTrueVolPct: DataTableTop100Types;
+    sortedByTotalVol: DataTableTop100Types;
+    sortedByTrueSales: DataTableTop100Types;
+    sortedByLoans: DataTableTop100Types;
+    sortedByRevenue: DataTableTop100Types;
+    sortedByFake: DataTableTop100Types;
+    sortedByTotalSalesCount: DataTableTop100Types;
+  };
+};
+
+// ------------------------------
+// Component Types -  Data Table Top 100
+// ------------------------------
+export type DataTableTop100Types = {
+  oneDayTop100: CollectionTypes[];
+  sevenDayTop100: CollectionTypes[];
+  thirtyDayTop100: CollectionTypes[];
+  ninetyDayTop100: CollectionTypes[];
+  allTop100: CollectionTypes[];
+};
+// ------------------------------
+// Component Types -  Data Table Body
+// ------------------------------
+export type DataTableBodyTypes = {
+  data: CollectionTypes[];
+  active: string;
+};
+
+// ------------------------------
+// Component Types -  Data Table Top 100 Column
+// ------------------------------
+export type DataTableColumnLabelsTypes = {
+  name: string;
+  id: string;
+  hasChevronDown: boolean;
+  active: boolean;
+};
+// ------------------------------
+// Component Types -  Data Table Head
+// ------------------------------
+export type DataTableHeadTypes = {
+  labels: DataTableColumnLabelsTypes[];
+  active: string;
+  handleSortByClick: (e: string) => void;
+};
+
+// ------------------------------
+// Component Types -  Navigation
+// ------------------------------
+export type NavigationTypes = {
+  name: string;
+  id: string;
+  link: string;
+};
+
+// ------------------------------
+// Component Types -  Nav Link
+// ------------------------------
+export interface INavLinkProps extends NavigationTypes {
+  activeClassName: boolean;
+}
+
+//
+export type ChartDataTogglesTypes = {
+  onClick: (arg1: React.MouseEvent, arg2: number | null) => void;
+  title: string;
+  active: number | null;
+};
+
+// ------------------------------
+// Component Types -  Tables Dot Points
+// ------------------------------
+export type TabledDotPointsTypes = {
+  dotpoints: DotPointTypes[];
+  onClick: (e: string) => void;
+};
+
+type DotPointTypes = {
+  name: string;
+  value?: number;
+  color: string;
+  id: string;
+};
+
+// ------------------------------
+// Component Types - Wallets
+// ------------------------------
+export type WalletTypes = {
+  activeWalletsTotal?: TradersTimeframeTypes;
+  activeWallets?: ActiveWalletsTypes;
+  newWallets?: NewWalletsTypes;
+  timeframe: number;
+  labels: string[];
+};
+export type ActiveWalletsTypes = {
+  onlyBought: number[];
+  onlySold: number[];
+  boughtAndSold: number[];
+};
+export interface NewWalletsTypes extends TradersTimeframeTypes {
+  dailyStats: {
+    new: number[];
+    totalCreated: number[];
+  };
+}
+
+// ------------------------------
+// Component Types - Tooltip Body
+// ------------------------------
+export type TooltipBodyTypes = {
+  name: string;
+  today: string;
+  trueVolume: number | number[];
+  fakeVolume: number | number[];
+  loanVolume: number | number[];
+  totalVolume: number;
+  totalRevenue: number;
+  totalRealDayVolume: number;
+  totalFakeVolume: number;
+  totalLoanVolume: number;
+  totalRealDayVolumePercentage: number;
+  totalFakeVolumePercentage: number;
+  totalLoanVolumePercentage: number;
+};
+// ------------------------------
+// Component Types - Traders
+// ------------------------------
+export type TradersTypes = {
+  activeWalletOnlyBought: number[];
+  activeWalletOnlySold: number[];
+  activeWalletBoughtAndSold: number[];
+  activeWallets: TradersTimeframeTypes;
+  newWallets: NewWalletsTypes;
+  trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  totalPercentChangeTimeframeData: PercentChangeTimeframeTypes;
+  truePercentChangeTimeframeData: PercentChangeTimeframeTypes;
+};
+
+export type TradersTimeframeTypes = {
+  oneDay: number[];
+  sevenDay: number[];
+  thirtyDay: number[];
+  ninetyDay: number[];
+  all: number[];
+};
+
+export interface ITradersTypes {
+  labels: string[];
+  activeWalletsOnlyBought: number[];
+  activeWalletsOnlySold: number[];
+  activeWalletsBoughtAndSold: number[];
+  activeWallets: TradersTimeframeTypes;
+  newWallets: NewWalletsTypes;
+}
+
 export type DatasetsType = {
   label: string;
   data: number[];

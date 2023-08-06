@@ -1,11 +1,6 @@
-export type ColumnLabelsTypes = {
-  name: string;
-  id: string;
-  hasChevronDown: boolean;
-  active: boolean;
-};
+import { DataTableColumnLabelsTypes } from "@/app/types";
 
-export const ColumnLabels: ColumnLabelsTypes[] = [
+export const ColumnLabels: DataTableColumnLabelsTypes[] = [
   {
     name: "#",
     id: "number",

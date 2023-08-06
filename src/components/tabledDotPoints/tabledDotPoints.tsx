@@ -1,22 +1,17 @@
 import DecimalFormatter from "@utils/decimalFormatter";
 
-interface DotPointProps {
-  dotpoints: DotPointTypes[];
-  onClick: (e: string) => void;
-}
-
-type DotPointTypes = {
-  name: string;
-  value?: number;
-  color: string;
-  id: string;
-};
+// Types
+import { TabledDotPointsTypes } from "@/app/types";
 
 function valueColor(value: number) {
   if (value < 0) return "red";
   else return "green";
 }
-const TabledDotPoints: React.FC<DotPointProps> = ({ dotpoints, onClick }) => {
+
+const TabledDotPoints: React.FC<TabledDotPointsTypes> = ({
+  dotpoints,
+  onClick,
+}) => {
   return (
     <div className="tabled-dot-points">
       <ul className="tabled-dot-point__list">

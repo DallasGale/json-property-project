@@ -14,15 +14,6 @@ import CryptoRedIcon from "@assets/icons/cryptoRed.svg";
 import CryptoYellowIcon from "@assets/icons/cryptoYellow.svg";
 import CryptoGreyIcon from "@assets/icons/cryptoGrey.svg";
 
-// Types
-import type {
-  TrueVolumeTypes,
-  FakeVolumeTypes,
-  LoanVolumeTypes,
-  RoyaltyTypes,
-} from "@app/types";
-import { TradersTimeframeTypes } from "../traders/types";
-
 // Components
 import ChartDataToggles from "@components/toggles/chart_data";
 import { HoverCard } from "@mantine/core";
@@ -32,49 +23,12 @@ import TooltipBody from "@components/leaderboard/tooltipBody/tooltipBody";
 import PercentFormatter from "@utils/percentFormatter";
 import { ColumnLabels } from "@/constants/top100table";
 
-interface LeaderBoardTypes {
-  traders: {
-    trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
-    loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
-    fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
-  };
-  showTimeframeToggles?: boolean;
-  leaderboardData: {
-    trueVolume: {
-      oneDay: TrueVolumeTypes[];
-      sevenDay: TrueVolumeTypes[];
-      thirtyDay: TrueVolumeTypes[];
-      ninetyDay: TrueVolumeTypes[];
-      all: TrueVolumeTypes[];
-    };
-    fakeVolume: {
-      oneDay: FakeVolumeTypes[];
-      sevenDay: FakeVolumeTypes[];
-      thirtyDay: FakeVolumeTypes[];
-      ninetyDay: FakeVolumeTypes[];
-      all: FakeVolumeTypes[];
-    };
-    loanVolume: {
-      oneDay: LoanVolumeTypes[];
-      sevenDay: LoanVolumeTypes[];
-      thirtyDay: LoanVolumeTypes[];
-      ninetyDay: LoanVolumeTypes[];
-      all: LoanVolumeTypes[];
-    };
-    royalty: {
-      oneDay: RoyaltyTypes[];
-      sevenDay: RoyaltyTypes[];
-      thirtyDay: RoyaltyTypes[];
-      ninetyDay: RoyaltyTypes[];
-      all: RoyaltyTypes[];
-    };
-  };
-}
+// Types
+import type { LeaderboardTypes } from "@app/types";
 
-const Leaderboard: React.FC<LeaderBoardTypes> = ({
+const Leaderboard: React.FC<LeaderboardTypes> = ({
   showTimeframeToggles = false,
   leaderboardData,
-  traders,
 }) => {
   // Animations
   const springs1 = useSpring({
