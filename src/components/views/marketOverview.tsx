@@ -590,7 +590,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             all: leaderboard.royalty.all,
           },
         }}
-        traders={traders}
       />
 
       {/* Traders row */}
