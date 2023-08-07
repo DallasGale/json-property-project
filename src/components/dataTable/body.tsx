@@ -15,9 +15,11 @@ import { ColumnLabels } from "@/constants/top100table";
 // Types
 import { DataTableBodyTypes } from "@/app/types";
 
-const DataTableBody: React.FC<DataTableBodyTypes> = ({ data, active }) => {
-  const today = new Date();
-
+const DataTableBody: React.FC<DataTableBodyTypes> = ({
+  data,
+  active,
+  timeframe,
+}) => {
   return (
     <>
       <tbody>
@@ -62,7 +64,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({ data, active }) => {
                     <HoverCard.Dropdown className="dropdown">
                       <TooltipBody
                         name={name}
-                        today={today.toDateString()}
+                        timeframe={timeframe}
                         trueVolume={total_real_day_volume}
                         fakeVolume={total_day_volume_fake}
                         loanVolume={total_day_volume_loan}

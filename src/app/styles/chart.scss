@@ -382,6 +382,21 @@ $gap: 20px;
   &::marker {
     content: none;
   }
+  &:last-child {
+    visibility: hidden;
+  }
+}
+
+.chart__labels-list-item--last {
+  visibility: visible !important;
+}
+
+.chart__labels-list--7day {
+  .chart__labels-list-item {
+    &:last-child {
+      visibility: visible !important;
+    }
+  }
 }
 
 .chart__seperator {

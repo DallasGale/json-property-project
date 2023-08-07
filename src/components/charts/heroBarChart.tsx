@@ -4,6 +4,7 @@ import Legend from "@components/dataViz/legend/legend";
 
 // Types
 import { DailyTrueVolumeTypes } from "@app/types";
+import Moment from "react-moment";
 
 const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
   labels,
@@ -13,25 +14,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
   timeframeClicked,
   timeframe,
 }) => {
-  const renderChartLabels = () => {
-    if (labels.length) {
-      if (timeframe === 0) {
-        if (labels.length % 160 === 0) return labels;
-        else return;
-      }
-
-      if (timeframe === 90) {
-        if (labels.length % 16 === 0) return labels;
-        else return;
-      }
-      if (timeframe === 30) {
-        if (labels.length % 7 === 0) return labels;
-        else return;
-      } else return labels;
-    }
-  };
-
-  console.log(renderChartLabels());
+  const today = new Date().toDateString();
   return (
     <>
       <Legend
@@ -45,9 +28,9 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
           <ol
             className={`chart__labels-list ${
               timeframe === 1 ? "u-justifyCenter" : ""
-            }`}
+            } ${timeframe === 7 ? "chart__labels-list--7day" : ""}`}
           >
-            {labels.map((label, index) => {
+            {labels.slice().map((label, index) => {
               if (timeframe === 0) {
                 if (index % 160 === 0)
                   return (
@@ -84,7 +67,7 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
                       {label}
                     </li>
                   );
-              } else {
+              } else if (timeframe === 7) {
                 return (
                   <li
                     className={`chart__labels-list-item typography__caption--medium ${
@@ -95,8 +78,21 @@ const HeroBarChart: React.FC<DailyTrueVolumeTypes> = ({
                     {label}
                   </li>
                 );
-              }
+              } else return;
             })}
+            {timeframe !== 7 && (
+              <li
+                className={` chart__labels-list-item chart__labels-list-item--last typography__caption--medium ${
+                  timeframeClicked ? "hidden" : "visible"
+                }`}
+              >
+                <Moment
+                  format="D MMM YYYY"
+                  date={today}
+                  subtract={{ days: 1 }}
+                />
+              </li>
+            )}
           </ol>
         </div>
         <Bar

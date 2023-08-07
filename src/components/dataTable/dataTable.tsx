@@ -246,7 +246,11 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
             active={activeColumn}
             handleSortByClick={(e) => handleSorting(e)}
           />
-          <DataTableBody active={activeColumn} data={top100Data} />
+          <DataTableBody
+            active={activeColumn}
+            data={top100Data}
+            timeframe={timeframe}
+          />
         </animated.table>
       </div>
     </div>

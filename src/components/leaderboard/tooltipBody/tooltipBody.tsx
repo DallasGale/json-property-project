@@ -15,15 +15,16 @@ import CryptoGreyIcon from "@assets/icons/cryptoGrey.svg";
 import LegendIconGreen from "@assets/icons/legendIconGreen.svg";
 import LegendIconRed from "@assets/icons/legendIconRed.svg";
 import LegendIconYellow from "@assets/icons/legendIconYellow.svg";
-import TimeIcon from "@assets/icons/time.svg";
+import CalendarIcon from "@assets/icons/calendar.svg";
 import PercentFormatter from "@/utils/percentFormatter";
 
 // Types
 import { TooltipBodyTypes } from "@/app/types";
+import DateRange from "@/components/dateRange/dateRange";
 
 const TooltipBody: React.FC<TooltipBodyTypes> = ({
   name,
-  today,
+  timeframe,
   trueVolume,
   fakeVolume,
   loanVolume,
@@ -49,16 +50,17 @@ const TooltipBody: React.FC<TooltipBodyTypes> = ({
             flexDirection: "row",
             alignItems: "center",
             gap: 10,
-            justifyContent: "flex-end",
+            justifyContent: "flex-start",
           }}
         >
-          <Image src={TimeIcon.src} alt="" width={15} height={15} />
+          <Image src={CalendarIcon.src} alt="" width={15} height={15} />
           <p className="typography__display--2 typography__color--dark-medium-emphasis">
-            <Moment
+            {/* <Moment
               format="ddd, MMMM Do"
               subtract={{ days: 1, hours: 0 }}
               date={today}
-            />
+            /> */}
+            <DateRange timeframe={timeframe} />
           </p>
         </div>
       </div>

@@ -1,8 +1,10 @@
 .tooltip-body__header {
-  display: grid;
-  align-items: center;
-  justify-content: space-between;
-  grid-template-columns: 50% 50%;
+  display: block;
+  // display: grid;
+  // align-items: center;
+  // justify-content: space-between;
+  // flex-direction: column;
+  // grid-template-columns: 50% 50%;
 }
 
 .tooltip-body__content {
