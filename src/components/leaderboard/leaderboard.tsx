@@ -158,7 +158,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           <HoverCard.Dropdown className="dropdown">
                             <TooltipBody
                               name={name}
-                              today={today.toDateString()}
+                              timeframe={timeframe}
                               trueVolume={total_real_day_volume}
                               fakeVolume={total_day_volume_fake}
                               loanVolume={total_day_volume_loan}
@@ -262,7 +262,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           <HoverCard.Dropdown className="dropdown">
                             <TooltipBody
                               name={name}
-                              today={today.toDateString()}
+                              timeframe={timeframe}
                               trueVolume={total_real_day_volume}
                               fakeVolume={total_day_volume_fake}
                               loanVolume={total_day_volume_loan}
@@ -366,7 +366,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           <HoverCard.Dropdown className="dropdown">
                             <TooltipBody
                               name={name}
-                              today={today.toDateString()}
+                              timeframe={timeframe}
                               trueVolume={total_real_day_volume}
                               fakeVolume={total_day_volume_fake}
                               loanVolume={total_day_volume_loan}
@@ -470,7 +470,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
                           <HoverCard.Dropdown className="dropdown">
                             <TooltipBody
                               name={name}
-                              today={today.toDateString()}
+                              timeframe={timeframe}
                               trueVolume={total_real_day_volume}
                               fakeVolume={total_day_volume_fake}
                               loanVolume={total_day_volume_loan}

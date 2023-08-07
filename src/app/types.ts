@@ -190,6 +190,7 @@ export type DataTableTop100Types = {
 export type DataTableBodyTypes = {
   data: CollectionTypes[];
   active: string;
+  timeframe: number;
 };
 
 // ------------------------------
@@ -275,7 +276,6 @@ export interface NewWalletsTypes extends TradersTimeframeTypes {
 // ------------------------------
 export type TooltipBodyTypes = {
   name: string;
-  today: string;
   trueVolume: number | number[];
   fakeVolume: number | number[];
   loanVolume: number | number[];
@@ -287,6 +287,7 @@ export type TooltipBodyTypes = {
   totalRealDayVolumePercentage: number;
   totalFakeVolumePercentage: number;
   totalLoanVolumePercentage: number;
+  timeframe?: number;
 };
 // ------------------------------
 // Component Types - Traders
