@@ -20,6 +20,11 @@ export interface IMarketOverviewProps {
   trueVolumeMovingAverage: number[];
   leaderboard: LeaderboarCategoryTypes;
   traders: TradersTypes;
+  activeWalletsOnlyBought: number[];
+  activeWalletsOnlySold: number[];
+  activeWalletsBoughtAndSold: number[];
+  newWallets: NewWalletsTypes;
+  // activeWallets: ActiveWalletsTypes;
 }
 
 // ------------------------------
@@ -320,6 +325,30 @@ export interface ITradersTypes {
   activeWalletsBoughtAndSold: number[];
   activeWallets: TradersTimeframeTypes;
   newWallets: NewWalletsTypes;
+}
+export interface IOverviewTypes {
+  title: string;
+  heroChartLabels: string[];
+  heroChartTimeframe: number;
+  heroChartDatasets: BarChartDatasetsType[];
+  trendline1Datasets: LineChartDatasetsType[];
+  trendline2Datasets: LineChartDatasetsType[];
+  trendline1Labels: string[];
+  trendline2Labels: string[];
+  trendline1LegendLabels: LegendLabelTypes[];
+  trendline2LegendLabels: LegendLabelTypes[];
+  trendlineTimeframe: number;
+  trendLine1LegendOnClick: (e: string) => void;
+  trendLine2LegendOnClick: (e: string) => void;
+  heroChartLegendOnClick: (e: string) => void;
+  heroChartTimeframeOnClick: (
+    arg1: React.MouseEvent,
+    arg2: number | null
+  ) => void;
+  trendlineTimeframeOnClick: (
+    arg1: React.MouseEvent,
+    arg2: number | null
+  ) => void;
 }
 
 export type DatasetsType = {
