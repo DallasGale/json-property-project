@@ -154,6 +154,7 @@ export type VolumeTableChartProps = {
   col2data: React.ReactNode;
   col3data?: React.ReactNode;
   volumeCategory: string;
+  infoTooltipText?: string;
 };
 
 // ------------------------------
