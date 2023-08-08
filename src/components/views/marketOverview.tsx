@@ -547,21 +547,25 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         if (domEls[i].id === e) {
           if (domEls[i].id === legendLabels.activeWallets[0].id) {
             setTradersActiveWalletsOnlyBoughtDisabled(
-              !heroChartOnlyBoughtDisabled
+              !tradersActiveWalletsOnlyBoughtDisabled
             );
           }
           if (domEls[i].id === legendLabels.activeWallets[1].id) {
-            setTradersActiveWalletsOnlySoldDisabled(!heroChartOnlySoldDisabled);
+            setTradersActiveWalletsOnlySoldDisabled(
+              !tradersActiveWalletsOnlySoldDisabled
+            );
           }
           if (domEls[i].id === legendLabels.activeWallets[2].id) {
             setTradersActiveWalletsBoughtAndSoldDisabled(
-              !heroChartBoughtAndSoldDisabled
+              !tradersActiveWalletsAndSoldDisabled
             );
           }
         }
       }
     }
   };
+
+  console.log({ tradersActiveWalletsOnlyBoughtDisabled });
 
   // > State Updates
   useEffect(() => {
