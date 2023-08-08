@@ -26,7 +26,6 @@ import Leaderboard from "@components/leaderboard/leaderboard";
 import ChartDataToggles from "@components/toggles/chart_data";
 import HeroBarChart from "@components/charts/heroBarChart";
 import ProgressRing from "@components/charts/progressRing";
-import Traders from "../traders/traders";
 import TimeframeAsString from "@utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
 import DecimalFormatter from "@utils/decimalFormatter";
@@ -149,7 +148,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         labels.slice(labels.length - 30).map((data: any) => data)
       );
     }
-
     if (dailyTimeframe === 90) {
       setDailyFakeVolumeDataArray(fakeVolume.slice(fakeVolume.length - 90));
       setDailyLoanVolumeDataArray(loanVolume.slice(loanVolume.length - 90));
@@ -160,19 +158,22 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
     }
   }, [dailyTimeframe]);
 
-  const [timeframeClicked, setTimeframeClicked] = useState(false);
+  const [dailyTimeframeClicked, setDailyTimeframeClicked] = useState(false);
   function handleDailyTimeferame(e: React.MouseEvent, value: any) {
-    setTimeframeClicked(true);
+    setDailyTimeframeClicked(true);
     e.preventDefault();
     setDailyTimeframe(value);
     setTimeout(() => {
-      setTimeframeClicked(false);
+      setDailyTimeframeClicked(false);
     }, 500);
   }
 
   const [trueVolumeDisabled, setTrueVolumeDisabled] = useState(false);
   const [loanVolumeDisabled, setLoanVolumeDisabled] = useState(false);
   const [fakeVolumeDisabled, setFakeVolumeDisabled] = useState(false);
+
+  const [heroChartTimeframeClicked, setHeroChartTimeframeClicked] =
+    useState(false);
 
   const onClick = (e: string) => {
     if (document) {
@@ -347,14 +348,109 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
       );
     }
   }, [timeframe]);
-  // ------------------------------------------------------
 
   // ------------------------------------------------------
-  // Overview - Traders
   // ------------------------------------------------------
-  const [onlyBoughtDisabled, setOnlyBoughtDisabled] = useState(false);
-  const [onlySoldDisabled, setOnlySoldDisabled] = useState(false);
-  const [boughtAndSoldDisabled, setBoughtAndSoldDisabled] = useState(false);
+  // START Overview - Traders Hero
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+  const [heroChartOnlyBoughtDisabled, setHeroChartOnlyBoughtDisabled] =
+    useState(false);
+  const [heroChartOnlySoldDisabled, setHeroChartOnlySoldDisabled] =
+    useState(false);
+  const [heroChartBoughtAndSoldDisabled, setHeroChartBoughtAndSoldDisabled] =
+    useState(false);
+
+  const [tradersHeroChartOnlyBought, setTradersHeroChartOnlyBought] = useState(
+    activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 90)
+  );
+  const [tradersHeroChartOnlySold, setTradersHeroChartOnlySold] = useState(
+    activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90)
+  );
+  const [tradersHeroChartBoughtAndSold, setTradersHeroChartBoughtAndSold] =
+    useState(activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90));
+
+  const [tradersHeroChartLabels, setHeroChartTradersLabels] = useState(
+    labels.slice(labels.length - 90).map((data: any) => data)
+  );
+  const [tradersHeroChartTimeframe, setTradersHeroChartTimeframe] =
+    useState(90);
+
+  function handleHeroChartTimeframeOnClick(e: React.MouseEvent, value: any) {
+    e.preventDefault();
+    setHeroChartTimeframeClicked(true);
+    setTimeout(() => {
+      setHeroChartTimeframeClicked(false);
+    }, 500);
+    setTradersHeroChartTimeframe(value);
+  }
+
+  // TODO: Refactor this into a re-useable hook or util...
+  useEffect(() => {
+    if (tradersHeroChartTimeframe === 0) {
+      setTradersHeroChartOnlyBought(activeWalletsOnlyBought);
+      setTradersHeroChartOnlySold(activeWalletsOnlySold);
+      setTradersHeroChartBoughtAndSold(activeWalletsBoughtAndSold);
+      setHeroChartTradersLabels(labels);
+    }
+    if (tradersHeroChartTimeframe === 1) {
+      setTradersHeroChartOnlyBought(
+        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 1)
+      );
+      setTradersHeroChartOnlySold(
+        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 1)
+      );
+      setTradersHeroChartBoughtAndSold(
+        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 1)
+      );
+      setHeroChartTradersLabels(
+        labels.slice(labels.length - 1).map((data: any) => data)
+      );
+    }
+    if (tradersHeroChartTimeframe === 7) {
+      setTradersHeroChartOnlyBought(
+        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 7)
+      );
+      setTradersHeroChartOnlySold(
+        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 7)
+      );
+      setTradersHeroChartBoughtAndSold(
+        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 7)
+      );
+      setHeroChartTradersLabels(
+        labels.slice(labels.length - 7).map((data: any) => data)
+      );
+    }
+    if (tradersHeroChartTimeframe === 30) {
+      setTradersHeroChartOnlyBought(
+        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 30)
+      );
+      setTradersHeroChartOnlySold(
+        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 30)
+      );
+      setTradersHeroChartBoughtAndSold(
+        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 30)
+      );
+      setHeroChartTradersLabels(
+        labels.slice(labels.length - 30).map((data: any) => data)
+      );
+    }
+
+    if (tradersHeroChartTimeframe === 90) {
+      setTradersHeroChartOnlyBought(
+        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 90)
+      );
+      setTradersHeroChartOnlySold(
+        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90)
+      );
+      setTradersHeroChartBoughtAndSold(
+        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 90)
+      );
+      setHeroChartTradersLabels(
+        labels.slice(labels.length - 90).map((data: any) => data)
+      );
+    }
+  }, [tradersHeroChartTimeframe]);
 
   const traderHeroChartLegendOnClick = (e: string) => {
     if (document) {
@@ -362,175 +458,296 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
       for (let i = 0; i < domEls.length; i++) {
         if (domEls[i].id === e) {
           if (domEls[i].id === "only-bought") {
-            setOnlyBoughtDisabled(!onlyBoughtDisabled);
+            setHeroChartOnlyBoughtDisabled(!heroChartOnlyBoughtDisabled);
           }
           if (domEls[i].id === "only-sold") {
-            setOnlySoldDisabled(!onlySoldDisabled);
+            setHeroChartOnlySoldDisabled(!heroChartOnlySoldDisabled);
           }
           if (domEls[i].id === "bought-and-sold") {
-            setBoughtAndSoldDisabled(!boughtAndSoldDisabled);
+            setHeroChartBoughtAndSoldDisabled(!heroChartBoughtAndSoldDisabled);
           }
         }
       }
     }
   };
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+  // END Overview - Traders Hero
+  // ------------------------------------------------------
+  // ------------------------------------------------------
 
-  const [tradersLabels, setTradersLabels] = useState(
-    labels.slice(labels.length - 90).map((data: any) => data)
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+  // START Overview - Traders Wallets - Global
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+  const [tradersWalletsTimeframe, setTradersWalletsTimeframe] =
+    useState<number>(7);
+
+  const handleTradersWalletsTimeframeOnClick = (
+    e: React.MouseEvent,
+    value: any
+  ) => {
+    e.preventDefault();
+    setTradersWalletsTimeframe(value);
+  };
+
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+  // END Overview - Traders Wallets - Global
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+  // START Overview - Traders Wallets - Active
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+
+  // > Data
+  const [activeWalletTradersLabels, setActiveWalletTradersLabels] = useState(
+    labels.slice(labels.length - 90).map((data: string) => data)
   );
-  const [onlyBoughtDataArray, setOnlyBoughtDataArray] = useState(
+  const [
+    tradersActiveWalletsOnlyBoughtDataArray,
+    setTradersActiveWalletsOnlyBoughtDataArray,
+  ] = useState(
     activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 90)
   );
-
-  const [onlySoldDataArray, setOnlySoldDataArray] = useState(
-    activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90)
-  );
-  const [boughtAndSoldDataArray, setBoughtAndSoldDataArray] = useState(
-    activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90)
-  );
-  const [tradersTimeframe, setTradersTimeframe] = useState(90);
-
-  useEffect(() => {
-    if (tradersTimeframe === 0) {
-      setOnlyBoughtDataArray(activeWalletsOnlyBought);
-      setOnlySoldDataArray(activeWalletsOnlySold);
-      setBoughtAndSoldDataArray(activeWalletsBoughtAndSold);
-      setTradersLabels(labels);
-    }
-    if (tradersTimeframe === 1) {
-      setOnlyBoughtDataArray(
-        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 1)
-      );
-      setOnlySoldDataArray(
-        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 1)
-      );
-      setBoughtAndSoldDataArray(
-        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 1)
-      );
-      setTradersLabels(
-        labels.slice(labels.length - 1).map((data: any) => data)
-      );
-    }
-    if (tradersTimeframe === 7) {
-      setOnlyBoughtDataArray(
-        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 7)
-      );
-      setOnlySoldDataArray(
-        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 7)
-      );
-      setBoughtAndSoldDataArray(
-        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 7)
-      );
-      setTradersLabels(
-        labels.slice(labels.length - 7).map((data: any) => data)
-      );
-    }
-    if (tradersTimeframe === 30) {
-      setOnlyBoughtDataArray(
-        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 30)
-      );
-      setOnlySoldDataArray(
-        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 30)
-      );
-      setBoughtAndSoldDataArray(
-        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 39)
-      );
-      setTradersLabels(
-        labels.slice(labels.length - 30).map((data: any) => data)
-      );
-    }
-    if (tradersTimeframe === 90) {
-      setOnlyBoughtDataArray(
-        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 90)
-      );
-      setOnlySoldDataArray(
-        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90)
-      );
-      setBoughtAndSoldDataArray(
-        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 90)
-      );
-      setTradersLabels(
-        labels.slice(labels.length - 90).map((data: any) => data)
-      );
-    }
-  }, [tradersTimeframe]);
-
-  function handleHeroChartTimeframe(e: React.MouseEvent, value: any) {
-    e.preventDefault();
-    setTimeframeClicked(true);
-    setTimeout(() => {
-      setTimeframeClicked(false);
-    }, 500);
-    setTradersTimeframe(value);
-  }
-
-  // ------------------------------------------------------
-  // Traders
-  // ------------------------------------------------------
-  const [tradersTrendlineTimeframe, seTtradersTrendlineTimeframe] =
-    useState<number>(7);
   const [
-    tradersTrendlineTimeframeClicked,
-    seTtradersTrendlineTimeframeClicked,
-  ] = useState(false);
-  function handleTrendlineTimeframeOnClick(e: React.MouseEvent, value: any) {
-    e.preventDefault();
-    seTtradersTrendlineTimeframe(value);
-  }
-  // Traders -  TrendLine 1
-  const [newWalletsDisabled, setNewWalletsDisabled] = useState(false);
-  const [totalCreatedDisabled, setTotalCreatedDisabled] = useState(false);
+    tradersActiveWalletsOnlySoldDataArray,
+    setTradersActiveWalletsOnlySoldDataArray,
+  ] = useState(activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90));
+  const [
+    tradersActiveWalletsBoughtAndSoldDataArray,
+    setTradersActiveWalletsBoughtAndSoldDataArray,
+  ] = useState(activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90));
 
-  const trendline1OnClick = (e: string) => {
+  // > Disabled state
+  const [
+    tradersActiveWalletsOnlyBoughtDisabled,
+    setTradersActiveWalletsOnlyBoughtDisabled,
+  ] = useState(false);
+  const [
+    tradersActiveWalletsOnlySoldDisabled,
+    setTradersActiveWalletsOnlySoldDisabled,
+  ] = useState(false);
+  const [
+    tradersActiveWalletsAndSoldDisabled,
+    setTradersActiveWalletsBoughtAndSoldDisabled,
+  ] = useState(false);
+
+  // > Click Handlers
+  const handleTradersActiveWalletsOnClick = (e: string) => {
     if (document) {
       const domEls = document?.getElementsByTagName("input");
       for (let i = 0; i < domEls.length; i++) {
         if (domEls[i].id === e) {
           if (domEls[i].id === legendLabels.activeWallets[0].id) {
-            setOnlyBoughtDisabled(!onlyBoughtDisabled);
+            setTradersActiveWalletsOnlyBoughtDisabled(
+              !heroChartOnlyBoughtDisabled
+            );
           }
           if (domEls[i].id === legendLabels.activeWallets[1].id) {
-            setOnlySoldDisabled(!onlySoldDisabled);
+            setTradersActiveWalletsOnlySoldDisabled(!heroChartOnlySoldDisabled);
           }
           if (domEls[i].id === legendLabels.activeWallets[2].id) {
-            setBoughtAndSoldDisabled(!boughtAndSoldDisabled);
+            setTradersActiveWalletsBoughtAndSoldDisabled(
+              !heroChartBoughtAndSoldDisabled
+            );
           }
         }
       }
     }
   };
+
+  // > State Updates
+  useEffect(() => {
+    if (tradersWalletsTimeframe === 0) {
+      setTradersActiveWalletsOnlyBoughtDataArray(activeWalletsOnlyBought);
+      setTradersActiveWalletsOnlySoldDataArray(activeWalletsOnlySold);
+      setTradersActiveWalletsBoughtAndSoldDataArray(activeWalletsBoughtAndSold);
+      setActiveWalletTradersLabels(labels);
+    }
+    if (tradersWalletsTimeframe === 1) {
+      setTradersActiveWalletsOnlyBoughtDataArray(
+        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 1)
+      );
+      setTradersActiveWalletsOnlySoldDataArray(
+        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 1)
+      );
+      setTradersActiveWalletsBoughtAndSoldDataArray(
+        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 1)
+      );
+      setActiveWalletTradersLabels(
+        labels.slice(labels.length - 1).map((data: string) => data)
+      );
+    }
+    if (tradersWalletsTimeframe === 7) {
+      setTradersActiveWalletsOnlyBoughtDataArray(
+        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 7)
+      );
+      setTradersActiveWalletsOnlySoldDataArray(
+        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 7)
+      );
+      setTradersActiveWalletsBoughtAndSoldDataArray(
+        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 7)
+      );
+      setActiveWalletTradersLabels(
+        labels.slice(labels.length - 7).map((data: string) => data)
+      );
+    }
+    if (tradersWalletsTimeframe === 30) {
+      setTradersActiveWalletsOnlyBoughtDataArray(
+        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 30)
+      );
+      setTradersActiveWalletsOnlySoldDataArray(
+        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 30)
+      );
+      setTradersActiveWalletsBoughtAndSoldDataArray(
+        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 39)
+      );
+      setActiveWalletTradersLabels(
+        labels.slice(labels.length - 30).map((data: string) => data)
+      );
+    }
+    if (tradersWalletsTimeframe === 90) {
+      setTradersActiveWalletsOnlyBoughtDataArray(
+        activeWalletsOnlyBought.slice(activeWalletsOnlyBought.length - 90)
+      );
+      setTradersActiveWalletsOnlySoldDataArray(
+        activeWalletsOnlySold.slice(activeWalletsOnlySold.length - 90)
+      );
+      setTradersActiveWalletsBoughtAndSoldDataArray(
+        activeWalletsBoughtAndSold.slice(activeWalletsBoughtAndSold.length - 90)
+      );
+      setActiveWalletTradersLabels(
+        labels.slice(labels.length - 90).map((data: string) => data)
+      );
+    }
+  }, [tradersWalletsTimeframe]);
   // ------------------------------------------------------
 
-  // Traders - TrendLine 2
-  const [newWalletsDailyStats, setNewWalletsDailyStatsDataArray] = useState(
-    traders.newWallets?.dailyStats.new.slice(
-      traders.newWallets?.dailyStats.new.length - 90
-    )
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+  // START Overview - Traders Wallets - New
+  // ------------------------------------------------------
+  // ------------------------------------------------------
+  // const [tradersNewWalletsData, setTradersNewWalletsData] = useState<number>(1);
+  const [newWalletTradersLabels, setNewWalletTradersLabels] = useState(
+    labels.slice(labels.length - 90).map((data: any) => data)
   );
+  const [tradersNewWalletsDailyStats, setTradersNewWalletsDailyStatsDataArray] =
+    useState(
+      traders.newWallets?.dailyStats.new.slice(
+        traders.newWallets?.dailyStats.new.length - 90
+      )
+    );
   const [
-    newWalletsDailyStatsTotalCreatedDataArray,
-    setNewWalletsDailyStatsTotalCreatedDataArray,
+    tradersNewWalletsDailyStatsTotalCreated,
+    setTradersNewWalletsDailyStatsTotalCreatedDataArray,
   ] = useState(
     traders.newWallets?.dailyStats.totalCreated.slice(
       traders.newWallets?.dailyStats.totalCreated.length - 90
     )
   );
 
-  const trendline2OnClick = (e: string) => {
+  // > Disabled state
+  const [tradersNewWalletsDisabled, setTradersNewWalletsDisabled] =
+    useState(false);
+  const [tradersTotalCreatedDisabled, setTradersTotalCreatedDisabled] =
+    useState(false);
+
+  // > Click handler
+  const handleTradersNewWalletsOnClick = (e: string) => {
     if (document) {
       const domEls = document?.getElementsByTagName("input");
       for (let i = 0; i < domEls.length; i++) {
         if (domEls[i].id === e) {
           if (domEls[i].id === legendLabels.newWallets[0].id) {
-            setNewWalletsDisabled(!newWalletsDisabled);
+            setTradersNewWalletsDisabled(!tradersNewWalletsDisabled);
           }
           if (domEls[i].id === legendLabels.newWallets[1].id) {
-            setTotalCreatedDisabled(!totalCreatedDisabled);
+            setTradersTotalCreatedDisabled(!tradersTotalCreatedDisabled);
           }
         }
       }
     }
   };
+
+  // > State update
+  useEffect(() => {
+    if (tradersWalletsTimeframe === 0) {
+      setTradersNewWalletsDailyStatsDataArray(
+        traders.newWallets?.dailyStats.new
+      );
+      setTradersNewWalletsDailyStatsTotalCreatedDataArray(
+        traders.newWallets?.dailyStats.totalCreated
+      );
+      setNewWalletTradersLabels(labels);
+    }
+    if (tradersWalletsTimeframe === 1) {
+      setTradersNewWalletsDailyStatsDataArray(
+        traders.newWallets?.dailyStats.new.slice(
+          traders.newWallets?.dailyStats.new.length - 1
+        )
+      );
+
+      setTradersNewWalletsDailyStatsTotalCreatedDataArray(
+        traders.newWallets?.dailyStats.totalCreated.slice(
+          traders.newWallets?.dailyStats.totalCreated.length - 1
+        )
+      );
+      setNewWalletTradersLabels(
+        labels.slice(labels.length - 1).map((data: string) => data)
+      );
+    }
+    if (tradersWalletsTimeframe === 7) {
+      setTradersNewWalletsDailyStatsDataArray(
+        traders.newWallets?.dailyStats.new.slice(
+          traders.newWallets?.dailyStats.new.length - 7
+        )
+      );
+      setTradersNewWalletsDailyStatsTotalCreatedDataArray(
+        traders.newWallets?.dailyStats.totalCreated.slice(
+          traders.newWallets?.dailyStats.totalCreated.length - 7
+        )
+      );
+      setNewWalletTradersLabels(
+        labels.slice(labels.length - 7).map((data: string) => data)
+      );
+    }
+    if (tradersWalletsTimeframe === 30) {
+      setTradersNewWalletsDailyStatsDataArray(
+        traders.newWallets?.dailyStats.new.slice(
+          traders.newWallets?.dailyStats.new.length - 30
+        )
+      );
+      setTradersNewWalletsDailyStatsTotalCreatedDataArray(
+        traders.newWallets?.dailyStats.totalCreated.slice(
+          traders.newWallets?.dailyStats.totalCreated.length - 30
+        )
+      );
+      setNewWalletTradersLabels(
+        labels.slice(labels.length - 30).map((data: string) => data)
+      );
+    }
+    if (tradersWalletsTimeframe === 90) {
+      setTradersNewWalletsDailyStatsDataArray(
+        traders.newWallets?.dailyStats.new.slice(
+          traders.newWallets?.dailyStats.new.length - 90
+        )
+      );
+      setTradersNewWalletsDailyStatsTotalCreatedDataArray(
+        traders.newWallets?.dailyStats.totalCreated.slice(
+          traders.newWallets?.dailyStats.totalCreated.length - 90
+        )
+      );
+      setNewWalletTradersLabels(
+        labels.slice(labels.length - 90).map((data: string) => data)
+      );
+    }
+  }, [tradersWalletsTimeframe]);
 
   return (
     <>
@@ -559,7 +776,7 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
                 className="grid__col-content"
               >
                 <HeroBarChart
-                  timeframeClicked={timeframeClicked}
+                  timeframeClicked={dailyTimeframeClicked}
                   timeframe={dailyTimeframe}
                   legendOnClick={(e: string) => onClick(e)}
                   labels={dailyTrueVolumeLabels}
@@ -615,7 +832,7 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
                 <ChartDataToggles
                   title={TimeframeAsString(timeframe)}
                   onClick={(arg1, arg2) =>
-                    handleTrendlineTimeferame(arg1, arg2)
+                    handleHeroChartTimeframeOnClick(arg1, arg2)
                   }
                   active={timeframe}
                 />
@@ -784,50 +1001,48 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         }}
       />
 
-      {/* <Traders
-        labels={labels}
-        activeWalletsOnlyBought={traders.activeWalletOnlyBought}
-        activeWalletsOnlySold={traders.activeWalletOnlySold}
-        activeWalletsBoughtAndSold={traders.activeWalletBoughtAndSold}
-        activeWallets={traders.activeWallets}
-        newWallets={traders.newWallets}
-      /> */}
-
       {/* Traders row */}
       <Overview
         title="Traders"
-        heroChartTimeframe={tradersTimeframe}
-        heroChartLabels={tradersLabels}
-        trendline1Labels={tradersLabels}
-        trendline2Labels={tradersLabels}
+        heroChartTimeframe={tradersHeroChartTimeframe}
+        heroChartLabels={tradersHeroChartLabels}
+        trendline1Labels={activeWalletTradersLabels}
+        trendline2Labels={newWalletTradersLabels}
         trendline1LegendLabels={legendLabels.activeWallets}
         trendline2LegendLabels={legendLabels.newWallets}
-        trendLine1LegendOnClick={(e: string) => trendline1OnClick(e)}
-        trendLine2LegendOnClick={(e: string) => trendline2OnClick(e)}
+        trendLine1LegendOnClick={(e: string) =>
+          handleTradersActiveWalletsOnClick(e)
+        }
+        trendLine2LegendOnClick={(e: string) =>
+          handleTradersNewWalletsOnClick(e)
+        }
         heroChartLegendOnClick={(e: string) => traderHeroChartLegendOnClick(e)}
         heroChartTimeframeOnClick={(arg1, arg2) =>
-          handleHeroChartTimeframe(arg1, arg2)
+          handleHeroChartTimeframeOnClick(arg1, arg2)
         }
-        trendlineTimeframe={tradersTrendlineTimeframe}
+        heroChartTimeframeClicked={heroChartTimeframeClicked}
+        trendlineTimeframe={tradersWalletsTimeframe}
         trendlineTimeframeOnClick={(arg1, arg2) =>
-          handleTrendlineTimeframeOnClick(arg1, arg2)
+          handleTradersWalletsTimeframeOnClick(arg1, arg2)
         }
         heroChartDatasets={[
           {
             label: "Only Bought",
-            data: onlyBoughtDisabled ? [] : onlyBoughtDataArray,
+            data: heroChartOnlyBoughtDisabled ? [] : tradersHeroChartOnlyBought,
             borderColor: "white",
             backgroundColor: "rgba(64, 192, 87, 1)",
           },
           {
             label: "Only Sold",
-            data: onlySoldDisabled ? [] : onlySoldDataArray,
+            data: heroChartOnlySoldDisabled ? [] : tradersHeroChartOnlySold,
             borderColor: "black",
             backgroundColor: "rgba(250, 82, 82, 1)",
           },
           {
             label: "Bought and Sold",
-            data: boughtAndSoldDisabled ? [] : boughtAndSoldDataArray,
+            data: heroChartBoughtAndSoldDisabled
+              ? []
+              : tradersHeroChartBoughtAndSold,
             borderColor: "white",
             backgroundColor: "rgba(95, 61, 196, 1)",
           },
@@ -835,7 +1050,9 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         trendline1Datasets={[
           {
             label: legendLabels.activeWallets[0].name,
-            data: onlyBoughtDisabled ? [] : onlyBoughtDataArray || [],
+            data: tradersActiveWalletsOnlyBoughtDisabled
+              ? []
+              : tradersActiveWalletsOnlyBoughtDataArray || [],
             borderColor: legendLabels.activeWallets[0].rgba,
             backgroundColor: legendLabels.activeWallets[0].rgba,
             pointRadius: 0,
@@ -843,7 +1060,9 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
           },
           {
             label: legendLabels.activeWallets[1].name,
-            data: onlySoldDisabled ? [] : onlySoldDataArray || [],
+            data: tradersActiveWalletsOnlySoldDisabled
+              ? []
+              : tradersActiveWalletsOnlySoldDataArray || [],
             borderColor: legendLabels.activeWallets[1].rgba,
             backgroundColor: legendLabels.activeWallets[1].rgba,
             pointRadius: 0,
@@ -851,7 +1070,9 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
           },
           {
             label: legendLabels.activeWallets[2].name,
-            data: boughtAndSoldDisabled ? [] : boughtAndSoldDataArray || [],
+            data: tradersActiveWalletsAndSoldDisabled
+              ? []
+              : tradersActiveWalletsBoughtAndSoldDataArray || [],
             borderColor: legendLabels.activeWallets[2].rgba,
             backgroundColor: legendLabels.activeWallets[2].rgba,
             pointRadius: 0,
@@ -861,9 +1082,9 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         trendline2Datasets={[
           {
             label: legendLabels.newWallets[0].name,
-            data: totalCreatedDisabled
+            data: tradersTotalCreatedDisabled
               ? []
-              : newWalletsDailyStatsTotalCreatedDataArray || [],
+              : tradersNewWalletsDailyStatsTotalCreated || [],
             borderColor: legendLabels.newWallets[0].rgba,
             backgroundColor: legendLabels.newWallets[0].rgba,
             pointRadius: 0,
@@ -871,7 +1092,9 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
           },
           {
             label: legendLabels.newWallets[1].name,
-            data: newWalletsDisabled ? [] : newWalletsDailyStats || [],
+            data: tradersNewWalletsDisabled
+              ? []
+              : tradersNewWalletsDailyStats || [],
             borderColor: legendLabels.newWallets[1].rgba,
             backgroundColor: legendLabels.newWallets[1].rgba,
             pointRadius: 0,

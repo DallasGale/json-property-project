@@ -325,7 +325,6 @@ const MarketOverviewPage: React.FC = async () => {
         activeWalletsBoughtAndSold={activeWalletBoughtAndSold[0].data}
         activeWalletsOnlyBought={activeWalletOnlyBought[0].data}
         activeWalletsOnlySold={activeWalletOnlySold[0].data}
-        newWallets={newWalletsDailyStats[0].data}
         leaderboard={{
           trueVolume: {
             oneDay: orderBy(

@@ -1,25 +1,21 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // Components
 import HeroBarChart from "@components/charts/heroBarChart";
 import ChartDataToggles from "@components/toggles/chart_data";
 
 // Utils
-import { useSpring, animated, easings } from "@react-spring/web";
+import { useSpring, animated } from "@react-spring/web";
 
 // Assets
 import TimeframeAsString from "@utils/timeframeAsString";
 import TwoColumnGrid from "@/grids/twoColumnGrid";
-import NewWallets from "./wallets/newWallets";
-import ActiveWallets from "./wallets/activeWallets";
-import { IOverviewTypes, ITradersTypes } from "@/app/types";
+import { IOverviewTypes } from "@/app/types";
 import TrendLineChart from "../charts/trendLineChart";
 import ChartHeader from "../charts/chartHeader";
 import DateRange from "../dateRange/dateRange";
-import { VolumeFormatter } from "@/utils/volumeFormatter";
 import { config, toFrom } from "@/constants/animationSettings";
-import { trendLineLabels } from "@fixtures/trendLineLabels";
 
 // Animation
 import { animation, legendLabels } from "./constants";
@@ -31,6 +27,7 @@ const Overview: React.FC<IOverviewTypes> = ({
   trendlineTimeframeOnClick,
   heroChartLabels,
   heroChartTimeframe,
+  heroChartTimeframeClicked,
   trendlineTimeframe,
   heroChartDatasets,
   trendline1Labels,
@@ -68,13 +65,6 @@ const Overview: React.FC<IOverviewTypes> = ({
     delay: 450,
   });
 
-  // const [timeframe, setTimeframe] = useState<number>(7);
-  const [timeframeClicked, setTimeframeClicked] = useState(false);
-  // function handleTrendlineTimeframe(e: React.MouseEvent, value: any) {
-  //   e.preventDefault();
-  //   setTimeframe(value);
-  // }
-
   return (
     <>
       <TwoColumnGrid
@@ -96,7 +86,7 @@ const Overview: React.FC<IOverviewTypes> = ({
             <animated.div style={{ ...springs2 }} className="grid__col-content">
               <div>
                 <HeroBarChart
-                  timeframeClicked={timeframeClicked}
+                  timeframeClicked={heroChartTimeframeClicked}
                   timeframe={heroChartTimeframe}
                   labels={heroChartLabels}
                   legendOnClick={heroChartLegendOnClick}

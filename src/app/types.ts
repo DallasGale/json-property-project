@@ -23,8 +23,6 @@ export interface IMarketOverviewProps {
   activeWalletsOnlyBought: number[];
   activeWalletsOnlySold: number[];
   activeWalletsBoughtAndSold: number[];
-  newWallets: NewWalletsTypes;
-  // activeWallets: ActiveWalletsTypes;
 }
 
 // ------------------------------
@@ -339,6 +337,7 @@ export interface IOverviewTypes {
   trendline1LegendLabels: LegendLabelTypes[];
   trendline2LegendLabels: LegendLabelTypes[];
   trendlineTimeframe: number;
+  heroChartTimeframeClicked: boolean;
   trendLine1LegendOnClick: (e: string) => void;
   trendLine2LegendOnClick: (e: string) => void;
   heroChartLegendOnClick: (e: string) => void;
