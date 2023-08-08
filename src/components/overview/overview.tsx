@@ -18,8 +18,7 @@ import DateRange from "../dateRange/dateRange";
 import { config, toFrom } from "@/constants/animationSettings";
 
 // Animation
-import { animation, legendLabels } from "./constants";
-import { VolumeFormatter } from "@/utils/volumeFormatter";
+import { animation } from "./constants";
 
 const Overview: React.FC<IOverviewTypes> = ({
   title,
@@ -41,6 +40,7 @@ const Overview: React.FC<IOverviewTypes> = ({
   trendLine2LegendOnClick,
   trendline1LegendLabels,
   trendline2LegendLabels,
+  heroChartLegendLabels,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -93,7 +93,7 @@ const Overview: React.FC<IOverviewTypes> = ({
                   timeframe={heroChartTimeframe}
                   labels={heroChartLabels}
                   legendOnClick={heroChartLegendOnClick}
-                  legendLabels={legendLabels}
+                  legendLabels={heroChartLegendLabels}
                   datasets={heroChartDatasets}
                 />
               </div>

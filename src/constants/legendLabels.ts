@@ -1,5 +1,23 @@
 // Constants
 export const legendLabels = {
+  tradersHero: [
+    {
+      color: "accent-green",
+      name: "Only Bought",
+      id: "only-bought",
+    },
+    {
+      color: "accent-red",
+      name: "Only Sold",
+      id: "only-sold",
+    },
+    {
+      color: "accent-purple",
+      name: "Bought and Sold",
+      id: "bought-and-sold",
+    },
+  ],
+
   newWallets: [
     {
       color: "accent-green",
