@@ -19,6 +19,7 @@ import { config, toFrom } from "@/constants/animationSettings";
 
 // Animation
 import { animation, legendLabels } from "./constants";
+import { VolumeFormatter } from "@/utils/volumeFormatter";
 
 const Overview: React.FC<IOverviewTypes> = ({
   title,
@@ -30,6 +31,8 @@ const Overview: React.FC<IOverviewTypes> = ({
   heroChartTimeframeClicked,
   trendlineTimeframe,
   heroChartDatasets,
+  trendline1HeaderValue,
+  trendline2HeaderValue,
   trendline1Labels,
   trendline2Labels,
   trendline1Datasets,
@@ -119,7 +122,7 @@ const Overview: React.FC<IOverviewTypes> = ({
               >
                 <div className="grid__col-container-body">
                   <ChartHeader
-                    // value={`${VolumeFormatter(activeWalletsData)}`}
+                    value={trendline1HeaderValue}
                     title="Active Wallets"
                     description="That have traded on an NFT Marketplace."
                   />
@@ -146,7 +149,7 @@ const Overview: React.FC<IOverviewTypes> = ({
               >
                 <div className="grid__col-container-body">
                   <ChartHeader
-                    // value={`${VolumeFormatter(newWalletsData)}`}
+                    value={trendline2HeaderValue}
                     title="New Wallets"
                     description="And their first NFT transaction."
                   />

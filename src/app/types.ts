@@ -338,6 +338,8 @@ export interface IOverviewTypes {
   trendline2LegendLabels: LegendLabelTypes[];
   trendlineTimeframe: number;
   heroChartTimeframeClicked: boolean;
+  trendline1HeaderValue?: string;
+  trendline2HeaderValue?: string;
   trendLine1LegendOnClick: (e: string) => void;
   trendLine2LegendOnClick: (e: string) => void;
   heroChartLegendOnClick: (e: string) => void;
