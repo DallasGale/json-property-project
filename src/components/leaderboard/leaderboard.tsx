@@ -124,7 +124,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column1={{
           content: (
             <VolumeTableChart
-              infoTooltipText="True Volume - TBC"
+              infoTooltipText="Excludes points farming, wash trading, and loan volume"
               volumeCategory={ColumnLabels[2].id}
               title="True Volume"
               valueTitle="% Of Total"
@@ -228,7 +228,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column2={{
           content: (
             <VolumeTableChart
-              infoTooltipText="Fake Volume - TBC"
+              infoTooltipText="Includes points farming and wash trading"
               volumeCategory={ColumnLabels[8].id}
               title="Fake Volume"
               valueTitle="% Of Total"
@@ -332,7 +332,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column3={{
           content: (
             <VolumeTableChart
-              infoTooltipText="Loan Volume - TBC"
+              infoTooltipText="Borrowing/repayments via Blur Lending"
               volumeCategory={ColumnLabels[6].id}
               title="Loan Volume"
               valueTitle="% of total"
@@ -436,7 +436,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column4={{
           content: (
             <VolumeTableChart
-              infoTooltipText="Collection Revenue - TBC"
+              infoTooltipText="Royalties from marketplace sales"
               volumeCategory={ColumnLabels[7].id}
               title="Collection Revenue"
               valueTitle="Earnings"
