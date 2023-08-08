@@ -41,6 +41,8 @@ const Overview: React.FC<IOverviewTypes> = ({
   trendline1LegendLabels,
   trendline2LegendLabels,
   heroChartLegendLabels,
+  trendline1HeaderTitle,
+  trendline2HeaderTitle,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -123,7 +125,7 @@ const Overview: React.FC<IOverviewTypes> = ({
                 <div className="grid__col-container-body">
                   <ChartHeader
                     value={trendline1HeaderValue}
-                    title="Active Wallets"
+                    title={trendline1HeaderTitle}
                     description="That have traded on an NFT Marketplace."
                   />
 
@@ -150,7 +152,7 @@ const Overview: React.FC<IOverviewTypes> = ({
                 <div className="grid__col-container-body">
                   <ChartHeader
                     value={trendline2HeaderValue}
-                    title="New Wallets"
+                    title={trendline2HeaderTitle}
                     description="And their first NFT transaction."
                   />
 

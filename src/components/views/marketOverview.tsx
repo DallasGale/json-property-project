@@ -959,7 +959,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
                       ]}
                       datasets={[
                         {
-                          label: "Loan Volume Trend",
                           data: loanVolumeTrendDisabled
                             ? []
                             : loanVolumeMovingAverage.slice(
@@ -975,7 +974,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
                           borderWidth: 3,
                         },
                         {
-                          label: "Fake Volume Trend",
                           data: fakeVolumeTrendDisabled
                             ? []
                             : fakeVolumeMovingAverage.slice(
@@ -1094,9 +1092,9 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             backgroundColor: "rgba(95, 61, 196, 1)",
           },
         ]}
+        trendline1HeaderTitle="Active Wallets"
         trendline1Datasets={[
           {
-            label: legendLabels.activeWallets[0].name,
             data: tradersActiveWalletsOnlyBoughtDisabled
               ? []
               : tradersActiveWalletsOnlyBoughtDataArray || [],
@@ -1106,7 +1104,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             borderWidth: 3,
           },
           {
-            label: legendLabels.activeWallets[1].name,
             data: tradersActiveWalletsOnlySoldDisabled
               ? []
               : tradersActiveWalletsOnlySoldDataArray || [],
@@ -1116,7 +1113,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             borderWidth: 3,
           },
           {
-            label: legendLabels.activeWallets[2].name,
             data: tradersActiveWalletsAndSoldDisabled
               ? []
               : tradersActiveWalletsBoughtAndSoldDataArray || [],
@@ -1126,9 +1122,9 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             borderWidth: 3,
           },
         ]}
+        trendline2HeaderTitle="New Wallets"
         trendline2Datasets={[
           {
-            label: legendLabels.newWallets[0].name,
             data: tradersTotalCreatedDisabled
               ? []
               : tradersNewWalletsDailyStatsTotalCreated || [],
@@ -1138,7 +1134,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             borderWidth: 3,
           },
           {
-            label: legendLabels.newWallets[1].name,
             data: tradersNewWalletsDisabled
               ? []
               : tradersNewWalletsDailyStats || [],
@@ -1153,7 +1148,7 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
       {/* Revenue row */}
       <Overview
         title="Revenue"
-        heroChartLegendLabels={legendLabels.tradersHero}
+        heroChartLegendLabels={legendLabels.revenue}
         heroChartTimeframe={revenueHeroChartTimeframe}
         heroChartLabels={revenueHeroChartLabels}
         trendline1HeaderValue={VolumeFormatter(totalActiveWallets)}
@@ -1179,33 +1174,33 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         }
         heroChartDatasets={[
           {
-            label: "Royalties",
+            label: legendLabels.revenue[0].name,
             data: tradersHeroChartOnlyBoughtDisabled
               ? []
               : tradersHeroChartOnlyBought,
             borderColor: "white",
-            backgroundColor: "rgba(64, 192, 87, 1)",
+            backgroundColor: legendLabels.revenue[0].rgba, // "rgba(64, 192, 87, 1)",
           },
           {
-            label: "Minting",
+            label: legendLabels.revenue[1].name,
             data: tradersHeroChartOnlySoldDisabled
               ? []
               : tradersHeroChartOnlySold,
             borderColor: "black",
-            backgroundColor: "rgba(250, 82, 82, 1)",
+            backgroundColor: legendLabels.revenue[1].rgba,
           },
           {
-            label: "Platform Fees",
+            label: legendLabels.revenue[2].name,
             data: tradersHeroChartBoughtAndSoldDisabled
               ? []
               : tradersHeroChartBoughtAndSold,
             borderColor: "white",
-            backgroundColor: "rgba(95, 61, 196, 1)",
+            backgroundColor: legendLabels.revenue[2].rgba,
           },
         ]}
+        trendline1HeaderTitle="Sales Revenue"
         trendline1Datasets={[
           {
-            label: legendLabels.activeWallets[0].name,
             data: tradersActiveWalletsOnlyBoughtDisabled
               ? []
               : tradersActiveWalletsOnlyBoughtDataArray || [],
@@ -1215,7 +1210,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             borderWidth: 3,
           },
           {
-            label: legendLabels.activeWallets[1].name,
             data: tradersActiveWalletsOnlySoldDisabled
               ? []
               : tradersActiveWalletsOnlySoldDataArray || [],
@@ -1224,20 +1218,10 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             pointRadius: 0,
             borderWidth: 3,
           },
-          {
-            label: legendLabels.activeWallets[2].name,
-            data: tradersActiveWalletsAndSoldDisabled
-              ? []
-              : tradersActiveWalletsBoughtAndSoldDataArray || [],
-            borderColor: legendLabels.activeWallets[2].rgba,
-            backgroundColor: legendLabels.activeWallets[2].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
         ]}
+        trendline2HeaderTitle="Minting Revenue"
         trendline2Datasets={[
           {
-            label: legendLabels.newWallets[0].name,
             data: tradersTotalCreatedDisabled
               ? []
               : tradersNewWalletsDailyStatsTotalCreated || [],
@@ -1247,7 +1231,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             borderWidth: 3,
           },
           {
-            label: legendLabels.newWallets[1].name,
             data: tradersNewWalletsDisabled
               ? []
               : tradersNewWalletsDailyStats || [],

@@ -54,22 +54,22 @@ export const legendLabels = {
   ],
   revenue: [
     {
-      color: "accent-green",
-      rgba: "rgba(64, 192, 87, 1)",
+      color: "accent-teal",
+      rgba: "rgba(18, 184, 134, 1)",
       name: "Royalties",
-      id: "active-wallet-only-bought",
+      id: "revenue-royalties",
     },
     {
-      color: "accent-red",
-      rgba: "rgba(250, 82, 82, 1)",
+      color: "accent-fluro",
+      rgba: "rgba(213, 244, 21, 1)",
       name: "Minting",
-      id: "active-wallet-only-sold",
+      id: "revnue-minting",
     },
     {
-      color: "accent-purple",
-      rgba: "rgba(95, 61, 196, 1)",
+      color: "accent-blue",
+      rgba: "rgba(34, 139, 230, 1)",
       name: "Platform Fees",
-      id: "active-wallet-bought-and-sold",
+      id: "revnue-platform-fees",
     },
   ],
 };

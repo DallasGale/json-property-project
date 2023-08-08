@@ -7,6 +7,9 @@ import LegendIconGreen from "@assets/icons/legendIconGreen.svg";
 import LegendIconRed from "@assets/icons/legendIconRed.svg";
 import LegendIconYellow from "@assets/icons/legendIconYellow.svg";
 import LegendIconPurple from "@assets/icons/legendIconPurple.svg";
+import LegendIconBlue from "@assets/icons/legendIconBlue.svg";
+import LegendIconTeal from "@assets/icons/legendIconTeal.svg";
+import LegendIconFluro from "@assets/icons/legendIconFluro.svg";
 
 const Legend: React.FC<ILegendProps> = ({
   modifierClass,
@@ -33,6 +36,15 @@ const Legend: React.FC<ILegendProps> = ({
               )}
               {color === "accent-purple" && (
                 <Image src={LegendIconPurple} alt="Legend Icon" />
+              )}
+              {color === "accent-blue" && (
+                <Image src={LegendIconBlue} alt="Legend Icon" />
+              )}
+              {color === "accent-teal" && (
+                <Image src={LegendIconTeal} alt="Legend Icon" />
+              )}
+              {color === "accent-fluro" && (
+                <Image src={LegendIconFluro} alt="Legend Icon" />
               )}
               <input
                 className="chart__legend-item"

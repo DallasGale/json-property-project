@@ -341,6 +341,8 @@ export interface IOverviewTypes {
   trendline1HeaderValue?: string;
   trendline2HeaderValue?: string;
   heroChartLegendLabels: LegendLabelTypes[];
+  trendline1HeaderTitle: string;
+  trendline2HeaderTitle: string;
   trendLine1LegendOnClick: (e: string) => void;
   trendLine2LegendOnClick: (e: string) => void;
   heroChartLegendOnClick: (e: string) => void;
@@ -389,7 +391,7 @@ export type BarChartDatasetsType = {
   backgroundColor: string;
 };
 export type LineChartDatasetsType = {
-  label: string;
+  // label: string;
   data: number[] | [];
   borderColor: string;
   backgroundColor: string;
