@@ -186,11 +186,11 @@ const MarketOverviewPage: React.FC = async () => {
   );
 
   const newWalletsDailyStats = dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "new_wallets"
+    ({ label }: DatasetsType) => label === "new_wallets_total"
   );
 
   const totalNewWalletsCreatedDailyStats = dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "backward_accumulated_new_wallets"
+    ({ label }: DatasetsType) => label === "new_wallets_backward_accumulated"
   );
   const trueVolumeSummary1Day = volumeSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real_1d"
