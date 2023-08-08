@@ -36,6 +36,8 @@ import DateRange from "../dateRange/dateRange";
 import type { IMarketOverviewProps } from "@/app/types";
 import Overview from "../overview/overview";
 import { legendLabels } from "@constants/legendLabels";
+import TradersOverview from "../overview/traders/traders";
+import RevenueOverview from "../overview/revenue/revenue";
 
 ChartJS.register(
   CategoryScale,
@@ -172,10 +174,10 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
   const [loanVolumeDisabled, setLoanVolumeDisabled] = useState(false);
   const [fakeVolumeDisabled, setFakeVolumeDisabled] = useState(false);
 
-  const [heroChartTimeframeClicked, setHeroChartTimeframeClicked] =
+  const [dailyHeroChartTimeframeClicked, setDailyHeroChartTimeframeClicked] =
     useState(false);
 
-  const onClick = (e: string) => {
+  const handleDailyHeroChartTimeframeOnClick = (e: string) => {
     if (document) {
       const domEls = document?.getElementsByTagName("input");
       for (let i = 0; i < domEls.length; i++) {
@@ -382,11 +384,14 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
   const [tradersHeroChartTimeframe, setTradersHeroChartTimeframe] =
     useState(90);
 
-  function handleHeroChartTimeframeOnClick(e: React.MouseEvent, value: any) {
+  function handleTradersHeroChartTimeframeOnClick(
+    e: React.MouseEvent,
+    value: any
+  ) {
     e.preventDefault();
-    setHeroChartTimeframeClicked(true);
+    setDailyHeroChartTimeframeClicked(true);
     setTimeout(() => {
-      setHeroChartTimeframeClicked(false);
+      setDailyHeroChartTimeframeClicked(false);
     }, 500);
     setTradersHeroChartTimeframe(value);
   }
@@ -548,17 +553,17 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         if (domEls[i].id === e) {
           if (domEls[i].id === legendLabels.activeWallets[0].id) {
             setTradersActiveWalletsOnlyBoughtDisabled(
-              !tradersHeroChartOnlyBoughtDisabled
+              !tradersActiveWalletsOnlyBoughtDisabled
             );
           }
           if (domEls[i].id === legendLabels.activeWallets[1].id) {
             setTradersActiveWalletsOnlySoldDisabled(
-              !tradersHeroChartOnlySoldDisabled
+              !tradersActiveWalletsOnlySoldDisabled
             );
           }
           if (domEls[i].id === legendLabels.activeWallets[2].id) {
             setTradersActiveWalletsBoughtAndSoldDisabled(
-              !tradersHeroChartBoughtAndSoldDisabled
+              !tradersActiveWalletsAndSoldDisabled
             );
           }
         }
@@ -789,6 +794,63 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
   const [revenueHeroChartTimeframe, setRevenueHeroChartTimeframe] =
     useState(90);
 
+  const [
+    revenueHeroChartTimeframeClicked,
+    setRevenueDailyHeroChartTimeframeClicked,
+  ] = useState(false);
+
+  const [revenueWalletsTimeframe, setRevenueWalletsTimeframe] =
+    useState<number>(7);
+
+  // > Click Handler
+  const handleRevenueHeroChartTimeframeOnClick = (
+    e: React.MouseEvent,
+    value: any
+  ) => {
+    e.preventDefault();
+    setRevenueDailyHeroChartTimeframeClicked(true);
+    setTimeout(() => {
+      setRevenueDailyHeroChartTimeframeClicked(false);
+    }, 500);
+    setRevenueHeroChartTimeframe(value);
+  };
+
+  const revenueHeroChartLegendOnClick = (e: string) => {
+    if (document) {
+      const domEls = document?.getElementsByTagName("input");
+      for (let i = 0; i < domEls.length; i++) {
+        if (domEls[i].id === e) {
+          if (domEls[i].id === legendLabels.revenue[0].id) {
+            setTradersHeroChartOnlyBoughtDisabled(
+              !tradersHeroChartOnlyBoughtDisabled
+            );
+          }
+          if (domEls[i].id === legendLabels.revenue[1].id) {
+            setTradersHeroChartOnlySoldDisabled(
+              !tradersHeroChartOnlySoldDisabled
+            );
+          }
+          if (domEls[i].id === legendLabels.revenue[2].id) {
+            setTradersHeroChartBoughtAndSoldDisabled(
+              !tradersHeroChartBoughtAndSoldDisabled
+            );
+          }
+        }
+      }
+    }
+  };
+
+  const [revenueSalesMintingTimeframe, setRevenueSalesMintingTimeframe] =
+    useState<number>(7);
+
+  const handleRevenueSalesMintingTimeframeOnClick = (
+    e: React.MouseEvent,
+    value: any
+  ) => {
+    e.preventDefault();
+    setRevenueSalesMintingTimeframe(value);
+  };
+
   return (
     <>
       {/* TODO:replace below with  <Overview ... /> */}
@@ -818,7 +880,9 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
                 <HeroBarChart
                   timeframeClicked={dailyTimeframeClicked}
                   timeframe={dailyTimeframe}
-                  legendOnClick={(e: string) => onClick(e)}
+                  legendOnClick={(e: string) =>
+                    handleDailyHeroChartTimeframeOnClick(e)
+                  }
                   labels={dailyTrueVolumeLabels}
                   datasets={[
                     {
@@ -1003,8 +1067,9 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
           ),
         }}
       />
-
+      {/* -------------------------------- */}
       {/* Leaderboard Row */}
+      {/* -------------------------------- */}
       <Leaderboard
         showTimeframeToggles={true}
         leaderboardData={{
@@ -1039,208 +1104,21 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         }}
       />
 
+      {/* -------------------------------- */}
       {/* Traders row */}
-      <Overview
-        title="Traders"
-        heroChartLegendLabels={legendLabels.tradersHero}
-        heroChartTimeframe={tradersHeroChartTimeframe}
-        heroChartLabels={tradersHeroChartLabels}
-        trendline1HeaderValue={VolumeFormatter(totalActiveWallets)}
-        trendline2HeaderValue={VolumeFormatter(totalNewWallets)}
-        trendline1Labels={activeWalletTradersLabels}
-        trendline2Labels={newWalletTradersLabels}
-        trendline1LegendLabels={legendLabels.activeWallets}
-        trendline2LegendLabels={legendLabels.newWallets}
-        trendLine1LegendOnClick={(e: string) =>
-          handleTradersActiveWalletsOnClick(e)
-        }
-        trendLine2LegendOnClick={(e: string) =>
-          handleTradersNewWalletsOnClick(e)
-        }
-        heroChartLegendOnClick={(e: string) => traderHeroChartLegendOnClick(e)}
-        heroChartTimeframeOnClick={(arg1, arg2) =>
-          handleHeroChartTimeframeOnClick(arg1, arg2)
-        }
-        heroChartTimeframeClicked={heroChartTimeframeClicked}
-        trendlineTimeframe={tradersWalletsTimeframe}
-        trendlineTimeframeOnClick={(arg1, arg2) =>
-          handleTradersWalletsTimeframeOnClick(arg1, arg2)
-        }
-        heroChartDatasets={[
-          {
-            label: "Only Bought",
-            data: tradersHeroChartOnlyBoughtDisabled
-              ? []
-              : tradersHeroChartOnlyBought,
-            borderColor: "white",
-            backgroundColor: "rgba(64, 192, 87, 1)",
-          },
-          {
-            label: "Only Sold",
-            data: tradersHeroChartOnlySoldDisabled
-              ? []
-              : tradersHeroChartOnlySold,
-            borderColor: "black",
-            backgroundColor: "rgba(250, 82, 82, 1)",
-          },
-          {
-            label: "Bought and Sold",
-            data: tradersHeroChartBoughtAndSoldDisabled
-              ? []
-              : tradersHeroChartBoughtAndSold,
-            borderColor: "white",
-            backgroundColor: "rgba(95, 61, 196, 1)",
-          },
-        ]}
-        trendline1HeaderTitle="Active Wallets"
-        trendline1Datasets={[
-          {
-            data: tradersActiveWalletsOnlyBoughtDisabled
-              ? []
-              : tradersActiveWalletsOnlyBoughtDataArray || [],
-            borderColor: legendLabels.activeWallets[0].rgba,
-            backgroundColor: legendLabels.activeWallets[0].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
-          {
-            data: tradersActiveWalletsOnlySoldDisabled
-              ? []
-              : tradersActiveWalletsOnlySoldDataArray || [],
-            borderColor: legendLabels.activeWallets[1].rgba,
-            backgroundColor: legendLabels.activeWallets[1].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
-          {
-            data: tradersActiveWalletsAndSoldDisabled
-              ? []
-              : tradersActiveWalletsBoughtAndSoldDataArray || [],
-            borderColor: legendLabels.activeWallets[2].rgba,
-            backgroundColor: legendLabels.activeWallets[2].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
-        ]}
-        trendline2HeaderTitle="New Wallets"
-        trendline2Datasets={[
-          {
-            data: tradersTotalCreatedDisabled
-              ? []
-              : tradersNewWalletsDailyStatsTotalCreated || [],
-            borderColor: legendLabels.newWallets[0].rgba,
-            backgroundColor: legendLabels.newWallets[0].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
-          {
-            data: tradersNewWalletsDisabled
-              ? []
-              : tradersNewWalletsDailyStats || [],
-            borderColor: legendLabels.newWallets[1].rgba,
-            backgroundColor: legendLabels.newWallets[1].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
-        ]}
+      {/* -------------------------------- */}
+      <TradersOverview
+        traders={traders}
+        labels={labels}
+        activeWalletsOnlyBought={activeWalletsOnlyBought}
+        activeWalletsOnlySold={activeWalletsOnlySold}
+        activeWalletsBoughtAndSold={activeWalletsBoughtAndSold}
       />
 
+      {/* -------------------------------- */}
       {/* Revenue row */}
-      <Overview
-        title="Revenue"
-        heroChartLegendLabels={legendLabels.revenue}
-        heroChartTimeframe={revenueHeroChartTimeframe}
-        heroChartLabels={revenueHeroChartLabels}
-        trendline1HeaderValue={VolumeFormatter(totalActiveWallets)}
-        trendline2HeaderValue={VolumeFormatter(totalNewWallets)}
-        trendline1Labels={activeWalletTradersLabels}
-        trendline2Labels={newWalletTradersLabels}
-        trendline1LegendLabels={legendLabels.activeWallets}
-        trendline2LegendLabels={legendLabels.newWallets}
-        trendLine1LegendOnClick={(e: string) =>
-          handleTradersActiveWalletsOnClick(e)
-        }
-        trendLine2LegendOnClick={(e: string) =>
-          handleTradersNewWalletsOnClick(e)
-        }
-        heroChartLegendOnClick={(e: string) => traderHeroChartLegendOnClick(e)}
-        heroChartTimeframeOnClick={(arg1, arg2) =>
-          handleHeroChartTimeframeOnClick(arg1, arg2)
-        }
-        heroChartTimeframeClicked={heroChartTimeframeClicked}
-        trendlineTimeframe={tradersWalletsTimeframe}
-        trendlineTimeframeOnClick={(arg1, arg2) =>
-          handleTradersWalletsTimeframeOnClick(arg1, arg2)
-        }
-        heroChartDatasets={[
-          {
-            label: legendLabels.revenue[0].name,
-            data: tradersHeroChartOnlyBoughtDisabled
-              ? []
-              : tradersHeroChartOnlyBought,
-            borderColor: "white",
-            backgroundColor: legendLabels.revenue[0].rgba, // "rgba(64, 192, 87, 1)",
-          },
-          {
-            label: legendLabels.revenue[1].name,
-            data: tradersHeroChartOnlySoldDisabled
-              ? []
-              : tradersHeroChartOnlySold,
-            borderColor: "black",
-            backgroundColor: legendLabels.revenue[1].rgba,
-          },
-          {
-            label: legendLabels.revenue[2].name,
-            data: tradersHeroChartBoughtAndSoldDisabled
-              ? []
-              : tradersHeroChartBoughtAndSold,
-            borderColor: "white",
-            backgroundColor: legendLabels.revenue[2].rgba,
-          },
-        ]}
-        trendline1HeaderTitle="Sales Revenue"
-        trendline1Datasets={[
-          {
-            data: tradersActiveWalletsOnlyBoughtDisabled
-              ? []
-              : tradersActiveWalletsOnlyBoughtDataArray || [],
-            borderColor: legendLabels.activeWallets[0].rgba,
-            backgroundColor: legendLabels.activeWallets[0].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
-          {
-            data: tradersActiveWalletsOnlySoldDisabled
-              ? []
-              : tradersActiveWalletsOnlySoldDataArray || [],
-            borderColor: legendLabels.activeWallets[1].rgba,
-            backgroundColor: legendLabels.activeWallets[1].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
-        ]}
-        trendline2HeaderTitle="Minting Revenue"
-        trendline2Datasets={[
-          {
-            data: tradersTotalCreatedDisabled
-              ? []
-              : tradersNewWalletsDailyStatsTotalCreated || [],
-            borderColor: legendLabels.newWallets[0].rgba,
-            backgroundColor: legendLabels.newWallets[0].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
-          {
-            data: tradersNewWalletsDisabled
-              ? []
-              : tradersNewWalletsDailyStats || [],
-            borderColor: legendLabels.newWallets[1].rgba,
-            backgroundColor: legendLabels.newWallets[1].rgba,
-            pointRadius: 0,
-            borderWidth: 3,
-          },
-        ]}
-      />
+      {/* -------------------------------- */}
+      <RevenueOverview traders={traders} labels={labels} />
     </>
   );
 };

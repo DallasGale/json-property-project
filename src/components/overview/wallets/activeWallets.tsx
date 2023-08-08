@@ -82,7 +82,6 @@ const ActiveWallets: React.FC<WalletTypes> = ({
     if (activeWalletsTotal) {
       if (timeframe === 0) {
         setActiveWalletsData(activeWalletsTotal.all[0]);
-
         setOnlyBoughtDataArray(activeWallets?.onlyBought);
         setOnlySoldDataArray(activeWallets?.onlySold);
         setBoughtAndSoldDataArray(activeWallets?.boughtAndSold);
@@ -90,7 +89,6 @@ const ActiveWallets: React.FC<WalletTypes> = ({
       }
       if (timeframe === 1) {
         setActiveWalletsData(activeWalletsTotal.oneDay[0]);
-
         setOnlyBoughtDataArray(
           activeWallets?.onlyBought.slice(activeWallets?.onlyBought.length - 1)
         );
