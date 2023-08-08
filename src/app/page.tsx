@@ -322,6 +322,9 @@ const MarketOverviewPage: React.FC = async () => {
         fakeVolumeMovingAverage={fakeVolume30DayMovingAverage[0].data}
         totalVolumeMovingAverage={totalVolume30DayMovingAverage[0].data}
         trueVolumeMovingAverage={trueVolume30DayMovingAverage[0].data}
+        activeWalletsBoughtAndSold={activeWalletBoughtAndSold[0].data}
+        activeWalletsOnlyBought={activeWalletOnlyBought[0].data}
+        activeWalletsOnlySold={activeWalletOnlySold[0].data}
         leaderboard={{
           trueVolume: {
             oneDay: orderBy(
