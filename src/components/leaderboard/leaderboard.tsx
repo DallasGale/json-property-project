@@ -332,7 +332,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
         column3={{
           content: (
             <VolumeTableChart
-              infoTooltipText="Includes loan settlements via Blur Lending"
+              infoTooltipText="Borrowing/repayments via Blur Lending"
               volumeCategory={ColumnLabels[6].id}
               title="Loan Volume"
               valueTitle="% of total"
