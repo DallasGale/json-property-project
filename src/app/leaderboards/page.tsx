@@ -64,6 +64,16 @@ const LeaderboardsPage: React.FC = async () => {
     ({ total_real_day_volume_percentage }: CollectionTypes) =>
       total_real_day_volume_percentage !== null
   );
+  // 7day percentage
+  const totalRealDayVolumePercentage7d = leaderBoard7dData.filter(
+    ({ total_real_day_volume_percentage }: CollectionTypes) =>
+      total_real_day_volume_percentage !== null
+  );
+  // 30day percentage
+  const totalRealDayVolumePercentage30d = leaderBoard30dData.filter(
+    ({ total_real_day_volume_percentage }: CollectionTypes) =>
+      total_real_day_volume_percentage !== null
+  );
 
   return (
     <>
@@ -107,12 +117,12 @@ const LeaderboardsPage: React.FC = async () => {
               "desc"
             ).slice(0, 100),
             sevenDayTop100: orderBy(
-              leaderBoard7dData,
+              totalRealDayVolumePercentage7d,
               ["total_real_day_volume_percentage"],
               "desc"
             ).slice(0, 100),
             thirtyDayTop100: orderBy(
-              leaderBoard30dData,
+              totalRealDayVolumePercentage30d,
               ["total_real_day_volume_percentage"],
               "desc"
             ).slice(0, 100),
