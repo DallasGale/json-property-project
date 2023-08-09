@@ -19,11 +19,27 @@ export interface IMarketOverviewProps {
   totalVolumeMovingAverage: number[];
   trueVolumeMovingAverage: number[];
   leaderboard: LeaderboarCategoryTypes;
-  traders: TradersTypes;
   activeWalletsOnlyBought: number[];
   activeWalletsOnlySold: number[];
   activeWalletsBoughtAndSold: number[];
+  traders: TradersTypes;
+  revenue: RevenueTypes;
 }
+
+// ------------------------------
+// Component Types - Revenue
+// ------------------------------
+export type RevenueTypes = {
+  royaltyVolume: number[];
+  platformVolume: number[];
+
+  trueVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  loanVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  fakeVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  totalVolumeTimeframeSummaryData: TradersTimeframeTypes;
+  totalPercentChangeTimeframeData: PercentChangeTimeframeTypes;
+  truePercentChangeTimeframeData: PercentChangeTimeframeTypes;
+};
 
 // ------------------------------
 // Component Types - Chart Header
@@ -340,6 +356,9 @@ export interface IOverviewTypes {
   heroChartTimeframeClicked: boolean;
   trendline1HeaderValue?: string;
   trendline2HeaderValue?: string;
+  heroChartLegendLabels: LegendLabelTypes[];
+  trendline1HeaderTitle: string;
+  trendline2HeaderTitle: string;
   trendLine1LegendOnClick: (e: string) => void;
   trendLine2LegendOnClick: (e: string) => void;
   heroChartLegendOnClick: (e: string) => void;

@@ -18,8 +18,7 @@ import DateRange from "../dateRange/dateRange";
 import { config, toFrom } from "@/constants/animationSettings";
 
 // Animation
-import { animation, legendLabels } from "./constants";
-import { VolumeFormatter } from "@/utils/volumeFormatter";
+import { animation } from "./animation";
 
 const Overview: React.FC<IOverviewTypes> = ({
   title,
@@ -41,6 +40,9 @@ const Overview: React.FC<IOverviewTypes> = ({
   trendLine2LegendOnClick,
   trendline1LegendLabels,
   trendline2LegendLabels,
+  heroChartLegendLabels,
+  trendline1HeaderTitle,
+  trendline2HeaderTitle,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -93,7 +95,7 @@ const Overview: React.FC<IOverviewTypes> = ({
                   timeframe={heroChartTimeframe}
                   labels={heroChartLabels}
                   legendOnClick={heroChartLegendOnClick}
-                  legendLabels={legendLabels}
+                  legendLabels={heroChartLegendLabels}
                   datasets={heroChartDatasets}
                 />
               </div>
@@ -123,7 +125,7 @@ const Overview: React.FC<IOverviewTypes> = ({
                 <div className="grid__col-container-body">
                   <ChartHeader
                     value={trendline1HeaderValue}
-                    title="Active Wallets"
+                    title={trendline1HeaderTitle}
                     description="That have traded on an NFT Marketplace."
                   />
 
@@ -143,33 +145,35 @@ const Overview: React.FC<IOverviewTypes> = ({
                   </div>
                 </div>
               </animated.div>
-              <animated.div
-                style={{ ...animateTrednline2 }}
-                className="grid__col-content grid__col-content--chart"
-              >
-                <div className="grid__col-container-body">
-                  <ChartHeader
-                    value={trendline2HeaderValue}
-                    title="New Wallets"
-                    description="And their first NFT transaction."
-                  />
+              {trendline2Datasets.length && (
+                <animated.div
+                  style={{ ...animateTrednline2 }}
+                  className="grid__col-content grid__col-content--chart"
+                >
+                  <div className="grid__col-container-body">
+                    <ChartHeader
+                      value={trendline2HeaderValue}
+                      title={trendline2HeaderTitle}
+                      description="And their first NFT transaction."
+                    />
 
-                  <div className="chart__seperator" />
-                  <TrendLineChart
-                    legendOnClick={trendLine2LegendOnClick}
-                    labels={trendline2Labels}
-                    legendLabels={trendline2LegendLabels}
-                    legendFormat="vertical"
-                    datasets={trendline2Datasets}
-                  />
-                  <div className="chart__container-footer">
-                    <p className="typography__label--medium typography__transform--uppercase">
-                      90 Day Trend
-                    </p>
-                    <DateRange />
+                    <div className="chart__seperator" />
+                    <TrendLineChart
+                      legendOnClick={trendLine2LegendOnClick}
+                      labels={trendline2Labels}
+                      legendLabels={trendline2LegendLabels}
+                      legendFormat="vertical"
+                      datasets={trendline2Datasets}
+                    />
+                    <div className="chart__container-footer">
+                      <p className="typography__label--medium typography__transform--uppercase">
+                        90 Day Trend
+                      </p>
+                      <DateRange />
+                    </div>
                   </div>
-                </div>
-              </animated.div>
+                </animated.div>
+              )}
             </div>
           ),
         }}
