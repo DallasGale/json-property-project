@@ -18,7 +18,7 @@ import DateRange from "../dateRange/dateRange";
 import { config, toFrom } from "@/constants/animationSettings";
 
 // Animation
-import { animation } from "./constants";
+import { animation } from "./animation";
 
 const Overview: React.FC<IOverviewTypes> = ({
   title,
