@@ -249,8 +249,8 @@ export interface INavLinkProps extends NavigationTypes {
 //
 export type ChartDataTogglesTypes = {
   title: string;
-  active: number | null;
-  onClick: (arg1: React.MouseEvent, arg2: number | null) => void;
+  active: number;
+  onClick: (arg1: React.MouseEvent, arg2: number) => void;
 };
 
 // ------------------------------
@@ -362,14 +362,8 @@ export interface IOverviewTypes {
   trendLine1LegendOnClick: (e: string) => void;
   trendLine2LegendOnClick: (e: string) => void;
   heroChartLegendOnClick: (e: string) => void;
-  heroChartTimeframeOnClick: (
-    arg1: React.MouseEvent,
-    arg2: number | null
-  ) => void;
-  trendlineTimeframeOnClick: (
-    arg1: React.MouseEvent,
-    arg2: number | null
-  ) => void;
+  heroChartTimeframeOnClick: (arg1: React.MouseEvent, arg2: number) => void;
+  trendlineTimeframeOnClick: (arg1: React.MouseEvent, arg2: number) => void;
 }
 
 export type DatasetsType = {

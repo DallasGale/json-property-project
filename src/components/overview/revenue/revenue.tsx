@@ -62,6 +62,7 @@ const RevenueOverview: React.FC<RevenueOverviewProps> = ({
   // > Platform
   const [heroPlatformDisabled, setHeroPlatformDisabled] = useState(false);
 
+  console.log({ heroTimeframe });
   // • Specific •
   // > Timeframe clicked...
   useEffect(() => {

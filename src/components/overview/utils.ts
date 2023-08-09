@@ -1,6 +1,6 @@
 export const handleHeroTimeframeClick = (
   e: React.MouseEvent,
-  value: number | null,
+  value: number,
   setHeroTimeframeClicked: (e: boolean) => void,
   setHeroTimeframe: (e: number) => void
 ) => {
@@ -9,9 +9,7 @@ export const handleHeroTimeframeClick = (
   setTimeout(() => {
     setHeroTimeframeClicked(false);
   }, 500);
-  if (value) {
-    setHeroTimeframe(value);
-  }
+  setHeroTimeframe(value);
 };
 
 // -----------------------------------------------------------
