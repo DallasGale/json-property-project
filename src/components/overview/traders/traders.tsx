@@ -566,6 +566,7 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
       }
       trendline1Datasets={[
         {
+          label: legendLabels.activeWallets[0].name,
           data: trendline1ActiveWalletsOnlyBoughtDisabled
             ? []
             : trendline1ActiveWalletsOnlyBoughtData || [],
@@ -575,6 +576,7 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
           borderWidth: 3,
         },
         {
+          label: legendLabels.activeWallets[1].name,
           data: trendline1ActiveWalletsOnlySoldDisabled
             ? []
             : trendline1ActiveWalletsOnlySoldData || [],
@@ -584,6 +586,7 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
           borderWidth: 3,
         },
         {
+          label: legendLabels.activeWallets[2].name,
           data: trendline1ActiveWalletsAndSoldDisabled
             ? []
             : trendline1ActiveWalletsBoughtAndSoldData || [],
@@ -602,6 +605,7 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
       }
       trendline2Datasets={[
         {
+          label: legendLabels.newWallets[0].name,
           data: trendline2TotalCreatedDisabled
             ? []
             : trendline2NewWalletsDailyStatsTotalCreatedData || [],
@@ -611,6 +615,7 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
           borderWidth: 3,
         },
         {
+          label: legendLabels.newWallets[1].name,
           data: trendline2NewWalletsDisabled
             ? []
             : trendline2NewWalletsDailyStatsData || [],

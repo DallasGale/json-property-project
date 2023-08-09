@@ -391,7 +391,7 @@ export type BarChartDatasetsType = {
   backgroundColor: string;
 };
 export type LineChartDatasetsType = {
-  // label: string;
+  label: string;
   data: number[] | [];
   borderColor: string;
   backgroundColor: string;

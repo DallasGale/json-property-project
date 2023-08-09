@@ -589,6 +589,7 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
                       ]}
                       datasets={[
                         {
+                          label: "Loan Volume Trend",
                           data: loanVolumeTrendDisabled
                             ? []
                             : loanVolumeMovingAverage.slice(
@@ -604,6 +605,7 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
                           borderWidth: 3,
                         },
                         {
+                          label: "Fake Volume Trend",
                           data: fakeVolumeTrendDisabled
                             ? []
                             : fakeVolumeMovingAverage.slice(
