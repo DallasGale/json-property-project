@@ -26,8 +26,8 @@ export const legendLabels = {
       id: "new-wallets-daily-stats",
     },
     {
-      color: "accent-red",
-      rgba: "rgba(95, 61, 196, 1)",
+      color: "accent-fluro",
+      rgba: "rgba(213, 244, 21, 1)",
       name: "Minted",
       id: "new-wallets-daily-stats-total-created",
     },
@@ -60,16 +60,38 @@ export const legendLabels = {
       id: "revenue-royalties",
     },
     {
-      color: "accent-fluro",
-      rgba: "rgba(213, 244, 21, 1)",
-      name: "Minting",
-      id: "revnue-minting",
+      color: "accent-blue",
+      rgba: "rgba(34, 139, 230, 1)",
+      name: "Platform Fees",
+      id: "revenue-platform-fees",
+    },
+  ],
+  salesRevenue: [
+    {
+      color: "accent-teal",
+      rgba: "rgba(18, 184, 134, 1)",
+      name: "Royalties",
+      id: "sales-royalties",
     },
     {
       color: "accent-blue",
       rgba: "rgba(34, 139, 230, 1)",
-      name: "Platform Fees",
-      id: "revnue-platform-fees",
+      name: "Platform",
+      id: "sales-platform",
+    },
+  ],
+  mintingRevenue: [
+    {
+      color: "accent-grey",
+      rgba: "rgba(18, 184, 134, 1)",
+      name: "Paid Mints",
+      id: "paid-mints",
+    },
+    {
+      color: "accent-grey",
+      rgba: "rgba(213, 244, 21, 1)",
+      name: "Free Mints",
+      id: "free-mints",
     },
   ],
 };

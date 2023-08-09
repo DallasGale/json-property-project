@@ -145,33 +145,35 @@ const Overview: React.FC<IOverviewTypes> = ({
                   </div>
                 </div>
               </animated.div>
-              <animated.div
-                style={{ ...animateTrednline2 }}
-                className="grid__col-content grid__col-content--chart"
-              >
-                <div className="grid__col-container-body">
-                  <ChartHeader
-                    value={trendline2HeaderValue}
-                    title={trendline2HeaderTitle}
-                    description="And their first NFT transaction."
-                  />
+              {trendline2Datasets.length && (
+                <animated.div
+                  style={{ ...animateTrednline2 }}
+                  className="grid__col-content grid__col-content--chart"
+                >
+                  <div className="grid__col-container-body">
+                    <ChartHeader
+                      value={trendline2HeaderValue}
+                      title={trendline2HeaderTitle}
+                      description="And their first NFT transaction."
+                    />
 
-                  <div className="chart__seperator" />
-                  <TrendLineChart
-                    legendOnClick={trendLine2LegendOnClick}
-                    labels={trendline2Labels}
-                    legendLabels={trendline2LegendLabels}
-                    legendFormat="vertical"
-                    datasets={trendline2Datasets}
-                  />
-                  <div className="chart__container-footer">
-                    <p className="typography__label--medium typography__transform--uppercase">
-                      90 Day Trend
-                    </p>
-                    <DateRange />
+                    <div className="chart__seperator" />
+                    <TrendLineChart
+                      legendOnClick={trendLine2LegendOnClick}
+                      labels={trendline2Labels}
+                      legendLabels={trendline2LegendLabels}
+                      legendFormat="vertical"
+                      datasets={trendline2Datasets}
+                    />
+                    <div className="chart__container-footer">
+                      <p className="typography__label--medium typography__transform--uppercase">
+                        90 Day Trend
+                      </p>
+                      <DateRange />
+                    </div>
                   </div>
-                </div>
-              </animated.div>
+                </animated.div>
+              )}
             </div>
           ),
         }}

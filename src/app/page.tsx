@@ -118,8 +118,11 @@ const MarketOverviewPage: React.FC = async () => {
   const realPercentDifference = dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "real_percent_difference"
   );
-  const totalVolume = await dailySummaryData?.datasets.filter(
-    ({ label }: DatasetsType) => label === "volume_total"
+  const royaltyVolume = await dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_royalty"
+  );
+  const platformVolume = await dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "volume_platform_opensea"
   );
   const loanVolum30DayMovingAverage = await dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_loan_30_day_moving_average"
@@ -459,6 +462,50 @@ const MarketOverviewPage: React.FC = async () => {
             ninetyDay: newWallet90Day[0].data,
             all: newWalletAll[0].data,
           },
+          trueVolumeTimeframeSummaryData: {
+            oneDay: trueVolumeSummary1Day[0].data,
+            sevenDay: trueVolumeSummary7Day[0].data,
+            thirtyDay: trueVolumeSummary30Day[0].data,
+            ninetyDay: trueVolumeSummary90Day[0].data,
+            all: trueVolumeSummaryAll[0].data,
+          },
+          totalVolumeTimeframeSummaryData: {
+            oneDay: totalVolumeSummary1Day[0].data,
+            sevenDay: totalVolumeSummary7Day[0].data,
+            thirtyDay: totalVolumeSummary30Day[0].data,
+            ninetyDay: totalVolumeSummary90Day[0].data,
+            all: totalVolumeSummaryAll[0].data,
+          },
+          totalPercentChangeTimeframeData: {
+            oneDay: totalPctChange1Day[0].data,
+            sevenDay: totalPctChange7Day[0].data,
+            thirtyDay: totalPctChange30Day[0].data,
+            ninetyDay: totalPctChange90Day[0].data,
+          },
+          truePercentChangeTimeframeData: {
+            oneDay: truePctChange1Day[0].data,
+            sevenDay: truePctChange7Day[0].data,
+            thirtyDay: truePctChange30Day[0].data,
+            ninetyDay: truePctChange90Day[0].data,
+          },
+          fakeVolumeTimeframeSummaryData: {
+            oneDay: fakeVolumeSummary1Day[0].data,
+            sevenDay: fakeVolumeSummary7Day[0].data,
+            thirtyDay: fakeVolumeSummary30Day[0].data,
+            ninetyDay: fakeVolumeSummary90Day[0].data,
+            all: fakeVolumeSummaryAll[0].data,
+          },
+          loanVolumeTimeframeSummaryData: {
+            oneDay: loanVolumeSummary1Day[0].data,
+            sevenDay: loanVolumeSummary7Day[0].data,
+            thirtyDay: loanVolumeSummary30Day[0].data,
+            ninetyDay: loanVolumeSummary90Day[0].data,
+            all: loanVolumeSummaryAll[0].data,
+          },
+        }}
+        revenue={{
+          royaltyVolume: royaltyVolume[0].data,
+          platformVolume: platformVolume[0].data,
           trueVolumeTimeframeSummaryData: {
             oneDay: trueVolumeSummary1Day[0].data,
             sevenDay: trueVolumeSummary7Day[0].data,

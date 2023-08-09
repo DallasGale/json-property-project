@@ -11,6 +11,7 @@ import { TradersTypes } from "@/app/types";
 import Overview from "../overview";
 import { legendLabels } from "@constants/legendLabels";
 import { VolumeFormatter } from "@/utils/volumeFormatter";
+import { handleHeroTimeframeClick, handleLegendClick } from "../utils";
 
 type TradersOverviewProps = {
   labels: string[];
@@ -44,17 +45,6 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
   const [heroTimeframe, setHeroTimeframe] = useState(90);
   const [heroTimeframeClicked, setHeroTimeframeClicked] = useState(false);
 
-  // • Generic •
-  // > Timeframe
-  function handleHeroTimeframeClick(e: React.MouseEvent, value: any) {
-    e.preventDefault();
-    setHeroTimeframeClicked(true);
-    setTimeout(() => {
-      setHeroTimeframeClicked(false);
-    }, 500);
-    setHeroTimeframe(value);
-  }
-
   // • Specific •
   // Hero Data State
   // ---------------
@@ -81,27 +71,6 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
   // > Bought and Sold
   const [heroBoughtAndSoldDisabled, setHeroBoughtAndSoldDisabled] =
     useState(false);
-
-  // • Specific •
-  // > Legend
-  const handleHeroLegendClick = (e: string) => {
-    if (document) {
-      const domEls = document?.getElementsByTagName("input");
-      for (let i = 0; i < domEls.length; i++) {
-        if (domEls[i].id === e) {
-          if (domEls[i].id === legendLabels.tradersHero[0].id) {
-            setHeroOnlyBoughtDisabled(!heroOnlyBoughtDisabled);
-          }
-          if (domEls[i].id === legendLabels.tradersHero[1].id) {
-            setHeroOnlySoldDisabled(!heroOnlySoldDisabled);
-          }
-          if (domEls[i].id === legendLabels.tradersHero[2].id) {
-            setHeroBoughtAndSoldDisabled(!heroBoughtAndSoldDisabled);
-          }
-        }
-      }
-    }
-  };
 
   // • Specific •
   // > Timeframe clicked...
@@ -250,33 +219,6 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
   ] = useState(false);
 
   // • Specific •
-  // > Legend
-  const handleTrendline1ActiveWalletsClick = (e: string) => {
-    if (document) {
-      const domEls = document?.getElementsByTagName("input");
-      for (let i = 0; i < domEls.length; i++) {
-        if (domEls[i].id === e) {
-          if (domEls[i].id === legendLabels.activeWallets[0].id) {
-            setTrendline1ActiveWalletsOnlyBoughtDisabled(
-              !trendline1ActiveWalletsOnlyBoughtDisabled
-            );
-          }
-          if (domEls[i].id === legendLabels.activeWallets[1].id) {
-            setTrendline1ActiveWalletsOnlySoldDisabled(
-              !trendline1ActiveWalletsOnlySoldDisabled
-            );
-          }
-          if (domEls[i].id === legendLabels.activeWallets[2].id) {
-            setTrendline1ActiveWalletsBoughtAndSoldDisabled(
-              !trendline1ActiveWalletsAndSoldDisabled
-            );
-          }
-        }
-      }
-    }
-  };
-
-  // • Specific •
   // > Trendline timeframe clicked...
   useEffect(() => {
     if (traders.activeWallets) {
@@ -409,24 +351,6 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
     useState(false);
 
   // • Specific •
-  // > Legend
-  const handleTrendline2NewWalletsClick = (e: string) => {
-    if (document) {
-      const domEls = document?.getElementsByTagName("input");
-      for (let i = 0; i < domEls.length; i++) {
-        if (domEls[i].id === e) {
-          if (domEls[i].id === legendLabels.newWallets[0].id) {
-            setTrendline2NewWalletsDisabled(!trendline2NewWalletsDisabled);
-          }
-          if (domEls[i].id === legendLabels.newWallets[1].id) {
-            setTrendline2TotalCreatedDisabled(!trendline2TotalCreatedDisabled);
-          }
-        }
-      }
-    }
-  };
-
-  // • Specific •
   // > Trendline timeframe clicked...
   useEffect(() => {
     if (traders.newWallets) {
@@ -528,10 +452,35 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
       heroChartLegendLabels={legendLabels.tradersHero}
       heroChartTimeframe={heroTimeframe}
       heroChartLabels={heroLabels}
-      heroChartLegendOnClick={(e: string) => handleHeroLegendClick(e)}
       heroChartTimeframeClicked={heroTimeframeClicked}
+      heroChartLegendOnClick={(e: string) =>
+        handleLegendClick(
+          e,
+          [
+            {
+              id: legendLabels.tradersHero[0].id,
+              setter: () => setHeroOnlyBoughtDisabled(!heroOnlyBoughtDisabled),
+            },
+            {
+              id: legendLabels.tradersHero[1].id,
+              setter: () => setHeroOnlySoldDisabled(!heroOnlySoldDisabled),
+            },
+            {
+              id: legendLabels.tradersHero[2].id,
+              setter: () =>
+                setHeroBoughtAndSoldDisabled(!heroBoughtAndSoldDisabled),
+            },
+          ],
+          legendLabels.tradersHero
+        )
+      }
       heroChartTimeframeOnClick={(arg1, arg2) =>
-        handleHeroTimeframeClick(arg1, arg2)
+        handleHeroTimeframeClick(
+          arg1,
+          arg2,
+          setHeroTimeframeClicked,
+          setHeroTimeframe
+        )
       }
       heroChartDatasets={[
         {
@@ -553,16 +502,42 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
           backgroundColor: "rgba(95, 61, 196, 1)",
         },
       ]}
-      trendlineTimeframe={trendlineTimeframe}
       trendlineTimeframeOnClick={(arg1, arg2) =>
         handleTrendlineTimeframeClick(arg1, arg2)
       }
+      trendlineTimeframe={trendlineTimeframe}
       trendline1HeaderTitle="Active Wallets"
       trendline1HeaderValue={VolumeFormatter(totalActiveWallets)}
       trendline1Labels={activeWalletLabels}
       trendline1LegendLabels={legendLabels.activeWallets}
       trendLine1LegendOnClick={(e: string) =>
-        handleTrendline1ActiveWalletsClick(e)
+        handleLegendClick(
+          e,
+          [
+            {
+              id: legendLabels.activeWallets[0].id,
+              setter: () =>
+                setTrendline1ActiveWalletsOnlyBoughtDisabled(
+                  !trendline1ActiveWalletsOnlyBoughtDisabled
+                ),
+            },
+            {
+              id: legendLabels.activeWallets[1].id,
+              setter: () =>
+                setTrendline1ActiveWalletsOnlySoldDisabled(
+                  !trendline1ActiveWalletsOnlySoldDisabled
+                ),
+            },
+            {
+              id: legendLabels.activeWallets[2].id,
+              setter: () =>
+                setTrendline1ActiveWalletsBoughtAndSoldDisabled(
+                  !trendline1ActiveWalletsAndSoldDisabled
+                ),
+            },
+          ],
+          legendLabels.activeWallets
+        )
       }
       trendline1Datasets={[
         {
@@ -601,7 +576,24 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
       trendline2Labels={trendline2NewWalletsLabels}
       trendline2LegendLabels={legendLabels.newWallets}
       trendLine2LegendOnClick={(e: string) =>
-        handleTrendline2NewWalletsClick(e)
+        handleLegendClick(
+          e,
+          [
+            {
+              id: legendLabels.newWallets[0].id,
+              setter: () =>
+                setTrendline2TotalCreatedDisabled(
+                  !trendline2TotalCreatedDisabled
+                ),
+            },
+            {
+              id: legendLabels.newWallets[1].id,
+              setter: () =>
+                setTrendline2NewWalletsDisabled(!trendline2NewWalletsDisabled),
+            },
+          ],
+          legendLabels.newWallets
+        )
       }
       trendline2Datasets={[
         {

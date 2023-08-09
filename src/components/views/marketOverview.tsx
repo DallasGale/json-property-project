@@ -60,10 +60,11 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
   loanVolumeMovingAverage,
   fakeVolumeMovingAverage,
   leaderboard,
-  traders,
   activeWalletsOnlyBought,
   activeWalletsOnlySold,
   activeWalletsBoughtAndSold,
+  traders,
+  revenue,
 }) => {
   // Animations
   const springs1 = useSpring({
@@ -348,75 +349,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
     }
   }, [timeframe]);
 
-  // ------------------------------------------------------
-  // ------------------------------------------------------
-  // START Overview - Revenue - Hero
-  // ------------------------------------------------------
-  // ------------------------------------------------------
-
-  // const [revenueHeroChartLabels, setRevenueHeroChartLabels] = useState(
-  //   labels.slice(labels.length - 90).map((data: any) => data)
-  // );
-  // const [revenueHeroChartTimeframe, setRevenueHeroChartTimeframe] =
-  //   useState(90);
-
-  // const [
-  //   revenueHeroChartTimeframeClicked,
-  //   setRevenueDailyHeroChartTimeframeClicked,
-  // ] = useState(false);
-
-  // const [revenueWalletsTimeframe, setRevenueWalletsTimeframe] =
-  //   useState<number>(7);
-
-  // > Click Handler
-  // const handleRevenueHeroChartTimeframeOnClick = (
-  //   e: React.MouseEvent,
-  //   value: any
-  // ) => {
-  //   e.preventDefault();
-  //   setRevenueDailyHeroChartTimeframeClicked(true);
-  //   setTimeout(() => {
-  //     setRevenueDailyHeroChartTimeframeClicked(false);
-  //   }, 500);
-  //   setRevenueHeroChartTimeframe(value);
-  // };
-
-  // const revenueHeroChartLegendOnClick = (e: string) => {
-  //   if (document) {
-  //     const domEls = document?.getElementsByTagName("input");
-  //     for (let i = 0; i < domEls.length; i++) {
-  //       if (domEls[i].id === e) {
-  //         if (domEls[i].id === legendLabels.revenue[0].id) {
-  //           setTradersHeroChartOnlyBoughtDisabled(
-  //             !tradersHeroChartOnlyBoughtDisabled
-  //           );
-  //         }
-  //         if (domEls[i].id === legendLabels.revenue[1].id) {
-  //           setTradersHeroChartOnlySoldDisabled(
-  //             !tradersHeroChartOnlySoldDisabled
-  //           );
-  //         }
-  //         if (domEls[i].id === legendLabels.revenue[2].id) {
-  //           setTradersHeroChartBoughtAndSoldDisabled(
-  //             !tradersHeroChartBoughtAndSoldDisabled
-  //           );
-  //         }
-  //       }
-  //     }
-  //   }
-  // };
-
-  // const [revenueSalesMintingTimeframe, setRevenueSalesMintingTimeframe] =
-  //   useState<number>(7);
-
-  // const handleRevenueSalesMintingTimeframeOnClick = (
-  //   e: React.MouseEvent,
-  //   value: any
-  // ) => {
-  //   e.preventDefault();
-  //   setRevenueSalesMintingTimeframe(value);
-  // };
-
   return (
     <>
       {/* TODO:replace below with  <Overview ... /> */}
@@ -686,7 +618,13 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
       {/* -------------------------------- */}
       {/* Revenue row */}
       {/* -------------------------------- */}
-      <RevenueOverview traders={traders} labels={labels} />
+      <RevenueOverview
+        revenue={revenue}
+        labels={labels}
+        activeWalletsOnlyBought={activeWalletsOnlyBought}
+        activeWalletsOnlySold={activeWalletsOnlySold}
+        activeWalletsBoughtAndSold={activeWalletsBoughtAndSold}
+      />
     </>
   );
 };
