@@ -195,6 +195,18 @@ const MarketOverviewPage: React.FC = async () => {
   const totalNewWalletsCreatedDailyStats = dailySummaryData?.datasets.filter(
     ({ label }: DatasetsType) => label === "new_wallets_backward_accumulated"
   );
+
+  const newWalletsMinter = dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "new_wallets_minter"
+  );
+
+  const newWalletsOther = dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "new_wallets_other"
+  );
+  const newWalletsBuyer = dailySummaryData?.datasets.filter(
+    ({ label }: DatasetsType) => label === "new_wallets_buyer"
+  );
+
   const trueVolumeSummary1Day = volumeSummararyData?.datasets.filter(
     ({ label }: DatasetsType) => label === "volume_real_1d"
   );
@@ -453,6 +465,9 @@ const MarketOverviewPage: React.FC = async () => {
           },
           newWallets: {
             dailyStats: {
+              minter: newWalletsMinter[0].data,
+              other: newWalletsOther[0].data,
+              buyer: newWalletsBuyer[0].data,
               new: newWalletsDailyStats[0].data,
               totalCreated: totalNewWalletsCreatedDailyStats[0].data,
             },

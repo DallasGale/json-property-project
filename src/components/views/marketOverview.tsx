@@ -34,8 +34,6 @@ import DateRange from "../dateRange/dateRange";
 
 // Types
 import type { IMarketOverviewProps } from "@/app/types";
-import Overview from "../overview/overview";
-import { legendLabels } from "@constants/legendLabels";
 import TradersOverview from "../overview/traders/traders";
 import RevenueOverview from "../overview/revenue/revenue";
 
@@ -233,8 +231,6 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
     useState(traders.fakeVolumeTimeframeSummaryData.oneDay);
   const [trueVolumeTotalSummararyData, setTrueVolumeTotalSummararyData] =
     useState(traders.trueVolumeTimeframeSummaryData.oneDay);
-  const [loanVolumeDoughnutSummararyData, setLoanVolumeDoughnutSummararyData] =
-    useState(traders.loanVolumeTimeframeSummaryData.oneDay);
 
   useEffect(() => {
     if (trueTotalTimeframe === 0) {
