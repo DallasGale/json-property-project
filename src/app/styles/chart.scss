@@ -330,12 +330,20 @@ $gap: 20px;
   }
 }
 
-.chart__legend-icon-label {
+.chart__legend-icon-label-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  .crypto-icon {
+    width: 12px;
+  }
 }
 
+.chart__legend-icon-label {
+  display: flex;
+  align-items: center;
+}
 .chart__trend-line {
   display: flex;
   flex-direction: column;

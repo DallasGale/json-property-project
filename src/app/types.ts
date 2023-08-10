@@ -119,8 +119,14 @@ export interface ILegendProps {
   labels: LabelTypes[];
   modifierClass?: string;
   legendFormat?: LegendFormatTypes;
+  legendItemVolume?: LegendItemVolumeTypes[];
   onClick: (e: string) => void;
 }
+
+export type LegendItemVolumeTypes = {
+  id: string;
+  value: number;
+};
 
 export type LabelTypes = {
   color: string;
@@ -148,6 +154,7 @@ export type TrendLineChartTypes = {
   datasets: LineChartDatasetsType[];
   legendLabels: LegendLabelTypes[];
   legendFormat?: LegendFormatTypes;
+  legendItemVolume?: LegendItemVolumeTypes[];
   legendOnClick: (e: string) => void;
 };
 
