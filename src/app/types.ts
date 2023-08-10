@@ -292,6 +292,9 @@ export type ActiveWalletsTypes = {
 };
 export interface NewWalletsTypes extends TradersTimeframeTypes {
   dailyStats: {
+    minter: number[];
+    other: number[];
+    buyer: number[];
     new: number[];
     totalCreated: number[];
   };

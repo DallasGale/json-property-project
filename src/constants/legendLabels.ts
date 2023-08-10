@@ -31,6 +31,12 @@ export const legendLabels = {
       name: "Minted",
       id: "new-wallets-daily-stats-total-created",
     },
+    {
+      color: "grey",
+      rgba: "rgba(92, 95, 102, 1)",
+      name: "Other",
+      id: "new-wallets-daily-stats-total-created",
+    },
   ],
   activeWallets: [
     {

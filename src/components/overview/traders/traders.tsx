@@ -327,19 +327,27 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
     labels.slice(labels.length - 90).map((data: any) => data)
   );
   const [
-    trendline2NewWalletsDailyStatsData,
-    setTrendline2NewWalletsDailyStatsData,
+    trendline2NewWalletsDailyStatsBoughtData,
+    setTrendline2NewWalletsDailyStatsBoughtData,
   ] = useState(
-    traders.newWallets?.dailyStats.new.slice(
-      traders.newWallets?.dailyStats.new.length - 90
+    traders.newWallets?.dailyStats.buyer.slice(
+      traders.newWallets?.dailyStats.buyer.length - 90
     )
   );
   const [
-    trendline2NewWalletsDailyStatsTotalCreatedData,
-    setTrendline2NewWalletsDailyStatsTotalCreatedData,
+    trendline2NewWalletsDailyStatsMintedData,
+    setTrendline2NewWalletsDailyStatsMintedData,
   ] = useState(
-    traders.newWallets?.dailyStats.totalCreated.slice(
-      traders.newWallets?.dailyStats.totalCreated.length - 90
+    traders.newWallets?.dailyStats.minter.slice(
+      traders.newWallets?.dailyStats.minter.length - 90
+    )
+  );
+  const [
+    trendline2NewWalletsDailyStatsOtherData,
+    setTrendline2NewWalletsDailyStatsOtherData,
+  ] = useState(
+    traders.newWallets?.dailyStats.other.slice(
+      traders.newWallets?.dailyStats.other.length - 90
     )
   );
 
@@ -357,11 +365,14 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
       if (trendlineTimeframe === 0) {
         // Data
         setTrendline2TotalNewWallets(traders.newWallets.all[0]);
-        setTrendline2NewWalletsDailyStatsData(
-          traders.newWallets?.dailyStats.new
+        setTrendline2NewWalletsDailyStatsBoughtData(
+          traders.newWallets?.dailyStats.buyer
         );
-        setTrendline2NewWalletsDailyStatsTotalCreatedData(
-          traders.newWallets?.dailyStats.totalCreated
+        setTrendline2NewWalletsDailyStatsMintedData(
+          traders.newWallets?.dailyStats.minter
+        );
+        setTrendline2NewWalletsDailyStatsOtherData(
+          traders.newWallets?.dailyStats.other
         );
 
         // Labels
@@ -370,14 +381,19 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
       if (trendlineTimeframe === 1) {
         // Data
         setTrendline2TotalNewWallets(traders.newWallets.oneDay[0]);
-        setTrendline2NewWalletsDailyStatsData(
-          traders.newWallets?.dailyStats.new.slice(
-            traders.newWallets?.dailyStats.new.length - 1
+        setTrendline2NewWalletsDailyStatsBoughtData(
+          traders.newWallets?.dailyStats.buyer.slice(
+            traders.newWallets?.dailyStats.buyer.length - 1
           )
         );
-        setTrendline2NewWalletsDailyStatsTotalCreatedData(
-          traders.newWallets?.dailyStats.totalCreated.slice(
-            traders.newWallets?.dailyStats.totalCreated.length - 1
+        setTrendline2NewWalletsDailyStatsMintedData(
+          traders.newWallets?.dailyStats.minter.slice(
+            traders.newWallets?.dailyStats.minter.length - 1
+          )
+        );
+        setTrendline2NewWalletsDailyStatsOtherData(
+          traders.newWallets?.dailyStats.other.slice(
+            traders.newWallets?.dailyStats.other.length - 1
           )
         );
 
@@ -389,14 +405,19 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
       if (trendlineTimeframe === 7) {
         // Data
         setTrendline2TotalNewWallets(traders.newWallets.sevenDay[0]);
-        setTrendline2NewWalletsDailyStatsData(
-          traders.newWallets?.dailyStats.new.slice(
-            traders.newWallets?.dailyStats.new.length - 7
+        setTrendline2NewWalletsDailyStatsBoughtData(
+          traders.newWallets?.dailyStats.buyer.slice(
+            traders.newWallets?.dailyStats.buyer.length - 7
           )
         );
-        setTrendline2NewWalletsDailyStatsTotalCreatedData(
-          traders.newWallets?.dailyStats.totalCreated.slice(
-            traders.newWallets?.dailyStats.totalCreated.length - 7
+        setTrendline2NewWalletsDailyStatsMintedData(
+          traders.newWallets?.dailyStats.minter.slice(
+            traders.newWallets?.dailyStats.minter.length - 7
+          )
+        );
+        setTrendline2NewWalletsDailyStatsOtherData(
+          traders.newWallets?.dailyStats.other.slice(
+            traders.newWallets?.dailyStats.other.length - 7
           )
         );
 
@@ -408,17 +429,21 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
       if (trendlineTimeframe === 30) {
         // Data
         setTrendline2TotalNewWallets(traders.newWallets.thirtyDay[0]);
-        setTrendline2NewWalletsDailyStatsData(
-          traders.newWallets?.dailyStats.new.slice(
-            traders.newWallets?.dailyStats.new.length - 30
+        setTrendline2NewWalletsDailyStatsBoughtData(
+          traders.newWallets?.dailyStats.buyer.slice(
+            traders.newWallets?.dailyStats.buyer.length - 30
           )
         );
-        setTrendline2NewWalletsDailyStatsTotalCreatedData(
-          traders.newWallets?.dailyStats.totalCreated.slice(
-            traders.newWallets?.dailyStats.totalCreated.length - 30
+        setTrendline2NewWalletsDailyStatsMintedData(
+          traders.newWallets?.dailyStats.minter.slice(
+            traders.newWallets?.dailyStats.minter.length - 30
           )
         );
-
+        setTrendline2NewWalletsDailyStatsOtherData(
+          traders.newWallets?.dailyStats.other.slice(
+            traders.newWallets?.dailyStats.other.length - 30
+          )
+        );
         // Labels
         setTrendline2NewWalletsLabels(
           labels.slice(labels.length - 30).map((data: string) => data)
@@ -427,17 +452,21 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
       if (trendlineTimeframe === 90) {
         // Data
         setTrendline2TotalNewWallets(traders.newWallets.ninetyDay[0]);
-        setTrendline2NewWalletsDailyStatsData(
-          traders.newWallets?.dailyStats.new.slice(
-            traders.newWallets?.dailyStats.new.length - 90
+        setTrendline2NewWalletsDailyStatsBoughtData(
+          traders.newWallets?.dailyStats.buyer.slice(
+            traders.newWallets?.dailyStats.buyer.length - 90
           )
         );
-        setTrendline2NewWalletsDailyStatsTotalCreatedData(
-          traders.newWallets?.dailyStats.totalCreated.slice(
-            traders.newWallets?.dailyStats.totalCreated.length - 90
+        setTrendline2NewWalletsDailyStatsMintedData(
+          traders.newWallets?.dailyStats.minter.slice(
+            traders.newWallets?.dailyStats.minter.length - 90
           )
         );
-
+        setTrendline2NewWalletsDailyStatsOtherData(
+          traders.newWallets?.dailyStats.other.slice(
+            traders.newWallets?.dailyStats.other.length - 90
+          )
+        );
         // Labels
         setTrendline2NewWalletsLabels(
           labels.slice(labels.length - 90).map((data: string) => data)
@@ -600,7 +629,7 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
           label: legendLabels.newWallets[0].name,
           data: trendline2TotalCreatedDisabled
             ? []
-            : trendline2NewWalletsDailyStatsTotalCreatedData || [],
+            : trendline2NewWalletsDailyStatsBoughtData || [],
           borderColor: legendLabels.newWallets[0].rgba,
           backgroundColor: legendLabels.newWallets[0].rgba,
           pointRadius: 0,
@@ -610,9 +639,19 @@ const TradersOverview: React.FC<TradersOverviewProps> = ({
           label: legendLabels.newWallets[1].name,
           data: trendline2NewWalletsDisabled
             ? []
-            : trendline2NewWalletsDailyStatsData || [],
+            : trendline2NewWalletsDailyStatsMintedData || [],
           borderColor: legendLabels.newWallets[1].rgba,
           backgroundColor: legendLabels.newWallets[1].rgba,
+          pointRadius: 0,
+          borderWidth: 3,
+        },
+        {
+          label: legendLabels.newWallets[2].name,
+          data: trendline2NewWalletsDisabled
+            ? []
+            : trendline2NewWalletsDailyStatsOtherData || [],
+          borderColor: legendLabels.newWallets[2].rgba,
+          backgroundColor: legendLabels.newWallets[2].rgba,
           pointRadius: 0,
           borderWidth: 3,
         },

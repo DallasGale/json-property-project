@@ -10,6 +10,7 @@ import LegendIconPurple from "@assets/icons/legendIconPurple.svg";
 import LegendIconBlue from "@assets/icons/legendIconBlue.svg";
 import LegendIconTeal from "@assets/icons/legendIconTeal.svg";
 import LegendIconFluro from "@assets/icons/legendIconFluro.svg";
+import LegendIconGrey from "@assets/icons/legendIconGrey.svg";
 import CryptoGreyIcon from "@assets/icons/cryptoGrey.svg";
 
 // Utils
@@ -22,7 +23,6 @@ const Legend: React.FC<ILegendProps> = ({
   legendFormat = "horizontal",
   legendItemVolume,
 }) => {
-  console.log({ legendItemVolume });
   return legendFormat === "tabled" ? (
     <TabledDotPoints dotpoints={labels} onClick={onClick} />
   ) : (
@@ -52,6 +52,9 @@ const Legend: React.FC<ILegendProps> = ({
                 )}
                 {color === "accent-fluro" && (
                   <Image src={LegendIconFluro} alt="Legend Icon" />
+                )}
+                {color === "grey" && (
+                  <Image src={LegendIconGrey} alt="Legend Icon" />
                 )}
                 <input
                   className="chart__legend-item"
