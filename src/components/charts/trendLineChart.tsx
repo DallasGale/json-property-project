@@ -11,6 +11,7 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
   legendOnClick,
   legendLabels,
   legendFormat,
+  legendItemVolume,
 }) => {
   return (
     <div className="chart__trend-line">
@@ -18,6 +19,7 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
         onClick={(e) => legendOnClick(e)}
         labels={legendLabels}
         legendFormat={legendFormat}
+        legendItemVolume={legendItemVolume}
       />
       <div
         className="chart__line-wrapper"

@@ -97,10 +97,10 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
 
   const trendlineTrueVolumeArray = trueVolume.slice(trueVolume.length - 90);
 
-  const [timeframe, setTimeframe] = useState<number>(1);
+  const [trueTotalTimeframe, setTrueTotalTimeframe] = useState<number>(1);
   function handleTrendlineTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
-    setTimeframe(value);
+    setTrueTotalTimeframe(value);
   }
 
   // ------------------------------------------------------
@@ -226,33 +226,35 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
     traders.truePercentChangeTimeframeData.oneDay
   );
 
-  // Doughnut
-  const [trueVolumeDoughnutSummararyData, setTrueVolumeDoughnutSummararyData] =
-    useState(traders.trueVolumeTimeframeSummaryData.oneDay);
-  const [fakeVolumeDoughnutSummararyData, setFakeVolumeDoughnutSummararyData] =
+  // Total Volume Summary DataPoints
+  const [loanVolumeTotalSummararyData, setLoanVolumeTotalSummararyData] =
+    useState(traders.loanVolumeTimeframeSummaryData.oneDay);
+  const [fakeVolumeTotalSummararyData, setFakeVolumeTotalSummararyData] =
     useState(traders.fakeVolumeTimeframeSummaryData.oneDay);
+  const [trueVolumeTotalSummararyData, setTrueVolumeTotalSummararyData] =
+    useState(traders.trueVolumeTimeframeSummaryData.oneDay);
   const [loanVolumeDoughnutSummararyData, setLoanVolumeDoughnutSummararyData] =
     useState(traders.loanVolumeTimeframeSummaryData.oneDay);
 
   useEffect(() => {
-    if (timeframe === 0) {
+    if (trueTotalTimeframe === 0) {
       setTrueVolumeTimeframeSummaryData(
         traders.trueVolumeTimeframeSummaryData.all
       );
       setTotalVolumeTimeframeSummaryData(
         traders.totalVolumeTimeframeSummaryData.all
       );
-      setTrueVolumeDoughnutSummararyData(
+      setTrueVolumeTotalSummararyData(
         traders.trueVolumeTimeframeSummaryData.all
       );
-      setFakeVolumeDoughnutSummararyData(
+      setFakeVolumeTotalSummararyData(
         traders.fakeVolumeTimeframeSummaryData.all
       );
-      setLoanVolumeDoughnutSummararyData(
+      setLoanVolumeTotalSummararyData(
         traders.loanVolumeTimeframeSummaryData.all
       );
     }
-    if (timeframe === 1) {
+    if (trueTotalTimeframe === 1) {
       setTrueVolumeTimeframeSummaryData(
         traders.trueVolumeTimeframeSummaryData.oneDay
       );
@@ -265,17 +267,17 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
       setTruePercentChangeTimeframe(
         traders.truePercentChangeTimeframeData.oneDay
       );
-      setTrueVolumeDoughnutSummararyData(
+      setTrueVolumeTotalSummararyData(
         traders.trueVolumeTimeframeSummaryData.oneDay
       );
-      setFakeVolumeDoughnutSummararyData(
+      setFakeVolumeTotalSummararyData(
         traders.fakeVolumeTimeframeSummaryData.oneDay
       );
-      setLoanVolumeDoughnutSummararyData(
+      setLoanVolumeTotalSummararyData(
         traders.loanVolumeTimeframeSummaryData.oneDay
       );
     }
-    if (timeframe === 7) {
+    if (trueTotalTimeframe === 7) {
       setTrueVolumeTimeframeSummaryData(
         traders.trueVolumeTimeframeSummaryData.sevenDay
       );
@@ -289,17 +291,17 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         traders.truePercentChangeTimeframeData.sevenDay
       );
 
-      setTrueVolumeDoughnutSummararyData(
+      setTrueVolumeTotalSummararyData(
         traders.trueVolumeTimeframeSummaryData.sevenDay
       );
-      setFakeVolumeDoughnutSummararyData(
+      setFakeVolumeTotalSummararyData(
         traders.fakeVolumeTimeframeSummaryData.sevenDay
       );
-      setLoanVolumeDoughnutSummararyData(
+      setLoanVolumeTotalSummararyData(
         traders.loanVolumeTimeframeSummaryData.sevenDay
       );
     }
-    if (timeframe === 30) {
+    if (trueTotalTimeframe === 30) {
       setTrueVolumeTimeframeSummaryData(
         traders.trueVolumeTimeframeSummaryData.thirtyDay
       );
@@ -313,17 +315,17 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         traders.truePercentChangeTimeframeData.thirtyDay
       );
 
-      setTrueVolumeDoughnutSummararyData(
+      setTrueVolumeTotalSummararyData(
         traders.trueVolumeTimeframeSummaryData.thirtyDay
       );
-      setFakeVolumeDoughnutSummararyData(
+      setFakeVolumeTotalSummararyData(
         traders.fakeVolumeTimeframeSummaryData.thirtyDay
       );
-      setLoanVolumeDoughnutSummararyData(
+      setLoanVolumeTotalSummararyData(
         traders.loanVolumeTimeframeSummaryData.thirtyDay
       );
     }
-    if (timeframe === 90) {
+    if (trueTotalTimeframe === 90) {
       setTrueVolumeTimeframeSummaryData(
         traders.trueVolumeTimeframeSummaryData.ninetyDay
       );
@@ -337,17 +339,17 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
         traders.truePercentChangeTimeframeData.ninetyDay
       );
 
-      setTrueVolumeDoughnutSummararyData(
+      setTrueVolumeTotalSummararyData(
         traders.trueVolumeTimeframeSummaryData.ninetyDay
       );
-      setFakeVolumeDoughnutSummararyData(
+      setFakeVolumeTotalSummararyData(
         traders.fakeVolumeTimeframeSummaryData.ninetyDay
       );
-      setLoanVolumeDoughnutSummararyData(
+      setLoanVolumeTotalSummararyData(
         traders.loanVolumeTimeframeSummaryData.ninetyDay
       );
     }
-  }, [timeframe]);
+  }, [trueTotalTimeframe]);
 
   return (
     <>
@@ -432,11 +434,11 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
             >
               <div className="chart__chart-actions-lockup">
                 <ChartDataToggles
-                  title={TimeframeAsString(timeframe)}
+                  title={TimeframeAsString(trueTotalTimeframe)}
                   onClick={(arg1, arg2) =>
                     handleTrendlineTimeferame(arg1, arg2)
                   }
-                  active={timeframe}
+                  active={trueTotalTimeframe}
                 />
               </div>
             </animated.div>
@@ -451,11 +453,11 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
                   <div className="grid__col-container-body">
                     <div className="chart__info">
                       <ProgressRing
-                        trueVolume={trueVolumeDoughnutSummararyData}
-                        loanVolume={loanVolumeDoughnutSummararyData}
-                        fakeVolume={fakeVolumeDoughnutSummararyData}
+                        trueVolume={trueVolumeTotalSummararyData}
+                        loanVolume={loanVolumeTotalSummararyData}
+                        fakeVolume={fakeVolumeTotalSummararyData}
                         percentage={`${DecimalFormatter(
-                          (trueVolumeDoughnutSummararyData[0] /
+                          (trueVolumeTotalSummararyData[0] /
                             totalVolumeTimeframeSummaryData[0]) *
                             100
                         )}`}
@@ -504,6 +506,16 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
 
                     <div className="chart__seperator" />
                     <TrendLineChart
+                      legendItemVolume={[
+                        {
+                          id: "loan-volume-trend",
+                          value: loanVolumeTotalSummararyData[0],
+                        },
+                        {
+                          id: "fake-volume-trend",
+                          value: fakeVolumeTotalSummararyData[0],
+                        },
+                      ]}
                       legendOnClick={(e: string) => trendlineLegendOnClick(e)}
                       labels={trendlineVolumeLabels}
                       legendFormat="vertical"
