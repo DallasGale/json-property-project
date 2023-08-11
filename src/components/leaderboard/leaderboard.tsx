@@ -229,7 +229,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               infoTooltipText="Includes points farming and wash trading"
-              volumeCategory={ColumnLabels[8].id}
+              volumeCategory={ColumnLabels[7].id}
               title="Fake Volume"
               valueTitle="% Of Total"
               color="accent-red"
@@ -333,7 +333,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               infoTooltipText="Borrowing/repayments via Blur Lending"
-              volumeCategory={ColumnLabels[6].id}
+              volumeCategory={ColumnLabels[5].id}
               title="Loan Volume"
               valueTitle="% of total"
               color="accent-yellow"
@@ -437,7 +437,7 @@ const Leaderboard: React.FC<LeaderBoardTypes> = ({
           content: (
             <VolumeTableChart
               infoTooltipText="Royalties from marketplace sales"
-              volumeCategory={ColumnLabels[7].id}
+              volumeCategory={ColumnLabels[6].id}
               title="Collection Revenue"
               valueTitle="Earnings"
               color="light-grey-1"
