@@ -15,7 +15,7 @@ import { ColumnLabels } from "@constants/top100table";
 import { config } from "@constants/animationSettings";
 
 // Types
-import { DataTableTypes } from "@/app/types";
+import { DataTableColumnLabelsTypes, DataTableTypes } from "@/app/types";
 
 const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
   const searchParams = useSearchParams().get("q");
@@ -34,27 +34,33 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
     config,
   });
 
-  const [sortedBy, setSortedBy] = useState(ColumnLabels[2].id);
+  const [sortedBy, setSortedBy] = useState({
+    id: ColumnLabels[2].id,
+    category: ColumnLabels[2].category,
+  });
   const [timeframe, setTimeframe] = useState(1);
   const [top100Data, setTop100Data] = useState(
     tableBodyData.sortedByTrueVol.thirtyDayTop100
   );
   const [activeColumn, setActiveColumn] = useState(ColumnLabels[2].id);
-  const handleSorting = (id: string) => {
-    setSortedBy(id);
+  const handleSorting = (id: string, category: string) => {
+    console.log({ id, category });
+    setSortedBy({ id: id, category: category });
     setActiveColumn(id);
   };
 
   useEffect(() => {
     if (searchParams) {
-      setSortedBy(searchParams);
+      const found: Pick<DataTableColumnLabelsTypes, "category">[] =
+        ColumnLabels.filter((label) => label.id === searchParams);
+      setSortedBy({ id: searchParams, category: found[0].category });
       setActiveColumn(searchParams);
     }
   }, [searchParams]);
 
   useEffect(() => {
     // True Volume
-    if (sortedBy === ColumnLabels[2].id) {
+    if (sortedBy.id === ColumnLabels[2].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByTrueVol.ninetyDayTop100);
       }
@@ -74,7 +80,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       }
     }
     // True Volume Percentage
-    if (sortedBy === ColumnLabels[3].id) {
+    if (sortedBy.id === ColumnLabels[3].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByTrueVolPct.ninetyDayTop100);
       }
@@ -94,7 +100,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       }
     }
     //  Total Volume
-    if (sortedBy === ColumnLabels[4].id) {
+    if (sortedBy.id === ColumnLabels[4].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByTotalVol.ninetyDayTop100);
       }
@@ -114,7 +120,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       }
     }
     // True Sales
-    if (sortedBy === ColumnLabels[5].id) {
+    if (sortedBy.id === ColumnLabels[5].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByTrueSales.ninetyDayTop100);
       }
@@ -134,7 +140,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       }
     }
     // Loans
-    if (sortedBy === ColumnLabels[6].id) {
+    if (sortedBy.id === ColumnLabels[6].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByLoans.ninetyDayTop100);
       }
@@ -154,7 +160,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       }
     }
     // Revenue
-    if (sortedBy === ColumnLabels[7].id) {
+    if (sortedBy.id === ColumnLabels[7].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByRevenue.ninetyDayTop100);
       }
@@ -174,7 +180,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       }
     }
     // Fake
-    if (sortedBy === ColumnLabels[8].id) {
+    if (sortedBy.id === ColumnLabels[8].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByFake.ninetyDayTop100);
       }
@@ -194,7 +200,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       }
     }
     // Total Sales Count
-    if (sortedBy === ColumnLabels[9].id) {
+    if (sortedBy.id === ColumnLabels[9].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByTotalSalesCount.ninetyDayTop100);
       }
@@ -228,7 +234,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       >
         <div className="chart__chart-actions-lockup">
           <ChartDataToggles
-            title="Top 100 Collections"
+            title={`Most ${sortedBy.category} by Collection`}
             onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
             active={timeframe}
           />
@@ -244,7 +250,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
           <Head
             labels={ColumnLabels}
             active={activeColumn}
-            handleSortByClick={(e) => handleSorting(e)}
+            handleSortByClick={(e, category) => handleSorting(e, category)}
           />
           <DataTableBody
             active={activeColumn}

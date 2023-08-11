@@ -166,20 +166,6 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                   </div>
                 </td>
 
-                <td width="90" align="right" className="data-table__td">
-                  <p
-                    className={`typography__display--2 ${
-                      active === ColumnLabels[5].id // "sales"
-                        ? "typography__color--white typography__weight--700"
-                        : "typography__color--dark-medium-emphasis"
-                    }`}
-                  >
-                    {total_real_day_trade_num
-                      ? VolumeFormatter(total_real_day_trade_num)
-                      : "-"}
-                  </p>
-                </td>
-
                 {/* loans */}
                 <td width="70" align="right" className="data-table__td">
                   <div className="leaderboard__data-cell">
@@ -192,7 +178,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                         />
                         <p
                           className={`typography__display--2 ${
-                            active === ColumnLabels[6].id // "loans"
+                            active === ColumnLabels[5].id // "loans"
                               ? "typography__color--white typography__weight--700"
                               : "typography__color--dark-medium-emphasis"
                           }`}
@@ -222,7 +208,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                         />
                         <p
                           className={`typography__display--2 ${
-                            active === ColumnLabels[7].id // "revenue"
+                            active === ColumnLabels[6].id // "revenue"
                               ? "typography__color--white typography__weight--700"
                               : "typography__color--dark-medium-emphasis"
                           }`}
@@ -251,7 +237,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                         />
                         <p
                           className={`typography__display--2 ${
-                            active === ColumnLabels[8].id // "fake"
+                            active === ColumnLabels[7].id // "fake"
                               ? "typography__color--white typography__weight--700"
                               : "typography__color--dark-medium-emphasis"
                           }`}
@@ -268,28 +254,33 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                     )}
                   </div>
                 </td>
+                {/* true sales count  */}
+                <td width="120" align="right" className="data-table__td">
+                  <p
+                    className={`typography__display--2 ${
+                      active === ColumnLabels[8].id
+                        ? "typography__color--white typography__weight--700"
+                        : "typography__color--dark-medium-emphasis"
+                    }`}
+                  >
+                    {total_real_day_trade_num
+                      ? VolumeFormatter(total_real_day_trade_num)
+                      : "-"}
+                  </p>
+                </td>
                 {/* total sales count */}
                 <td width="120" align="right" className="data-table__td">
                   <div className="leaderboard__data-cell">
                     {total_day_trade_num ? (
-                      <>
-                        <Image
-                          src={CryptoIcon}
-                          alt="Crypto Icon"
-                          className="data-table__icon data-table__icon--crypto"
-                        />
-                        <p
-                          className={`typography__display--2 ${
-                            active === ColumnLabels[9].id //  "total-sales-count"
-                              ? "typography__color--white typography__weight--700"
-                              : "typography__color--dark-medium-emphasis"
-                          }`}
-                        >
-                          {VolumeFormatter(
-                            DecimalFormatter(total_day_trade_num)
-                          )}
-                        </p>
-                      </>
+                      <p
+                        className={`typography__display--2 ${
+                          active === ColumnLabels[9].id
+                            ? "typography__color--white typography__weight--700"
+                            : "typography__color--dark-medium-emphasis"
+                        }`}
+                      >
+                        {VolumeFormatter(DecimalFormatter(total_day_trade_num))}
+                      </p>
                     ) : (
                       <p className="typography__display--2 typography__color--dark-medium-emphasis">
                         -

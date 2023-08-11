@@ -227,6 +227,7 @@ export type DataTableColumnLabelsTypes = {
   id: string;
   hasChevronDown: boolean;
   active: boolean;
+  category: string;
 };
 // ------------------------------
 // Component Types -  Data Table Head
@@ -234,7 +235,7 @@ export type DataTableColumnLabelsTypes = {
 export type DataTableHeadTypes = {
   labels: DataTableColumnLabelsTypes[];
   active: string;
-  handleSortByClick: (e: string) => void;
+  handleSortByClick: (id: string, category: string) => void;
 };
 
 // ------------------------------

@@ -11,10 +11,7 @@ const Leaderboards: React.FC<LeaderboardsTypes> = ({ top100 }) => {
         leaderboardData={{ ...top100 }}
       />
 
-      <DataTable
-        tableTitle="Top 100 Collections"
-        tableBodyData={{ ...top100 }}
-      />
+      <DataTable tableBodyData={{ ...top100 }} />
     </>
   );
 };
