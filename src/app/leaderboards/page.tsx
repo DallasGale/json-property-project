@@ -83,6 +83,28 @@ const LeaderboardsPage: React.FC = async () => {
       </Head>
       <Leaderboards
         top100={{
+          sortedAlphabetically: {
+            oneDayTop100: orderBy(leaderBoard1dData, ["name"], "asc").slice(
+              0,
+              100
+            ),
+            sevenDayTop100: orderBy(leaderBoard7dData, ["name"], "asc").slice(
+              0,
+              100
+            ),
+            thirtyDayTop100: orderBy(leaderBoard30dData, ["name"], "asc").slice(
+              0,
+              100
+            ),
+            ninetyDayTop100: orderBy(leaderBoard90dData, ["name"], "asc").slice(
+              0,
+              100
+            ),
+            allTop100: orderBy(leaderBoardAllData, ["name"], "asc").slice(
+              0,
+              100
+            ),
+          },
           sortedByTrueVol: {
             oneDayTop100: orderBy(
               leaderBoard1dData,

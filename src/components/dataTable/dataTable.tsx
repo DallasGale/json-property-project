@@ -219,6 +219,25 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
         setTop100Data(tableBodyData.sortedByTotalSalesCount.allTop100);
       }
     }
+    if (sortedBy.id === ColumnLabels[1].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedAlphabetically.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedAlphabetically.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedAlphabetically.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedAlphabetically.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedAlphabetically.allTop100);
+      }
+    }
   }, [timeframe, sortedBy]);
 
   function handleDailyTimeferame(e: React.MouseEvent, value: any) {
@@ -234,7 +253,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       >
         <div className="chart__chart-actions-lockup">
           <ChartDataToggles
-            title={`Most ${sortedBy.category} by Collection`}
+            title={`Top 100 Collections ${sortedBy.category}`}
             onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
             active={timeframe}
           />

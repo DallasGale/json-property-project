@@ -86,7 +86,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                     </HoverCard.Dropdown>
                   </HoverCard>
                 </td>
-                <td width="120" className="data-table__td">
+                <td width="90" className="data-table__td">
                   <div className="data-table__cell-content">
                     {total_real_day_volume ? (
                       <>
@@ -137,7 +137,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                   )}
                 </td>
 
-                <td width="100" align="right" className="data-table__td">
+                <td width="95" align="right" className="data-table__td">
                   <div className="data-table__cell-content">
                     {total_raw_day_volume ? (
                       <>
@@ -167,7 +167,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                 </td>
 
                 {/* loans */}
-                <td width="70" align="right" className="data-table__td">
+                <td width="50" align="right" className="data-table__td">
                   <div className="leaderboard__data-cell">
                     {total_day_volume_loan ? (
                       <>
@@ -226,7 +226,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                   </div>
                 </td>
                 {/* fake_volume */}
-                <td width="70" align="right" className="data-table__td">
+                <td width="50" align="right" className="data-table__td">
                   <div className="leaderboard__data-cell">
                     {total_day_volume_fake ? (
                       <>
@@ -255,7 +255,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                   </div>
                 </td>
                 {/* true sales count  */}
-                <td width="120" align="right" className="data-table__td">
+                <td width="112" align="right" className="data-table__td">
                   <p
                     className={`typography__display--2 ${
                       active === ColumnLabels[8].id
@@ -269,7 +269,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                   </p>
                 </td>
                 {/* total sales count */}
-                <td width="120" align="right" className="data-table__td">
+                <td width="115" align="right" className="data-table__td">
                   <div className="leaderboard__data-cell">
                     {total_day_trade_num ? (
                       <p

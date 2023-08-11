@@ -197,6 +197,7 @@ export type DataTableTypes = {
     sortedByRevenue: DataTableTop100Types;
     sortedByFake: DataTableTop100Types;
     sortedByTotalSalesCount: DataTableTop100Types;
+    sortedAlphabetically: DataTableTop100Types;
   };
 };
 
@@ -502,6 +503,13 @@ export interface LeaderboardsTypes {
       allTop100: CollectionTypes[];
     };
     sortedByTotalSalesCount: {
+      oneDayTop100: CollectionTypes[];
+      sevenDayTop100: CollectionTypes[];
+      thirtyDayTop100: CollectionTypes[];
+      ninetyDayTop100: CollectionTypes[];
+      allTop100: CollectionTypes[];
+    };
+    sortedAlphabetically: {
       oneDayTop100: CollectionTypes[];
       sevenDayTop100: CollectionTypes[];
       thirtyDayTop100: CollectionTypes[];
