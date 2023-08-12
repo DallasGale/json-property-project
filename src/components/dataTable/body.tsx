@@ -255,7 +255,7 @@ const DataTableBody: React.FC<DataTableBodyTypes> = ({
                   </div>
                 </td>
                 {/* true sales count  */}
-                <td width="112" align="right" className="data-table__td">
+                <td width="115" align="right" className="data-table__td">
                   <p
                     className={`typography__display--2 ${
                       active === ColumnLabels[8].id

@@ -59,6 +59,26 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
   }, [searchParams]);
 
   useEffect(() => {
+    // Alphabetically
+    if (sortedBy.id === ColumnLabels[1].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedAlphabetically.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedAlphabetically.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedAlphabetically.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedAlphabetically.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedAlphabetically.allTop100);
+      }
+    }
     // True Volume
     if (sortedBy.id === ColumnLabels[2].id) {
       if (timeframe === 90) {
@@ -119,28 +139,9 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
         setTop100Data(tableBodyData.sortedByTotalVol.allTop100);
       }
     }
-    // True Sales
-    if (sortedBy.id === ColumnLabels[5].id) {
-      if (timeframe === 90) {
-        setTop100Data(tableBodyData.sortedByTrueSales.ninetyDayTop100);
-      }
-      if (timeframe === 30) {
-        setTop100Data(tableBodyData.sortedByTrueSales.thirtyDayTop100);
-      }
-      if (timeframe === 7) {
-        setTop100Data(tableBodyData.sortedByTrueSales.sevenDayTop100);
-      }
 
-      if (timeframe === 1) {
-        setTop100Data(tableBodyData.sortedByTrueSales.oneDayTop100);
-      }
-
-      if (timeframe === 0) {
-        setTop100Data(tableBodyData.sortedByTrueSales.allTop100);
-      }
-    }
     // Loans
-    if (sortedBy.id === ColumnLabels[6].id) {
+    if (sortedBy.id === ColumnLabels[5].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByLoans.ninetyDayTop100);
       }
@@ -159,8 +160,9 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
         setTop100Data(tableBodyData.sortedByLoans.allTop100);
       }
     }
+
     // Revenue
-    if (sortedBy.id === ColumnLabels[7].id) {
+    if (sortedBy.id === ColumnLabels[6].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByRevenue.ninetyDayTop100);
       }
@@ -180,7 +182,7 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
       }
     }
     // Fake
-    if (sortedBy.id === ColumnLabels[8].id) {
+    if (sortedBy.id === ColumnLabels[7].id) {
       if (timeframe === 90) {
         setTop100Data(tableBodyData.sortedByFake.ninetyDayTop100);
       }
@@ -197,6 +199,26 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
 
       if (timeframe === 0) {
         setTop100Data(tableBodyData.sortedByFake.allTop100);
+      }
+    }
+    // True Sales
+    if (sortedBy.id === ColumnLabels[8].id) {
+      if (timeframe === 90) {
+        setTop100Data(tableBodyData.sortedByTrueSales.ninetyDayTop100);
+      }
+      if (timeframe === 30) {
+        setTop100Data(tableBodyData.sortedByTrueSales.thirtyDayTop100);
+      }
+      if (timeframe === 7) {
+        setTop100Data(tableBodyData.sortedByTrueSales.sevenDayTop100);
+      }
+
+      if (timeframe === 1) {
+        setTop100Data(tableBodyData.sortedByTrueSales.oneDayTop100);
+      }
+
+      if (timeframe === 0) {
+        setTop100Data(tableBodyData.sortedByTrueSales.allTop100);
       }
     }
     // Total Sales Count
@@ -217,25 +239,6 @@ const DataTable: React.FC<DataTableTypes> = ({ tableBodyData }) => {
 
       if (timeframe === 0) {
         setTop100Data(tableBodyData.sortedByTotalSalesCount.allTop100);
-      }
-    }
-    if (sortedBy.id === ColumnLabels[1].id) {
-      if (timeframe === 90) {
-        setTop100Data(tableBodyData.sortedAlphabetically.ninetyDayTop100);
-      }
-      if (timeframe === 30) {
-        setTop100Data(tableBodyData.sortedAlphabetically.thirtyDayTop100);
-      }
-      if (timeframe === 7) {
-        setTop100Data(tableBodyData.sortedAlphabetically.sevenDayTop100);
-      }
-
-      if (timeframe === 1) {
-        setTop100Data(tableBodyData.sortedAlphabetically.oneDayTop100);
-      }
-
-      if (timeframe === 0) {
-        setTop100Data(tableBodyData.sortedAlphabetically.allTop100);
       }
     }
   }, [timeframe, sortedBy]);

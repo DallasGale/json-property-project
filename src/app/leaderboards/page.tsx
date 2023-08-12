@@ -75,6 +75,31 @@ const LeaderboardsPage: React.FC = async () => {
       total_real_day_volume_percentage !== null
   );
 
+  // // 1day loan
+  // const totalLoanVolume1d = leaderBoard1dData.filter(
+  //   ({ total_day_volume_loan }: CollectionTypes) => total_day_volume_loan !== 0
+  // );
+
+  // // 7day loan
+  // const totalLoanVolume7d = leaderBoard7dData.filter(
+  //   ({ total_day_volume_loan }: CollectionTypes) => total_day_volume_loan !== 0
+  // );
+
+  // // 30day loan
+  // const totalLoanVolume30d = leaderBoard30dData.filter(
+  //   ({ total_day_volume_loan }: CollectionTypes) => total_day_volume_loan !== 0
+  // );
+
+  // // 90day loan
+  // const totalLoanVolume90d = leaderBoard90dData.filter(
+  //   ({ total_day_volume_loan }: CollectionTypes) => total_day_volume_loan !== 0
+  // );
+
+  // // All loan
+  // const totalLoanVolumeAlld = leaderBoardAllData.filter(
+  //   ({ total_day_volume_loan }: CollectionTypes) => total_day_volume_loan !== 0
+  // );
+
   return (
     <>
       <Head>
@@ -227,17 +252,17 @@ const LeaderboardsPage: React.FC = async () => {
             thirtyDayTop100: orderBy(
               leaderBoard30dData,
               ["total_day_volume_loan"],
-              "desc"
+              "asc"
             ).slice(0, 100),
             ninetyDayTop100: orderBy(
               leaderBoard90dData,
               ["total_day_volume_loan"],
-              "desc"
+              "asc"
             ).slice(0, 100),
             allTop100: orderBy(
               leaderBoardAllData,
               ["total_day_volume_loan"],
-              "desc"
+              "asc"
             ).slice(0, 100),
           },
           sortedByRevenue: {
