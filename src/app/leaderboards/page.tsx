@@ -252,17 +252,17 @@ const LeaderboardsPage: React.FC = async () => {
             thirtyDayTop100: orderBy(
               leaderBoard30dData,
               ["total_day_volume_loan"],
-              "asc"
+              "desc"
             ).slice(0, 100),
             ninetyDayTop100: orderBy(
               leaderBoard90dData,
               ["total_day_volume_loan"],
-              "asc"
+              "desc"
             ).slice(0, 100),
             allTop100: orderBy(
               leaderBoardAllData,
               ["total_day_volume_loan"],
-              "asc"
+              "desc"
             ).slice(0, 100),
           },
           sortedByRevenue: {
