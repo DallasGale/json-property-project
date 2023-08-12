@@ -186,19 +186,9 @@ export type VolumeTableChartProps = {
 // ------------------------------
 // Component Types -  Data Table
 // ------------------------------
-export type DataTableTypes = {
+export type PropertyDataTableTypes = {
   tableTitle?: string;
-  tableBodyData: {
-    sortedByTrueVol: DataTableTop100Types;
-    sortedByTrueVolPct: DataTableTop100Types;
-    sortedByTotalVol: DataTableTop100Types;
-    sortedByTrueSales: DataTableTop100Types;
-    sortedByLoans: DataTableTop100Types;
-    sortedByRevenue: DataTableTop100Types;
-    sortedByFake: DataTableTop100Types;
-    sortedByTotalSalesCount: DataTableTop100Types;
-    sortedAlphabetically: DataTableTop100Types;
-  };
+  propertyData: PropertyDataTypes[];
 };
 
 // ------------------------------
@@ -214,27 +204,33 @@ export type DataTableTop100Types = {
 // ------------------------------
 // Component Types -  Data Table Body
 // ------------------------------
-export type DataTableBodyTypes = {
-  data: CollectionTypes[];
+export type PropertyTableBodyTypes = {
+  property_data: PropertyDataTypes[];
   active: string;
-  timeframe: number;
+};
+
+export type PropertyDataTypes = {
+  id: string;
+  address: string;
+  variance: number;
+  indicative_price: number;
+  selling_price: number;
 };
 
 // ------------------------------
 // Component Types -  Data Table Top 100 Column
 // ------------------------------
-export type DataTableColumnLabelsTypes = {
+export type PropertyTableColumnLabelsTypes = {
   name: string;
   id: string;
   hasChevronDown: boolean;
   active: boolean;
-  category: string;
 };
 // ------------------------------
 // Component Types -  Data Table Head
 // ------------------------------
 export type DataTableHeadTypes = {
-  labels: DataTableColumnLabelsTypes[];
+  labels: PropertyTableColumnLabelsTypes[];
   active: string;
   handleSortByClick: (id: string, category: string) => void;
 };
@@ -451,98 +447,6 @@ export type CollectionTypes = {
   total_loan_day_volume_percentage: number | null;
 };
 
-export interface LeaderboardsTypes {
-  top100: {
-    sortedByTrueVol: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByTrueVolPct: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByTotalVol: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByTrueSales: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByLoans: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByRevenue: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByFake: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedByTotalSalesCount: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    sortedAlphabetically: {
-      oneDayTop100: CollectionTypes[];
-      sevenDayTop100: CollectionTypes[];
-      thirtyDayTop100: CollectionTypes[];
-      ninetyDayTop100: CollectionTypes[];
-      allTop100: CollectionTypes[];
-    };
-    trueVolume: {
-      oneDay: TrueVolumeTypes[];
-      sevenDay: TrueVolumeTypes[];
-      thirtyDay: TrueVolumeTypes[];
-      ninetyDay: TrueVolumeTypes[];
-      all: TrueVolumeTypes[];
-    };
-    fakeVolume: {
-      oneDay: FakeVolumeTypes[];
-      sevenDay: FakeVolumeTypes[];
-      thirtyDay: FakeVolumeTypes[];
-      ninetyDay: FakeVolumeTypes[];
-      all: FakeVolumeTypes[];
-    };
-    loanVolume: {
-      oneDay: LoanVolumeTypes[];
-      sevenDay: LoanVolumeTypes[];
-      thirtyDay: LoanVolumeTypes[];
-      ninetyDay: LoanVolumeTypes[];
-      all: LoanVolumeTypes[];
-    };
-    royalty: {
-      oneDay: RoyaltyTypes[];
-      sevenDay: RoyaltyTypes[];
-      thirtyDay: RoyaltyTypes[];
-      ninetyDay: RoyaltyTypes[];
-      all: RoyaltyTypes[];
-    };
-  };
+export interface ISalesResultsTypes {
+  propertyData: PropertyDataTypes[];
 }

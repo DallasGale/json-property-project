@@ -1,5 +1,5 @@
-.data-table {
-  color: $white;
+.property-table {
+  color: $black;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -9,18 +9,18 @@
     overflow-x: hidden;
   }
 }
-.data-table__td {
+.property-table__td {
   border-bottom: 1px solid $dark-bg-2;
 }
 
-.data-table__cell-content {
+.property-table__cell-content {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   position: relative;
 }
 
-.data-table__cell {
+.property-table__cell {
   cursor: pointer;
   &--volume,
   &--true,
@@ -30,7 +30,7 @@
   }
 }
 
-.data-table__icon {
+.property-table__icon {
   position: relative;
   &--crypto {
     width: 13px;
@@ -44,7 +44,7 @@
   }
 }
 
-.data-table__row {
+.property-table__row {
   transition: all 0.5s ease-in-out;
   opacity: 1;
   &:hover {
@@ -62,7 +62,7 @@ thead td {
   }
 }
 
-.data-table__body-count {
+.property-table__body-count {
   position: absolute;
   top: 0;
   margin-top: 30px;
@@ -74,6 +74,6 @@ thead td {
   }
 }
 
-.data-table__table-wrapper {
+.property-table__table-wrapper {
   position: relative;
 }

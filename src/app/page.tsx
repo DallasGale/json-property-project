@@ -327,8 +327,6 @@ const MarketOverviewPage: React.FC = async () => {
         <title>DataBeast - Powered by nftDb</title>
         <meta name="description" content="Powered by nftDb" />
       </Head>
-      <HeroBanner />
-      <StatusBar />
       <MarketOverview
         labels={labels}
         trueVolume={trueVolume[0].data}

@@ -1,4 +1,4 @@
-$maxWidth: 1200px;
+$maxWidth: 1500px;
 
 @import "./breakpoints.scss";
 @import "./colors.scss";
@@ -14,7 +14,7 @@ $maxWidth: 1200px;
 @import "./traders.scss";
 @import "./grid.scss";
 @import "./tabledDotPoints.scss";
-@import "./dataTable.scss";
+@import "./propertyTable.scss";
 @import "./heroBanner.scss";
 @import "./statusBar.scss";
 @import "./pages.scss";
@@ -24,9 +24,10 @@ $maxWidth: 1200px;
 @import "./dropdown.scss";
 @import "./tooltipBody.scss";
 @import "./link.scss";
+@import "./salesResults.scss";
 
 body {
-  background-color: $black;
+  background-color: $white;
 }
 
 main {

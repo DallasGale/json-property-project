@@ -7,9 +7,9 @@ const navigation: NavigationTypes[] = [
     link: "/",
   },
   {
-    name: "Leaderboards",
-    id: "leaderboards",
-    link: "/leaderboards",
+    name: "Sales Results",
+    id: "sales-results",
+    link: "/sales-results",
   },
   {
     name: "About Us",

@@ -21,19 +21,19 @@ const Head: React.FC<DataTableHeadTypes> = ({
               id={id}
               key={id}
               onClick={() => handleSortByClick(id, category)}
-              className={`data-table__cell data-table__cell--${name.toLowerCase()}`}
+              className={`property-table__cell property-table__cell--${name.toLowerCase()}`}
             >
               {hasChevronDown ? (
-                <div className="data-table__cell-content">
+                <div className="property-table__cell-content">
                   <Image
                     src={ChevronDown}
                     alt="Crypto Icon"
-                    className="data-table__icon data-table__icon--chevron"
+                    className="property-table__icon property-table__icon--chevron"
                   />
                   <p
                     className={`typography__display--2 ${
                       active === id
-                        ? "typography__color--white typography__weight--700"
+                        ? "typography__color--black typography__weight--700"
                         : "typography__color--dark-medium-emphasis"
                     }`}
                   >
