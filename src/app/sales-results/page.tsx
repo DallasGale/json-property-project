@@ -7,7 +7,9 @@ import SalesResults from "@/components/views/salesResults";
 
 // Fetching
 const getPropertyData = async () => {
-  const res = await fetch("http://localhost:3000/api/property");
+  const res = await fetch(
+    "https://jason-project-api-dallasgale1.vercel.app/api/property"
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
