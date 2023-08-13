@@ -205,13 +205,15 @@ export type DataTableTop100Types = {
 // Component Types -  Data Table Body
 // ------------------------------
 export type PropertyTableBodyTypes = {
-  property_data: PropertyDataTypes[];
+  property_data: {
+    data: PropertyDataTypes[];
+  };
   active: string;
 };
 
 export type PropertyDataTypes = {
   id: string;
-  address: string;
+  full_address: string;
   variance: number;
   indicative_price: number;
   selling_price: number;
