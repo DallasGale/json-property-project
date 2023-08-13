@@ -26,7 +26,7 @@ const SalesResultsPage: React.FC = async () => {
   return (
     <>
       <Head>
-        <title>"//"</title>
+        <title></title>
         <meta name="description" content="" />
       </Head>
       <SalesResults propertyData={propertyData} />

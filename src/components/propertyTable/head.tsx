@@ -15,12 +15,12 @@ const Head: React.FC<DataTableHeadTypes> = ({
   return (
     <thead>
       <tr>
-        {labels.map(({ name, id, hasChevronDown, category }) => {
+        {labels.map(({ name, id, hasChevronDown }) => {
           return (
             <td
               id={id}
               key={id}
-              onClick={() => handleSortByClick(id, category)}
+              onClick={() => handleSortByClick(id)}
               className={`property-table__cell property-table__cell--${name.toLowerCase()}`}
             >
               {hasChevronDown ? (

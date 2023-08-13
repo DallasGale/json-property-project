@@ -23,8 +23,6 @@ import {
 const PropertyDataTable: React.FC<PropertyDataTableTypes> = ({
   propertyData,
 }) => {
-  const searchParams = useSearchParams().get("q");
-
   // Animations
   const animation1 = useSpring({
     from: { opacity: 0 },
@@ -45,18 +43,10 @@ const PropertyDataTable: React.FC<PropertyDataTableTypes> = ({
   const [timeframe, setTimeframe] = useState(1);
   const [propertyDataState, setPropertyDataState] = useState(propertyData);
   const [activeColumn, setActiveColumn] = useState(ColumnLabels[2].id);
-  const handleSorting = (id: string, category: string) => {
-    console.log({ id, category });
+  const handleSorting = (id: string) => {
     setSortedBy({ id: id });
     setActiveColumn(id);
   };
-
-  useEffect(() => {
-    if (searchParams) {
-      setSortedBy({ id: searchParams });
-      setActiveColumn(searchParams);
-    }
-  }, [searchParams]);
 
   // useEffect(() => {
   //   // Address
@@ -170,7 +160,7 @@ const PropertyDataTable: React.FC<PropertyDataTableTypes> = ({
           <Head
             labels={ColumnLabels}
             active={activeColumn}
-            handleSortByClick={(e, category) => handleSorting(e, category)}
+            handleSortByClick={(e) => handleSorting(e)}
           />
           <PropertyTableBody
             property_data={propertyDataState}

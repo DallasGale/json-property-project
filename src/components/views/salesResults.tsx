@@ -6,7 +6,7 @@ const SalesResults: React.FC<ISalesResultsTypes> = ({ propertyData }) => {
   return (
     <section className="sales-results">
       <div>
-        <PropertyTable propertyData={{ ...propertyData }} />
+        <PropertyTable propertyData={propertyData} />
       </div>
       <div>
         {/* Charts */}

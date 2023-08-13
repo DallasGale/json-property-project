@@ -188,7 +188,9 @@ export type VolumeTableChartProps = {
 // ------------------------------
 export type PropertyDataTableTypes = {
   tableTitle?: string;
-  propertyData: PropertyDataTypes[];
+  propertyData: {
+    data: PropertyDataTypes[];
+  };
 };
 
 // ------------------------------
@@ -234,7 +236,7 @@ export type PropertyTableColumnLabelsTypes = {
 export type DataTableHeadTypes = {
   labels: PropertyTableColumnLabelsTypes[];
   active: string;
-  handleSortByClick: (id: string, category: string) => void;
+  handleSortByClick: (id: string) => void;
 };
 
 // ------------------------------
@@ -450,5 +452,7 @@ export type CollectionTypes = {
 };
 
 export interface ISalesResultsTypes {
-  propertyData: PropertyDataTypes[];
+  propertyData: {
+    data: PropertyDataTypes[];
+  };
 }
