@@ -19,13 +19,14 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
   property_data,
   active,
 }) => {
+  console.log(property_data.data);
   return (
     <>
       <tbody>
-        {property_data.map(
+        {property_data.data.map(
           ({
             id,
-            address,
+            full_address,
             variance,
             indicative_price,
             selling_price,
@@ -41,7 +42,7 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
                   >
                     <HoverCard.Target>
                       <p className="typography__display--6 u-cursor-pointer">
-                        {address}
+                        {full_address}
                       </p>
                     </HoverCard.Target>
                     <HoverCard.Dropdown className="dropdown">
@@ -75,7 +76,7 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
                       color: GoodToBadColors(variance),
                     }}
                     className={`typography__display--2 ${
-                      active === ColumnLabels[3].id
+                      active === ColumnLabels[0].id
                         ? "typography__weight--700"
                         : "typography__weight--300"
                     }`}
@@ -87,7 +88,7 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
                   <div className="property-table__cell-content">
                     <p
                       className={`typography__display--2 ${
-                        active === ColumnLabels[2].id
+                        active === ColumnLabels[1].id
                           ? "typography__color--white typography__weight--700"
                           : "typography__color--dark-medium-emphasis"
                       }`}
@@ -101,7 +102,7 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
                   <div className="property-table__cell-content">
                     <p
                       className={`typography__display--2 ${
-                        active === ColumnLabels[4].id
+                        active === ColumnLabels[2].id
                           ? "typography__color--white typography__weight--700"
                           : "typography__color--dark-medium-emphasis"
                       }`}
