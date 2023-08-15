@@ -449,9 +449,7 @@ const MarketOverview: React.FC<IMarketOverviewProps> = ({
                   <div className="grid__col-container-body">
                     <div className="chart__info">
                       <ProgressRing
-                        trueVolume={trueVolumeTotalSummararyData}
-                        loanVolume={loanVolumeTotalSummararyData}
-                        fakeVolume={fakeVolumeTotalSummararyData}
+                        averageVariance={trueVolumeTotalSummararyData}
                         percentage={`${DecimalFormatter(
                           (trueVolumeTotalSummararyData[0] /
                             totalVolumeTimeframeSummaryData[0]) *

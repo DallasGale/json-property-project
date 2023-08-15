@@ -1,6 +1,6 @@
 import { Line } from "react-chartjs-2";
 import Legend from "@components/dataViz/legend/legend";
-import MatrixBg from "@assets/bg/matrix.svg";
+import LineBg from "@assets/bg/lines.svg";
 
 // Types
 import { TrendLineChartTypes } from "@app/types";
@@ -23,7 +23,7 @@ const TrendLineChart: React.FC<TrendLineChartTypes> = ({
       />
       <div
         className="chart__line-wrapper"
-        style={{ background: `url(${MatrixBg.src}` }}
+        style={{ background: `url(${LineBg.src}` }}
       >
         <Line
           data={{

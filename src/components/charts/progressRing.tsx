@@ -2,9 +2,7 @@ import { ProgressRingTypes } from "@/app/types";
 import { Doughnut } from "react-chartjs-2";
 
 const ProgressRing: React.FC<ProgressRingTypes> = ({
-  trueVolume,
-  loanVolume,
-  fakeVolume,
+  averageVariance,
   percentage,
   modiferClass = "",
 }) => {
@@ -25,16 +23,12 @@ const ProgressRing: React.FC<ProgressRingTypes> = ({
         data={{
           datasets: [
             {
-              data: [trueVolume, loanVolume, fakeVolume],
-              backgroundColor: [
-                "rgba(64, 192, 87, 1)",
-                "rgba(250, 176, 5, 1)",
-                "rgba(250, 82, 82, 1)",
-              ],
+              data: [averageVariance],
+              backgroundColor: ["rgba(64, 192, 87, 1)"],
 
               borderColor: "transparent",
               hoverOffset: 4,
-              borderRadius: [5, 5, 5],
+              borderRadius: [5],
               spacing: 6,
             },
           ],

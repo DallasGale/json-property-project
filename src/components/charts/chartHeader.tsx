@@ -34,7 +34,9 @@ const ChartHeader: React.FC<ChartHeaderTypes> = ({
           </p>
         )}
       </div>
-      <h3 className="typography__title--small">{title}</h3>
+      <h3 className="typography__title--small typography__color--black">
+        {title}
+      </h3>
       <p className="typography__body--small typography__color--dark-medium-emphasis">
         {description}
       </p>

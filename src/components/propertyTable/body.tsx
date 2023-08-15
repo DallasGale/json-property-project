@@ -15,6 +15,7 @@ import { ColumnLabels } from "@/constants/top100table";
 // Types
 import { PropertyDataTypes, PropertyTableBodyTypes } from "@/app/types";
 
+import MaximiseIcon from "@assets/icons/maximise.svg";
 const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
   property_data,
   active,
@@ -41,7 +42,7 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
                     position="top"
                   >
                     <HoverCard.Target>
-                      <p className="typography__display--6 u-cursor-pointer">
+                      <p className="typography__display--2 typography__color--black u-cursor-pointer">
                         {full_address}
                       </p>
                     </HoverCard.Target>
@@ -70,7 +71,7 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
                     </HoverCard.Dropdown>
                   </HoverCard>
                 </td>
-                <td width="70" align="right" className="property-table__td">
+                <td width="120" align="left" className="property-table__td">
                   <p
                     style={{
                       color: GoodToBadColors(variance),
@@ -84,7 +85,7 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
                     {DecimalFormatter(variance)}%
                   </p>
                 </td>
-                <td width="90" className="property-table__td">
+                <td width="120" align="left" className="property-table__td">
                   <div className="property-table__cell-content">
                     <p
                       className={`typography__display--2 ${
@@ -98,17 +99,22 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
                   </div>
                 </td>
 
-                <td width="95" align="right" className="property-table__td">
+                <td width="120" align="left" className="property-table__td">
                   <div className="property-table__cell-content">
-                    <p
-                      className={`typography__display--2 ${
-                        active === ColumnLabels[2].id
-                          ? "typography__color--white typography__weight--700"
-                          : "typography__color--dark-medium-emphasis"
-                      }`}
-                    >
-                      {VolumeFormatter(DecimalFormatter(selling_price))}
+                    <p className="typography__display--2 typography__color--black typography__weight--400">
+                      ${DecimalFormatter(selling_price)}
                     </p>
+                  </div>
+                </td>
+
+                <td width="120" align="left" className="property-table__td">
+                  <div className="property-table__cell-content">
+                    <Image
+                      src={MaximiseIcon.src}
+                      alt="open"
+                      width={15}
+                      height={15}
+                    />
                   </div>
                 </td>
               </tr>

@@ -139,9 +139,7 @@ export type LabelTypes = {
 // Component Types - Progress RIng
 // ------------------------------
 export type ProgressRingTypes = {
-  trueVolume: number | number[];
-  loanVolume: number | number[];
-  fakeVolume: number | number[];
+  averageVariance?: number | number[];
   percentage?: string;
   modiferClass?: string;
 };

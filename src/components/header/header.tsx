@@ -8,11 +8,6 @@ const Header: React.FC = ({}) => {
   return (
     <header className="header">
       <div className="header__cell">
-        <Link href="/">
-          <Image src={Logo} alt="Databeast" />
-        </Link>
-      </div>
-      <div className="header__cell">
         <Navigation />
       </div>
     </header>

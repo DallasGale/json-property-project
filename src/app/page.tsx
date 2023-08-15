@@ -7,10 +7,13 @@ export const metadata: Metadata = {
 };
 const MarketOverviewPage: React.FC = async () => {
   return (
-    <Head>
-      <title>DataBeast - Powered by nftDb</title>
-      <meta name="description" content="Powered by nftDb" />
-    </Head>
+    <>
+      <Head>
+        <title></title>
+        <meta name="description" content="" />
+      </Head>
+      <h1>Market Overview</h1>
+    </>
   );
 };
 

@@ -16,13 +16,13 @@ export const ColumnLabels: PropertyTableColumnLabelsTypes[] = [
   {
     name: "Indicative Price",
     id: "indicative-price",
-    hasChevronDown: true,
+    hasChevronDown: false,
     active: false,
   },
   {
     name: "Selling Price",
     id: "selling-price",
-    hasChevronDown: true,
+    hasChevronDown: false,
     active: false,
   },
 ];

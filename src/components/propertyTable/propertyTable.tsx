@@ -48,89 +48,6 @@ const PropertyDataTable: React.FC<PropertyDataTableTypes> = ({
     setActiveColumn(id);
   };
 
-  // useEffect(() => {
-  //   // Address
-  //   if (sortedBy.id === ColumnLabels[1].id) {
-  //     if (timeframe === 90) {
-  //       setPropertyData(tableBodyData.sortedAlphabetically.ninetyDayTop100);
-  //     }
-  //     if (timeframe === 30) {
-  //       setPropertyData(tableBodyData.sortedAlphabetically.thirtyDayTop100);
-  //     }
-  //     if (timeframe === 7) {
-  //       setPropertyData(tableBodyData.sortedAlphabetically.sevenDayTop100);
-  //     }
-
-  //     if (timeframe === 1) {
-  //       setPropertyData(tableBodyData.sortedAlphabetically.oneDayTop100);
-  //     }
-
-  //     if (timeframe === 0) {
-  //       setPropertyData(tableBodyData.sortedAlphabetically.allTop100);
-  //     }
-  //   }
-  //   // Variance
-  //   if (sortedBy.id === ColumnLabels[2].id) {
-  //     if (timeframe === 90) {
-  //       setPropertyData(tableBodyData.sortedByTrueVol.ninetyDayTop100);
-  //     }
-  //     if (timeframe === 30) {
-  //       setPropertyData(tableBodyData.sortedByTrueVol.thirtyDayTop100);
-  //     }
-  //     if (timeframe === 7) {
-  //       setPropertyData(tableBodyData.sortedByTrueVol.sevenDayTop100);
-  //     }
-
-  //     if (timeframe === 1) {
-  //       setPropertyData(tableBodyData.sortedByTrueVol.oneDayTop100);
-  //     }
-
-  //     if (timeframe === 0) {
-  //       setPropertyData(tableBodyData.sortedByTrueVol.allTop100);
-  //     }
-  //   }
-  //   // Indicative Price
-  //   if (sortedBy.id === ColumnLabels[3].id) {
-  //     if (timeframe === 90) {
-  //       setPropertyData(tableBodyData.sortedByTrueVolPct.ninetyDayTop100);
-  //     }
-  //     if (timeframe === 30) {
-  //       setPropertyData(tableBodyData.sortedByTrueVolPct.thirtyDayTop100);
-  //     }
-  //     if (timeframe === 7) {
-  //       setPropertyData(tableBodyData.sortedByTrueVolPct.sevenDayTop100);
-  //     }
-
-  //     if (timeframe === 1) {
-  //       setPropertyData(tableBodyData.sortedByTrueVolPct.oneDayTop100);
-  //     }
-
-  //     if (timeframe === 0) {
-  //       setPropertyData(tableBodyData.sortedByTrueVolPct.allTop100);
-  //     }
-  //   }
-  //   //  Selling Price
-  //   if (sortedBy.id === ColumnLabels[4].id) {
-  //     if (timeframe === 90) {
-  //       setPropertyData(tableBodyData.sortedByTotalVol.ninetyDayTop100);
-  //     }
-  //     if (timeframe === 30) {
-  //       setPropertyData(tableBodyData.sortedByTotalVol.thirtyDayTop100);
-  //     }
-  //     if (timeframe === 7) {
-  //       setPropertyData(tableBodyData.sortedByTotalVol.sevenDayTop100);
-  //     }
-
-  //     if (timeframe === 1) {
-  //       setPropertyData(tableBodyData.sortedByTotalVol.oneDayTop100);
-  //     }
-
-  //     if (timeframe === 0) {
-  //       setPropertyData(tableBodyData.sortedByTotalVol.allTop100);
-  //     }
-  //   }
-  // }, [timeframe, sortedBy]);
-
   function handleDailyTimeferame(e: React.MouseEvent, value: any) {
     e.preventDefault();
     setTimeframe(value);
@@ -138,35 +55,29 @@ const PropertyDataTable: React.FC<PropertyDataTableTypes> = ({
 
   return (
     <div className="property-table">
-      <animated.div
-        style={{ ...animation1 }}
-        className="chart__grid chart__grid--one-col"
-      >
-        <div className="chart__chart-actions-lockup">
-          <ChartDataToggles
-            title={`Top 100 Collections`}
-            onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
-            active={timeframe}
-          />
+      <div className="u-container-shadow">
+        <div className="chart__grid chart__grid--one-col">
+          <div className="chart__chart-actions-lockup">
+            <ChartDataToggles
+              title={`Sales Results`}
+              onClick={(arg1, arg2) => handleDailyTimeferame(arg1, arg2)}
+              active={timeframe}
+            />
+          </div>
         </div>
-      </animated.div>
-      <div className="property-table__table-wrapper">
-        <animated.table
-          style={{ ...animation2 }}
-          cellPadding={6}
-          cellSpacing={0}
-          width="100%"
-        >
-          <Head
-            labels={ColumnLabels}
-            active={activeColumn}
-            handleSortByClick={(e) => handleSorting(e)}
-          />
-          <PropertyTableBody
-            property_data={propertyDataState}
-            active={activeColumn}
-          />
-        </animated.table>
+        <div className="property-table__table-wrapper">
+          <table cellPadding={6} cellSpacing={0} width="100%">
+            <Head
+              labels={ColumnLabels}
+              active={activeColumn}
+              handleSortByClick={(e) => handleSorting(e)}
+            />
+            <PropertyTableBody
+              property_data={propertyDataState}
+              active={activeColumn}
+            />
+          </table>
+        </div>
       </div>
     </div>
   );

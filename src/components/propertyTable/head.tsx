@@ -20,8 +20,9 @@ const Head: React.FC<DataTableHeadTypes> = ({
             <td
               id={id}
               key={id}
+              align="left"
               onClick={() => handleSortByClick(id)}
-              className={`property-table__cell property-table__cell--${name.toLowerCase()}`}
+              className={`property-table__td property-table__cell property-table__cell--${name.toLowerCase()}`}
             >
               {hasChevronDown ? (
                 <div className="property-table__cell-content">
@@ -30,24 +31,19 @@ const Head: React.FC<DataTableHeadTypes> = ({
                     alt="Crypto Icon"
                     className="property-table__icon property-table__icon--chevron"
                   />
-                  <p
-                    className={`typography__display--2 ${
-                      active === id
-                        ? "typography__color--black typography__weight--700"
-                        : "typography__color--dark-medium-emphasis"
-                    }`}
-                  >
+                  <p className="typography__display--2 typography__color--black typography__weight--700">
                     {name}
                   </p>
                 </div>
               ) : (
-                <p className="typography__display--2 typography__color--dark-medium-emphasis">
+                <p className="typography__display--2 typography__weight--700 typography__color--black">
                   {name}
                 </p>
               )}
             </td>
           );
         })}
+        <td className="property-table__td property-table__cell"></td>
       </tr>
     </thead>
   );

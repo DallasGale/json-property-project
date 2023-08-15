@@ -55,15 +55,15 @@
 }
 
 .grid__col-content {
-  background: $dark-bg-2;
+  background: $white;
   box-sizing: border-box;
   width: 100%;
   border-radius: 8px;
   padding: 16px;
 
-  &--chart {
-    min-height: 344px;
-  }
+  // &--chart {
+  //   min-height: 344px;
+  // }
 }
 
 .grid__col-container-body {

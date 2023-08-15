@@ -70,9 +70,7 @@ const TooltipBody: React.FC<TooltipBodyTypes> = ({
           <div className="tooltip-body__content-data-progress">
             <ProgressRing
               modiferClass="tooltip-body__content-data-progress-ring"
-              trueVolume={trueVolume}
-              fakeVolume={fakeVolume}
-              loanVolume={loanVolume}
+              averageVariance={trueVolume}
             />
           </div>
           <div className="tooltip-body__content-data-values">
