@@ -5,13 +5,7 @@ import Image from "next/image";
 // Assets
 import LegendIconGreen from "@assets/icons/legendIconGreen.svg";
 import LegendIconRed from "@assets/icons/legendIconRed.svg";
-import LegendIconYellow from "@assets/icons/legendIconYellow.svg";
-import LegendIconPurple from "@assets/icons/legendIconPurple.svg";
-import LegendIconBlue from "@assets/icons/legendIconBlue.svg";
-import LegendIconTeal from "@assets/icons/legendIconTeal.svg";
-import LegendIconFluro from "@assets/icons/legendIconFluro.svg";
 import LegendIconGrey from "@assets/icons/legendIconGrey.svg";
-import CryptoGreyIcon from "@assets/icons/cryptoGrey.svg";
 
 // Utils
 import { VolumeFormatter } from "@/utils/volumeFormatter";
@@ -38,21 +32,7 @@ const Legend: React.FC<ILegendProps> = ({
                 {color === "accent-red" && (
                   <Image src={LegendIconRed} alt="Legend Icon" />
                 )}
-                {color === "accent-yellow" && (
-                  <Image src={LegendIconYellow} alt="Legend Icon" />
-                )}
-                {color === "accent-purple" && (
-                  <Image src={LegendIconPurple} alt="Legend Icon" />
-                )}
-                {color === "accent-blue" && (
-                  <Image src={LegendIconBlue} alt="Legend Icon" />
-                )}
-                {color === "accent-teal" && (
-                  <Image src={LegendIconTeal} alt="Legend Icon" />
-                )}
-                {color === "accent-fluro" && (
-                  <Image src={LegendIconFluro} alt="Legend Icon" />
-                )}
+
                 {color === "grey" && (
                   <Image src={LegendIconGrey} alt="Legend Icon" />
                 )}
@@ -71,11 +51,6 @@ const Legend: React.FC<ILegendProps> = ({
 
               {legendItemVolume && (
                 <div className="chart__legend-icon-label">
-                  <Image
-                    src={CryptoGreyIcon}
-                    alt="Legend Icon"
-                    className="crypto-icon"
-                  />
                   <p className="typography__body--small">
                     {legendItemVolume.map((item) => {
                       if (item.id === id) {

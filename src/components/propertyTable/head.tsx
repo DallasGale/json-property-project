@@ -26,14 +26,14 @@ const Head: React.FC<DataTableHeadTypes> = ({
             >
               {hasChevronDown ? (
                 <div className="property-table__cell-content">
+                  <p className="typography__display--2 typography__color--black typography__weight--700">
+                    {name}
+                  </p>
                   <Image
                     src={ChevronDown}
                     alt="Crypto Icon"
                     className="property-table__icon property-table__icon--chevron"
                   />
-                  <p className="typography__display--2 typography__color--black typography__weight--700">
-                    {name}
-                  </p>
                 </div>
               ) : (
                 <p className="typography__display--2 typography__weight--700 typography__color--black">

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSpring, animated } from "@react-spring/web";
+import { useSpring, animated, easings } from "@react-spring/web";
 
 // Utils
 import { useSearchParams } from "next/navigation";
@@ -52,10 +52,21 @@ const PropertyDataTable: React.FC<PropertyDataTableTypes> = ({
     e.preventDefault();
     setTimeframe(value);
   }
-
+  // Animations
+  const springs1 = useSpring({
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1 },
+    delay: 300,
+    config: {
+      tension: 90,
+      friction: 16,
+      duration: 750,
+      easing: easings.easeInOutCubic,
+    },
+  });
   return (
     <div className="property-table">
-      <div className="u-container-shadow">
+      <animated.div className="u-container-shadow" style={{ ...springs1 }}>
         <div className="chart__grid chart__grid--one-col">
           <div className="chart__chart-actions-lockup">
             <ChartDataToggles
@@ -78,7 +89,7 @@ const PropertyDataTable: React.FC<PropertyDataTableTypes> = ({
             />
           </table>
         </div>
-      </div>
+      </animated.div>
     </div>
   );
 };

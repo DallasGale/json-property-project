@@ -107,7 +107,7 @@ const DataTableBody: React.FC<PropertyTableBodyTypes> = ({
                   </div>
                 </td>
 
-                <td width="120" align="left" className="property-table__td">
+                <td width="30" align="left" className="property-table__td">
                   <div className="property-table__cell-content">
                     <Image
                       src={MaximiseIcon.src}

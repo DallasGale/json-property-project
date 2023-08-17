@@ -129,7 +129,6 @@ const Overview: React.FC<IOverviewTypes> = ({
                     description="That have traded on an NFT Marketplace."
                   />
 
-                  <div className="chart__seperator" />
                   <TrendLineChart
                     legendOnClick={trendLine1LegendOnClick} // refactor onClick
                     labels={trendline1Labels} //activeWalletTradersLabels
@@ -157,7 +156,6 @@ const Overview: React.FC<IOverviewTypes> = ({
                       description="And their first NFT transaction."
                     />
 
-                    <div className="chart__seperator" />
                     <TrendLineChart
                       legendOnClick={trendLine2LegendOnClick}
                       labels={trendline2Labels}

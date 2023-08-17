@@ -3,11 +3,5 @@
 <rect x="8" y="8" width="12" height="4" rx="1" fill="#40C057"/>
 </g>
 <rect x="8" y="8" width="12" height="4" rx="1" fill="#40C057"/>
-<defs>
-<filter id="filter0_f_4540_8914" x="0" y="0" width="28" height="20" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="4" result="effect1_foregroundBlur_4540_8914"/>
-</filter>
-</defs>
+
 </svg>
