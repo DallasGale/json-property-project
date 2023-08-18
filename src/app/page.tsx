@@ -2,8 +2,8 @@ import Head from "next/head";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "DataBeast - Powered by nftDb",
-  description: "Powered by nftDb",
+  title: "",
+  description: "",
 };
 const MarketOverviewPage: React.FC = async () => {
   return (

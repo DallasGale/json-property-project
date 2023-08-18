@@ -17,8 +17,8 @@ const getPropertyData = async () => {
 };
 
 export const metadata: Metadata = {
-  title: "DataBeast - Powered by nftDb",
-  description: "Powered by nftDb",
+  title: "",
+  description: "",
 };
 
 const SalesResultsPage: React.FC = async () => {

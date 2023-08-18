@@ -22,9 +22,7 @@ const Footer = () => {
         </li> */}
       </ul>
 
-      <p className="typography__caption--medium typography__color--dark-bg-3">
-        Copyright © 2023 DataBeast. All Rights Reserved
-      </p>
+     
 
       <ul className="footer__links-list">
         <li className="footer__links-list-item">
